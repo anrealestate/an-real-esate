@@ -98,21 +98,57 @@ lbOverlay?.addEventListener('touchend', e => {
 /* ================================
    Enquiry form
    ================================ */
-document.getElementById('prop-form')?.addEventListener('submit', e => {
+document.getElementById('prop-form')?.addEventListener('submit', async e => {
   e.preventDefault()
-  const btn  = e.target.querySelector('button[type="submit"]')
-  const orig = btn.textContent
-  btn.textContent = 'Request Sent ✓'
-  btn.style.background   = 'var(--gold)'
-  btn.style.borderColor  = 'var(--gold)'
-  btn.style.color        = 'var(--bg)'
-  setTimeout(() => {
-    btn.textContent       = orig
-    btn.style.background  = ''
-    btn.style.borderColor = ''
-    btn.style.color       = ''
-    e.target.reset()
-  }, 3000)
+  const form = e.target
+  const btn  = form.querySelector('button[type="submit"]')
+
+  // Basic validation
+  const name  = form.querySelector('[name="name"]').value.trim()
+  const email = form.querySelector('[name="email"]').value.trim()
+  if (!name || !email) {
+    form.querySelector('[name="name"]').style.borderColor  = name  ? '' : 'var(--gold)'
+    form.querySelector('[name="email"]').style.borderColor = email ? '' : 'var(--gold)'
+    return
+  }
+
+  btn.textContent   = 'Sending…'
+  btn.disabled      = true
+
+  const property = form.querySelector('[name="property"]')?.value || ''
+
+  try {
+    const res = await fetch('https://formsubmit.co/ajax/alvaro@anrealestate.es', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        name,
+        email,
+        phone:    form.querySelector('[name="phone"]').value.trim(),
+        message:  form.querySelector('[name="message"]').value.trim(),
+        property,
+        _subject: 'Solicitud de visita web — ' + property,
+        _captcha: 'false',
+        _template: 'table',
+      }),
+    })
+    if (!res.ok) throw new Error()
+    btn.textContent        = 'Request Sent ✓'
+    btn.style.background   = 'var(--gold)'
+    btn.style.borderColor  = 'var(--gold)'
+    btn.style.color        = 'var(--bg)'
+    form.reset()
+    setTimeout(() => {
+      btn.textContent        = 'Request Viewing'
+      btn.style.background   = ''
+      btn.style.borderColor  = ''
+      btn.style.color        = ''
+      btn.disabled           = false
+    }, 4000)
+  } catch {
+    btn.textContent = 'Error — try again'
+    btn.disabled    = false
+  }
 })
 
 /* ================================
