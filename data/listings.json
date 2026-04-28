@@ -1,0 +1,82 @@
+{
+  "listings": [
+    {
+      "title": "Exceptional Penthouse with Panoramic Views",
+      "price": "€3,200,000",
+      "neighbourhood": "Pedralbes",
+      "type": "penthouse",
+      "status": "sale",
+      "beds": 4,
+      "baths": 4,
+      "size": "350",
+      "image": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=700&q=80&auto=format",
+      "description": "Exceptional penthouse occupying the entire top floor with uninterrupted panoramic views across Barcelona from the sea to Montjuïc.",
+      "published": true
+    },
+    {
+      "title": "Elegant Modernist Apartment with Terrace",
+      "price": "€830,000",
+      "neighbourhood": "Eixample",
+      "type": "apartment",
+      "status": "sale",
+      "beds": 3,
+      "baths": 2,
+      "size": "145",
+      "image": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=700&q=80&auto=format",
+      "description": "Beautifully restored apartment in a classic Eixample building with original modernist details and a private terrace.",
+      "published": true
+    },
+    {
+      "title": "Magnificent Villa with Private Pool & Garden",
+      "price": "€5,500,000",
+      "neighbourhood": "Sarrià",
+      "type": "villa",
+      "status": "sale",
+      "beds": 5,
+      "baths": 5,
+      "size": "480",
+      "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=700&q=80&auto=format",
+      "description": "Magnificent detached villa set in lush gardens in the prestigious Sarrià district, featuring a private pool and outdoor entertaining areas.",
+      "published": true
+    },
+    {
+      "title": "Stunning Seafront Apartment with Terrace",
+      "price": "€7,700",
+      "neighbourhood": "Diagonal Mar",
+      "type": "apartment",
+      "status": "rent",
+      "beds": 2,
+      "baths": 2,
+      "size": "120",
+      "image": "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=700&q=80&auto=format",
+      "description": "Stunning seafront apartment with unobstructed Mediterranean views and a generous terrace ideal for year-round living.",
+      "published": true
+    },
+    {
+      "title": "Charming Townhouse with Rooftop Terrace",
+      "price": "€1,450,000",
+      "neighbourhood": "Gràcia",
+      "type": "townhouse",
+      "status": "sale",
+      "beds": 4,
+      "baths": 3,
+      "size": "220",
+      "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80&auto=format",
+      "description": "Charming townhouse in the heart of Gràcia with a private rooftop terrace offering sweeping views of the neighbourhood.",
+      "published": true
+    },
+    {
+      "title": "Boutique Studio in Historic Gothic Quarter",
+      "price": "€2,900",
+      "neighbourhood": "El Born",
+      "type": "studio",
+      "status": "rent",
+      "beds": 1,
+      "baths": 1,
+      "size": "65",
+      "image": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=700&q=80&auto=format",
+      "description": "Beautifully designed boutique studio in a restored historic building in El Born, steps from Barcelona's best restaurants and galleries.",
+      "published": true
+    }
+  ]
+}

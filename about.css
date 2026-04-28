@@ -1,0 +1,369 @@
+/* ================================
+   About Page — about.css
+   Mirrors TREF about layout exactly
+   ================================ */
+
+/* Header always solid */
+.header { background: var(--bg); border-bottom: 1px solid var(--border); }
+.header::before { opacity: 0 !important; }
+
+/* ================================
+   Main wrapper
+   ================================ */
+.ab-main {
+  padding-top: 74px; /* fixed header height */
+}
+
+/* ================================
+   TOP TITLE SECTION
+   ================================ */
+.ab-top {
+  padding-top: clamp(3rem, 8vw, 7rem);
+  padding-bottom: clamp(2.5rem, 6vw, 5rem);
+  text-align: center;
+}
+
+.ab-top-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.ab-h1 {
+  font-family: var(--serif);
+  font-size: max(40px, 9vw);
+  font-weight: 300;
+  line-height: .97;
+  letter-spacing: -.3vw;
+  color: var(--cream);
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+.ab-h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+.ab-h1 .text-wrap {
+  display: block;
+  overflow: hidden;
+  padding: .12em 0;
+  margin: -.12em 0;
+}
+
+.ab-top-sub {
+  font-size: var(--fs-xs);
+  font-weight: 300;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  opacity: .8;
+  line-height: 1.8;
+}
+
+/* ================================
+   TOP IMAGE — parallax
+   ================================ */
+.ab-top-img {
+  max-width: 980px;
+  height: clamp(220px, 30vw, 400px);
+  margin: 0 auto clamp(4rem, 8vw, 8rem);
+  overflow: hidden;
+  display: block;
+}
+.ab-top-img img {
+  width: 100%;
+  height: 120%;
+  object-fit: cover;
+  object-position: center 40%;
+  display: block;
+}
+
+/* ================================
+   ABOUT INTRO — centered h2 + text
+   ================================ */
+.ab-intro {
+  margin-bottom: clamp(5rem, 12vw, 12rem);
+  position: relative;
+}
+
+.ab-intro-inner {
+  max-width: 820px;
+  margin: 0 auto;
+  text-align: center;
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.ab-intro-h2 {
+  font-family: var(--serif);
+  font-size: max(26px, 3.2vw);
+  font-weight: 300;
+  line-height: 1.18;
+  letter-spacing: -.1vw;
+  color: var(--cream);
+  margin-bottom: 2rem;
+}
+
+.ab-intro-text p {
+  font-size: var(--fs-sm);
+  color: var(--cream-dim);
+  opacity: .8;
+  line-height: 1.85;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.ab-intro-key {
+  display: flex;
+  justify-content: center;
+  padding-top: clamp(2rem, 4vw, 3.5rem);
+}
+
+/* ================================
+   TEAM — 3-col TREF overlay
+   (augments styles from styles.css)
+   ================================ */
+.ab-team-wrap {
+  margin-bottom: clamp(5rem, 14vw, 14rem);
+}
+
+/* at-text width for TREF overlap effect */
+.at-text {
+  font-size: var(--fs-sm);
+  color: var(--cream-dim);
+  opacity: .8;
+  line-height: 1.75;
+  margin-bottom: 2rem;
+}
+
+/* mob-hidden helper */
+.mob-hidden { display: none; }
+
+@media (min-width: 1024px) {
+  .mob-hidden { display: block; }
+  .at-text { width: 155%; }
+}
+
+/* ================================
+   CREDENTIALS / HISTORY
+   ================================ */
+.ab-history {
+  padding-bottom: clamp(5rem, 12vw, 12rem);
+  border-top: 1px solid var(--border);
+}
+
+.ab-history-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding-top: clamp(3rem, 6vw, 5rem);
+}
+
+/* Left sticky column */
+.ab-history-left {
+  width: 100%;
+}
+
+.ab-history-title {
+  /* sticky applied at 1024px+ */
+}
+
+.ab-history-h2 {
+  font-family: var(--serif);
+  font-size: max(28px, 3.5vw);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -.12vw;
+  color: var(--cream);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.ab-history-h2 .text-wrap {
+  display: block;
+  overflow: hidden;
+  padding: .1em 0;
+  margin: -.1em 0;
+}
+
+.ab-history-sub {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  letter-spacing: .06em;
+  line-height: 1.6;
+  opacity: .8;
+  max-width: 28ch;
+}
+
+/* Right scrolling column */
+.ab-history-right {
+  width: 100%;
+}
+
+.ab-history-item {
+  max-width: 520px;
+  margin-bottom: clamp(3.5rem, 8vw, 6rem);
+}
+.ab-history-item:last-child { margin-bottom: 0; }
+
+.ab-history-year {
+  display: block;
+  font-family: var(--serif);
+  font-size: max(40px, 6.5vw);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  letter-spacing: -.1vw;
+}
+
+.ab-history-text {
+  font-size: var(--fs-sm);
+  color: var(--cream-dim);
+  opacity: .8;
+  line-height: 1.75;
+}
+
+/* ================================
+   CTA
+   ================================ */
+.ab-cta {
+  padding-block: clamp(4rem, 9vw, 7rem);
+}
+
+.ab-cta-h2 {
+  font-family: var(--serif);
+  font-size: max(44px, 7vw);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -.2vw;
+  color: var(--cream);
+  margin-top: .75rem;
+  margin-bottom: 1.25rem;
+}
+.ab-cta-h2 em {
+  font-style: italic;
+  color: var(--gold);
+}
+.ab-cta-h2 .text-wrap {
+  display: block;
+  overflow: hidden;
+  padding: .1em 0;
+  margin: -.1em 0;
+}
+
+.ab-cta-sub {
+  font-size: var(--fs-sm);
+  color: var(--cream-dim);
+  opacity: .8;
+  line-height: 1.7;
+  max-width: 44ch;
+  margin-bottom: 2.5rem;
+}
+
+.ab-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3.5rem;
+}
+
+.ab-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: .08em;
+  color: #25d366;
+  padding: .8rem 1.4rem;
+  border: 1px solid #25d366;
+  transition: background var(--fast), color var(--fast);
+}
+.ab-wa:hover { background: #25d366; color: #fff; }
+
+/* Contact grid */
+.ab-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem 2.5rem;
+  border-top: 1px solid var(--border);
+  padding-top: 2.5rem;
+  max-width: 640px;
+}
+
+.ab-contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+
+.ab-contact-label {
+  font-size: var(--fs-2xs);
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.ab-contact-val {
+  font-size: var(--fs-sm);
+  color: var(--cream-dim);
+  line-height: 1.5;
+}
+
+.ab-social {
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+}
+
+/* ================================
+   Breakpoints
+   ================================ */
+@media (min-width: 768px) {
+  .ab-top-img {
+    height: clamp(280px, 28vw, 400px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .ab-history-inner {
+    flex-direction: row;
+    gap: 0;
+    align-items: flex-start;
+    position: relative;
+  }
+
+  .ab-history-left {
+    width: calc(50% - 40px);
+    padding-bottom: 78px;
+    border-right: 1px solid var(--border);
+    padding-right: 60px;
+    flex-shrink: 0;
+  }
+
+  .ab-history-title {
+    position: sticky;
+    top: calc(74px + 3rem);
+  }
+
+  .ab-history-right {
+    width: calc(50% - 40px);
+    margin-left: auto;
+    padding-left: 60px;
+    padding-top: clamp(3rem, 6vw, 5rem);
+  }
+
+  .ab-history-item {
+    margin-bottom: clamp(5rem, 12vw, 10rem);
+  }
+
+  .ab-contact-grid {
+    max-width: none;
+  }
+}
+
+@media (min-width: 1280px) {
+  .ab-h1 { font-size: max(56px, 8.5vw); }
+  .ab-history-item { margin-bottom: clamp(6rem, 14vw, 12rem); }
+}

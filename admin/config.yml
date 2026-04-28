@@ -1,0 +1,83 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "listings"
+    label: "Listings"
+    files:
+      - file: "data/listings.json"
+        label: "Property Listings"
+        name: "all_listings"
+        fields:
+          - label: "Listings"
+            name: "listings"
+            widget: "list"
+            summary: "{{fields.title}} — {{fields.neighbourhood}} — {{fields.price}}"
+            fields:
+              - label: "Title"
+                name: "title"
+                widget: "string"
+                hint: "e.g. Elegant Penthouse with Sea Views"
+
+              - label: "Price"
+                name: "price"
+                widget: "string"
+                hint: "e.g. €3,200,000 for sale or €7,700 for monthly rent"
+
+              - label: "Neighbourhood"
+                name: "neighbourhood"
+                widget: "string"
+                hint: "e.g. Pedralbes, Eixample, Sarrià, Gràcia, El Born"
+
+              - label: "Type"
+                name: "type"
+                widget: "select"
+                options:
+                  - { label: "Penthouse", value: "penthouse" }
+                  - { label: "Apartment", value: "apartment" }
+                  - { label: "Villa",     value: "villa" }
+                  - { label: "Townhouse", value: "townhouse" }
+                  - { label: "Studio",    value: "studio" }
+
+              - label: "Status"
+                name: "status"
+                widget: "select"
+                options:
+                  - { label: "For Sale", value: "sale" }
+                  - { label: "For Rent", value: "rent" }
+
+              - label: "Bedrooms"
+                name: "beds"
+                widget: "number"
+                value_type: "int"
+                min: 0
+
+              - label: "Bathrooms"
+                name: "baths"
+                widget: "number"
+                value_type: "int"
+                min: 0
+
+              - label: "Size (m²)"
+                name: "size"
+                widget: "string"
+                hint: "e.g. 350"
+
+              - label: "Image URL"
+                name: "image"
+                widget: "string"
+                hint: "Paste a direct image URL"
+
+              - label: "Description"
+                name: "description"
+                widget: "text"
+
+              - label: "Published"
+                name: "published"
+                widget: "boolean"
+                default: true
+                hint: "Toggle off to hide from the public site"

@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Exceptional Penthouse with Panoramic Views — Pedralbes, Barcelona. AN Real Estate." />
+  <title>Penthouse in Pedralbes — AN Real Estate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="property.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header scrolled" id="site-header">
+    <div class="holder">
+      <div class="header-block">
+        <div class="header-left">
+          <button class="mob-nav-icon" id="hamburger" aria-label="Menu" aria-expanded="false">
+            <span></span><span></span>
+          </button>
+          <nav class="hn-left" aria-label="Primary left">
+            <a href="index.html#properties" class="hn-link">Properties</a>
+            <a href="index.html#services"   class="hn-link">Services</a>
+          </nav>
+        </div>
+        <a href="index.html" class="header-logo">
+          <span class="hl-mark">AN</span>
+          <span class="hl-sub">Real Estate</span>
+        </a>
+        <div class="header-right">
+          <nav class="hn-right" aria-label="Primary right">
+            <a href="index.html#about"   class="hn-link">About</a>
+            <a href="index.html#contact" class="hn-link">Contact</a>
+          </nav>
+          <a href="tel:+34600000000" class="header-phone">+34 600 000 000</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+    <nav class="drawer-nav">
+      <a href="index.html#properties" class="drawer-link">Properties</a>
+      <a href="index.html#services"   class="drawer-link">Services</a>
+      <a href="index.html#about"      class="drawer-link">About</a>
+      <a href="index.html#contact"    class="drawer-link">Contact</a>
+    </nav>
+    <div class="drawer-foot">
+      <a href="tel:+34600000000" class="drawer-phone">+34 600 000 000</a>
+    </div>
+  </div>
+
+  <!-- BREADCRUMB -->
+  <nav class="prop-breadcrumb" aria-label="Breadcrumb">
+    <div class="holder">
+      <a href="index.html">Home</a>
+      <span>›</span>
+      <a href="index.html#properties">Properties</a>
+      <span>›</span>
+      <a href="#">Barcelona</a>
+      <span>›</span>
+      <span>Exceptional Penthouse in Pedralbes</span>
+    </div>
+  </nav>
+
+  <!-- GALLERY MOSAIC -->
+  <section class="pg-section">
+    <div class="pg-mosaic">
+
+      <div class="pg-hero" data-src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1600&q=85&auto=format" role="button" tabindex="0" aria-label="View photo 1">
+        <img id="pg-hero-img"
+          src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1600&q=85&auto=format"
+          alt="Penthouse living area" loading="eager" />
+      </div>
+
+      <div class="pg-grid-side">
+        <button class="pg-cell" data-src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1400&q=85&auto=format">
+          <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=700&q=75&auto=format" alt="Living room" loading="lazy" />
+        </button>
+        <button class="pg-cell" data-src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=1400&q=85&auto=format">
+          <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=700&q=75&auto=format" alt="Kitchen" loading="lazy" />
+        </button>
+        <button class="pg-cell" data-src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=1400&q=85&auto=format">
+          <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=700&q=75&auto=format" alt="Master bedroom" loading="lazy" />
+        </button>
+        <button class="pg-cell pg-cell--last" data-src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=1400&q=85&auto=format">
+          <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=700&q=75&auto=format" alt="Bathroom" loading="lazy" />
+          <div class="pg-more-overlay">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            View all 12 photos
+          </div>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROPERTY HEADER -->
+  <div class="ph-bar">
+    <div class="holder">
+
+      <div class="ph-top">
+        <div class="ph-badges">
+          <span class="ph-badge ph-badge--sale">For Sale</span>
+          <span class="ph-badge ph-badge--type">Penthouse</span>
+          <span class="ph-badge ph-badge--new">New listing</span>
+        </div>
+        <h1 class="ph-title">Exceptional Penthouse<br>with Panoramic Views</h1>
+        <p class="ph-location">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+          Pedralbes, Barcelona, Spain
+        </p>
+      </div>
+
+      <div class="ph-specs">
+        <div class="ph-price-block">
+          <p class="ph-price">€3,200,000</p>
+          <p class="ph-ref">Ref. AN-2024-047</p>
+        </div>
+        <div class="ph-specs-divider"></div>
+        <div class="ph-spec">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 24 24"><path d="M2 20V8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12"/><path d="M2 14h20"/><path d="M7 14v6"/><path d="M17 14v6"/><path d="M7 8V5a2 2 0 0 1 4 0v3"/></svg>
+          <div class="ph-spec-text">
+            <span class="ph-spec-val">4</span>
+            <span class="ph-spec-key">Bedrooms</span>
+          </div>
+        </div>
+        <div class="ph-spec">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 24 24"><path d="M9 6 Q9 3 12 3 Q15 3 15 6 L15 11 L3 11 L3 14 Q3 17 6 17 L18 17 Q21 17 21 14 L21 11"/><path d="M6 17 L6 21"/><path d="M18 17 L18 21"/></svg>
+          <div class="ph-spec-text">
+            <span class="ph-spec-val">4</span>
+            <span class="ph-spec-key">Bathrooms</span>
+          </div>
+        </div>
+        <div class="ph-spec">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 3v18"/></svg>
+          <div class="ph-spec-text">
+            <span class="ph-spec-val">350 m²</span>
+            <span class="ph-spec-key">Total area</span>
+          </div>
+        </div>
+        <div class="ph-spec">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 24 24"><path d="M3 21h18M3 7v14M21 7v14M6 11h4M14 11h4M6 15h4M14 15h4M6 19h4M14 19h4"/><path d="M9 3h6l3 4H6L9 3z"/></svg>
+          <div class="ph-spec-text">
+            <span class="ph-spec-val">12th</span>
+            <span class="ph-spec-key">Floor</span>
+          </div>
+        </div>
+        <div class="ph-spec">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 24 24"><rect x="2" y="10" width="20" height="9" rx="1"/><path d="M6 10V7a2 2 0 0 1 4 0v3"/><path d="M12 13h1"/></svg>
+          <div class="ph-spec-text">
+            <span class="ph-spec-val">2</span>
+            <span class="ph-spec-key">Parking</span>
+          </div>
+        </div>
+        <div class="ph-spec">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          <div class="ph-spec-text">
+            <span class="ph-spec-val">85 m²</span>
+            <span class="ph-spec-key">Terrace</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="prop-body">
+    <div class="holder">
+      <div class="prop-layout">
+
+        <!-- MAIN CONTENT -->
+        <main class="prop-main">
+
+          <!-- Description -->
+          <section class="prop-section">
+            <h2 class="prop-section-h">Description</h2>
+            <div class="prop-desc">
+              <p>This exceptional penthouse occupies the entire top floor of one of Pedralbes' most prestigious residential buildings, offering uninterrupted panoramic views across Barcelona from the sea to Montjuïc. Meticulously designed by a renowned Barcelona studio, every detail has been carefully considered to create a residence of extraordinary quality.</p>
+              <p>The generous open-plan living and dining area leads seamlessly onto a wraparound terrace of 85 m², the perfect setting for entertaining. The state-of-the-art kitchen features custom cabinetry and premium appliances throughout. All four bedrooms are suites with en-suite bathrooms finished in natural stone.</p>
+              <p>Located in the prestigious Pedralbes neighbourhood, minutes from the best international schools, the Diagonal shopping corridor, and with easy access to both Barcelona city centre and El Prat Airport.</p>
+            </div>
+          </section>
+
+          <!-- Property details table -->
+          <section class="prop-section">
+            <h2 class="prop-section-h">Property Details</h2>
+            <div class="prop-details">
+              <div class="pd-row">
+                <span class="pd-key">Property type</span>
+                <span class="pd-val">Penthouse</span>
+              </div>
+              <div class="pd-row">
+                <span class="pd-key">Total size</span>
+                <span class="pd-val">350 m²</span>
+              </div>
+              <div class="pd-row">
+                <span class="pd-key">Terrace</span>
+                <span class="pd-val">85 m²</span>
+              </div>
+              <div class="pd-row">
+                <span class="pd-key">Bedrooms</span>
+                <span class="pd-val">4</span>
+              </div>
+              <div class="pd-row">
+                <span class="pd-key">Bathrooms</span>
+                <span class="pd-val">4</span>
+              </div>
+              <div class="pd-row">
+                <span class="pd-key">Floor</span>
+                <span class="pd-val">12th (top floor)</span>
+              </div>
+              <div class="pd-row">
+                <span class="pd-key">Parking spaces</span>
+                <span class="pd-val">2 underground</span>
+              </div>
+              <div class="pd-row">
+                <span class="pd-key">Year built</span>
+                <span class="pd-val">2018</span>
+              </div>
+              <div class="pd-row">
+                <span class="pd-key">Condition</span>
+                <span class="pd-val">Excellent</span>
+              </div>
+              <div class="pd-row">
+                <span class="pd-key">EPC rating</span>
+                <span class="pd-val">A</span>
+              </div>
+              <div class="pd-row">
+                <span class="pd-key">Ceiling height</span>
+                <span class="pd-val">3.2 m</span>
+              </div>
+              <div class="pd-row">
+                <span class="pd-key">Reference</span>
+                <span class="pd-val">AN-2024-047</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Features as tags -->
+          <section class="prop-section">
+            <h2 class="prop-section-h">Features &amp; Amenities</h2>
+            <div class="prop-tags-group">
+              <p class="feat-group">Interior</p>
+              <div class="prop-tags">
+                <span class="prop-tag-pill">Open-plan living &amp; dining</span>
+                <span class="prop-tag-pill">4 en-suite bedrooms</span>
+                <span class="prop-tag-pill">Miele kitchen appliances</span>
+                <span class="prop-tag-pill">Home automation</span>
+                <span class="prop-tag-pill">Underfloor heating</span>
+                <span class="prop-tag-pill">Oak herringbone floors</span>
+                <span class="prop-tag-pill">Walk-in wardrobe</span>
+                <span class="prop-tag-pill">Double-height ceilings</span>
+                <span class="prop-tag-pill">Natural stone bathrooms</span>
+                <span class="prop-tag-pill">Wine cellar</span>
+              </div>
+            </div>
+            <div class="prop-tags-group">
+              <p class="feat-group">Building &amp; Outdoor</p>
+              <div class="prop-tags">
+                <span class="prop-tag-pill">85 m² wraparound terrace</span>
+                <span class="prop-tag-pill">360° panoramic views</span>
+                <span class="prop-tag-pill">Communal pool &amp; garden</span>
+                <span class="prop-tag-pill">24/7 concierge</span>
+                <span class="prop-tag-pill">Private storage</span>
+                <span class="prop-tag-pill">Security system</span>
+                <span class="prop-tag-pill">EV charging</span>
+                <span class="prop-tag-pill">Bicycle storage</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Location -->
+          <section class="prop-section">
+            <h2 class="prop-section-h">Location</h2>
+            <div class="prop-map-placeholder">
+              <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24" opacity=".3"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+              <p>Pedralbes, Barcelona, Spain</p>
+              <span>Exact address provided after enquiry</span>
+            </div>
+            <div class="prop-nearby">
+              <div class="nearby-item">
+                <span class="nearby-icon">
+                  <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </span>
+                <span class="nearby-name">Col·legi Alemany (German School)</span>
+                <span class="nearby-dist">5 min walk</span>
+              </div>
+              <div class="nearby-item">
+                <span class="nearby-icon">
+                  <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                </span>
+                <span class="nearby-name">Diagonal Mar Shopping</span>
+                <span class="nearby-dist">12 min drive</span>
+              </div>
+              <div class="nearby-item">
+                <span class="nearby-icon">
+                  <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-4 0v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+                </span>
+                <span class="nearby-name">Palau Reial Metro Station</span>
+                <span class="nearby-dist">8 min walk</span>
+              </div>
+              <div class="nearby-item">
+                <span class="nearby-icon">
+                  <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </span>
+                <span class="nearby-name">El Prat International Airport</span>
+                <span class="nearby-dist">25 min drive</span>
+              </div>
+            </div>
+          </section>
+
+        </main>
+
+        <!-- SIDEBAR -->
+        <aside class="prop-aside">
+          <div class="prop-card" id="enquire">
+
+            <!-- Agent -->
+            <div class="pc-agent">
+              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=120&q=80&auto=format"
+                alt="Álvaro Navarro" class="pc-agent-img" loading="lazy" />
+              <div class="pc-agent-info">
+                <p class="pc-agent-name">Álvaro Navarro</p>
+                <p class="pc-agent-role">Founder &amp; Lead Agent</p>
+                <p class="pc-agent-agency">AN Real Estate · Barcelona</p>
+              </div>
+            </div>
+
+            <!-- Price -->
+            <div class="pc-price-block">
+              <p class="pc-price">€3,200,000</p>
+              <p class="pc-loc">Pedralbes, Barcelona</p>
+            </div>
+
+            <!-- Form -->
+            <form class="pc-form" id="prop-form" novalidate>
+              <div class="fg">
+                <label class="flabel">Name</label>
+                <input type="text" class="finput" placeholder="Your full name" required />
+              </div>
+              <div class="fg">
+                <label class="flabel">Email</label>
+                <input type="email" class="finput" placeholder="your@email.com" required />
+              </div>
+              <div class="fg">
+                <label class="flabel">Phone</label>
+                <input type="tel" class="finput" placeholder="+34 600 000 000" />
+              </div>
+              <div class="fg">
+                <label class="flabel">Message</label>
+                <textarea class="finput ftextarea" rows="3" placeholder="I'm interested in this property…"></textarea>
+              </div>
+              <button type="submit" class="button pc-submit">Request Viewing</button>
+            </form>
+
+            <a href="https://wa.me/34600000000" class="pc-whatsapp" target="_blank" rel="noopener">
+              <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+              Chat on WhatsApp
+            </a>
+
+            <a href="tel:+34600000000" class="pc-tel">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              +34 600 000 000
+            </a>
+
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- SIMILAR PROPERTIES -->
+  <section class="prop-similar">
+    <div class="holder">
+      <div class="prop-similar-head reveal">
+        <p class="subheading">You May Also Like</p>
+        <h2 class="prop-similar-h">
+          <span class="text-wrap"><span class="text-inner">Similar</span></span>
+          <span class="text-wrap"><span class="text-inner">Properties</span></span>
+        </h2>
+      </div>
+      <div class="props-grid">
+
+        <a href="property.html" class="prop-card-grid">
+          <div class="prop-img-wrap">
+            <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=700&q=80&auto=format" alt="Apartment Eixample" class="prop-img" loading="lazy" />
+            <span class="prop-tag">For Sale</span>
+          </div>
+          <div class="prop-card-info">
+            <div class="prop-meta">
+              <span class="prop-loc">Eixample</span>
+              <span class="prop-price">€830,000</span>
+            </div>
+            <h3 class="prop-title">Elegant Modernist Apartment</h3>
+            <p class="prop-specs">3 bed · 2 bath · 145 m²</p>
+          </div>
+        </a>
+
+        <a href="property.html" class="prop-card-grid">
+          <div class="prop-img-wrap">
+            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=700&q=80&auto=format" alt="Villa Sarrià" class="prop-img" loading="lazy" />
+            <span class="prop-tag">For Sale</span>
+          </div>
+          <div class="prop-card-info">
+            <div class="prop-meta">
+              <span class="prop-loc">Sarrià</span>
+              <span class="prop-price">€5,500,000</span>
+            </div>
+            <h3 class="prop-title">Magnificent Villa with Pool</h3>
+            <p class="prop-specs">5 bed · 5 bath · 480 m²</p>
+          </div>
+        </a>
+
+        <a href="property.html" class="prop-card-grid">
+          <div class="prop-img-wrap">
+            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80&auto=format" alt="Townhouse Gràcia" class="prop-img" loading="lazy" />
+            <span class="prop-tag">For Sale</span>
+          </div>
+          <div class="prop-card-info">
+            <div class="prop-meta">
+              <span class="prop-loc">Gràcia</span>
+              <span class="prop-price">€1,450,000</span>
+            </div>
+            <h3 class="prop-title">Charming Townhouse with Rooftop</h3>
+            <p class="prop-specs">4 bed · 3 bath · 220 m²</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="holder">
+      <div class="footer-top">
+        <a href="index.html" class="footer-logo">
+          <span class="hl-mark">AN</span>
+          <span class="hl-sub">Real Estate</span>
+        </a>
+        <nav class="footer-nav">
+          <a href="index.html#properties" class="fn-link">Properties</a>
+          <a href="index.html#services"   class="fn-link">Services</a>
+          <a href="index.html#about"      class="fn-link">About</a>
+          <a href="index.html#contact"    class="fn-link">Contact</a>
+        </nav>
+      </div>
+      <div class="footer-text">
+        <p>AN Real Estate is a licensed property agency specialising in luxury residential real estate in Barcelona, Spain. Registered with the Barcelona Association of Real Estate Agents (API). All properties subject to availability. Prices indicative and subject to change.</p>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          <span>© 2025 AN Real Estate · Barcelona</span>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Legal Notice</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+        <div class="footer-studio">anrealestate.es</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lb-overlay" id="lb-overlay" role="dialog" aria-modal="true" aria-label="Photo gallery">
+    <button class="lb-close" id="lb-close" aria-label="Close gallery">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <button class="lb-arrow lb-arrow--prev" id="lb-prev" aria-label="Previous photo">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="lb-stage">
+      <img class="lb-img" id="lb-img" src="" alt="" />
+    </div>
+    <button class="lb-arrow lb-arrow--next" id="lb-next" aria-label="Next photo">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <div class="lb-counter" id="lb-counter">1 / 5</div>
+  </div>
+
+  <!-- Mobile sticky bar -->
+  <div class="prop-sticky-cta" id="prop-sticky-cta">
+    <p class="psc-price">€3,200,000</p>
+    <a href="#enquire" class="button">Request Viewing</a>
+  </div>
+
+  <a href="https://wa.me/34600000000" class="wa-fab" aria-label="WhatsApp" target="_blank" rel="noopener">
+    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+  </a>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="main.js"></script>
+  <script src="property.js"></script>
+  <script src="animations.js"></script>
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AN Real Estate — Exclusive luxury properties for sale and rent in Barcelona." />
+  <title>AN Real Estate — Luxury Properties in Barcelona</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="is-loader">
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-inner">
+    <span class="loader-mark">AN</span>
+    <span class="loader-sep">—</span>
+    <span class="loader-sub">Real Estate</span>
+  </div>
+</div>
+
+<div id="wrapper">
+
+  <!-- HEADER -->
+  <header class="header" id="site-header">
+    <div class="holder">
+      <div class="header-block">
+
+        <div class="header-left">
+          <button class="mob-nav-icon" id="hamburger" aria-label="Menu" aria-expanded="false">
+            <span></span><span></span>
+          </button>
+          <nav class="hn-left" aria-label="Primary left">
+            <a href="#properties" class="hn-link">Properties</a>
+            <a href="#services"   class="hn-link">Services</a>
+          </nav>
+        </div>
+
+        <a href="/" class="header-logo">
+          <span class="hl-mark">AN</span>
+          <span class="hl-sub">Real Estate</span>
+        </a>
+
+        <div class="header-right">
+          <nav class="hn-right" aria-label="Primary right">
+            <a href="about.html"   class="hn-link">About</a>
+            <a href="#contact" class="hn-link">Contact</a>
+          </nav>
+          <a href="tel:+34600000000" class="header-phone">+34 600 000 000</a>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE DRAWER -->
+  <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+    <nav class="drawer-nav">
+      <a href="#properties" class="drawer-link">Properties</a>
+      <a href="#services"   class="drawer-link">Services</a>
+      <a href="about.html"      class="drawer-link">About</a>
+      <a href="#contact"    class="drawer-link">Contact</a>
+    </nav>
+    <div class="drawer-foot">
+      <a href="tel:+34600000000" class="drawer-phone">+34 600 000 000</a>
+    </div>
+  </div>
+
+  <!-- BANNER -->
+  <section class="banner" id="hero">
+    <div class="banner-slider" id="banner-slider">
+      <div class="banner-slide active">
+        <div class="banner-float">
+          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=85&auto=format" alt="Luxury Interior Barcelona" loading="eager" fetchpriority="high" />
+        </div>
+      </div>
+      <div class="banner-slide">
+        <div class="banner-float">
+          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1920&q=85&auto=format" alt="Luxury Villa" loading="lazy" />
+        </div>
+      </div>
+      <div class="banner-slide">
+        <div class="banner-float">
+          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=85&auto=format" alt="Barcelona Property" loading="lazy" />
+        </div>
+      </div>
+    </div>
+    <div class="banner-overlay"></div>
+    <div class="banner-main">
+      <div class="holder">
+        <div class="banner-block">
+          <p class="banner-eyebrow">Barcelona <span class="beo-sep">—</span> Since 2012</p>
+          <h1 class="banner-h1">
+            <span class="text-wrap"><span class="text-inner">Your Finest</span></span>
+            <span class="text-wrap"><span class="text-inner"><em>Address.</em></span></span>
+          </h1>
+          <p class="banner-sub">Exclusive residences for sale and rent in Barcelona's most prestigious neighbourhoods.</p>
+          <a href="#properties" class="button">Explore Properties</a>
+        </div>
+      </div>
+    </div>
+    <div class="banner-dots" id="banner-dots">
+      <button class="bn-dot active" data-i="0" aria-label="Slide 1"></button>
+      <button class="bn-dot" data-i="1" aria-label="Slide 2"></button>
+      <button class="bn-dot" data-i="2" aria-label="Slide 3"></button>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT WRAP -->
+  <section class="main-wrap">
+    <div class="holder">
+
+      <!-- ABOUT INTRO — 3 col -->
+      <div class="about-team">
+        <div class="about-team-col reveal">
+          <div class="key-wrap"><div class="key"></div></div>
+          <h2 class="at-heading">
+            <span class="text-wrap"><span class="text-inner">connect exceptional</span></span>
+            <span class="text-wrap"><span class="text-inner">homes with</span></span>
+            <span class="text-wrap"><span class="text-inner">exceptional people.</span></span>
+          </h2>
+          <p class="at-sub">AN Real Estate · Since 2012</p>
+        </div>
+        <div class="about-team-col at-img-col">
+          <div class="at-img img-float">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=700&q=80&auto=format" alt="Álvaro Navarro, Founder" loading="lazy" />
+          </div>
+        </div>
+        <div class="about-team-col reveal">
+          <p class="at-text">Over a decade of personalised service, deep market knowledge, and an unwavering commitment to finding the perfect match between exceptional homes and discerning buyers.</p>
+          <a href="about.html" class="link-flash">Meet Álvaro <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <!-- INFO / PROPERTIES -->
+      <div class="info" id="properties">
+        <div class="info-top reveal">
+          <h2 class="info-heading">
+            <span class="text-wrap"><span class="text-inner">Featured</span></span>
+            <span class="text-wrap"><span class="text-inner">Properties</span></span>
+          </h2>
+          <p class="subheading">Eixample · Pedralbes · Sarrià · Gràcia · El Born</p>
+        </div>
+        <div class="info-content">
+          <div class="info-block">
+            <div class="filter-tabs" role="tablist">
+              <button class="ftab active" data-filter="all">All</button>
+              <button class="ftab" data-filter="sale">For Sale</button>
+              <button class="ftab" data-filter="rent">For Rent</button>
+              <button class="ftab" data-filter="penthouse">Penthouse</button>
+              <button class="ftab" data-filter="villa">Villa</button>
+            </div>
+            <div class="props-grid" id="props-grid">
+            </div>
+            <div class="info-footer-link">
+              <a href="#" class="link-flash">View all properties <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+
+          <!-- SERVICES — invest-info style -->
+          <div class="invest-info" id="services">
+            <div class="invest-info-top reveal">
+              <h2 class="invest-heading">
+                <span class="text-wrap"><span class="text-inner">The AN</span></span>
+                <span class="text-wrap"><span class="text-inner">Difference</span></span>
+              </h2>
+              <p class="subheading">Why Choose Us</p>
+            </div>
+            <div class="invest-info-block">
+              <div class="invest-info-img img-float">
+                <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=700&q=80&auto=format" alt="Barcelona Luxury" loading="lazy" />
+              </div>
+              <div class="invest-info-content">
+                <div class="services-list">
+                  <div class="svc-item">
+                    <span class="svc-num">01</span>
+                    <div class="svc-body">
+                      <h3 class="svc-name">Trust & Integrity</h3>
+                      <p class="svc-desc">Every transaction handled with complete transparency and an unwavering commitment to your best interests — no exceptions.</p>
+                    </div>
+                  </div>
+                  <div class="svc-item">
+                    <span class="svc-num">02</span>
+                    <div class="svc-body">
+                      <h3 class="svc-name">Bespoke Service</h3>
+                      <p class="svc-desc">Personalised attention from first enquiry to final signature. Your timeline, your priorities, your terms.</p>
+                    </div>
+                  </div>
+                  <div class="svc-item">
+                    <span class="svc-num">03</span>
+                    <div class="svc-body">
+                      <h3 class="svc-name">Global Reach</h3>
+                      <p class="svc-desc">An international network connecting Barcelona's finest properties with qualified buyers in London, New York, Zurich, and beyond.</p>
+                    </div>
+                  </div>
+                  <div class="svc-item">
+                    <span class="svc-num">04</span>
+                    <div class="svc-body">
+                      <h3 class="svc-name">Market Expertise</h3>
+                      <p class="svc-desc">Twelve years of deep, granular knowledge of Barcelona's premium market ensures every decision is grounded in data and experience.</p>
+                    </div>
+                  </div>
+                </div>
+                <a href="#contact" class="link-flash">Get in touch <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testi-section" id="testimonials">
+    <div class="holder">
+      <div class="testi-top reveal">
+        <div class="key-wrap"><div class="key"></div></div>
+        <p class="testi-eyebrow">Client Stories</p>
+      </div>
+      <div class="testi-list">
+
+        <div class="testi-item">
+          <blockquote class="testi-big-quote">"Álvaro found us our dream apartment in Eixample within two weeks. His knowledge of the local market is unmatched, and his discretion throughout was exactly what we needed."</blockquote>
+          <div class="testi-author">
+            <div class="testi-avatar">JM</div>
+            <div>
+              <div class="testi-name">James &amp; Maria K.</div>
+              <div class="testi-detail">Purchased in Eixample · 2024</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-item">
+          <blockquote class="testi-big-quote">"The most professional real estate experience I've had in Europe. AN Real Estate handled our villa sale in Pedralbes flawlessly — above asking price and in record time."</blockquote>
+          <div class="testi-author">
+            <div class="testi-avatar">SF</div>
+            <div>
+              <div class="testi-name">Sophie F.</div>
+              <div class="testi-detail">Sold villa in Pedralbes · 2024</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-item">
+          <blockquote class="testi-big-quote">"As an international buyer, having Álvaro guide us through Barcelona's market was invaluable. He handled every detail — from legal referrals to neighbourhood tours. Truly exceptional."</blockquote>
+          <div class="testi-author">
+            <div class="testi-avatar">RT</div>
+            <div>
+              <div class="testi-name">Robert T.</div>
+              <div class="testi-detail">Purchased in Sarrià · 2023</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- JOIN / CONTACT -->
+  <section class="join" id="contact">
+    <div class="holder">
+      <div class="join-top reveal">
+        <h2 class="join-heading">
+          <span class="text-wrap"><span class="text-inner">Let's Find Your</span></span>
+          <span class="text-wrap"><span class="text-inner">Perfect Home.</span></span>
+        </h2>
+      </div>
+      <div class="join-body">
+        <div class="key-wrap"><div class="key"></div></div>
+        <form class="join-form" id="contact-form" novalidate>
+          <div class="form-row">
+            <div class="fg">
+              <label class="flabel">Name</label>
+              <input type="text" class="finput" placeholder="John Smith" required />
+            </div>
+            <div class="fg">
+              <label class="flabel">Email</label>
+              <input type="email" class="finput" placeholder="john@example.com" required />
+            </div>
+          </div>
+          <div class="fg">
+            <label class="flabel">I'm interested in</label>
+            <select class="finput">
+              <option value="">Select…</option>
+              <option>Buying a property</option>
+              <option>Selling my property</option>
+              <option>Renting</option>
+              <option>Free valuation</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label class="flabel">Message</label>
+            <textarea class="finput ftextarea" rows="4" placeholder="Tell us about your needs…"></textarea>
+          </div>
+          <div class="join-submit">
+            <button type="submit" class="button">Send Message</button>
+            <div class="join-contact-links">
+              <a href="tel:+34600000000" class="jcl">+34 600 000 000</a>
+              <a href="mailto:info@anrealestate.es" class="jcl">info@anrealestate.es</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="holder">
+      <div class="footer-top">
+        <a href="/" class="footer-logo">
+          <span class="hl-mark">AN</span>
+          <span class="hl-sub">Real Estate</span>
+        </a>
+        <nav class="footer-nav">
+          <a href="#properties" class="fn-link">Properties</a>
+          <a href="#services"   class="fn-link">Services</a>
+          <a href="about.html"      class="fn-link">About</a>
+          <a href="#contact"    class="fn-link">Contact</a>
+        </nav>
+      </div>
+      <div class="footer-text">
+        <p>AN Real Estate is a licensed property agency specialising in luxury residential real estate in Barcelona, Spain. We are registered members of the Barcelona Association of Real Estate Agents (API) and operate in full compliance with Spanish property law. All properties are subject to availability. Prices shown are indicative and subject to change without notice. AN Real Estate acts as an intermediary between buyers and sellers and does not hold client funds.</p>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          <span>© 2025 AN Real Estate · Barcelona</span>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Legal Notice</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+        <div class="footer-studio">anrealestate.es</div>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /#wrapper -->
+
+<!-- WhatsApp FAB -->
+<a href="https://wa.me/34600000000" class="wa-fab" aria-label="WhatsApp" target="_blank" rel="noopener">
+  <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
+<script src="main.js"></script>
+<script src="animations.js"></script>
+<script src="listings.js"></script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on('init', user => {
+      if (!user) {
+        window.netlifyIdentity.on('login', () => {
+          document.location.href = '/admin/'
+        })
+      }
+    })
+  }
+</script>
+</body>
+</html>
