@@ -931,16 +931,27 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   font-size: max(28px, 4vw);
   font-weight: 300;
   font-style: italic;
-  color: var(--cream);
+  color: rgba(240,235,224,.10);
   line-height: 1.25;
   letter-spacing: -.12vw;
   margin-bottom: 2.5rem;
 }
 
-/* individual word targets for scrub reveal */
-.testi-big-quote .word {
-  display: inline;
-  opacity: 0.12;
+/* TREF line-by-line reveal */
+.testi-line {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.testi-cover {
+  position: absolute;
+  top: 0; left: 0;
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--cream);
 }
 
 .testi-author { display: flex; align-items: center; gap: 1rem; }

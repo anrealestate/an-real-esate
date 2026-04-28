@@ -173,62 +173,154 @@ if (aboutGrid) {
 }
 
 /* ================================
-   10. Testimonials — randomized slider + word scrub
+   10. Testimonials — TREF line reveal + slider + auto-rotation
    ================================ */
 const testiItems = Array.from(document.querySelectorAll('.testi-item'))
 const testiDots  = Array.from(document.querySelectorAll('.testi-dot'))
 let testiCurrent = Math.floor(Math.random() * testiItems.length)
 let activeST     = null
+let activeAnim   = null
 
-function buildScrub(item) {
-  if (activeST) { activeST.kill(); activeST = null }
-
+// Split quote into rendered lines, return cover elements via callback
+function buildLines(item, callback) {
   const quote = item.querySelector('.testi-big-quote')
   if (!quote) return
 
-  // Cache original text on first run, then restore it before re-splitting
   if (!quote.dataset.raw) quote.dataset.raw = quote.textContent.trim()
+
+  // Phase 1 — word spans for measuring
   quote.innerHTML = quote.dataset.raw
     .split(/\s+/)
-    .map(w => `<span class="word">${w}</span>`)
+    .map(w => `<span class="tw">${w}</span>`)
     .join(' ')
 
-  const words = quote.querySelectorAll('.word')
-  gsap.set(words, { opacity: 0.12 })
+  // Phase 2 — measure after browser renders, group by offsetTop
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    const words = Array.from(quote.querySelectorAll('.tw'))
+    const lineMap = new Map()
+    words.forEach(word => {
+      const top = Math.round(word.offsetTop)
+      if (!lineMap.has(top)) lineMap.set(top, [])
+      lineMap.get(top).push(word.textContent)
+    })
 
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: quote,
-      start: 'top 88%',
-      end: 'bottom 25%',
-      scrub: 1.2,
-    }
-  })
-  tl.to(words, { opacity: 1, ease: 'none', stagger: { each: 0.06 } })
-  activeST = tl.scrollTrigger
+    // Phase 3 — rebuild with .testi-line + .testi-cover per line
+    quote.innerHTML = ''
+    const covers = []
+    lineMap.forEach(lineWords => {
+      const text = lineWords.join(' ')
+      const line = document.createElement('span')
+      line.className = 'testi-line'
+      line.textContent = text
+      const cover = document.createElement('span')
+      cover.className = 'testi-cover'
+      cover.textContent = text
+      line.appendChild(cover)
+      quote.appendChild(line)
+      covers.push(cover)
+    })
+
+    gsap.set(covers, { width: 0 })
+    callback(covers, quote)
+  }))
 }
 
-function showTesti(index, animate = true) {
+// Mode 1 — scroll scrub (first slide on page load)
+function buildScrollScrub(item) {
+  if (activeST)   { activeST.kill();   activeST   = null }
+  if (activeAnim) { activeAnim.kill(); activeAnim = null }
+
+  buildLines(item, (covers, quote) => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: quote,
+        start: 'top 88%',
+        end: 'bottom 25%',
+        scrub: 1.2,
+      }
+    })
+    covers.forEach((cover, i) => {
+      tl.to(cover, { width: '100%', ease: 'none', duration: 1 }, i * (0.7 / covers.length))
+    })
+    activeST = tl.scrollTrigger
+    ScrollTrigger.refresh()
+  })
+}
+
+// Mode 2 — auto timed reveal (slide transitions)
+function buildAutoReveal(item) {
+  if (activeST)   { activeST.kill();   activeST   = null }
+  if (activeAnim) { activeAnim.kill(); activeAnim = null }
+
+  buildLines(item, covers => {
+    const tl = gsap.timeline()
+    covers.forEach((cover, i) => {
+      tl.to(cover, { width: '100%', ease: 'power2.inOut', duration: 0.55 }, i * 0.2)
+    })
+    activeAnim = tl
+  })
+}
+
+function showTesti(index, isFirst = false) {
   testiItems.forEach((item, i) => item.classList.toggle('is-active', i === index))
   testiDots.forEach((dot,  i) => dot.classList.toggle('is-active',  i === index))
   testiCurrent = index
-  const delay = animate ? 300 : 0
-  setTimeout(() => {
-    buildScrub(testiItems[index])
-    ScrollTrigger.refresh()
-  }, delay)
+
+  if (isFirst) {
+    buildScrollScrub(testiItems[index])
+  } else {
+    setTimeout(() => buildAutoReveal(testiItems[index]), 320)
+  }
 }
 
-// Boot with random slide
-showTesti(testiCurrent, false)
+// Boot with random slide — scroll scrub
+showTesti(testiCurrent, true)
 
+// Auto-rotation
+let autoTimer   = null
+let resumeTimer = null
+const AUTO_MS   = 5000
+const PAUSE_MS  = 8000
+
+function startAuto() {
+  stopAuto()
+  autoTimer = setInterval(() => {
+    showTesti((testiCurrent + 1) % testiItems.length, false)
+  }, AUTO_MS)
+}
+
+function stopAuto() {
+  clearInterval(autoTimer)
+  autoTimer = null
+}
+
+function pauseThenResume() {
+  stopAuto()
+  clearTimeout(resumeTimer)
+  resumeTimer = setTimeout(startAuto, PAUSE_MS)
+}
+
+// Only rotate when section is visible
+const testiSection = document.querySelector('.testi-section')
+if (testiSection) {
+  new IntersectionObserver(([entry]) => {
+    entry.isIntersecting ? startAuto() : stopAuto()
+  }, { threshold: 0.2 }).observe(testiSection)
+}
+
+// Manual controls
 document.getElementById('testi-prev')?.addEventListener('click', () => {
-  showTesti((testiCurrent - 1 + testiItems.length) % testiItems.length)
+  showTesti((testiCurrent - 1 + testiItems.length) % testiItems.length, false)
+  pauseThenResume()
 })
 document.getElementById('testi-next')?.addEventListener('click', () => {
-  showTesti((testiCurrent + 1) % testiItems.length)
+  showTesti((testiCurrent + 1) % testiItems.length, false)
+  pauseThenResume()
 })
-testiDots.forEach((dot, i) => dot.addEventListener('click', () => showTesti(i)))
+testiDots.forEach((dot, i) => dot.addEventListener('click', () => {
+  showTesti(i, false)
+  pauseThenResume()
+}))
 
 /* ================================
    11. Join section
