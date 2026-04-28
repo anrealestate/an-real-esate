@@ -13,8 +13,8 @@
   --gold-dim:  rgba(201,169,110,.25);
   --muted:     rgba(240,235,224,.35);
 
-  --serif: 'Cormorant Garamond', Georgia, serif;
-  --sans:  'DM Sans', system-ui, sans-serif;
+  --serif: 'Nanum Myeongjo', Georgia, serif;
+  --sans:  'Jost', system-ui, sans-serif;
 
   --fs-2xs: clamp(.65rem,  1.5vw,  .75rem);
   --fs-xs:  clamp(.72rem,  1.8vw,  .82rem);
@@ -196,24 +196,13 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 /* Logo */
 .header-logo, .footer-logo {
   display: flex;
-  align-items: baseline;
-  gap: .45rem;
+  align-items: center;
   justify-content: center;
 }
-.hl-mark {
-  font-family: var(--serif);
-  font-size: 1.45rem;
-  font-weight: 400;
-  color: var(--gold);
-  letter-spacing: .04em;
-  line-height: 1;
-}
-.hl-sub {
-  font-size: var(--fs-2xs);
-  font-weight: 400;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--cream-dim);
+.header-logo-img {
+  height: 32px;
+  width: auto;
+  display: block;
 }
 
 /* Hamburger */
@@ -888,53 +877,57 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Nav — arrows + dots */
+/* Nav — arrows + counter */
 .testi-nav {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
-  padding-top: 2rem;
+  justify-content: center;
+  gap: 1.5rem;
+  padding-top: 2.5rem;
 }
 
 .testi-arrow {
-  width: 40px; height: 40px;
+  width: 36px; height: 36px;
   display: flex; align-items: center; justify-content: center;
-  border: 1px solid var(--border);
   color: var(--cream-dim);
   cursor: pointer;
-  transition: border-color var(--fast), color var(--fast);
+  transition: color var(--fast);
   flex-shrink: 0;
-}
-.testi-arrow:hover { border-color: rgba(240,235,224,.35); color: var(--cream); }
-
-.testi-dots {
-  display: flex;
-  align-items: center;
-  gap: .55rem;
-}
-
-.testi-dot {
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: var(--border);
-  cursor: pointer;
-  transition: background var(--fast), transform var(--fast);
+  background: none;
   border: none;
 }
-.testi-dot.is-active {
-  background: var(--gold);
-  transform: scale(1.4);
+.testi-arrow:hover { color: var(--cream); }
+
+.testi-counter {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.testi-nav-line {
+  display: block;
+  width: clamp(40px, 6vw, 80px);
+  height: 1px;
+  background: var(--border);
+}
+
+.testi-count {
+  font-size: var(--fs-2xs);
+  letter-spacing: .2em;
+  color: var(--gold);
+  white-space: nowrap;
 }
 
 .testi-big-quote {
   font-family: var(--serif);
-  font-size: max(28px, 4vw);
+  font-size: max(32px, 5vw);
   font-weight: 300;
   font-style: italic;
   color: rgba(240,235,224,.10);
-  line-height: 1.25;
-  letter-spacing: -.12vw;
-  margin-bottom: 2.5rem;
+  line-height: 1.2;
+  letter-spacing: -.15vw;
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
 /* TREF line-by-line reveal */
@@ -948,28 +941,19 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .testi-cover {
   position: absolute;
   top: 0; left: 0;
-  width: 0;
-  overflow: hidden;
+  width: 100%;
   white-space: nowrap;
   color: var(--cream);
+  clip-path: inset(0 100% 0 0);
 }
 
-.testi-author { display: flex; align-items: center; gap: 1rem; }
-
-.testi-avatar {
-  width: 44px; height: 44px;
-  border-radius: 50%;
-  background: var(--surface);
-  color: var(--gold);
-  display: flex; align-items: center; justify-content: center;
+.testi-attr {
+  text-align: center;
   font-size: var(--fs-xs);
-  font-weight: 600;
-  flex-shrink: 0;
-  border: 1px solid var(--border);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
-
-.testi-name   { font-weight: 500; font-size: var(--fs-sm); color: var(--cream); }
-.testi-detail { font-size: var(--fs-xs); color: var(--muted); margin-top: 2px; }
 
 /* ================================
    Join / Contact

@@ -1,4 +1,22 @@
 /* ================================
+   Phone assembly — keeps number out of plain HTML
+   ================================ */
+document.querySelectorAll('.tel-js').forEach(el => {
+  const parts = [el.dataset.a, el.dataset.b, el.dataset.c, el.dataset.d, el.dataset.e]
+  const raw     = parts.join('')
+  const display = parts.join(' ')
+  el.href = 'tel:' + raw
+  const textTarget = el.querySelector('.tel-text') || el.querySelector('.tel-arrow')
+  if (el.querySelector('.tel-arrow')) {
+    el.insertBefore(document.createTextNode(display + ' '), el.querySelector('.tel-arrow'))
+  } else if (el.querySelector('.tel-text')) {
+    el.querySelector('.tel-text').textContent = display
+  } else {
+    el.textContent = display
+  }
+})
+
+/* ================================
    Header: transparent → solid on scroll
    ================================ */
 const header = document.getElementById('site-header')

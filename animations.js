@@ -175,11 +175,18 @@ if (aboutGrid) {
 /* ================================
    10. Testimonials — TREF line reveal + slider + auto-rotation
    ================================ */
-const testiItems = Array.from(document.querySelectorAll('.testi-item'))
-const testiDots  = Array.from(document.querySelectorAll('.testi-dot'))
-let testiCurrent = Math.floor(Math.random() * testiItems.length)
-let activeST     = null
-let activeAnim   = null
+const testiItems   = Array.from(document.querySelectorAll('.testi-item'))
+const testiCountEl = document.getElementById('testi-count')
+let testiCurrent   = Math.floor(Math.random() * testiItems.length)
+let activeST       = null
+let activeAnim     = null
+
+function updateCounter(index) {
+  if (!testiCountEl) return
+  const cur   = String(index + 1).padStart(2, '0')
+  const total = String(testiItems.length).padStart(2, '0')
+  testiCountEl.textContent = `${cur} — ${total}`
+}
 
 // Split quote into rendered lines, return cover elements via callback
 function buildLines(item, callback) {
@@ -220,7 +227,7 @@ function buildLines(item, callback) {
       covers.push(cover)
     })
 
-    gsap.set(covers, { width: 0 })
+    gsap.set(covers, { clipPath: 'inset(0 100% 0 0)' })
     callback(covers, quote)
   }))
 }
@@ -235,12 +242,12 @@ function buildScrollScrub(item) {
       scrollTrigger: {
         trigger: quote,
         start: 'top 88%',
-        end: 'bottom 25%',
+        end: 'center center',
         scrub: 1.2,
       }
     })
     covers.forEach((cover, i) => {
-      tl.to(cover, { width: '100%', ease: 'none', duration: 1 }, i * (0.7 / covers.length))
+      tl.to(cover, { clipPath: 'inset(0 0% 0 0)', ease: 'none', duration: 1 }, i * 0.3)
     })
     activeST = tl.scrollTrigger
     ScrollTrigger.refresh()
@@ -255,7 +262,7 @@ function buildAutoReveal(item) {
   buildLines(item, covers => {
     const tl = gsap.timeline()
     covers.forEach((cover, i) => {
-      tl.to(cover, { width: '100%', ease: 'power2.inOut', duration: 0.55 }, i * 0.2)
+      tl.to(cover, { clipPath: 'inset(0 0% 0 0)', ease: 'power2.inOut', duration: 3 }, i * 0.3)
     })
     activeAnim = tl
   })
@@ -263,8 +270,8 @@ function buildAutoReveal(item) {
 
 function showTesti(index, isFirst = false) {
   testiItems.forEach((item, i) => item.classList.toggle('is-active', i === index))
-  testiDots.forEach((dot,  i) => dot.classList.toggle('is-active',  i === index))
   testiCurrent = index
+  updateCounter(index)
 
   if (isFirst) {
     buildScrollScrub(testiItems[index])
@@ -317,10 +324,6 @@ document.getElementById('testi-next')?.addEventListener('click', () => {
   showTesti((testiCurrent + 1) % testiItems.length, false)
   pauseThenResume()
 })
-testiDots.forEach((dot, i) => dot.addEventListener('click', () => {
-  showTesti(i, false)
-  pauseThenResume()
-}))
 
 /* ================================
    11. Join section

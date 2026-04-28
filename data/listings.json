@@ -1,21 +1,28 @@
 {
   "listings": [
     {
-      "title": "Exceptional Penthouse with Panoramic Views",
-      "price": "€3,200,000",
-      "neighbourhood": "Pedralbes",
-      "type": "penthouse",
+      "title": "Exquisite Brand-New Garden Residence in Gràcia",
+      "price": "€830,000",
+      "neighbourhood": "Gràcia, Barcelona",
+      "type": "apartment",
       "status": "sale",
-      "beds": 4,
-      "baths": 4,
-      "size": "350",
-      "image": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=700&q=80&auto=format",
-      "description": "Exceptional penthouse occupying the entire top floor with uninterrupted panoramic views across Barcelona from the sea to Montjuïc.",
+      "beds": 2,
+      "baths": 2,
+      "size": "94",
+      "image": "https://anrealestate.es/wp-content/uploads/2026/03/Imagen-01-logo-1.jpg",
+      "images": [
+        "https://anrealestate.es/wp-content/uploads/2026/03/Imagen-01-logo-1.jpg",
+        "https://anrealestate.es/wp-content/uploads/2026/03/imagen-4-logo-1.jpg",
+        "https://anrealestate.es/wp-content/uploads/2026/03/imagen3-logo-2.jpg",
+        "https://anrealestate.es/wp-content/uploads/2026/03/Imagen-02-logo-1.jpg",
+        "https://anrealestate.es/wp-content/uploads/2026/03/planell.jpg"
+      ],
+      "description": "Ground-floor residence undergoing high-spec renovation in the heart of Gràcia, adjacent to Avenida Diagonal. Features soaring ceilings, restored Volta Catalana brickwork, 23 m² open-plan living and dining area, principal suite with dressing room, and a 45 m² Mediterranean garden with independent multipurpose pavilion.",
       "published": true
     },
     {
       "title": "Elegant Modernist Apartment with Terrace",
-      "price": "€830,000",
+      "price": "€2,100,000",
       "neighbourhood": "Eixample",
       "type": "apartment",
       "status": "sale",
@@ -24,7 +31,7 @@
       "size": "145",
       "image": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=700&q=80&auto=format",
       "description": "Beautifully restored apartment in a classic Eixample building with original modernist details and a private terrace.",
-      "published": true
+      "published": false
     },
     {
       "title": "Magnificent Villa with Private Pool & Garden",
@@ -37,11 +44,11 @@
       "size": "480",
       "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=700&q=80&auto=format",
       "description": "Magnificent detached villa set in lush gardens in the prestigious Sarrià district, featuring a private pool and outdoor entertaining areas.",
-      "published": true
+      "published": false
     },
     {
       "title": "Stunning Seafront Apartment with Terrace",
-      "price": "€7,700",
+      "price": "€7,700/mo",
       "neighbourhood": "Diagonal Mar",
       "type": "apartment",
       "status": "rent",
@@ -50,7 +57,7 @@
       "size": "120",
       "image": "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=700&q=80&auto=format",
       "description": "Stunning seafront apartment with unobstructed Mediterranean views and a generous terrace ideal for year-round living.",
-      "published": true
+      "published": false
     },
     {
       "title": "Charming Townhouse with Rooftop Terrace",
@@ -63,11 +70,11 @@
       "size": "220",
       "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80&auto=format",
       "description": "Charming townhouse in the heart of Gràcia with a private rooftop terrace offering sweeping views of the neighbourhood.",
-      "published": true
+      "published": false
     },
     {
       "title": "Boutique Studio in Historic Gothic Quarter",
-      "price": "€2,900",
+      "price": "€2,900/mo",
       "neighbourhood": "El Born",
       "type": "studio",
       "status": "rent",
@@ -76,7 +83,7 @@
       "size": "65",
       "image": "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=700&q=80&auto=format",
       "description": "Beautifully designed boutique studio in a restored historic building in El Born, steps from Barcelona's best restaurants and galleries.",
-      "published": true
+      "published": false
     }
   ]
 }
