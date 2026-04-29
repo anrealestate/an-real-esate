@@ -1162,7 +1162,7 @@ input[type="range"] {
 .hidden { display: none !important; }
 
 @media (max-width: 900px) {
-  .sidebar { width: 60px; }
+  .sidebar { width: 60px; overflow: hidden; }
   .sb-name, .sb-link span, .sb-btn span { display: none; }
   .sb-link { justify-content: center; padding: .65rem; }
   .sb-brand { justify-content: center; padding: 1rem .5rem; }
@@ -1171,6 +1171,86 @@ input[type="range"] {
   .fg-2 { grid-column: span 1; }
   .wm-layout { grid-template-columns: 1fr; }
   .view { padding: 1.25rem 1rem 2rem; }
+}
+
+/* ── MOBILE (≤600px) ─────────────────────────── */
+@media (max-width: 600px) {
+  /* Bottom nav */
+  .sidebar {
+    width: 100%;
+    height: 54px;
+    min-height: auto;
+    overflow: visible;
+    position: fixed;
+    bottom: 0; left: 0; right: 0; top: auto;
+    flex-direction: row;
+    border-right: none;
+    border-top: 1px solid var(--border);
+    z-index: 200;
+  }
+  .sb-brand,
+  .sb-foot { display: none; }
+  .sb-nav {
+    flex-direction: row;
+    padding: 0;
+    gap: 0;
+    width: 100%;
+  }
+  .sb-link {
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: .4rem .25rem;
+    gap: .15rem;
+    font-size: .52rem;
+    letter-spacing: .03em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .sb-link svg { width: 17px; height: 17px; flex-shrink: 0; }
+
+  /* Main scrollable area clears bottom nav */
+  .main { padding-bottom: 64px; }
+  .view { padding: 1rem .85rem 1.5rem; }
+
+  /* View header stacks */
+  .view-hd {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .65rem;
+  }
+  .view-hd h1 { font-size: 1.15rem; }
+  .hd-actions { width: 100%; flex-wrap: wrap; }
+
+  /* Property table scrolls horizontally */
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .prop-table { min-width: 480px; }
+
+  /* Price wrap */
+  .price-wrap { flex-wrap: wrap; gap: .4rem; }
+  .price-sym { border-radius: var(--r) 0 0 var(--r); }
+  .price-postfix { min-width: auto; flex: 1; border-radius: 0 var(--r) var(--r) 0 !important; }
+
+  /* Features grid: single column */
+  .feats-grid { grid-template-columns: 1fr; }
+
+  /* Confirm box: full width */
+  .confirm-box { width: 92vw; }
+
+  /* Login box */
+  .ls-box { width: 100%; max-width: 340px; padding: 0 1.5rem; }
+
+  /* Prevent iOS zoom on all form inputs */
+  input[type="text"],
+  input[type="url"],
+  input[type="number"],
+  input[type="password"],
+  input[type="email"],
+  input[type="tel"],
+  textarea,
+  select { font-size: 16px; }
 }
 
 /* ── HOJAS DE VISITA ─────────────────────────── */
