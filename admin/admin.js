@@ -209,7 +209,10 @@ function loadData() {
       } else {
         _listings.forEach(l => {
           const p = prev.find(c => c.slug === l.slug)
-          if (p?.address) l.address = p.address
+          if (p?.address)    l.address    = p.address
+          if (p?.doorFloor)  l.doorFloor  = p.doorFloor
+          if (p?.doorNum)    l.doorNum    = p.doorNum
+          if (p?.zip)        l.zip        = p.zip
         })
       }
     }
