@@ -432,7 +432,7 @@
 
         if (data.error) {
           result.className = 'vs-ai-result vs-ai-result--info'
-          result.textContent = 'Error: ' + data.error
+          result.textContent = 'Error: ' + data.error + (data.raw ? ' | RAW: ' + data.raw.slice(0, 300) : '')
           return
         }
 
