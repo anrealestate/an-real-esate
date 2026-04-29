@@ -436,7 +436,7 @@ async function saveProperty() {
     const origText = saveBtn.textContent
     saveBtn.disabled = true
     saveBtn.textContent = '⏳ Traduciendo…'
-    await translateListing()
+    try { await translateListing() } catch (e) { console.warn('Auto-translate failed, saving anyway:', e) }
     saveBtn.disabled = false
     saveBtn.textContent = origText
   }
@@ -1680,7 +1680,10 @@ async function gtranslate(text, targetLang, sourceLang = 'auto') {
   if (!text || !text.trim()) return text
   const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sourceLang}&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}`
   try {
-    const res = await fetch(url)
+    const ctrl = new AbortController()
+    const tid = setTimeout(() => ctrl.abort(), 5000)
+    const res = await fetch(url, { signal: ctrl.signal })
+    clearTimeout(tid)
     const data = await res.json()
     return data[0].map(x => x[0]).join('')
   } catch { return text }
