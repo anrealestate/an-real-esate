@@ -21,6 +21,8 @@
       if (tr.title)       merged.title       = tr.title
       if (tr.description) merged.description = tr.description
       if (tr.features)    merged.features    = tr.features
+      if (tr.details)     merged.details     = tr.details
+      if (tr.nearby)      merged.nearby      = tr.nearby
       return merged
     }
     return baseListing

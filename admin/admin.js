@@ -1154,12 +1154,54 @@ async function translateListing() {
       }
       translations[lang].features = features
     }
+
+    // Translate details rows
+    const detailRows = document.querySelectorAll('#details-list .detail-row')
+    if (detailRows.length) {
+      const details = []
+      for (const r of detailRows) {
+        const key = r.querySelector('.det-key').value.trim()
+        const val = r.querySelector('.det-val').value.trim()
+        if (!key) continue
+        details.push({
+          key: await gtranslate(key, lang, sourceLang),
+          val: await gtranslate(val, lang, sourceLang)
+        })
+      }
+      if (details.length) translations[lang].details = details
+    }
+
+    // Translate nearby (dist phrases only, names are proper nouns)
+    const nearbyRows = document.querySelectorAll('#nearby-list .nearby-row')
+    if (nearbyRows.length) {
+      const nearby = []
+      for (const r of nearbyRows) {
+        const name = r.querySelector('.nb-name').value.trim()
+        const dist = r.querySelector('.nb-dist').value.trim()
+        if (!name) continue
+        nearby.push({
+          name,
+          dist: await gtranslate(dist, lang, sourceLang)
+        })
+      }
+      if (nearby.length) translations[lang].nearby = nearby
+    }
   }
 
   // If writing in a specific language, store the source content too
   if (sourceLang !== 'auto') {
-    translations[sourceLang] = { title, description }
-    if (Object.keys(currentFeatures).length) translations[sourceLang].features = currentFeatures
+    const srcDetails = [...document.querySelectorAll('#details-list .detail-row')]
+      .map(r => ({ key: r.querySelector('.det-key').value.trim(), val: r.querySelector('.det-val').value.trim() }))
+      .filter(d => d.key)
+    const srcNearby = [...document.querySelectorAll('#nearby-list .nearby-row')]
+      .map(r => ({ name: r.querySelector('.nb-name').value.trim(), dist: r.querySelector('.nb-dist').value.trim() }))
+      .filter(n => n.name)
+    translations[sourceLang] = {
+      title, description,
+      ...(Object.keys(currentFeatures).length ? { features: currentFeatures } : {}),
+      ...(srcDetails.length ? { details: srcDetails } : {}),
+      ...(srcNearby.length ? { nearby: srcNearby } : {})
+    }
   }
 
   document.getElementById('f-translations').value = JSON.stringify(translations)
