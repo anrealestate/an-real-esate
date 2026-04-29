@@ -48,8 +48,7 @@ export default async function handler(req, res) {
           { text: PROMPT(name, docType) }
         ]
       }],
-      generationConfig: { max_output_tokens: 512 },
-      thinkingConfig: { thinkingBudget: 0 }
+      generationConfig: { max_output_tokens: 512 }
     })
   })
 
