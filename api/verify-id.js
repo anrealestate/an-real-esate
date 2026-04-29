@@ -56,8 +56,9 @@ export default async function handler(req, res) {
   if (!r.ok) return res.status(500).json({ error: data.error?.message || 'Gemini API error' })
 
   const raw = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || ''
+  const cleaned = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '').trim()
   try {
-    return res.json(JSON.parse(raw))
+    return res.json(JSON.parse(cleaned))
   } catch {
     return res.status(500).json({ error: 'Could not parse AI response', raw })
   }
