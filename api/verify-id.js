@@ -1,12 +1,8 @@
-const SYSTEM_PROMPT = `You are a document verification assistant. Analyse the provided image of an identity document.
+const PROMPT = (name, docType) => `Analyse this identity document image.
+Submitted name: "${name}"
+Document type declared: "${docType || 'unspecified'}"
 
-Rules:
-- isIdDocument: true only if the image clearly shows a real identity document (DNI, NIE, passport, driver licence, residence permit)
-- nameOnDoc: extract the full name exactly as printed. For DNI/NIE look for "APELLIDOS / NOMBRE" sections. Return null if unreadable.
-- nameMatch: compare nameOnDoc with the submitted name. Ignore case, common accent variations and extra spaces. Return null if nameOnDoc is null.
-- message: one short sentence in Spanish explaining the result.
-
-Respond ONLY with valid JSON, no markdown:
+Respond ONLY with valid JSON (no markdown):
 {
   "isIdDocument": true,
   "docType": "DNI",
@@ -14,7 +10,13 @@ Respond ONLY with valid JSON, no markdown:
   "nameMatch": true,
   "confidence": "high",
   "message": "Documento reconocido como DNI. El nombre coincide con el formulario."
-}`
+}
+
+Rules:
+- isIdDocument: true only if the image clearly shows a real ID (DNI, NIE, passport, driver licence)
+- nameOnDoc: full name exactly as printed; null if unreadable
+- nameMatch: compare nameOnDoc with submitted name (ignore case/accents); null if nameOnDoc is null
+- message: one short sentence in Spanish`
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*')
@@ -26,42 +28,34 @@ export default async function handler(req, res) {
   if (!imageBase64) return res.status(400).json({ error: 'No image' })
   if (!name)        return res.status(400).json({ error: 'No name' })
 
-  const apiKey = process.env.ANTHROPIC_API_KEY
-  if (!apiKey) return res.status(503).json({ error: 'ANTHROPIC_API_KEY not configured' })
+  const apiKey = process.env.GEMINI_API_KEY
+  if (!apiKey) return res.status(503).json({ error: 'GEMINI_API_KEY not configured' })
 
-  // Extract media type and pure base64 from data URL
   const match = imageBase64.match(/^data:(image\/[a-z+]+);base64,(.+)$/)
   if (!match) return res.status(400).json({ error: 'Invalid image format' })
-  const mediaType = match[1]
-  const b64data   = match[2]
+  const mimeType = match[1]
+  const b64data  = match[2]
 
-  const userMessage = `Please verify this identity document.\nSubmitted name: "${name}"\nDocument type declared: "${docType || 'unspecified'}"`
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${apiKey}`
 
-  const r = await fetch('https://api.anthropic.com/v1/messages', {
+  const r = await fetch(url, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': apiKey,
-      'anthropic-version': '2023-06-01',
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      model: 'claude-haiku-4-5-20251001',
-      max_tokens: 512,
-      system: SYSTEM_PROMPT,
-      messages: [{
-        role: 'user',
-        content: [
-          { type: 'image', source: { type: 'base64', media_type: mediaType, data: b64data } },
-          { type: 'text', text: userMessage }
+      contents: [{
+        parts: [
+          { inline_data: { mime_type: mimeType, data: b64data } },
+          { text: PROMPT(name, docType) }
         ]
-      }]
+      }],
+      generationConfig: { response_mime_type: 'application/json', max_output_tokens: 256 }
     })
   })
 
   const data = await r.json()
-  if (!r.ok) return res.status(500).json({ error: data.error?.message || 'API error' })
+  if (!r.ok) return res.status(500).json({ error: data.error?.message || 'Gemini API error' })
 
-  const raw = data.content?.[0]?.text?.trim() || ''
+  const raw = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || ''
   try {
     return res.json(JSON.parse(raw))
   } catch {
