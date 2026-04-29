@@ -250,7 +250,7 @@
   background: transparent;
   border: none;
   font-family: var(--sans);
-  font-size: var(--fs-sm);
+  font-size: max(16px, var(--fs-sm));
   color: var(--cream);
   outline: none;
   min-width: 0;
