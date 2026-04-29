@@ -1812,9 +1812,9 @@ function buildAgentPDF(v) {
   const addrs = JSON.parse(localStorage.getItem('an_addresses') || '{}')
   const _resolvedListing = _listings.find(l => (v.propSlug && l.slug === v.propSlug) || (v.propRef && v.propRef !== '—' && l.ref === v.propRef) || l.title === v.propTitle)
   const address   = v.propAddress || (v.propSlug && addrs[v.propSlug]) || _resolvedListing?.address || ''
-  const doorFloor = _resolvedListing?.doorFloor || ''
-  const doorNum   = _resolvedListing?.doorNum || ''
-  const zip       = _resolvedListing?.zip || ''
+  const doorFloor = v.doorFloor || _resolvedListing?.doorFloor || ''
+  const doorNum   = v.doorNum   || _resolvedListing?.doorNum   || ''
+  const zip       = v.zip       || _resolvedListing?.zip       || ''
 
   const { jsPDF } = window.jspdf
   const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' })
@@ -2106,12 +2106,16 @@ function initVisits() {
 
   function visitUrl(ref, title, zone, slug, address) {
     const date = getVisitDate()
+    const l = _listings.find(l => l.slug === slug)
     return BASE + '/visit.html?ref=' + encodeURIComponent(ref) +
       '&title=' + encodeURIComponent(title) +
       '&zone='  + encodeURIComponent(zone) +
-      (slug    ? '&slug='    + encodeURIComponent(slug)    : '') +
-      (address ? '&address=' + encodeURIComponent(address) : '') +
-      (date    ? '&date='    + encodeURIComponent(date)    : '')
+      (slug             ? '&slug='       + encodeURIComponent(slug)              : '') +
+      (address          ? '&address='    + encodeURIComponent(address)           : '') +
+      (l?.doorFloor     ? '&doorFloor='  + encodeURIComponent(l.doorFloor)       : '') +
+      (l?.doorNum       ? '&doorNum='    + encodeURIComponent(l.doorNum)         : '') +
+      (l?.zip           ? '&zip='        + encodeURIComponent(l.zip)             : '') +
+      (date             ? '&date='       + encodeURIComponent(date)              : '')
   }
 
   function copyUrl(url, btn) {

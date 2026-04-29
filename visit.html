@@ -219,8 +219,11 @@
     var propRef     = params.get('ref')     || '—'
     var propTitle   = params.get('title')   || 'Propiedad'
     var propZone    = params.get('zone')    || 'Barcelona, España'
-    var propAddress = params.get('address') || ''
-    var propSlug    = params.get('slug')    || ''
+    var propAddress  = params.get('address')   || ''
+    var propDoorFloor= params.get('doorFloor') || ''
+    var propDoorNum  = params.get('doorNum')   || ''
+    var propZip      = params.get('zip')       || ''
+    var propSlug     = params.get('slug')      || ''
 
     document.getElementById('vs-prop-ref').textContent   = propRef
     document.getElementById('vs-prop-title').textContent = propTitle
@@ -760,7 +763,8 @@
 
         var record = {
           id: Date.now() + '-' + Math.random().toString(36).slice(2, 7),
-          propSlug: propSlug, propRef: propRef, propTitle: propTitle, propZone: propZone, propAddress: propAddress,
+          propSlug: propSlug, propRef: propRef, propTitle: propTitle, propZone: propZone,
+          propAddress: propAddress, doorFloor: propDoorFloor, doorNum: propDoorNum, zip: propZip,
           name: name, docType: docType, docNum: docNum, phone: phone, email: email,
           visitDate: visitDate, timestamp: timestamp, ip: ip, savedAt: new Date().toISOString(),
           signature: sigDataUrl, docHash: docHash || '', dniPhoto: dniPhotoDataUrl || '',
@@ -779,7 +783,8 @@
     /* ── Email notification ── */
     function sendEmail(name, docType, docNum, phone, email, visitDate, timestamp, ip, docHash) {
       var record = {
-        propSlug: propSlug, propRef: propRef, propTitle: propTitle, propZone: propZone, propAddress: propAddress,
+        propSlug: propSlug, propRef: propRef, propTitle: propTitle, propZone: propZone,
+        propAddress: propAddress, doorFloor: propDoorFloor, doorNum: propDoorNum, zip: propZip,
         name: name, docType: docType, docNum: docNum, phone: phone, email: email,
         visitDate: visitDate, timestamp: timestamp, ip: ip, savedAt: new Date().toISOString(),
         docHash: docHash || '', aiVerify: aiVerifyResult || null
@@ -832,7 +837,8 @@
     /* ── Remote storage (server-side) ── */
     function saveVisitRemote(name, docType, docNum, phone, email, visitDate, timestamp, ip, docHash) {
       var record = {
-        propSlug: propSlug, propRef: propRef, propTitle: propTitle, propZone: propZone, propAddress: propAddress,
+        propSlug: propSlug, propRef: propRef, propTitle: propTitle, propZone: propZone,
+        propAddress: propAddress, doorFloor: propDoorFloor, doorNum: propDoorNum, zip: propZip,
         name: name, docType: docType, docNum: docNum, phone: phone, email: email,
         visitDate: visitDate, timestamp: timestamp, ip: ip, savedAt: new Date().toISOString(),
         docHash: docHash || '', aiVerify: aiVerifyResult || null
