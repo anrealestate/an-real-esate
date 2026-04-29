@@ -9,21 +9,46 @@
 
 /* ── HERO ─────────────────────── */
 .val-top {
-  padding-top: clamp(3.5rem, 9vw, 7.5rem);
-  padding-bottom: clamp(2rem, 5vw, 4rem);
+  position: relative;
+  min-height: 74vh;
+  display: flex;
+  align-items: center;
   text-align: center;
+  background: url('https://res.cloudinary.com/dbume3eak/image/upload/q_auto,f_auto,w_1600/v1777483887/Hero11_qszyft.jpg') center / cover no-repeat;
 }
-.val-top-inner { max-width: 820px; margin: 0 auto; }
+
+.val-top::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(9,31,56,.88) 0%,
+    rgba(9,31,56,.52) 50%,
+    rgba(9,31,56,.92) 100%
+  );
+  pointer-events: none;
+}
+
+.val-top .holder {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding-top: clamp(4.5rem, 10vw, 8rem);
+  padding-bottom: clamp(3rem, 7vw, 6rem);
+}
+
+.val-top-inner { max-width: 840px; margin: 0 auto; }
 
 .val-h1 {
   font-family: var(--serif);
-  font-size: max(38px, 8.5vw);
+  font-size: max(44px, 8.5vw);
   font-weight: 300;
   line-height: .97;
   letter-spacing: -.28vw;
   color: var(--cream);
   margin-top: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.6rem;
 }
 .val-h1 em { font-style: italic; color: var(--gold); }
 .val-h1 .text-wrap {
@@ -36,26 +61,73 @@
 .val-sub {
   font-size: var(--fs-sm);
   color: var(--cream-dim);
-  opacity: .75;
-  line-height: 1.7;
+  line-height: 1.75;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ── TRUST STRIP ─────────────── */
+.val-trust {
+  border-bottom: 1px solid var(--border);
+  padding: clamp(2rem, 4.5vw, 3rem) 0;
+}
+
+.val-trust-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.val-trust-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .35rem;
+  padding: 0 clamp(2rem, 6vw, 5rem);
+  text-align: center;
+}
+
+.val-trust-num {
+  font-family: var(--serif);
+  font-size: clamp(1.7rem, 3.8vw, 2.6rem);
+  font-weight: 300;
+  color: var(--gold);
+  letter-spacing: -.02em;
+  line-height: 1;
+}
+
+.val-trust-label {
+  font-family: var(--sans);
+  font-size: var(--fs-2xs);
+  font-weight: 400;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+}
+
+.val-trust-sep {
+  width: 1px;
+  height: 2.8rem;
+  background: var(--border);
+  flex-shrink: 0;
 }
 
 /* ── CHAT SECTION ─────────────── */
 .val-chat-section {
+  padding-top: clamp(4rem, 8vw, 6.5rem);
   padding-bottom: clamp(5rem, 12vw, 9rem);
-  border-top: 1px solid var(--border);
-  padding-top: clamp(3rem, 6vw, 5rem);
 }
 
 .chat-wrap {
-  max-width: 600px;
+  max-width: 640px;
+  margin: 0 auto;
 }
 
 /* message list */
 .chat-messages {
   display: flex;
   flex-direction: column;
-  gap: .85rem;
+  gap: .9rem;
   margin-bottom: 2rem;
 }
 
@@ -77,7 +149,7 @@
 /* bubbles */
 .chat-bubble {
   max-width: 78%;
-  padding: .85rem 1.2rem;
+  padding: .9rem 1.25rem;
   font-size: var(--fs-sm);
   line-height: 1.65;
   border-radius: 2px;
@@ -127,10 +199,10 @@
 .chat-options {
   display: flex;
   flex-wrap: wrap;
-  gap: .45rem;
+  gap: .5rem;
 }
 .chat-opt {
-  padding: .5rem 1rem;
+  padding: .55rem 1.15rem;
   font-family: var(--sans);
   font-size: var(--fs-xs);
   font-weight: 400;
@@ -139,7 +211,7 @@
   color: var(--cream-dim);
   background: transparent;
   cursor: pointer;
-  transition: border-color var(--fast), color var(--fast);
+  transition: border-color var(--fast), color var(--fast), background var(--fast);
   border-radius: 2px;
 }
 .chat-opt:hover {
@@ -184,10 +256,7 @@
   min-width: 0;
 }
 .chat-input::placeholder { color: rgba(240,235,224,.2); }
-.chat-input.is-required {
-  border-color: rgba(220, 100, 80, .7);
-  animation: shake .3s ease;
-}
+.chat-input.is-required { animation: shake .3s ease; }
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   25%       { transform: translateX(-5px); }
@@ -225,8 +294,20 @@
 }
 .chat-skip:hover { color: var(--cream-dim); }
 
+/* ── Responsive ──────────────── */
+@media (max-width: 600px) {
+  .val-trust-inner {
+    flex-direction: column;
+    gap: 1.6rem;
+  }
+  .val-trust-sep {
+    width: 2.5rem;
+    height: 1px;
+  }
+}
+
 @media (min-width: 1280px) {
-  .val-h1 { font-size: max(52px, 8vw); }
+  .val-h1 { font-size: max(58px, 8vw); }
 }
 
 /* Google Places autocomplete dropdown */
