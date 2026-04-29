@@ -63,6 +63,6 @@ export default async function handler(req, res) {
   try {
     return res.json(JSON.parse(cleaned))
   } catch {
-    return res.status(500).json({ error: 'Could not parse AI response', raw })
+    return res.status(500).json({ error: 'Could not parse AI response', raw, debug: JSON.stringify(data.candidates?.[0]?.content).slice(0, 500) })
   }
 }
