@@ -1471,3 +1471,55 @@ details[open] .vl-import-toggle::before { transform: rotate(90deg); }
   line-height: 1.6; margin-top: .25rem;
 }
 .feat-group--custom textarea:focus { outline: none; border-color: var(--gold); }
+
+/* ── AI Improve Modal ─────────────────────────── */
+.improve-modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.7);
+  z-index: 9999; display: flex; align-items: center; justify-content: center;
+  padding: 1rem;
+}
+.improve-modal {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 10px; width: 100%; max-width: 720px;
+  max-height: 90vh; display: flex; flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0,0,0,.6);
+}
+.improve-modal-hd {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: .9rem 1.2rem; border-bottom: 1px solid var(--border);
+  font-size: .85rem; font-weight: 600; letter-spacing: .05em; color: var(--gold);
+}
+.improve-modal-close {
+  background: none; border: none; color: var(--muted); font-size: 1.2rem;
+  cursor: pointer; line-height: 1; padding: 0 .2rem;
+}
+.improve-modal-close:hover { color: var(--cream); }
+.improve-modal-body { overflow-y: auto; padding: 1rem 1.2rem; display: flex; flex-direction: column; gap: .9rem; }
+.im-section { display: flex; flex-direction: column; gap: .4rem; }
+.im-label {
+  display: flex; align-items: center; gap: .5rem;
+  font-size: .68rem; font-weight: 700; letter-spacing: .08em;
+  color: var(--muted); text-transform: uppercase;
+}
+.im-content {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 6px; padding: .7rem .9rem;
+  font-size: .82rem; line-height: 1.65; color: var(--cream);
+}
+.im-content p { margin: 0 0 .6em; }
+.im-content p:last-child { margin-bottom: 0; }
+.im-mono { font-family: monospace; font-size: .78rem; }
+.im-editorial { font-family: 'Georgia', serif; font-size: .88rem; color: #e8ddc8; }
+.btn-copy-section {
+  font-size: .65rem; padding: .15rem .45rem; background: transparent;
+  border: 1px solid var(--border); color: var(--muted); border-radius: 3px;
+  cursor: pointer; transition: border-color .15s, color .15s;
+}
+.btn-copy-section:hover { border-color: var(--gold); color: var(--gold); }
+.btn-use-text {
+  align-self: flex-start; font-size: .75rem; padding: .3rem .8rem;
+  background: var(--gold); color: #18180f; border: none;
+  border-radius: 4px; cursor: pointer; font-weight: 600; margin-top: .2rem;
+  transition: opacity .15s;
+}
+.btn-use-text:hover { opacity: .85; }

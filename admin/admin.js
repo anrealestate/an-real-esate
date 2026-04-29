@@ -734,29 +734,88 @@ async function improveDesc(rowDiv) {
   const ta = rowDiv.querySelector('.desc-textarea')
   const btn = rowDiv.querySelector('.btn-improve')
   const text = ta.value.trim()
-  if (!text) return
+  if (!text) { toast('Escribe texto antes de mejorar', 'error'); return }
+
   const origLabel = btn.textContent
   btn.disabled = true
   btn.textContent = '⏳…'
+
   try {
-    const lang = document.getElementById('f-source-lang')?.value || 'auto'
-    const res = await fetch('/api/improve', {
+    const lang    = document.getElementById('f-source-lang')?.value || 'auto'
+    const address = document.getElementById('f-address')?.value || ''
+    const price   = document.getElementById('f-price-num')?.value || ''
+
+    const res  = await fetch('/api/improve', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, lang }),
+      body: JSON.stringify({ text, lang, address, price }),
     })
     const data = await res.json()
-    if (data.improved) {
-      ta.value = data.improved
-    } else {
-      toast(data.error || 'Error al mejorar', 'error')
-    }
+    if (data.error) { toast(data.error, 'error'); return }
+    showImproveModal(data, ta)
   } catch {
     toast('Error de conexión', 'error')
   } finally {
     btn.disabled = false
     btn.textContent = origLabel
   }
+}
+
+function showImproveModal(data, targetTextarea) {
+  document.getElementById('improve-modal')?.remove()
+
+  const copyBtn = (id, label) =>
+    `<button type="button" class="btn-copy-section" onclick="navigator.clipboard.writeText(document.getElementById('${id}').textContent).then(()=>this.textContent='✓').catch(()=>{});setTimeout(()=>this.textContent='${label}',1500)">${label}</button>`
+
+  const kw = Array.isArray(data.keywords) ? data.keywords.join(' · ') : ''
+
+  const modal = document.createElement('div')
+  modal.id = 'improve-modal'
+  modal.className = 'improve-modal-overlay'
+  modal.innerHTML = `
+    <div class="improve-modal">
+      <div class="improve-modal-hd">
+        <span>✨ Resultado IA</span>
+        <button type="button" class="improve-modal-close" onclick="document.getElementById('improve-modal').remove()">×</button>
+      </div>
+      <div class="improve-modal-body">
+        ${data.h1 ? `<div class="im-section">
+          <div class="im-label">📝 H1 SUGERIDO ${copyBtn('im-h1','Copiar')}</div>
+          <div class="im-content" id="im-h1">${data.h1}</div>
+        </div>` : ''}
+        ${data.titleTag ? `<div class="im-section">
+          <div class="im-label">🔍 TITLE TAG ${copyBtn('im-tt','Copiar')}</div>
+          <div class="im-content im-mono" id="im-tt">${data.titleTag}</div>
+        </div>` : ''}
+        ${data.metaDescription ? `<div class="im-section">
+          <div class="im-label">📋 META DESCRIPTION ${copyBtn('im-md','Copiar')}</div>
+          <div class="im-content im-mono" id="im-md">${data.metaDescription}</div>
+        </div>` : ''}
+        ${data.editorial ? `<div class="im-section">
+          <div class="im-label">✍️ TEXTO EDITORIAL ${copyBtn('im-ed','Copiar')}</div>
+          <div class="im-content im-editorial" id="im-ed">${data.editorial.replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>')}</div>
+          <button type="button" class="btn-use-text" onclick="
+            document.querySelector('#improve-modal ~ * .desc-textarea, #improve-modal').closest('.view').querySelector('.desc-textarea');
+            (function(){var ta=arguments[0];ta.value=document.getElementById('im-ed').innerText;document.getElementById('improve-modal').remove()})(${JSON.stringify(null)})
+          ">← Usar en descripción</button>
+        </div>` : ''}
+        ${kw ? `<div class="im-section">
+          <div class="im-label">🏷️ KEYWORDS ${copyBtn('im-kw','Copiar')}</div>
+          <div class="im-content im-mono" id="im-kw">${kw}</div>
+        </div>` : ''}
+      </div>
+    </div>`
+
+  // Wire "Usar en descripción" properly
+  document.body.appendChild(modal)
+  const useBtn = modal.querySelector('.btn-use-text')
+  if (useBtn) {
+    useBtn.onclick = () => {
+      targetTextarea.value = modal.querySelector('#im-ed').innerText
+      modal.remove()
+    }
+  }
+  modal.addEventListener('click', e => { if (e.target === modal) modal.remove() })
 }
 
 function addDetailRow(d = {}) {
