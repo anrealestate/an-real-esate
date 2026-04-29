@@ -847,7 +847,15 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(record)
-      }).catch(function () {})
+      }).then(function (r) {
+        return r.json()
+      }).then(function (d) {
+        var el = document.getElementById('vs-email-sent')
+        if (el) el.innerHTML += ' | Servidor: ' + (d.ok ? '✓ guardado' : '⚠ ' + d.error)
+      }).catch(function (e) {
+        var el = document.getElementById('vs-email-sent')
+        if (el) el.innerHTML += ' | Servidor: ⚠ ' + e.message
+      })
     }
   })()
   </script>
