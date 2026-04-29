@@ -1932,6 +1932,18 @@ function buildAgentPDF(v) {
     y += 6
   }
 
+  if (v.aiVerify) {
+    const ai = v.aiVerify
+    section('VERIFICACIÓN IA DEL DOCUMENTO')
+    kv('Documento válido:', ai.isIdDocument ? 'Sí' : 'No')
+    kv('Tipo detectado:',   ai.docType || '—')
+    kv('Nombre en doc:',    ai.nameOnDoc || '—')
+    kv('Nombre coincide:',  ai.nameMatch === true ? 'Sí' : ai.nameMatch === false ? 'No' : '—')
+    kv('Confianza:',        ai.confidence || '—')
+    kv('Mensaje IA:',       ai.message || '—')
+    y += 2
+  }
+
   doc.setDrawColor(210, 205, 195); doc.setLineWidth(0.2)
   doc.line(M, y, W - M, y)
   y += 6

@@ -432,24 +432,13 @@
 
         if (data.error) {
           result.className = 'vs-ai-result vs-ai-result--info'
-          result.textContent = 'Error: ' + data.error + (data.raw ? ' | RAW: ' + data.raw.slice(0, 200) : '') + (data.debug ? ' | DBG: ' + data.debug.slice(0, 300) : '')
+          result.textContent = 'No se pudo verificar la foto. El agente comprobará el documento en persona.'
           return
         }
 
-        if (!data.isIdDocument) {
-          result.className = 'vs-ai-result vs-ai-result--warn'
-          result.textContent = '⚠ ' + (data.message || 'No se ha detectado un documento de identidad válido. Por favor, fotografíe el anverso del DNI/NIE/Pasaporte.')
-          return
-        }
-
-        if (data.nameMatch === false) {
-          result.className = 'vs-ai-result vs-ai-result--warn'
-          result.textContent = '⚠ Documento detectado (' + (data.docType || 'ID') + '), pero el nombre no coincide. Nombre en el documento: ' + (data.nameOnDoc || '—') + '. Por favor, revise los datos introducidos.'
-          return
-        }
-
+        aiVerifyResult = data
         result.className = 'vs-ai-result vs-ai-result--ok'
-        result.textContent = '✓ ' + (data.message || 'Documento verificado correctamente.')
+        result.textContent = '✓ Foto del documento recibida correctamente.'
       })
       .catch(function () {
         btn.disabled = false
@@ -470,6 +459,7 @@
 
     /* ── Submit ── */
     var pdfDoc = null
+    var aiVerifyResult = null
 
     document.getElementById('vs-submit').addEventListener('click', function () {
       var name         = document.getElementById('vs-name').value.trim()
@@ -772,7 +762,8 @@
           propSlug: propSlug, propRef: propRef, propTitle: propTitle, propZone: propZone, propAddress: propAddress,
           name: name, docType: docType, docNum: docNum, phone: phone, email: email,
           visitDate: visitDate, timestamp: timestamp, ip: ip, savedAt: new Date().toISOString(),
-          signature: sigDataUrl, docHash: docHash || '', dniPhoto: dniPhotoDataUrl || ''
+          signature: sigDataUrl, docHash: docHash || '', dniPhoto: dniPhotoDataUrl || '',
+          aiVerify: aiVerifyResult || null
         }
         var existing = []
         try { existing = JSON.parse(localStorage.getItem('an_visits') || '[]') } catch {}
@@ -790,7 +781,7 @@
         propSlug: propSlug, propRef: propRef, propTitle: propTitle, propZone: propZone, propAddress: propAddress,
         name: name, docType: docType, docNum: docNum, phone: phone, email: email,
         visitDate: visitDate, timestamp: timestamp, ip: ip, savedAt: new Date().toISOString(),
-        docHash: docHash || ''
+        docHash: docHash || '', aiVerify: aiVerifyResult || null
       }
       var encoded = btoa(unescape(encodeURIComponent(JSON.stringify(record))))
       var adminUrl = window.location.origin + '/admin/index.html?visit=' + encodeURIComponent(encoded)
@@ -813,6 +804,15 @@
       fd.append('Hash SHA-256',   docHash || '—')
       fd.append('Agente', 'D. Álvaro Navarro Mosca · Agente autónomo · AICAT 13069 · DNI 46242509C')
       fd.append('Guardar en admin', adminUrl)
+      if (aiVerifyResult) {
+        var ai = aiVerifyResult
+        fd.append('IA · Documento válido', ai.isIdDocument ? 'Sí' : 'No')
+        fd.append('IA · Tipo documento',   ai.docType || '—')
+        fd.append('IA · Nombre en doc',    ai.nameOnDoc || '—')
+        fd.append('IA · Nombre coincide',  ai.nameMatch === true ? 'Sí' : ai.nameMatch === false ? 'No' : '—')
+        fd.append('IA · Confianza',        ai.confidence || '—')
+        fd.append('IA · Mensaje',          ai.message || '—')
+      }
       fd.append('Nota', 'El visitante ha firmado y descargado el PDF. Haz clic en «Guardar en admin» para registrar la visita en el panel.')
 
       fetch('https://formsubmit.co/ajax/alvaro@anrealestate.es', { method: 'POST', body: fd })
