@@ -346,9 +346,8 @@
         <!-- SIDEBAR -->
         <aside class="prop-aside">
 
-          <div class="prop-card" id="enquire">
-
-            <!-- Agent -->
+          <!-- Agent — scrolls with page -->
+          <div class="pc-info-block">
             <div class="pc-agent">
               <div class="pc-agent-logo">
                 <img src="logo.svg" alt="AN Real Estate" />
@@ -359,14 +358,16 @@
                 <p class="pc-agent-agency" data-i18n="agent.agency">AN High End Real Estate · Barcelona</p>
               </div>
             </div>
+          </div>
 
-            <!-- Price -->
+          <!-- Price + Form — sticky -->
+          <div class="prop-card pc-form-block" id="enquire">
+
             <div class="pc-price-block">
               <p class="pc-price">€830,000</p>
               <p class="pc-loc">Gràcia, Barcelona</p>
             </div>
 
-            <!-- Form -->
             <form class="pc-form" id="prop-form" novalidate>
               <input type="hidden" name="property" value="Exquisite Brand-New Garden Residence in Gràcia — €830,000 — Gràcia, Barcelona" />
               <div class="fg">
@@ -404,7 +405,7 @@
             </a>
 
 
-          </div><!-- /.prop-card -->
+          </div><!-- /.pc-form-block -->
 
         </aside>
 
