@@ -514,5 +514,21 @@
     document.getElementById('cookie-reject').addEventListener('click', function(){ dismiss('essential') })
   })()
   </script>
+  <script>
+  ;(function(){
+    if (new URLSearchParams(location.search).get('demo') !== '1') return
+    document.body.classList.add('demo-mode')
+    var style = document.createElement('style')
+    style.textContent = [
+      '.demo-mode #site-header,',
+      '.demo-mode #mobile-drawer,',
+      '.demo-mode .prop-breadcrumb,',
+      '.demo-mode .footer,',
+      '.demo-mode #cookie-banner { display: none !important; }',
+      '.demo-mode { padding-top: 0 !important; }',
+    ].join('\n')
+    document.head.appendChild(style)
+  })()
+  </script>
 </body>
 </html>
