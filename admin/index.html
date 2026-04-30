@@ -581,6 +581,18 @@
             </label>
           </div>
           <div class="wm-group">
+            <label>Logo</label>
+            <div class="wm-logo-area" id="wm-logo-area">
+              <img id="wm-logo-preview" class="wm-logo-preview hidden" alt="Logo" />
+              <label class="wm-logo-upload" id="wm-logo-upload-label">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+                <span id="wm-logo-upload-text">Subir logo (PNG/SVG)</span>
+                <input type="file" id="wm-logo-file" accept="image/png,image/svg+xml,image/webp" />
+              </label>
+              <button type="button" class="wm-logo-remove hidden" id="wm-logo-remove" title="Eliminar logo">✕ Quitar</button>
+            </div>
+          </div>
+          <div class="wm-group">
             <label>Posición del logo</label>
             <div class="pos-grid" id="pos-grid">
               <button type="button" class="pos-btn" data-pos="top-left">↖</button>

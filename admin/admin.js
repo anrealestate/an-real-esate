@@ -1331,6 +1331,47 @@ function initWatermarkTool() {
     localStorage.setItem('an_wm_auto', _wmAutoApply ? '1' : '0')
   })
 
+  function setLogoPreview(dataUrl) {
+    const preview = document.getElementById('wm-logo-preview')
+    const label   = document.getElementById('wm-logo-upload-label')
+    const text    = document.getElementById('wm-logo-upload-text')
+    const remove  = document.getElementById('wm-logo-remove')
+    if (dataUrl) {
+      preview.src = dataUrl
+      preview.classList.remove('hidden')
+      label.classList.add('wm-logo-has')
+      text.textContent = 'Cambiar logo'
+      remove.classList.remove('hidden')
+    } else {
+      preview.src = ''
+      preview.classList.add('hidden')
+      label.classList.remove('wm-logo-has')
+      text.textContent = 'Subir logo (PNG/SVG)'
+      remove.classList.add('hidden')
+    }
+  }
+
+  setLogoPreview(localStorage.getItem('an_wm_logo'))
+
+  document.getElementById('wm-logo-file').addEventListener('change', e => {
+    const file = e.target.files[0]
+    e.target.value = ''
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = ev => {
+      localStorage.setItem('an_wm_logo', ev.target.result)
+      setLogoPreview(ev.target.result)
+      toast('Logo guardado', 'success')
+    }
+    reader.readAsDataURL(file)
+  })
+
+  document.getElementById('wm-logo-remove').addEventListener('click', () => {
+    localStorage.removeItem('an_wm_logo')
+    setLogoPreview(null)
+    toast('Logo eliminado — se usará el logo de texto AN', 'success')
+  })
+
   fileInput.addEventListener('change', () => handleWmFiles(fileInput.files))
 
   dropArea.addEventListener('dragover', e => { e.preventDefault(); dropArea.style.borderColor = 'var(--gold)' })
@@ -1369,6 +1410,8 @@ async function reprocessAll() {
 }
 
 function getLogoDataUrl() {
+  const stored = localStorage.getItem('an_wm_logo')
+  if (stored) return Promise.resolve(stored)
   return new Promise(resolve => {
     // Draw "AN" text logo on a transparent canvas
     const c  = document.createElement('canvas')
