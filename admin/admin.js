@@ -27,7 +27,8 @@ let _editSlug    = null
 let _filter      = 'all'
 let _formDirty   = false
 let _wmPosition  = 'bottom-left'
-let _wmAutoApply = localStorage.getItem('an_wm_auto') === '1'
+let _wmAutoApply   = localStorage.getItem('an_wm_auto') === '1'
+let _wmSampleDataUrl = localStorage.getItem('an_wm_sample') || null
 let _mediaItems  = []
 let _wmProcessed = []
 let _visitSort   = 'date'
@@ -1308,11 +1309,13 @@ function initWatermarkTool() {
   sizeSlider.addEventListener('input', () => {
     document.getElementById('wm-size-val').textContent = sizeSlider.value + '%'
     reprocessAll()
+    renderLivePreview()
   })
 
   opacitySlider.addEventListener('input', () => {
     document.getElementById('wm-opacity-val').textContent = opacitySlider.value + '%'
     reprocessAll()
+    renderLivePreview()
   })
 
   document.querySelectorAll('.pos-btn').forEach(btn => {
@@ -1321,6 +1324,7 @@ function initWatermarkTool() {
       btn.classList.add('active')
       _wmPosition = btn.dataset.pos
       reprocessAll()
+      renderLivePreview()
     })
   })
 
@@ -1362,6 +1366,7 @@ function initWatermarkTool() {
       localStorage.setItem('an_wm_logo', ev.target.result)
       setLogoPreview(ev.target.result)
       toast('Logo guardado', 'success')
+      renderLivePreview()
     }
     reader.readAsDataURL(file)
   })
@@ -1370,7 +1375,31 @@ function initWatermarkTool() {
     localStorage.removeItem('an_wm_logo')
     setLogoPreview(null)
     toast('Logo eliminado — se usará el logo de texto AN', 'success')
+    renderLivePreview()
   })
+
+  // Sample image for live preview
+  function setSampleBtnText(hasImage) {
+    const t = document.getElementById('wm-sample-btn-text')
+    if (t) t.textContent = hasImage ? 'Cambiar imagen' : 'Subir imagen de ejemplo'
+  }
+  setSampleBtnText(!!_wmSampleDataUrl)
+
+  document.getElementById('wm-sample-file').addEventListener('change', e => {
+    const file = e.target.files[0]
+    e.target.value = ''
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = ev => {
+      _wmSampleDataUrl = ev.target.result
+      try { localStorage.setItem('an_wm_sample', _wmSampleDataUrl) } catch { /* quota */ }
+      setSampleBtnText(true)
+      renderLivePreview()
+    }
+    reader.readAsDataURL(file)
+  })
+
+  renderLivePreview()
 
   fileInput.addEventListener('change', () => handleWmFiles(fileInput.files))
 
@@ -1407,6 +1436,56 @@ async function reprocessAll() {
   if (!_wmProcessed.length) return
   // Re-process from cache is complex; simpler: ask user to re-select files
   // For now just show a hint
+}
+
+async function renderLivePreview() {
+  const canvas  = document.getElementById('wm-preview-canvas')
+  const empty   = document.getElementById('wm-live-empty')
+  if (!canvas || !empty) return
+
+  if (!_wmSampleDataUrl) {
+    canvas.classList.add('hidden')
+    empty.classList.remove('hidden')
+    return
+  }
+
+  const logoDataUrl = await getLogoDataUrl()
+  const loadImg = src => new Promise(r => { const i = new Image(); i.onload = () => r(i); i.src = src })
+  const [sampleImg, logoImg] = await Promise.all([loadImg(_wmSampleDataUrl), loadImg(logoDataUrl)])
+
+  const wrap  = document.getElementById('wm-live-canvas-wrap')
+  const maxW  = wrap.clientWidth || 600
+  const maxH  = 460
+  let w = sampleImg.width, h = sampleImg.height
+  const ratio = w / h
+  if (w > maxW) { w = maxW; h = w / ratio }
+  if (h > maxH) { h = maxH; w = h * ratio }
+  w = Math.round(w); h = Math.round(h)
+
+  canvas.width  = w
+  canvas.height = h
+  const ctx = canvas.getContext('2d')
+  ctx.drawImage(sampleImg, 0, 0, w, h)
+
+  const sizeRatio = parseInt(document.getElementById('wm-size').value) / 100
+  const opacity   = parseInt(document.getElementById('wm-opacity').value) / 100
+  const logoW = w * sizeRatio
+  const logoH = logoImg.height * (logoW / logoImg.width)
+  const margin = w * 0.025
+  const pos = _wmPosition
+  let x = margin, y = h - logoH - margin
+  if (pos.includes('right'))  x = w - logoW - margin
+  if (pos.includes('center') && !pos.includes('mid')) x = (w - logoW) / 2
+  if (pos.includes('top'))    y = margin
+  if (pos.includes('mid'))    y = (h - logoH) / 2
+  if (pos === 'center') { x = (w - logoW) / 2; y = (h - logoH) / 2 }
+
+  ctx.globalAlpha = opacity
+  ctx.drawImage(logoImg, x, y, logoW, logoH)
+  ctx.globalAlpha = 1
+
+  canvas.classList.remove('hidden')
+  empty.classList.add('hidden')
 }
 
 function getLogoDataUrl() {

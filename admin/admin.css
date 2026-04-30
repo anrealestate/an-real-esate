@@ -902,6 +902,40 @@ textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
 
 .wm-group label span { color: var(--gold); }
 
+/* Live preview */
+.wm-live-preview { display: flex; flex-direction: column; gap: .6rem; margin-bottom: 1.4rem; }
+
+.wm-live-header {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: var(--fs-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+}
+
+.wm-sample-btn {
+  display: flex; align-items: center; gap: .35rem;
+  cursor: pointer; font-size: .68rem; color: var(--gold);
+  letter-spacing: .06em; text-transform: uppercase;
+  padding: .3rem .6rem; border: 1px solid var(--border); border-radius: 5px;
+  transition: border-color .15s;
+}
+.wm-sample-btn:hover { border-color: var(--gold); }
+.wm-sample-btn input[type="file"] { display: none; }
+
+.wm-live-canvas-wrap {
+  position: relative; width: 100%;
+  border-radius: 8px; overflow: hidden;
+  background: repeating-conic-gradient(#1e1e1e 0% 25%, #161616 0% 50%) 0 0 / 12px 12px;
+  min-height: 160px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+#wm-preview-canvas { display: block; width: 100%; height: auto; border-radius: 8px; }
+
+.wm-live-empty {
+  display: flex; flex-direction: column; align-items: center; gap: .6rem;
+  padding: 2.5rem 1rem; text-align: center;
+  font-size: var(--fs-xs); color: var(--muted);
+}
+
 .wm-logo-area { display: flex; flex-direction: column; gap: .5rem; }
 
 .wm-logo-preview { max-height: 52px; max-width: 100%; object-fit: contain; border-radius: 4px; background: repeating-conic-gradient(#2a2a2a 0% 25%, #1a1a1a 0% 50%) 0 0 / 10px 10px; padding: 4px; }
