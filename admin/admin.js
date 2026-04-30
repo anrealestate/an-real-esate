@@ -8,10 +8,6 @@ const ADMIN_PASSWORD    = 'ANadmin2026'  // cambia esto en producción
 // pon aquí la URL completa del endpoint en Vercel:
 // const IMPROVE_API = 'https://tu-proyecto.vercel.app/api/improve'
 const IMPROVE_API = '/api/improve'
-// When opened from file://, call the Netlify function URL directly (skips redirect, fixes null-origin CORS)
-const PUBLISH_API = location.protocol === 'file:'
-  ? 'https://anrealestate.es/.netlify/functions/publish'
-  : '/api/publish'
 const DATA_URL          = '/data/listings.json'
 const SESSION_KEY       = 'an_admin_auth'
 const CLD_CLOUD         = 'dbume3eak'
@@ -1104,27 +1100,95 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('f-slug')?.addEventListener('input', () => { _titleChanged = true })
 })
 
-// ── EXPORT JSON ───────────────────────────────
+// ── PUBLISH — direct GitHub API (works from file:// and live site) ──────────
+const GH_OWNER  = 'dajungcho-cmyk'
+const GH_REPO   = 'an-reale-state'
+const GH_BRANCH = 'main'
+const GH_API    = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents`
+
+function ghHeaders(token) {
+  return {
+    Authorization: `token ${token}`,
+    'Content-Type': 'application/json',
+    Accept: 'application/vnd.github+json',
+  }
+}
+
+async function ghGet(token, path) {
+  const r = await fetch(`${GH_API}/${path}`, { headers: ghHeaders(token) })
+  if (!r.ok) throw new Error(`GitHub GET ${path}: ${r.status}`)
+  return r.json()
+}
+
+async function ghPut(token, path, content, sha, message) {
+  const r = await fetch(`${GH_API}/${path}`, {
+    method: 'PUT',
+    headers: ghHeaders(token),
+    body: JSON.stringify({
+      message,
+      content: btoa(unescape(encodeURIComponent(content))),
+      sha,
+      branch: GH_BRANCH,
+    }),
+  })
+  if (!r.ok) {
+    const e = await r.json().catch(() => ({}))
+    throw new Error(e.message || `GitHub PUT ${path}: ${r.status}`)
+  }
+  return r.json()
+}
+
 async function publishToWeb() {
+  // Get or ask for GitHub token (stored locally, never leaves the browser)
+  let token = localStorage.getItem('an_gh_token') || ''
+  if (!token) {
+    token = prompt('GitHub Personal Access Token (scope: repo):\n\nSólo se pide una vez — se guarda en este navegador.')?.trim() || ''
+    if (!token) return
+    localStorage.setItem('an_gh_token', token)
+  }
+
   const btn = document.getElementById('publish-btn')
   const orig = btn.innerHTML
   btn.disabled = true
-  btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" stroke-dasharray="60" stroke-dashoffset="20"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur=".8s" repeatCount="indefinite"/></circle></svg> Publicando…'
+  btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" stroke-dasharray="60" stroke-dashoffset="20"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur=".8s" repeatCount="indefinite"/></circle></svg> Subiendo…'
 
   try {
-    const r = await fetch(PUBLISH_API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ listings: _listings })
-    })
-    const d = await r.json()
-    if (d.ok) {
-      toast(`✓ Cambios subidos — ${d.count} propiedades. La web se actualizará en ~30 s.`, 'success')
-    } else {
-      toast('Error al publicar: ' + (d.error || 'respuesta inesperada'), 'error')
+    const listings = _listings
+    const results  = []
+
+    // 1 — data/listings.json
+    const jsonContent = JSON.stringify({ listings }, null, 2)
+    const jsonFile    = await ghGet(token, 'data/listings.json')
+    await ghPut(token, 'data/listings.json', jsonContent, jsonFile.sha, `Publish listings (${listings.length} properties)`)
+    results.push('data/listings.json')
+
+    // 2 — inline data in index.html
+    const indexFile    = await ghGet(token, 'index.html')
+    const indexContent = decodeURIComponent(escape(atob(indexFile.content.replace(/\n/g, ''))))
+    const inlineJson   = JSON.stringify({ listings })
+    const updated = indexContent.replace(
+      /(<script[^>]+id="listings-data"[^>]*>)([\s\S]*?)(<\/script>)/,
+      `$1${inlineJson}$3`
+    )
+    if (updated !== indexContent) {
+      await ghPut(token, 'index.html', updated, indexFile.sha, `Sync inline listings data (${listings.length} properties)`)
+      results.push('index.html')
     }
+
+    // 3 — data-listings.js
+    const dlFile    = await ghGet(token, 'data-listings.js')
+    const dlContent = `/* Shared listings data — auto-generated */\n;(function () {\n  const el = document.getElementById('listings-data')\n  if (el) return\n  const s = document.createElement('script')\n  s.id   = 'listings-data'\n  s.type = 'application/json'\n  s.textContent = JSON.stringify(${JSON.stringify({ listings })})\n  document.head.appendChild(s)\n})()\n`
+    await ghPut(token, 'data-listings.js', dlContent, dlFile.sha, `Sync data-listings.js (${listings.length} properties)`)
+    results.push('data-listings.js')
+
+    toast(`✓ ${results.length} archivos subidos — ${listings.length} propiedades. La web se actualizará en ~30 s.`, 'success')
   } catch (e) {
-    toast('Error de red al publicar: ' + e.message, 'error')
+    if (e.message.includes('401') || e.message.includes('Bad credentials')) {
+      localStorage.removeItem('an_gh_token')
+      toast('Token inválido — eliminado. Intenta de nuevo para introducir uno nuevo.', 'error')
+    } else {
+      toast('Error al subir: ' + e.message, 'error')
+    }
   } finally {
     btn.disabled = false
     btn.innerHTML = orig
