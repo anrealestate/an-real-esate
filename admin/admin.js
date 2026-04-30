@@ -1102,7 +1102,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ── PUBLISH — direct GitHub API (works from file:// and live site) ──────────
 const GH_OWNER  = 'dajungcho-cmyk'
-const GH_REPO   = 'an-reale-state'
+const GH_REPO   = 'an-real-esate'
 const GH_BRANCH = 'main'
 const GH_API    = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents`
 
