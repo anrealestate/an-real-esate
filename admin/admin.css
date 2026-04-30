@@ -1554,7 +1554,7 @@ input[type="range"] {
   #props-summary { font-size: .68rem; }
 
   /* ── Property table → card layout ─────────── */
-  .table-wrap { overflow-x: visible; background: transparent; border: none; border-radius: 0; }
+  .table-wrap { overflow: visible; background: transparent; border: none; border-radius: 0; }
   .prop-table { display: block; min-width: 0; }
   .prop-table thead { display: none; }
   .prop-table tbody { display: flex; flex-direction: column; gap: .4rem; }
