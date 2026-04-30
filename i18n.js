@@ -241,7 +241,7 @@ var I18N = {
     'svc.04.name': 'Experiència Estratègica',
     'svc.04.desc': 'Profund coneixement del mercat de luxe de Barcelona i les tendències immobiliàries de Catalunya, amb un enfocament orientat als resultats en cada transacció.',
     'svc.cta': 'Contacteu-nos',
-    'stats.years': 'Anys d'experiència',
+    'stats.years': "Anys d'experiència",
     'stats.props': 'Propietats gestionades',
     'stats.volume': 'En transaccions',
     'stats.satisfaction': 'Satisfacció del client',
