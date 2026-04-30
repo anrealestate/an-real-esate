@@ -630,6 +630,7 @@
   .prop-card {
     position: sticky;
     top: calc(72px + 1.5rem);
+    bottom: 1.5rem;
   }
   .props-grid { grid-template-columns: repeat(3, 1fr); }
 }
