@@ -8,8 +8,10 @@ const ADMIN_PASSWORD    = 'ANadmin2026'  // cambia esto en producción
 // pon aquí la URL completa del endpoint en Vercel:
 // const IMPROVE_API = 'https://tu-proyecto.vercel.app/api/improve'
 const IMPROVE_API = '/api/improve'
-const _API_BASE   = location.protocol === 'file:' ? 'https://anrealestate.es' : ''
-const PUBLISH_API = _API_BASE + '/api/publish'
+// When opened from file://, call the Netlify function URL directly (skips redirect, fixes null-origin CORS)
+const PUBLISH_API = location.protocol === 'file:'
+  ? 'https://anrealestate.es/.netlify/functions/publish'
+  : '/api/publish'
 const DATA_URL          = '/data/listings.json'
 const SESSION_KEY       = 'an_admin_auth'
 const CLD_CLOUD         = 'dbume3eak'

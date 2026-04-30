@@ -2,10 +2,13 @@
    Writes updated listings to GitHub (3 files) so Netlify auto-deploys. */
 
 exports.handler = async function (event) {
+  // Reflect origin so 'null' (file://) is explicitly allowed — * doesn't match null in Chrome
+  const origin = event.headers?.origin || event.headers?.Origin || '*'
   const cors = {
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': origin,
     'Access-Control-Allow-Methods': 'POST,OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
+    'Vary': 'Origin',
   }
 
   if (event.httpMethod === 'OPTIONS') return { statusCode: 200, headers: cors, body: '' }
