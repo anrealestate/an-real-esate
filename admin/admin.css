@@ -1510,10 +1510,12 @@ details[open] .vl-import-toggle::before { transform: rotate(90deg); }
   border-radius: var(--r) 0 0 var(--r); color: var(--gold); font-size: var(--fs-sm);
 }
 .price-input {
-  flex: 1; border-radius: 0 !important;
+  flex: 1; min-width: 0; width: auto;
+  border-radius: 0 !important;
   border-left: none !important; border-right: none !important;
 }
 .price-postfix {
+  flex: 0 0 auto; width: auto;
   border-radius: 0 var(--r) var(--r) 0 !important;
   border-left: none !important;
   min-width: 110px;
