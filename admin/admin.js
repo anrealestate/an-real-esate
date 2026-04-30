@@ -125,7 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let applyWm = false
     if (_wmAutoApply) {
       applyWm = await showConfirmAsync(
-        `¿Aplicar logo AN a ${files.length === 1 ? 'esta foto' : `estas ${files.length} fotos`} antes de subirlas?`
+        `¿Aplicar logo AN a ${files.length === 1 ? 'esta foto' : `estas ${files.length} fotos`} antes de subirlas?`,
+        { okText: 'Sí, aplicar', okClass: 'btn-gold' }
       )
     }
 
@@ -1602,16 +1603,28 @@ function dataUrlToFile(dataUrl, name) {
   return new File([arr], name, { type: mime })
 }
 
-function showConfirmAsync(msg) {
+function showConfirmAsync(msg, { okText = 'Confirmar', okClass = 'btn-gold' } = {}) {
   return new Promise(resolve => {
+    const okBtn = document.getElementById('confirm-ok')
+    const prevText  = okBtn.textContent
+    const prevClass = okBtn.className
+    okBtn.textContent = okText
+    okBtn.className   = okClass
+
     document.getElementById('confirm-msg').textContent = msg
     document.getElementById('confirm-overlay').classList.remove('hidden')
-    document.getElementById('confirm-ok').addEventListener('click', () => {
+
+    function restore() {
+      okBtn.textContent = prevText
+      okBtn.className   = prevClass
       document.getElementById('confirm-overlay').classList.add('hidden')
-      resolve(true)
+    }
+
+    document.getElementById('confirm-ok').addEventListener('click', () => {
+      restore(); resolve(true)
     }, { once: true })
     document.getElementById('confirm-cancel').addEventListener('click', () => {
-      resolve(false)
+      restore(); resolve(false)
     }, { once: true })
   })
 }
