@@ -168,10 +168,14 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .hn-link:hover::before { transform: scaleX(1); }
 
 .hn-link--cta {
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
   color: var(--gold);
   border: 1px solid var(--gold);
-  padding: .45em 1.1em;
+  padding: .4em 1.1em;
   letter-spacing: .14em;
+  line-height: 1;
   transition: color var(--fast), background var(--fast), border-color var(--fast);
 }
 .hn-link--cta::before { display: none; }
