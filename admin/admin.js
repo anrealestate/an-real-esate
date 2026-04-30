@@ -16,6 +16,12 @@ const CLD_UPLOAD_URL    = `https://api.cloudinary.com/v1_1/${CLD_CLOUD}/image/up
 const MEDIA_KEY         = 'an_media_library'
 const VISITS_KEY        = 'an_visits'
 
+// ── STAGE SYSTEM ──────────────────────────────
+const STAGES      = ['draft', 'active', 'reserved', 'sold', 'withdrawn']
+const STAGE_LABEL = { draft:'Borrador', active:'Activa', reserved:'Reservada', sold:'Vendida', withdrawn:'Retirada' }
+const STAGE_CLASS = { draft:'stage-draft', active:'stage-active', reserved:'stage-reserved', sold:'stage-sold', withdrawn:'stage-withdrawn' }
+const PUBLIC_STAGES = ['active', 'reserved', 'sold']
+
 let _listings    = []
 let _editSlug    = null
 let _filter      = 'all'
@@ -42,7 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-save').addEventListener('click', saveProperty)
   document.getElementById('btn-delete').addEventListener('click', confirmDelete)
   document.getElementById('btn-translate').addEventListener('click', translateListing)
-
   // Sidebar nav
   document.querySelectorAll('.sb-link').forEach(link => {
     link.addEventListener('click', e => {
@@ -245,17 +250,30 @@ function loadData() {
     }
   } catch {}
 
+  // Migrate old data model (published/sold/status/type) → new (stage/type/propertyType)
+  _listings.forEach(l => {
+    if (!l.stage) {
+      l.stage = l.sold ? 'sold' : (l.published ? 'active' : 'draft')
+      l.propertyType = l.type || 'apartment'
+      l.type = l.status || 'sale'
+      delete l.published
+      delete l.sold
+      delete l.status
+    }
+  })
+
   if (_listings.length) cacheListings()
   renderTable()
   updateSummary()
 }
 
 function updateSummary() {
-  const total = _listings.length
-  const active = _listings.filter(l => l.published && !l.sold).length
-  const sold = _listings.filter(l => l.sold).length
+  const total    = _listings.length
+  const active   = _listings.filter(l => l.stage === 'active').length
+  const reserved = _listings.filter(l => l.stage === 'reserved').length
+  const sold     = _listings.filter(l => l.stage === 'sold').length
   document.getElementById('props-summary').textContent =
-    `${total} propiedades · ${active} activas · ${sold} vendidas`
+    `${total} propiedades · ${active} activas · ${reserved} reservadas · ${sold} vendidas`
 }
 
 // ── TABLE ─────────────────────────────────────
@@ -263,22 +281,25 @@ function renderTable() {
   const tbody = document.getElementById('prop-tbody')
   let filtered = [..._listings]
 
-  if (_filter === 'sale')  filtered = filtered.filter(l => l.status === 'sale' && !l.sold)
-  if (_filter === 'rent')  filtered = filtered.filter(l => l.status === 'rent' && !l.sold)
-  if (_filter === 'sold')  filtered = filtered.filter(l => l.sold)
-  if (_filter === 'draft') filtered = filtered.filter(l => !l.published)
+  if (_filter === 'sale')      filtered = filtered.filter(l => l.type === 'sale' && l.stage !== 'sold' && l.stage !== 'withdrawn')
+  if (_filter === 'rent')      filtered = filtered.filter(l => l.type === 'rent' && l.stage !== 'sold' && l.stage !== 'withdrawn')
+  if (_filter === 'sold')      filtered = filtered.filter(l => l.stage === 'sold')
+  if (_filter === 'reserved')  filtered = filtered.filter(l => l.stage === 'reserved')
+  if (_filter === 'draft')     filtered = filtered.filter(l => l.stage === 'draft')
+  if (_filter === 'withdrawn') filtered = filtered.filter(l => l.stage === 'withdrawn')
 
   if (!filtered.length) {
-    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--muted);font-size:.82rem;">Sin resultados</td></tr>`
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--muted);font-size:.82rem;">Sin resultados</td></tr>`
     return
   }
 
   tbody.innerHTML = filtered.map(l => {
-    const typeLabel = { apartment:'Apartamento', villa:'Villa', house:'Casa', penthouse:'Ático', townhouse:'Adosado', office:'Oficina' }[l.type] || l.type
-    const statusBadge = l.status === 'rent'
+    const typeBadge = l.type === 'rent'
       ? `<span class="badge badge-rent">Alquiler</span>`
-      : l.type === 'villa' ? `<span class="badge badge-villa">Villa</span>`
+      : l.propertyType === 'villa' ? `<span class="badge badge-villa">Villa</span>`
       : `<span class="badge badge-sale">Venta</span>`
+
+    const stage = l.stage || 'draft'
 
     return `
     <tr data-slug="${l.slug}">
@@ -288,16 +309,14 @@ function renderTable() {
         <div class="pt-loc">${l.neighbourhood || ''}</div>
       </td>
       <td class="pt-price">${l.price || '—'}</td>
-      <td>${statusBadge}</td>
+      <td>${typeBadge}</td>
       <td>
-        <button class="row-toggle" title="${l.published ? 'Ocultar' : 'Publicar'}" onclick="quickToggle('${l.slug}','published')">
-          <span class="rt-dot ${l.published ? 'on' : 'off'}"></span>
-        </button>
-      </td>
-      <td>
-        <button class="row-toggle" title="${l.sold ? 'Marcar disponible' : 'Marcar vendida'}" onclick="quickToggle('${l.slug}','sold')">
-          <span class="rt-dot ${l.sold ? 'on' : 'off'}"></span>
-        </button>
+        <div class="stage-dropdown-wrap" id="stage-wrap-${l.slug}">
+          <span class="state-badge ${STAGE_CLASS[stage]}" style="cursor:pointer" onclick="toggleStageDropdown('${l.slug}')">${STAGE_LABEL[stage]}</span>
+          <div class="stage-dropdown hidden" id="stage-dd-${l.slug}">
+            ${STAGES.map(s => `<button class="stage-dropdown-item${s === stage ? ' is-current' : ''}" onclick="setStage('${l.slug}','${s}')">${STAGE_LABEL[s]}</button>`).join('')}
+          </div>
+        </div>
       </td>
       <td>
         <div class="row-actions">
@@ -313,14 +332,34 @@ function renderTable() {
   }).join('')
 }
 
-function quickToggle(slug, field) {
+function setStage(slug, stage) {
   const l = _listings.find(x => x.slug === slug)
   if (!l) return
-  l[field] = !l[field]
+  l.stage = stage
+  if (PUBLIC_STAGES.includes(stage) && l.ref) lockRef(l.ref)
+  document.querySelectorAll('.stage-dropdown').forEach(d => d.classList.add('hidden'))
   renderTable()
   updateSummary()
   cacheListings()
-  toast(`${field === 'published' ? (l[field] ? 'Publicada' : 'Ocultada') : (l[field] ? 'Marcada vendida' : 'Marcada disponible')}`, 'success')
+  toast(`Estado: ${STAGE_LABEL[stage]}`, 'success')
+}
+
+function toggleStageDropdown(slug) {
+  const dd = document.getElementById('stage-dd-' + slug)
+  if (!dd) return
+  const wasHidden = dd.classList.contains('hidden')
+  document.querySelectorAll('.stage-dropdown').forEach(d => d.classList.add('hidden'))
+  if (wasHidden) {
+    dd.classList.remove('hidden')
+    setTimeout(() => {
+      document.addEventListener('click', function handler(e) {
+        if (!e.target.closest('.stage-dropdown-wrap')) {
+          document.querySelectorAll('.stage-dropdown').forEach(d => d.classList.add('hidden'))
+          document.removeEventListener('click', handler)
+        }
+      })
+    }, 0)
+  }
 }
 
 // ── REFERENCIA AUTO ───────────────────────────
@@ -345,6 +384,25 @@ function lockRef(ref) {
   if (!locked.includes(ref)) {
     locked.push(ref)
     localStorage.setItem(REF_KEY, JSON.stringify(locked))
+  }
+}
+
+function getCurrentStage() {
+  const active = document.querySelector('.pipeline-btn.is-active')
+  return active ? active.dataset.stage : 'draft'
+}
+
+function updatePipelineBar(stage) {
+  document.querySelectorAll('.pipeline-btn').forEach(btn => {
+    btn.classList.toggle('is-active', btn.dataset.stage === stage)
+  })
+}
+
+function setPipelineStage(stage) {
+  updatePipelineBar(stage)
+  if (PUBLIC_STAGES.includes(stage)) {
+    const l = _editSlug ? _listings.find(x => x.slug === _editSlug) : null
+    if (l?.ref) lockRef(l.ref)
   }
 }
 
@@ -401,10 +459,10 @@ function _showForm(slug) {
   document.getElementById('f-door-floor').value    = l.doorFloor || ''
   document.getElementById('f-door-num').value      = l.doorNum || ''
   document.getElementById('f-zip').value           = l.zip || ''
-  document.getElementById('f-type').value          = l.type || 'apartment'
+  document.getElementById('f-property-type').value = l.propertyType || 'apartment'
 
-  const _statusRadio = document.querySelector(`input[name="f-status"][value="${l.status || 'sale'}"]`)
-  if (_statusRadio) _statusRadio.checked = true
+  const _typeRadio = document.querySelector(`input[name="f-type"][value="${l.type || 'sale'}"]`)
+  if (_typeRadio) _typeRadio.checked = true
 
   document.getElementById('f-badge-type').value    = l.badge_type || ''
   document.getElementById('f-beds').value          = String(l.beds ?? 2)
@@ -417,8 +475,7 @@ function _showForm(slug) {
   document.getElementById('f-year-renovated').value = l.year_renovated || ''
   document.getElementById('f-condition').value     = l.condition || ''
   document.getElementById('f-energy').value        = l.energy || ''
-  document.getElementById('f-published').checked   = l.published !== false
-  document.getElementById('f-sold').checked        = l.sold === true
+  updatePipelineBar(l.stage || 'draft')
 
   // Init Google Maps autocomplete on address field (once)
   initAddressAutocomplete()
@@ -556,14 +613,14 @@ async function saveProperty() {
   const _pricePost = document.getElementById('f-price-postfix').value
   const price = _priceNum ? `€${_priceNum}${_pricePost}` : ''
 
-  // Status from radio
-  const _statusChecked = document.querySelector('input[name="f-status"]:checked')
-  const status = _statusChecked ? _statusChecked.value : 'sale'
+  // Type from radio (sale/rent)
+  const _typeChecked = document.querySelector('input[name="f-type"]:checked')
+  const type = _typeChecked ? _typeChecked.value : 'sale'
 
-  // Badge type auto from type
+  // Badge type auto from propertyType
   const BADGE_MAP = { apartment:'Apartment', penthouse:'Penthouse', villa:'Villa', house:'House', townhouse:'Townhouse', studio:'Studio', office:'Office', land:'Land' }
-  const type = document.getElementById('f-type').value
-  const badge_type = BADGE_MAP[type] || type.charAt(0).toUpperCase() + type.slice(1)
+  const propertyType = document.getElementById('f-property-type').value
+  const badge_type = BADGE_MAP[propertyType] || propertyType.charAt(0).toUpperCase() + propertyType.slice(1)
 
   const listing = {
     slug,
@@ -576,7 +633,7 @@ async function saveProperty() {
     doorNum:       document.getElementById('f-door-num').value.trim() || undefined,
     zip:           document.getElementById('f-zip').value.trim() || undefined,
     type,
-    status,
+    propertyType,
     badge_type,
     beds:          parseInt(document.getElementById('f-beds').value) || 0,
     baths:         parseInt(document.getElementById('f-baths').value) || 0,
@@ -594,8 +651,7 @@ async function saveProperty() {
     details:      details.length ? details : undefined,
     features:     Object.keys(features).length ? features : undefined,
     nearby:       nearby.length ? nearby : undefined,
-    published:    document.getElementById('f-published').checked,
-    sold:         document.getElementById('f-sold').checked || undefined,
+    stage:        getCurrentStage(),
     translations: (() => { try { const v = document.getElementById('f-translations').value; return v ? JSON.parse(v) : undefined } catch { return undefined } })(),
   }
 
@@ -619,7 +675,7 @@ async function saveProperty() {
     localStorage.setItem('an_addresses', JSON.stringify(addrs))
   } catch {}
 
-  if (listing.published && listing.ref) lockRef(listing.ref)
+  if (PUBLIC_STAGES.includes(listing.stage) && listing.ref) lockRef(listing.ref)
 
   _formDirty = false
   cacheListings()

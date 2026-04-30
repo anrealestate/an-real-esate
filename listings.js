@@ -26,7 +26,7 @@ async function initListings() {
     } catch { return }
   }
 
-  cachedListings = listings.filter(l => l.published)
+  cachedListings = listings.filter(l => ['active', 'reserved', 'sold'].includes(l.stage) || l.published)
 
   if (!cachedListings.length) {
     grid.innerHTML = '<p style="color:var(--muted);font-size:var(--fs-xs);letter-spacing:.06em;">No listings available at this time.</p>'
@@ -56,16 +56,21 @@ function renderCard(listing) {
   const L        = (window.I18N && window.I18N[lang]) || (window.I18N && window.I18N.en) || {}
   const tr       = (listing.translations && listing.translations[lang]) || {}
   const title    = tr.title || listing.title
-  const isSold   = listing.sold === true
-  const isRent   = listing.status === 'rent'
-  const tagClass = isSold ? 'sold' : (isRent ? 'rent' : 'sale')
+  const stage    = listing.stage || (listing.sold ? 'sold' : (listing.published ? 'active' : 'draft'))
+  const isSold   = stage === 'sold'
+  const isReserved = stage === 'reserved'
+  const isRent   = listing.type === 'rent' || listing.status === 'rent'
+  const tagClass = isSold ? 'sold' : (isReserved ? 'reserved' : (isRent ? 'rent' : 'sale'))
   const tagLabel = isSold
     ? (L['prop.sold']     || 'Sold')
+    : isReserved ? (L['prop.reserved'] || 'Reserved')
     : (isRent ? (L['prop.for_rent'] || 'For Rent') : (L['prop.for_sale'] || 'For Sale'))
   const priceHTML = isRent
     ? `${listing.price}<small>/mo</small>`
     : listing.price
-  const dataType  = `${listing.status} ${listing.type}`
+  const propType  = listing.propertyType || listing.type || ''
+  const listType  = listing.type === 'rent' || listing.status === 'rent' ? 'rent' : 'sale'
+  const dataType  = `${listType} ${propType}`
   const href      = `property.html?slug=${listing.slug || ''}`
 
   return `

@@ -91,8 +91,10 @@
         <button class="fchip active" data-f="all">Todas</button>
         <button class="fchip" data-f="sale">En venta</button>
         <button class="fchip" data-f="rent">En alquiler</button>
+        <button class="fchip" data-f="reserved">Reservadas</button>
         <button class="fchip" data-f="sold">Vendidas</button>
-        <button class="fchip" data-f="draft">Ocultas</button>
+        <button class="fchip" data-f="draft">Borrador</button>
+        <button class="fchip" data-f="withdrawn">Retiradas</button>
       </div>
 
       <div class="table-wrap">
@@ -103,9 +105,8 @@
               <th>Propiedad</th>
               <th>Precio</th>
               <th>Tipo</th>
-              <th>Publicada</th>
-              <th>Vendida</th>
-              <th style="width:80px"></th>
+              <th>Estado</th>
+              <th style="width:100px"></th>
             </tr>
           </thead>
           <tbody id="prop-tbody"></tbody>
@@ -134,9 +135,17 @@
             </select>
             <button class="btn-outline" id="btn-translate">🌐</button>
           </div>
-          <button class="btn-gold" id="btn-save" data-i18n="btn.save">Guardar</button>
+          <button class="btn-outline" id="btn-save" data-i18n="btn.save">Guardar borrador</button>
         </div>
       </header>
+
+      <div class="pipeline-bar" id="pipeline-bar">
+        <button type="button" class="pipeline-btn is-active" data-stage="draft" onclick="setPipelineStage('draft')">Borrador</button>
+        <button type="button" class="pipeline-btn" data-stage="active" onclick="setPipelineStage('active')">Activa</button>
+        <button type="button" class="pipeline-btn" data-stage="reserved" onclick="setPipelineStage('reserved')">Reservada</button>
+        <button type="button" class="pipeline-btn" data-stage="sold" onclick="setPipelineStage('sold')">Vendida</button>
+        <button type="button" class="pipeline-btn" data-stage="withdrawn" onclick="setPipelineStage('withdrawn')">Retirada</button>
+      </div>
 
       <div class="form-tabs-bar">
         <button class="ftab active" data-tab="basic" data-i18n="tab.basic">Básico</button>
@@ -169,15 +178,15 @@
             </div>
 
             <div class="fg">
-              <label data-i18n="label.status">Estado</label>
+              <label data-i18n="label.status">Venta / Alquiler</label>
               <div class="radio-group">
-                <label class="radio-opt"><input type="radio" name="f-status" value="sale" checked /><span data-i18n="label.status.sale">En venta</span></label>
-                <label class="radio-opt"><input type="radio" name="f-status" value="rent" /><span data-i18n="label.status.rent">En alquiler</span></label>
+                <label class="radio-opt"><input type="radio" name="f-type" value="sale" checked /><span data-i18n="label.status.sale">En venta</span></label>
+                <label class="radio-opt"><input type="radio" name="f-type" value="rent" /><span data-i18n="label.status.rent">En alquiler</span></label>
               </div>
             </div>
             <div class="fg">
               <label data-i18n="label.type">Tipo de propiedad</label>
-              <select id="f-type">
+              <select id="f-property-type">
                 <option value="apartment" data-i18n="opt.type.apartment">Apartamento</option>
                 <option value="penthouse" data-i18n="opt.type.penthouse">Ático</option>
                 <option value="villa" data-i18n="opt.type.villa">Villa</option>
@@ -342,17 +351,6 @@
           </div>
 
           <input type="hidden" id="f-badge-type" />
-
-          <div class="toggles-row">
-            <label class="toggle-wrap">
-              <span data-i18n="label.published">Publicada en la web</span>
-              <div class="toggle"><input type="checkbox" id="f-published" checked /><span class="slider"></span></div>
-            </label>
-            <label class="toggle-wrap">
-              <span data-i18n="label.sold">Marcada como vendida / alquilada</span>
-              <div class="toggle"><input type="checkbox" id="f-sold" /><span class="slider"></span></div>
-            </label>
-          </div>
         </div>
 
         <!-- TAB: imágenes -->
