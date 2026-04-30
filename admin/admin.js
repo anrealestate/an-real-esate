@@ -603,6 +603,9 @@ function _showForm(slug) {
 
   const _storedAddrs = JSON.parse(localStorage.getItem('an_addresses') || '{}')
   document.getElementById('f-address').value       = l.address || _storedAddrs[l.slug] || ''
+  document.getElementById('f-lat').value           = l.lat != null ? l.lat : ''
+  document.getElementById('f-lng').value           = l.lng != null ? l.lng : ''
+  initMapPicker(l.lat, l.lng, l.address || _storedAddrs[l.slug] || '')
   document.getElementById('f-door-floor').value    = l.doorFloor || ''
   document.getElementById('f-door-num').value      = l.doorNum || ''
   document.getElementById('f-zip').value           = l.zip || ''
@@ -849,6 +852,8 @@ async function saveProperty() {
       return c || z || ''
     })(),
     address:       document.getElementById('f-address').value.trim() || undefined,
+    lat:           document.getElementById('f-lat').value  ? parseFloat(document.getElementById('f-lat').value)  : undefined,
+    lng:           document.getElementById('f-lng').value  ? parseFloat(document.getElementById('f-lng').value)  : undefined,
     doorFloor:     document.getElementById('f-door-floor').value.trim() || undefined,
     doorNum:       document.getElementById('f-door-num').value.trim() || undefined,
     zip:           document.getElementById('f-zip').value.trim() || undefined,
@@ -1358,6 +1363,76 @@ function dlFile(content, filename, type) {
 
 function cacheListings() {
   localStorage.setItem('an_listings_cache', JSON.stringify({ listings: _listings }))
+}
+
+// ── MAP PICKER ────────────────────────────────
+let _mapPickerInstance = null
+let _mapPickerMarker   = null
+
+function initMapPicker(lat, lng, address) {
+  const mapEl = document.getElementById('admin-map-picker')
+  if (!mapEl) return
+
+  function buildMap(coord) {
+    if (!window.google?.maps) return
+    mapEl.innerHTML = ''
+    const map = new google.maps.Map(mapEl, {
+      center: coord,
+      zoom: 15,
+      disableDefaultUI: true,
+      zoomControl: true,
+      gestureHandling: 'cooperative',
+    })
+    const marker = new google.maps.Marker({
+      position: coord,
+      map,
+      draggable: true,
+      cursor: 'move',
+    })
+    marker.addListener('dragend', () => {
+      const pos = marker.getPosition()
+      document.getElementById('f-lat').value = pos.lat().toFixed(7)
+      document.getElementById('f-lng').value = pos.lng().toFixed(7)
+      _formDirty = true
+    })
+    map.addListener('click', e => {
+      marker.setPosition(e.latLng)
+      document.getElementById('f-lat').value = e.latLng.lat().toFixed(7)
+      document.getElementById('f-lng').value = e.latLng.lng().toFixed(7)
+      _formDirty = true
+    })
+    _mapPickerInstance = map
+    _mapPickerMarker   = marker
+  }
+
+  function geocodeAndBuild(addr) {
+    if (!window.google?.maps) return
+    new google.maps.Geocoder().geocode({ address: addr }, (results, status) => {
+      if (status === 'OK' && results[0]) {
+        const loc = results[0].geometry.location
+        buildMap({ lat: loc.lat(), lng: loc.lng() })
+        document.getElementById('f-lat').value = loc.lat().toFixed(7)
+        document.getElementById('f-lng').value = loc.lng().toFixed(7)
+      }
+    })
+  }
+
+  function tryInit() {
+    if (!window.google?.maps) { setTimeout(tryInit, 400); return }
+    if (lat && lng) {
+      buildMap({ lat: parseFloat(lat), lng: parseFloat(lng) })
+    } else if (address) {
+      geocodeAndBuild(address)
+    } else {
+      buildMap({ lat: 41.3874, lng: 2.1686 }) // Barcelona default
+    }
+  }
+  tryInit()
+
+  document.getElementById('btn-map-reset')?.addEventListener('click', () => {
+    const addr = document.getElementById('f-address').value.trim()
+    if (addr) geocodeAndBuild(addr)
+  })
 }
 
 // ── GOOGLE MAPS AUTOCOMPLETE ───────────────────

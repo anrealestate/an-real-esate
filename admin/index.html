@@ -243,6 +243,15 @@
               <label data-i18n="label.address">Dirección exacta <em data-i18n="label.address.hint">(solo visible en admin y hoja de visita)</em></label>
               <input type="text" id="f-address" data-i18n-ph="ph.address" placeholder="Busca la dirección…" autocomplete="off" />
             </div>
+            <div class="fg fg-2">
+              <label>Geolocalización <em>(arrastra el marcador para ajustar)</em></label>
+              <div id="admin-map-picker" style="width:100%;height:220px;border-radius:6px;overflow:hidden;background:#1a1a12;margin-bottom:6px;"></div>
+              <div style="display:flex;gap:8px;">
+                <input type="text" id="f-lat" placeholder="Latitud" style="flex:1" readonly />
+                <input type="text" id="f-lng" placeholder="Longitud" style="flex:1" readonly />
+                <button type="button" id="btn-map-reset" class="btn-sm" title="Centrar en dirección">↺ Recalcular</button>
+              </div>
+            </div>
             <div class="fg">
               <label>Piso</label>
               <input type="text" id="f-door-floor" placeholder="ej: 3" maxlength="10" />
