@@ -11,6 +11,7 @@ var I18N = {
     'form.name': 'Name', 'form.email': 'Email', 'form.phone': 'Phone', 'form.message': 'Message',
     'form.name_ph': 'Your full name', 'form.email_ph': 'your@email.com',
     'form.phone_ph': '+34 600 000 000', 'form.msg_ph': "I'm interested in this property…",
+    'form.msg_val': "I'm interested in this property and would like to schedule a viewing.",
     'form.submit': 'Request Viewing',
     'sidebar.whatsapp': 'Chat on WhatsApp',
     'similar.subtitle': 'You May Also Like', 'similar.title1': 'Similar', 'similar.title2': 'Properties',
@@ -123,6 +124,7 @@ var I18N = {
     'form.name': 'Nombre', 'form.email': 'Email', 'form.phone': 'Teléfono', 'form.message': 'Mensaje',
     'form.name_ph': 'Tu nombre completo', 'form.email_ph': 'tu@email.com',
     'form.phone_ph': '+34 600 000 000', 'form.msg_ph': 'Estoy interesado en esta propiedad…',
+    'form.msg_val': 'Estoy interesado en esta propiedad y me gustaría concertar una visita.',
     'form.submit': 'Solicitar visita',
     'sidebar.whatsapp': 'Chatear por WhatsApp',
     'similar.subtitle': 'También te puede interesar', 'similar.title1': 'Propiedades', 'similar.title2': 'Similares',
@@ -235,6 +237,7 @@ var I18N = {
     'form.name': 'Nom', 'form.email': 'Correu electrònic', 'form.phone': 'Telèfon', 'form.message': 'Missatge',
     'form.name_ph': 'El teu nom complet', 'form.email_ph': 'el-teu@email.com',
     'form.phone_ph': '+34 600 000 000', 'form.msg_ph': "M'interessa aquesta propietat…",
+    'form.msg_val': "M'interessa aquesta propietat i m'agradaria concertar una visita.",
     'form.submit': "Sol·licitar visita",
     'sidebar.whatsapp': 'Xat per WhatsApp',
     'similar.subtitle': 'També us pot interessar', 'similar.title1': 'Propietats', 'similar.title2': 'Similars',
@@ -347,6 +350,7 @@ var I18N = {
     'form.name': 'Nom', 'form.email': 'Email', 'form.phone': 'Téléphone', 'form.message': 'Message',
     'form.name_ph': 'Votre nom complet', 'form.email_ph': 'votre@email.com',
     'form.phone_ph': '+34 600 000 000', 'form.msg_ph': 'Je suis intéressé par ce bien…',
+    'form.msg_val': "Je suis intéressé par ce bien et j'aimerais programmer une visite.",
     'form.submit': 'Demander une visite',
     'sidebar.whatsapp': 'Chat WhatsApp',
     'similar.subtitle': 'Vous aimerez aussi', 'similar.title1': 'Propriétés', 'similar.title2': 'Similaires',
@@ -459,6 +463,7 @@ var I18N = {
     'form.name': 'Name', 'form.email': 'E-Mail', 'form.phone': 'Telefon', 'form.message': 'Nachricht',
     'form.name_ph': 'Ihr vollständiger Name', 'form.email_ph': 'ihre@email.com',
     'form.phone_ph': '+34 600 000 000', 'form.msg_ph': 'Ich interessiere mich für diese Immobilie…',
+    'form.msg_val': 'Ich interessiere mich für diese Immobilie und möchte gerne einen Besichtigungstermin vereinbaren.',
     'form.submit': 'Besichtigung anfragen',
     'sidebar.whatsapp': 'WhatsApp Chat',
     'similar.subtitle': 'Das könnte Ihnen gefallen', 'similar.title1': 'Ähnliche', 'similar.title2': 'Immobilien',
@@ -571,6 +576,7 @@ var I18N = {
     'form.name': 'Nome', 'form.email': 'Email', 'form.phone': 'Telefono', 'form.message': 'Messaggio',
     'form.name_ph': 'Il tuo nome completo', 'form.email_ph': 'tua@email.com',
     'form.phone_ph': '+34 600 000 000', 'form.msg_ph': 'Sono interessato a questa proprietà…',
+    'form.msg_val': 'Sono interessato a questa proprietà e vorrei fissare una visita.',
     'form.submit': 'Richiedi visita',
     'sidebar.whatsapp': 'Chat su WhatsApp',
     'similar.subtitle': 'Potrebbe interessarti anche', 'similar.title1': 'Proprietà', 'similar.title2': 'Simili',
@@ -683,6 +689,7 @@ var I18N = {
     'form.name': 'Имя', 'form.email': 'Email', 'form.phone': 'Телефон', 'form.message': 'Сообщение',
     'form.name_ph': 'Ваше полное имя', 'form.email_ph': 'ваш@email.com',
     'form.phone_ph': '+34 600 000 000', 'form.msg_ph': 'Меня интересует данный объект…',
+    'form.msg_val': 'Меня интересует данный объект, и я хотел бы договориться об осмотре.',
     'form.submit': 'Записаться на просмотр',
     'sidebar.whatsapp': 'Написать в WhatsApp',
     'similar.subtitle': 'Вам также может понравиться', 'similar.title1': 'Похожие', 'similar.title2': 'Объекты',
@@ -822,6 +829,13 @@ function applyI18n(lang) {
       el.textContent = val
       if (el.dataset.raw !== undefined) el.dataset.raw = val
     }
+  }
+  var valEls = document.querySelectorAll('[data-i18n-val]')
+  for (var v = 0; v < valEls.length; v++) {
+    var vel = valEls[v]
+    var vkey = vel.getAttribute('data-i18n-val')
+    var vval = (dict[vkey] !== undefined ? dict[vkey] : (I18N.en[vkey] !== undefined ? I18N.en[vkey] : ''))
+    vel.value = vval
   }
   document.documentElement.lang = lang
   document.querySelectorAll('.lang-btn').forEach(function(btn) { btn.textContent = lang.toUpperCase() })
