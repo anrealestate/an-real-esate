@@ -317,10 +317,7 @@
 <div class="print-bar">
   <strong id="print-title">Cargando…</strong>
   <div class="print-bar-actions">
-    <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,.5);cursor:pointer">
-      <input type="checkbox" id="toggle-logo" checked style="accent-color:var(--gold)" /> Logo
-    </label>
-    <button class="btn-close" onclick="window.close(); window.location.href='/admin/index.html'">← Volver</button>
+<button class="btn-close" onclick="window.close(); window.location.href='/admin/index.html'">← Volver</button>
     <button class="btn-print" onclick="window.print()">Guardar PDF</button>
   </div>
 </div>
@@ -525,11 +522,6 @@
 
   document.getElementById('root').innerHTML = page1 + page2
 
-  document.getElementById('toggle-logo').addEventListener('change', function () {
-    document.querySelectorAll('.cover-logo, .cover-photo-logo, .footer-logo').forEach(el => {
-      el.style.visibility = this.checked ? '' : 'hidden'
-    })
-  })
 })()
 </script>
 </body>
