@@ -1724,8 +1724,8 @@ async function applyLogoToGallery() {
   }
 
   if (successCount > 0) {
-    _formDirty = true
-    toast(`Logo aplicado a ${successCount} foto${successCount > 1 ? 's' : ''} — guarda y publica para ver los cambios`, 'success')
+    await saveProperty()
+    toast(`Logo aplicado a ${successCount} foto${successCount > 1 ? 's' : ''} — publica para ver los cambios en la web`, 'success')
   } else {
     toast('No se pudo aplicar el logo (¿CORS?)', 'error')
   }
