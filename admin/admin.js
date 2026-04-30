@@ -121,8 +121,10 @@ document.addEventListener('DOMContentLoaded', () => {
     e.target.value = ''
     if (!file) return
     document.getElementById('pdf-hero-progress').classList.remove('hidden')
+    document.getElementById('pdf-hero-status').textContent = 'Comprimiendo…'
+    const compressed = await compressImage(file)
     document.getElementById('pdf-hero-status').textContent = 'Subiendo…'
-    const url = await uploadFile(file, null, 'pdf-hero-fill', 'pdf-hero-status')
+    const url = await uploadFile(compressed, null, 'pdf-hero-fill', 'pdf-hero-status')
     document.getElementById('pdf-hero-progress').classList.add('hidden')
     if (url) { setPdfHero(url); _formDirty = true }
   })
@@ -1851,6 +1853,33 @@ function showConfirmAsync(msg, { okText = 'Confirmar', okClass = 'btn-gold' } = 
     document.getElementById('confirm-cancel').addEventListener('click', () => {
       restore(); resolve(false)
     }, { once: true })
+  })
+}
+
+// ── IMAGE COMPRESSION ─────────────────────────
+function compressImage(file, maxPx = 2400, quality = 0.85) {
+  return new Promise((resolve) => {
+    const img = new Image()
+    const url = URL.createObjectURL(file)
+    img.onload = () => {
+      URL.revokeObjectURL(url)
+      let { naturalWidth: w, naturalHeight: h } = img
+      if (w <= maxPx && h <= maxPx && file.size <= 9 * 1024 * 1024) {
+        resolve(file)
+        return
+      }
+      const scale = Math.min(1, maxPx / Math.max(w, h))
+      w = Math.round(w * scale)
+      h = Math.round(h * scale)
+      const canvas = document.createElement('canvas')
+      canvas.width = w
+      canvas.height = h
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h)
+      canvas.toBlob(blob => {
+        resolve(new File([blob], file.name.replace(/\.\w+$/, '.jpg'), { type: 'image/jpeg' }))
+      }, 'image/jpeg', quality)
+    }
+    img.src = url
   })
 }
 
