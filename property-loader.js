@@ -262,9 +262,7 @@
     { featureType: 'administrative.locality', elementType: 'labels.text.fill', stylers: [{ color: '#c8b99a' }] },
   ]
 
-  function initPropertyMap() {
-    const coord = COORDS[slug || 'gracia-garden']
-    if (!coord) return
+  function renderMap(coord) {
     const mapEl = document.getElementById('prop-map')
     if (!mapEl) return
     const map = new google.maps.Map(mapEl, {
@@ -287,6 +285,32 @@
         strokeWeight: 1,
         scale: 2,
         anchor: new google.maps.Point(12, 22),
+      }
+    })
+  }
+
+  function initPropertyMap() {
+    const mapEl = document.getElementById('prop-map')
+    if (!mapEl) return
+
+    // 1. Coords from listing JSON
+    if (baseListing.lat && baseListing.lng) {
+      renderMap({ lat: parseFloat(baseListing.lat), lng: parseFloat(baseListing.lng) })
+      return
+    }
+    // 2. Hardcoded fallback coords
+    const coord = COORDS[slug || 'gracia-garden']
+    if (coord) {
+      renderMap(coord)
+      return
+    }
+    // 3. Geocode from address
+    const address = baseListing.address || baseListing.neighbourhood || baseListing.city
+    if (!address) return
+    new google.maps.Geocoder().geocode({ address }, (results, status) => {
+      if (status === 'OK' && results[0]) {
+        const loc = results[0].geometry.location
+        renderMap({ lat: loc.lat(), lng: loc.lng() })
       }
     })
   }
