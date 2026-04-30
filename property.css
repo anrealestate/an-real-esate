@@ -626,11 +626,10 @@
     grid-template-columns: 1fr 340px;
     gap: 4rem;
   }
+  .prop-aside { align-self: stretch; }
   .prop-card {
     position: sticky;
     top: calc(72px + 1.5rem);
-    max-height: calc(100vh - 72px - 3rem);
-    overflow-y: auto;
   }
   .props-grid { grid-template-columns: repeat(3, 1fr); }
 }
