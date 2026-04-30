@@ -630,11 +630,12 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    align-self: start;
+    align-self: stretch;
   }
   .pc-form-card {
     position: sticky;
     top: calc(72px + 1.5rem);
+    align-self: start;
   }
   .props-grid { grid-template-columns: repeat(3, 1fr); }
 }
