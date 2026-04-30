@@ -245,6 +245,7 @@
     'eixample-golden-mile':        { lat: 41.3953, lng: 2.1696 },
     'vallvidrera-villa':           { lat: 41.4208, lng: 2.0865 },
     'eixample-villarroel':         { lat: 41.3875, lng: 2.1528 },
+    'villa-cascades':              { lat: 41.4328796, lng: 2.0927754 },
   }
   const MAP_STYLE = [
     { elementType: 'geometry',            stylers: [{ color: '#18180f' }] },
