@@ -161,6 +161,7 @@
     const nearSec = document.getElementById('prop-nearby-section')
     const nearEl  = document.getElementById('prop-nearby')
     if (nearSec && nearEl) {
+      nearSec.style.display = '' // always show — section contains the map
       if (listing.nearby) {
         nearEl.innerHTML = listing.nearby.map(n => `
           <div class="nearby-item">
@@ -168,9 +169,8 @@
             <span class="nearby-name">${n.name}</span>
             <span class="nearby-dist">${n.dist}</span>
           </div>`).join('')
-        nearSec.style.display = ''
       } else {
-        nearSec.style.display = 'none'
+        nearEl.style.display = 'none'
       }
     }
 
