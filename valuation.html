@@ -664,10 +664,11 @@
 
     function scrollBottom() {
       msgsEl.scrollTo({ top: msgsEl.scrollHeight, behavior: 'smooth' })
-      /* Pin input area to thumb zone — only fires when section is near viewport */
+      /* Pin input area to thumb zone — skip when input is empty (mid-transition) */
       setTimeout(function() {
+        if (!inputEl.firstChild) return
         var rect = inputEl.getBoundingClientRect()
-        if (rect.top > window.innerHeight + 100) return  /* section not in view yet */
+        if (rect.top > window.innerHeight + 100) return
         var target = window.innerHeight - 40
         var diff   = rect.bottom - target
         if (Math.abs(diff) > 50) {
