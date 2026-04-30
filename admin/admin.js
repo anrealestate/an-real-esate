@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('login-form').addEventListener('submit', handleLogin)
   document.getElementById('logout-btn').addEventListener('click', logout)
   document.getElementById('export-btn').addEventListener('click', exportJSON)
+  document.getElementById('publish-btn').addEventListener('click', publishToWeb)
   document.getElementById('btn-new-prop').addEventListener('click', () => showForm(null))
   document.getElementById('btn-add-new')?.addEventListener('click', () => showForm(null))
   document.getElementById('btn-back').addEventListener('click', showPropsList)
@@ -895,6 +896,32 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 // ── EXPORT JSON ───────────────────────────────
+async function publishToWeb() {
+  const btn = document.getElementById('publish-btn')
+  const orig = btn.innerHTML
+  btn.disabled = true
+  btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" stroke-dasharray="60" stroke-dashoffset="20"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur=".8s" repeatCount="indefinite"/></circle></svg> Publicando…'
+
+  try {
+    const r = await fetch('/api/publish', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ listings: _listings })
+    })
+    const d = await r.json()
+    if (d.ok) {
+      toast(`✓ Web actualizada — ${d.count} propiedades publicadas. Netlify desplegará en ~30 segundos.`, 'success')
+    } else {
+      toast('Error al publicar: ' + (d.error || 'respuesta inesperada'), 'error')
+    }
+  } catch (e) {
+    toast('Error de red al publicar: ' + e.message, 'error')
+  } finally {
+    btn.disabled = false
+    btn.innerHTML = orig
+  }
+}
+
 function exportJSON() {
   const jsonStr = JSON.stringify({ listings: _listings }, null, 2)
 

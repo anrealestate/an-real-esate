@@ -200,6 +200,9 @@ body { background: var(--bg); color: var(--cream); min-height: 100vh; }
 
 .sb-btn:hover { border-color: var(--gold); color: var(--gold); }
 .sb-btn--ghost { color: var(--muted); font-size: var(--fs-xs); justify-content: center; }
+.sb-btn--publish { border-color: var(--gold); color: var(--gold); font-weight: 500; }
+.sb-btn--publish:hover { background: var(--gold); color: #1a1a0e; }
+.sb-btn--publish:disabled { opacity: .6; cursor: default; }
 .sb-back-home { display: flex; align-items: center; gap: .5rem; text-decoration: none; }
 
 /* ── MAIN ───────────────────────────────────── */
