@@ -73,11 +73,15 @@ function renderCard(listing) {
   const dataType  = `${listType} ${propType}`
   const href      = `property.html?slug=${listing.slug || ''}`
 
+  const BADGE_LABELS = { new: 'Nueva', exclusive: 'Exclusiva', reduced: 'Precio reducido', offmarket: 'Off-market' }
+  const badgeHTML = listing.badge ? `<span class="prop-badge prop-badge--${listing.badge}">${BADGE_LABELS[listing.badge] || listing.badge}</span>` : ''
+
   return `
     <a href="${href}" class="prop-card" data-type="${dataType}">
       <div class="prop-img-wrap">
         <img src="${listing.image}" alt="${listing.title}" class="prop-img" loading="lazy" />
         <span class="prop-tag ${tagClass}">${tagLabel}</span>
+        ${badgeHTML}
       </div>
       <div class="prop-info">
         <div class="prop-meta">
