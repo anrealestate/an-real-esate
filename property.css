@@ -626,7 +626,13 @@
     grid-template-columns: 1fr 340px;
     gap: 4rem;
   }
-  .prop-card {
+  .prop-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-self: start;
+  }
+  .pc-form-card {
     position: sticky;
     top: calc(72px + 1.5rem);
   }
