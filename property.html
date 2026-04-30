@@ -104,7 +104,7 @@
       <span>›</span>
       <a href="index.html#properties" data-i18n="bread.properties">Properties</a>
       <span>›</span>
-      <a href="#">Barcelona</a>
+      <span>Barcelona</span>
       <span>›</span>
       <span aria-current="page">Garden Residence in Gràcia</span>
     </div>
@@ -435,22 +435,22 @@
           <img src="logo.svg" alt="AN Real Estate" class="header-logo-img" />
         </a>
         <nav class="footer-nav">
-          <a href="index.html#properties" class="fn-link">Properties</a>
-          <a href="index.html#services"   class="fn-link">Services</a>
-          <a href="about.html"            class="fn-link">About</a>
+          <a href="index.html#properties" class="fn-link" data-i18n="nav.properties">Properties</a>
+          <a href="index.html#services"   class="fn-link" data-i18n="nav.services">Services</a>
+          <a href="about.html"            class="fn-link" data-i18n="nav.about">About</a>
           <a href="valuation.html"        class="fn-link" data-i18n="nav.valuation">Free Valuation</a>
-          <a href="index.html#contact"    class="fn-link">Contact</a>
+          <a href="index.html#contact"    class="fn-link" data-i18n="nav.contact">Contact</a>
         </nav>
       </div>
       <div class="footer-text">
-        <p>AN High End Real Estate is a licensed property agency specialising in luxury residential real estate in Barcelona and Catalonia. Registered with the Registro de Agentes Inmobiliarios de Cataluña: AICAT 13069. All properties are subject to availability. Prices shown are indicative and subject to change without notice.</p>
+        <p data-i18n="footer.disclaimer">AN High End Real Estate is a licensed property agency specialising in luxury residential real estate in Barcelona and Catalonia. Registered with the Registro de Agentes Inmobiliarios de Cataluña: AICAT 13069. All properties are subject to availability. Prices shown are indicative and subject to change without notice.</p>
       </div>
       <div class="footer-bottom">
         <div class="footer-copy">
           <span>© 2026 AN High End Real Estate · Barcelona</span>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="legal.html">Legal Notice</a>
-          <a href="cookies.html">Cookie Policy</a>
+          <a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
+          <a href="legal.html" data-i18n="footer.legal">Legal Notice</a>
+          <a href="cookies.html" data-i18n="footer.cookies">Cookie Policy</a>
         </div>
         <div class="footer-studio">anrealestate.es</div>
       </div>
@@ -487,31 +487,31 @@
   <!-- Dossier lead modal -->
   <div class="dossier-overlay" id="dossier-overlay" role="dialog" aria-modal="true" aria-labelledby="dossier-title">
     <div class="dossier-modal">
-      <button class="dossier-close" id="dossier-close" aria-label="Cerrar">
+      <button class="dossier-close" id="dossier-close" aria-label="Close">
         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
-      <p class="dossier-eyebrow" id="dossier-eyebrow" data-i18n="dossier.eyebrow">Dossier exclusivo</p>
-      <h2 class="dossier-title" id="dossier-title" data-i18n="dossier.title">Accede al dossier completo</h2>
-      <p class="dossier-sub" data-i18n="dossier.sub">Déjanos tu contacto y descarga el dossier de esta propiedad.</p>
+      <p class="dossier-eyebrow" id="dossier-eyebrow" data-i18n="dossier.eyebrow">Exclusive Dossier</p>
+      <h2 class="dossier-title" id="dossier-title" data-i18n="dossier.title">Access the full dossier</h2>
+      <p class="dossier-sub" data-i18n="dossier.sub">Leave your contact details and download the full dossier for this property.</p>
       <form class="dossier-form" id="dossier-form" novalidate>
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_subject" id="dossier-subject" value="Solicitud de dossier — AN Real Estate" />
         <input type="hidden" name="propiedad" id="dossier-property" value="" />
         <div class="dossier-fg">
-          <input type="text" name="nombre" class="dossier-input" placeholder="Tu nombre" data-i18n="dossier.name_ph" required autocomplete="name" />
+          <input type="text" name="nombre" class="dossier-input" placeholder="Your name" data-i18n="dossier.name_ph" required autocomplete="name" />
         </div>
         <div class="dossier-fg">
-          <input type="email" name="email" class="dossier-input" placeholder="Email" autocomplete="email" />
+          <input type="email" name="email" class="dossier-input" placeholder="Email" autocomplete="email" required />
         </div>
         <div class="dossier-fg">
-          <input type="tel" name="telefono" class="dossier-input" placeholder="Teléfono (opcional)" data-i18n="dossier.phone_ph" autocomplete="tel" />
+          <input type="tel" name="telefono" class="dossier-input" placeholder="Phone (optional)" data-i18n="dossier.phone_ph" autocomplete="tel" />
         </div>
         <button type="submit" class="dossier-btn" id="dossier-submit" data-i18n="dossier.btn">
           <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-          Descargar dossier
+          Download Dossier
         </button>
       </form>
-      <p class="dossier-legal" data-i18n="dossier.legal">Tus datos se usan únicamente para enviarte información sobre esta propiedad.</p>
+      <p class="dossier-legal" data-i18n="dossier.legal">Your data is used solely to send you information about this property.</p>
     </div>
   </div>
 
@@ -567,7 +567,7 @@
       var titleEl = document.getElementById('ph-title')
       var slugParam = new URLSearchParams(location.search).get('slug') || ''
       var title = titleEl ? titleEl.textContent : slugParam
-      document.getElementById('dossier-title').textContent = title || 'Accede al dossier completo'
+      document.getElementById('dossier-title').textContent = title || (I18N[getLang()]||I18N.en)['dossier.title']
       document.getElementById('dossier-subject').value = 'Solicitud de dossier — ' + title
       document.getElementById('dossier-property').value = title + ' (' + slugParam + ')'
       overlay.classList.add('is-open')
@@ -589,7 +589,7 @@
 
       var submitBtn = document.getElementById('dossier-submit')
       submitBtn.disabled = true
-      submitBtn.textContent = 'Un momento…'
+      submitBtn.textContent = (I18N[getLang()]||I18N.en)['dossier.loading']
 
       // Save lead to localStorage for admin
       try {
@@ -614,7 +614,7 @@
         var slug = new URLSearchParams(location.search).get('slug') || ''
         window.open('property-print.html?slug=' + slug, '_blank')
         submitBtn.disabled = false
-        submitBtn.innerHTML = '<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg> Descargar dossier'
+        submitBtn.innerHTML = '<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg> ' + (I18N[getLang()]||I18N.en)['dossier.btn']
         form.reset()
       })
     })
