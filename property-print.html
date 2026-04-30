@@ -111,13 +111,15 @@
     /* LEFT PANEL */
     .cover-panel {
       background: var(--navy);
-      padding: 10mm 8mm 0 9mm;
+      padding: 10mm 9mm 0 10mm;
       display: flex;
       flex-direction: column;
       overflow: hidden;
     }
 
-    .cover-logo { margin-bottom: auto; }
+    .cover-logo {
+      margin-bottom: 0;
+    }
     .cover-logo img {
       height: 9mm;
       width: auto;
@@ -133,6 +135,15 @@
       color: rgba(255,255,255,.85);
     }
 
+    /* Content block — vertically centered in remaining space */
+    .cover-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-bottom: 4mm;
+    }
+
     .cover-badge {
       display: inline-flex;
       align-items: center;
@@ -145,7 +156,6 @@
       border: 0.25mm solid rgba(200,169,110,.4);
       padding: 1.5mm 2.5mm;
       margin-bottom: 5mm;
-      margin-top: auto;
       width: fit-content;
     }
 
@@ -441,12 +451,13 @@
   }
   const logoDataUrl = localStorage.getItem('an_wm_logo') || ''
 
-  const imgs = (l.images || [])
-    .map(i => typeof i === 'string' ? { src: i } : i)
-    .filter(i => !i.hidden)
-    .map(i => i.src)
-  const hero = imgs[0] || l.image || ''
-  const galleryImgs = imgs.slice(1, 4)
+  // For PDF: use ALL images (including hidden) — first one is original unwatermarked
+  const allImgs = (l.images || []).map(i => typeof i === 'string' ? { src: i } : i)
+  const visibleImgs = allImgs.filter(i => !i.hidden).map(i => i.src)
+  // Hero: prefer first hidden (original) if exists, else first visible
+  const firstHidden = allImgs.find(i => i.hidden)
+  const hero = (firstHidden?.src) || visibleImgs[0] || l.image || ''
+  const galleryImgs = visibleImgs.slice(0, 3)
 
   const desc = Array.isArray(l.description) ? l.description : l.description ? [l.description] : []
   const isRent = l.type === 'rent' || l.status === 'rent'
@@ -483,19 +494,21 @@
     <div class="cover">
       <div class="cover-panel">
         <div class="cover-logo">${logoMarkup}</div>
-        <span class="cover-badge">${saleLabel} &nbsp;·&nbsp; ${l.badge_type || l.propertyType || ''}</span>
-        <h1 class="cover-title">${l.title}</h1>
-        <p class="cover-location">${l.neighbourhood || l.city || ''}</p>
-        <div class="cover-rule"></div>
-        <p class="cover-price">${priceLabel}</p>
-        <div class="cover-specs">
-          ${spec(l.beds, 'Dormitorios')}
-          ${spec(l.baths, 'Baños')}
-          ${spec(l.size ? l.size + ' m²' : '', 'Superficie')}
-          ${spec(l.garage ? l.garage + ' plz.' : '', 'Garaje')}
+        <div class="cover-content">
+          <span class="cover-badge">${saleLabel} &nbsp;·&nbsp; ${l.badge_type || l.propertyType || ''}</span>
+          <h1 class="cover-title">${l.title}</h1>
+          <p class="cover-location">${l.neighbourhood || l.city || ''}</p>
+          <div class="cover-rule"></div>
+          <p class="cover-price">${priceLabel}</p>
+          <div class="cover-specs">
+            ${spec(l.beds, 'Dormitorios')}
+            ${spec(l.baths, 'Baños')}
+            ${spec(l.size ? l.size + ' m²' : '', 'Superficie')}
+            ${spec(l.garage ? l.garage + ' plz.' : '', 'Garaje')}
+          </div>
+          <div class="cover-rule"></div>
+          <p class="cover-desc">${desc[0] || ''}</p>
         </div>
-        <div class="cover-rule"></div>
-        <p class="cover-desc">${desc[0] || ''}</p>
       </div>
       <div class="cover-photo">
         ${hero ? `<img src="${hero}" alt="${l.title}" />` : '<div class="cover-photo-empty"></div>'}
