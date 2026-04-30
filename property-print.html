@@ -5,18 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Property PDF</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
   <script src="data-listings.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:   #091F38;
-      --gold:   #C8A96E;
-      --text:   #1C1A14;
-      --muted:  #7A7060;
-      --paper:  #FAF8F4;
-      --border: #E2DAD0;
+      --navy:  #091F38;
+      --navy2: #0d2844;
+      --gold:  #C8A96E;
+      --text:  #1C1A14;
+      --muted: #7A7060;
+      --paper: #FAF8F4;
+      --rule:  #E2DAD0;
     }
 
     @page { size: A4; margin: 0; }
@@ -27,57 +28,32 @@
       print-color-adjust: exact;
     }
 
-    /* ── PRINT BAR (screen only) ── */
+    /* ── PRINT BAR ── */
     .print-bar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 44px;
+      position: fixed; top: 0; left: 0; right: 0; height: 44px;
       background: var(--navy);
-      display: flex;
-      align-items: center;
-      padding: 0 20px;
-      gap: 12px;
-      z-index: 999;
-      font-size: 12px;
-      color: rgba(255,255,255,.6);
+      display: flex; align-items: center; padding: 0 20px; gap: 12px;
+      z-index: 999; font-size: 12px; color: rgba(255,255,255,.55);
     }
-    .print-bar strong { color: white; font-weight: 500; }
+    .print-bar strong { color: #fff; font-weight: 500; }
     .print-bar-actions { margin-left: auto; display: flex; gap: 8px; align-items: center; }
     .btn-print {
-      background: var(--gold);
-      color: var(--navy);
-      border: none;
-      padding: 7px 20px;
-      font-family: 'Jost', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .8px;
-      text-transform: uppercase;
-      cursor: pointer;
-      border-radius: 2px;
-      transition: opacity .15s;
+      background: var(--gold); color: var(--navy); border: none;
+      padding: 7px 22px; font-family: 'Jost', sans-serif;
+      font-size: 10px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; cursor: pointer; border-radius: 1px;
     }
     .btn-print:hover { opacity: .85; }
     .btn-close {
-      background: rgba(255,255,255,.08);
-      color: rgba(255,255,255,.6);
-      border: none;
-      padding: 7px 14px;
-      font-family: 'Jost', sans-serif;
-      font-size: 11px;
-      cursor: pointer;
-      border-radius: 2px;
+      background: rgba(255,255,255,.07); color: rgba(255,255,255,.55);
+      border: none; padding: 7px 14px; font-family: 'Jost', sans-serif;
+      font-size: 11px; cursor: pointer; border-radius: 1px;
     }
-
     @media screen {
       body {
-        padding-top: 60px;
-        background: #1a1a1a;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 16px;
-        padding-bottom: 48px;
+        padding-top: 60px; background: #111;
+        display: flex; flex-direction: column; align-items: center;
+        gap: 20px; padding-bottom: 60px;
       }
     }
     @media print {
@@ -87,366 +63,252 @@
 
     /* ── PAGE ── */
     .page {
-      width: 210mm;
-      height: 297mm;
+      width: 210mm; height: 297mm;
       background: var(--paper);
-      position: relative;
-      overflow: hidden;
+      position: relative; overflow: hidden;
       page-break-after: always;
     }
-    @media screen {
-      .page { box-shadow: 0 8px 48px rgba(0,0,0,.55); }
-    }
+    @media screen { .page { box-shadow: 0 12px 60px rgba(0,0,0,.7); } }
 
-    /* ════════════════════════════════
+
+    /* ════════════════════════
        PAGE 1 — COVER
-    ════════════════════════════════ */
+    ════════════════════════ */
     .cover {
       display: grid;
-      grid-template-columns: 80mm 1fr;
-      grid-template-rows: 1fr 12mm;
+      grid-template-columns: 71mm 1fr;
+      grid-template-rows: 1fr 14mm;
       height: 100%;
     }
 
-    /* LEFT PANEL */
+    /* ── LEFT PANEL ── */
     .cover-panel {
-      background: var(--navy);
-      padding: 9mm 9mm 0 10mm;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
+      background: linear-gradient(175deg, var(--navy2) 0%, var(--navy) 100%);
+      display: flex; flex-direction: column;
+      position: relative; overflow: hidden;
+    }
+    /* thin gold accent strip on left edge */
+    .cover-panel::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 0.6mm;
+      background: linear-gradient(to bottom, transparent 0%, var(--gold) 30%, var(--gold) 70%, transparent 100%);
+      opacity: .5;
     }
 
-    .cover-logo { flex-shrink: 0; }
+    .cover-logo-wrap {
+      padding: 9mm 9mm 0 11mm;
+      flex-shrink: 0;
+    }
     .cover-logo img {
-      height: 9mm;
-      width: auto;
-      filter: brightness(0) invert(1);
-      opacity: .82;
+      height: 8.5mm; width: auto;
+      filter: brightness(0) invert(1); opacity: .8;
       display: block;
     }
     .cover-logo-text {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 18pt;
-      font-weight: 300;
-      letter-spacing: 5px;
-      color: rgba(255,255,255,.85);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16pt; font-weight: 300; letter-spacing: 6px;
+      color: rgba(255,255,255,.8);
     }
 
-    /* Content pushed to bottom third */
+    /* Vast breathing space — this IS luxury */
+    .cover-spacer { flex: 1; }
+
+    /* Content block — bottom of panel */
     .cover-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding-bottom: 9mm;
+      padding: 0 9mm 9mm 11mm;
     }
 
-    /* Badge — borderless, text only */
     .cover-badge {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 6pt;
-      font-weight: 400;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: rgba(200,169,110,.75);
-      margin-bottom: 4mm;
+      font-size: 5.5pt; letter-spacing: 3px; text-transform: uppercase;
+      color: rgba(200,169,110,.65); font-weight: 400;
+      margin-bottom: 5mm; display: flex; align-items: center; gap: 4px;
     }
-    .cover-badge-dot {
-      width: 1.2mm;
-      height: 1.2mm;
-      border-radius: 50%;
-      background: var(--gold);
-      opacity: .6;
-      flex-shrink: 0;
+    .cover-badge-sep {
+      display: inline-block; width: 1mm; height: 1mm;
+      border-radius: 50%; background: var(--gold); opacity: .5;
     }
 
     .cover-title {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 30pt;
-      font-weight: 300;
-      line-height: 1.05;
-      color: white;
-      margin-bottom: 2mm;
-      letter-spacing: -.3px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32pt; font-weight: 300; font-style: italic;
+      line-height: 1.0; color: #fff;
+      margin-bottom: 3mm; letter-spacing: -.5px;
     }
 
     .cover-location {
-      font-size: 6.5pt;
-      font-weight: 400;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--gold);
-      opacity: .75;
-      margin-bottom: 6mm;
+      font-size: 6pt; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--gold); opacity: .7; margin-bottom: 7mm;
     }
 
     .cover-rule {
-      width: 12mm;
-      height: 0.25mm;
-      background: rgba(200,169,110,.4);
-      margin-bottom: 5mm;
+      height: 0.25mm; background: rgba(200,169,110,.3); margin-bottom: 6mm;
     }
 
     .cover-price {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 24pt;
-      font-weight: 400;
-      color: var(--gold);
-      margin-bottom: 5.5mm;
-      letter-spacing: -.2px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22pt; font-weight: 400; color: var(--gold);
+      margin-bottom: 6mm; letter-spacing: .5px;
     }
 
-    /* Specs — single horizontal row */
+    /* Specs — horizontal strip with gold dividers */
     .cover-specs {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: 6mm;
+      display: flex; align-items: flex-start;
+      padding-bottom: 7mm;
+      border-bottom: 0.25mm solid rgba(200,169,110,.2);
     }
-    .cover-spec {
-      display: flex;
-      flex-direction: column;
-    }
+    .cover-spec { display: flex; flex-direction: column; }
     .cover-spec + .cover-spec {
-      padding-left: 4mm;
-      margin-left: 4mm;
-      border-left: 0.25mm solid rgba(200,169,110,.25);
+      margin-left: 4.5mm; padding-left: 4.5mm;
+      border-left: 0.25mm solid rgba(200,169,110,.22);
     }
     .cover-spec-val {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 14pt;
-      font-weight: 300;
-      color: white;
-      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13pt; font-weight: 300; color: #fff;
       line-height: 1;
     }
     .cover-spec-lbl {
-      font-size: 5.5pt;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.3);
-      display: block;
-      margin-top: 1mm;
+      font-size: 5pt; letter-spacing: 1.5px; text-transform: uppercase;
+      color: rgba(255,255,255,.28); margin-top: 1mm;
     }
 
-    .cover-desc {
-      font-size: 7.5pt;
-      line-height: 1.72;
-      color: rgba(255,255,255,.45);
-      font-weight: 300;
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 7;
-      -webkit-box-orient: vertical;
-    }
-
-    /* PHOTO */
+    /* ── PHOTO ── */
     .cover-photo {
-      overflow: hidden;
-      position: relative;
+      overflow: hidden; position: relative;
     }
-    .cover-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+    .cover-photo > img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
     }
     .cover-photo-empty {
-      width: 100%;
-      height: 100%;
-      background: #0b1e33;
+      width: 100%; height: 100%; background: #0b1e33;
     }
-
-    /* Logo on photo — centered, tasteful size */
-    .cover-photo-logo {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    /* Subtle bottom gradient for footer legibility */
+    .cover-photo::after {
+      content: '';
+      position: absolute; left: 0; right: 0; bottom: 0; height: 30%;
+      background: linear-gradient(to top, rgba(9,31,56,.35) 0%, transparent 100%);
       pointer-events: none;
     }
+    /* Logo overlay — centered */
+    .cover-photo-logo {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: none; z-index: 1;
+    }
     .cover-photo-logo img {
-      width: 36%;
-      height: auto;
-      object-fit: contain;
-      display: block;
-      opacity: 1;
+      width: 34%; height: auto; display: block; opacity: 1;
     }
 
-    /* FOOTER BAR */
+    /* ── FOOTER BAR ── */
     .cover-footer {
       grid-column: 1 / -1;
-      background: white;
-      border-top: 0.25mm solid var(--border);
-      display: flex;
-      align-items: center;
-      padding: 0 8mm;
-      gap: 4mm;
+      background: #fff;
+      border-top: 0.3mm solid var(--rule);
+      display: flex; align-items: center;
+      padding: 0 9mm; gap: 5mm;
     }
-
-    .footer-logo img { height: 6.5mm; width: auto; }
+    .footer-logo img { height: 7mm; width: auto; }
     .footer-logo-text {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 11pt;
-      font-weight: 400;
-      letter-spacing: 3px;
-      color: var(--navy);
+      font-size: 10pt; font-weight: 400; letter-spacing: 3.5px; color: var(--navy);
     }
-
-    .footer-sep {
-      width: 0.25mm;
-      height: 6mm;
-      background: var(--border);
-      margin: 0 2mm;
+    .footer-vsep {
+      width: 0.25mm; height: 7mm; background: var(--rule); margin: 0 1mm;
     }
-
     .footer-agent-name {
-      font-size: 7pt;
-      font-weight: 500;
-      color: var(--text);
-      letter-spacing: .3px;
+      font-size: 6.5pt; font-weight: 500; color: var(--text); letter-spacing: .4px;
     }
     .footer-agent-contact {
-      font-size: 6pt;
-      color: var(--muted);
-      margin-top: .5mm;
-      letter-spacing: .2px;
+      font-size: 5.5pt; color: var(--muted); margin-top: .7mm; letter-spacing: .2px;
     }
-
+    .footer-right { margin-left: auto; display: flex; align-items: center; gap: 5mm; }
     .footer-ref {
-      margin-left: auto;
-      font-size: 6pt;
-      letter-spacing: 1.5px;
-      color: var(--muted);
-      text-transform: uppercase;
+      font-size: 5.5pt; letter-spacing: 2px; color: var(--muted); text-transform: uppercase;
     }
-
-    .footer-qr {
-      display: flex;
-      align-items: center;
-      gap: 2.5mm;
-      margin-left: 4mm;
-    }
-    .footer-qr img { width: 8mm; height: 8mm; }
+    .footer-qr { display: flex; align-items: center; gap: 2.5mm; }
+    .footer-qr img { width: 9mm; height: 9mm; }
     .footer-qr-label {
-      font-size: 5.5pt;
-      color: var(--muted);
-      line-height: 1.4;
-      text-align: right;
+      font-size: 5pt; color: var(--muted); line-height: 1.5; text-align: right;
+      letter-spacing: .5px; text-transform: uppercase;
     }
 
-    /* ════════════════════════════════
+
+    /* ════════════════════════
        PAGE 2 — DOSSIER
-    ════════════════════════════════ */
+    ════════════════════════ */
     .dossier {
-      padding: 11mm 12mm 0;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
+      padding: 12mm 13mm 0;
+      height: 100%; display: flex; flex-direction: column;
     }
 
+    /* Header */
     .dossier-hd {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      padding-bottom: 4mm;
-      border-bottom: 0.25mm solid var(--border);
-      margin-bottom: 6mm;
+      display: flex; justify-content: space-between; align-items: flex-end;
+      border-bottom: 0.25mm solid var(--rule);
+      padding-bottom: 4.5mm; margin-bottom: 7mm;
     }
     .dossier-hd-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 16pt;
-      font-weight: 300;
-      color: var(--navy);
-      letter-spacing: -.2px;
+      font-size: 18pt; font-weight: 300; font-style: italic;
+      color: var(--navy); letter-spacing: -.3px;
     }
-    .dossier-hd-loc {
-      font-size: 6.5pt;
-      letter-spacing: 1.8px;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-top: 1mm;
+    .dossier-hd-sub {
+      font-size: 6pt; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--muted); margin-top: 1.5mm;
     }
     .dossier-ref {
-      font-size: 6pt;
-      letter-spacing: 1.5px;
-      color: var(--muted);
-      text-transform: uppercase;
+      font-size: 5.5pt; letter-spacing: 2px; color: var(--muted); text-transform: uppercase;
     }
 
     /* Photo grid */
     .photo-grid {
-      display: grid;
-      gap: 1.5mm;
-      margin-bottom: 6mm;
+      display: grid; gap: 1.5mm; margin-bottom: 7mm;
     }
-    .photo-grid.grid-3 { grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 44mm; }
-    .photo-grid.grid-2 { grid-template-columns: 1fr 1fr; grid-template-rows: 44mm; }
-    .photo-grid.grid-1 { grid-template-columns: 1fr; grid-template-rows: 44mm; }
-
+    .photo-grid.grid-3 { grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 48mm; }
+    .photo-grid.grid-2 { grid-template-columns: 1fr 1fr; grid-template-rows: 48mm; }
+    .photo-grid.grid-1 { grid-template-columns: 1fr; grid-template-rows: 48mm; }
     .photo-grid img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      border-radius: .5mm;
+      width: 100%; height: 100%; object-fit: cover; display: block;
     }
 
-    /* Description */
-    .dossier-section + .dossier-section { margin-top: 5mm; }
-    .section-label {
-      font-size: 5.5pt;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 3mm;
-      display: block;
+    /* Sections */
+    .dossier-section + .dossier-section { margin-top: 6mm; }
+    .section-lbl {
+      font-size: 5pt; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 3.5mm; display: block;
     }
 
-    .dossier-desc-cols {
-      columns: 2;
-      column-gap: 8mm;
-      font-size: 7.5pt;
-      line-height: 1.72;
-      color: #3A3628;
-      font-weight: 300;
+    /* Description — 2 columns, clean serif body text */
+    .desc-cols {
+      columns: 2; column-gap: 8mm;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 9.5pt; font-weight: 300; font-style: italic;
+      line-height: 1.75; color: #3A3628;
     }
-    .dossier-desc-cols p + p { margin-top: 2.5mm; }
+    .desc-cols p + p { margin-top: 3mm; }
 
     /* Features */
-    .feat-wrap {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5mm;
+    .feat-grid {
+      display: flex; flex-wrap: wrap; gap: 1.5mm;
     }
     .feat-pill {
-      font-size: 6pt;
-      padding: 1.2mm 3mm;
-      border: 0.2mm solid var(--border);
-      border-radius: 20mm;
-      color: var(--muted);
-      background: white;
-      white-space: nowrap;
+      font-size: 5.5pt; padding: 1mm 2.5mm;
+      border: 0.2mm solid var(--rule);
+      color: var(--muted); background: #fff; white-space: nowrap;
+      letter-spacing: .3px;
     }
 
     /* Dossier footer */
     .dossier-foot {
       margin-top: auto;
-      padding: 4mm 0 8mm;
-      border-top: 0.25mm solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 4mm;
+      border-top: 0.25mm solid var(--rule);
+      padding: 4.5mm 0 9mm;
+      display: flex; align-items: center; gap: 5mm;
     }
     .dossier-foot .footer-logo img { height: 6.5mm; }
     .dossier-foot .footer-logo-text {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 11pt;
-      letter-spacing: 3px;
-      color: var(--navy);
+      font-size: 10pt; letter-spacing: 3.5px; color: var(--navy);
     }
   </style>
 </head>
@@ -455,9 +317,8 @@
 <div class="print-bar">
   <strong id="print-title">Cargando…</strong>
   <div class="print-bar-actions">
-    <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,.65);cursor:pointer">
-      <input type="checkbox" id="toggle-logo" checked style="accent-color:var(--gold)" />
-      Logo
+    <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,.5);cursor:pointer">
+      <input type="checkbox" id="toggle-logo" checked style="accent-color:var(--gold)" /> Logo
     </label>
     <button class="btn-close" onclick="history.back()">← Volver</button>
     <button class="btn-print" onclick="window.print()">Guardar PDF</button>
@@ -472,14 +333,16 @@
   const dataEl = document.getElementById('listings-data')
   let listings = []
   try { listings = JSON.parse(dataEl.textContent).listings || [] } catch {}
-  // Prefer localStorage cache (has unsaved fields like pdf_hero not yet published)
   try {
     const cached = JSON.parse(localStorage.getItem('an_listings_cache') || '{}').listings || []
     if (cached.length) listings = cached
   } catch {}
 
   const l = listings.find(x => x.slug === slug)
-  if (!l) { document.getElementById('root').innerHTML = '<div style="padding:40px;color:#fff;font-family:sans-serif">Propiedad no encontrada</div>'; return }
+  if (!l) {
+    document.getElementById('root').innerHTML = '<div style="padding:40px;color:#fff;font-family:sans-serif">Propiedad no encontrada</div>'
+    return
+  }
 
   document.title = l.title + ' — AN Real Estate'
   document.getElementById('print-title').textContent = l.title
@@ -492,145 +355,153 @@
   }
   const logoDataUrl = localStorage.getItem('an_wm_logo') || ''
 
-  const allImgs = (l.images || []).map(i => typeof i === 'string' ? { src: i } : i)
-  const visibleImgs = allImgs.filter(i => !i.hidden).map(i => i.src)
-  const hero = l.pdf_hero || visibleImgs[0] || l.image || ''
-  const galleryImgs = visibleImgs.slice(0, 3)
+  const allImgs   = (l.images || []).map(i => typeof i === 'string' ? { src: i } : i)
+  const visible   = allImgs.filter(i => !i.hidden).map(i => i.src)
+  const hero      = l.pdf_hero || visible[0] || l.image || ''
+  const gallery   = visible.slice(0, 3)
 
-  const desc = Array.isArray(l.description) ? l.description : l.description ? [l.description] : []
-  const isRent = l.type === 'rent' || l.status === 'rent'
-  const priceLabel = isRent ? l.price + '<small>/mo</small>' : l.price
-  const saleLabel  = isRent ? 'En Alquiler' : 'En Venta'
-  const typeLabel  = l.badge_type || l.propertyType || ''
-
-  const allFeats = l.features ? Object.values(l.features).flat() : []
+  const desc      = Array.isArray(l.description) ? l.description : l.description ? [l.description] : []
+  const isRent    = l.type === 'rent' || l.status === 'rent'
+  const saleLabel = isRent ? 'En Alquiler' : 'En Venta'
+  const typeLabel = l.badge_type || l.propertyType || ''
+  const allFeats  = l.features ? Object.values(l.features).flat() : []
 
   const propUrl = 'https://anrealestate.es/property.html?slug=' + slug
-  const qrSrc   = 'https://api.qrserver.com/v1/create-qr-code/?size=80x80&color=091F38&bgcolor=FAF8F4&data=' + encodeURIComponent(propUrl)
+  const qrSrc   = 'https://api.qrserver.com/v1/create-qr-code/?size=90x90&color=091F38&bgcolor=ffffff&data=' + encodeURIComponent(propUrl)
 
   function spec(val, lbl) {
     if (!val && val !== 0) return ''
-    return `<div class="cover-spec">
-      <span class="cover-spec-val">${val}</span>
-      <span class="cover-spec-lbl">${lbl}</span>
-    </div>`
+    return `<div class="cover-spec"><span class="cover-spec-val">${val}</span><span class="cover-spec-lbl">${lbl}</span></div>`
   }
 
-  const logoMarkup = logoDataUrl
+  const logoEl = logoDataUrl
     ? `<img src="${logoDataUrl}" />`
     : `<span class="cover-logo-text">AN</span>`
 
-  const footerLogoMarkup = logoDataUrl
+  const footerLogo = logoDataUrl
     ? `<div class="footer-logo"><img src="${logoDataUrl}" /></div>`
     : `<div class="footer-logo"><span class="footer-logo-text">AN</span></div>`
 
-  const agentContact = [agent.phone, agent.email].filter(Boolean).join(' · ')
-    + (agent.license ? ' · ' + agent.license : '')
+  const agentLine = [agent.phone, agent.email].filter(Boolean).join('  ·  ')
+    + (agent.license ? '  ·  ' + agent.license : '')
 
-  const badgeDot = typeLabel ? `<span class="cover-badge-dot"></span> ${typeLabel}` : ''
+  const badgeParts = [saleLabel, typeLabel].filter(Boolean)
+  const badgeHtml  = badgeParts.join(`<span class="cover-badge-sep"></span>`)
 
-  // ── PAGE 1
+  // ── PAGE 1 ────────────────────────────────────
   const page1 = `
   <div class="page">
     <div class="cover">
+
       <div class="cover-panel">
-        <div class="cover-logo">${logoMarkup}</div>
+        <div class="cover-logo-wrap">
+          <div class="cover-logo">${logoEl}</div>
+        </div>
+
+        <div class="cover-spacer"></div>
+
         <div class="cover-content">
-          <span class="cover-badge">${saleLabel}${badgeDot ? ' ' + badgeDot : ''}</span>
+          <p class="cover-badge">${badgeHtml}</p>
           <h1 class="cover-title">${l.title}</h1>
           <p class="cover-location">${l.neighbourhood || l.city || ''}</p>
           <div class="cover-rule"></div>
-          <p class="cover-price">${priceLabel}</p>
+          <p class="cover-price">${l.price || ''}</p>
           <div class="cover-specs">
-            ${spec(l.beds, 'Dormitorios')}
+            ${spec(l.beds,  'Dormitorios')}
             ${spec(l.baths, 'Baños')}
-            ${spec(l.size ? l.size + ' m²' : '', 'Superficie')}
-            ${spec(l.garage ? l.garage + ' plz.' : '', 'Garaje')}
+            ${spec(l.size  ? l.size  + ' m²'  : '', 'Superficie')}
+            ${spec(l.garage? l.garage + ' plz.': '', 'Garaje')}
           </div>
-          <div class="cover-rule"></div>
-          <p class="cover-desc">${desc[0] || ''}</p>
         </div>
       </div>
+
       <div class="cover-photo">
         ${hero ? `<img src="${hero}" alt="${l.title}" />` : '<div class="cover-photo-empty"></div>'}
         ${logoDataUrl ? `<div class="cover-photo-logo"><img src="${logoDataUrl}" alt="logo" /></div>` : ''}
       </div>
+
       <div class="cover-footer">
-        ${footerLogoMarkup}
-        ${agent.name || agentContact ? `
-          <div class="footer-sep"></div>
+        ${footerLogo}
+        ${agent.name || agentLine ? `
+          <div class="footer-vsep"></div>
           <div>
-            ${agent.name ? `<div class="footer-agent-name">${agent.name}</div>` : ''}
-            ${agentContact ? `<div class="footer-agent-contact">${agentContact}</div>` : ''}
+            ${agent.name    ? `<div class="footer-agent-name">${agent.name}</div>`       : ''}
+            ${agentLine     ? `<div class="footer-agent-contact">${agentLine}</div>`    : ''}
           </div>` : ''}
-        <span class="footer-ref">Ref. ${l.ref || ''}</span>
-        <div class="footer-qr">
-          <div class="footer-qr-label">Ver en<br>la web</div>
-          <img src="${qrSrc}" alt="QR" />
+        <div class="footer-right">
+          ${l.ref ? `<span class="footer-ref">Ref. ${l.ref}</span>` : ''}
+          <div class="footer-qr">
+            <div class="footer-qr-label">Ver en<br>la web</div>
+            <img src="${qrSrc}" alt="QR" />
+          </div>
         </div>
       </div>
+
     </div>
   </div>`
 
-  // ── PAGE 2
-  const hasPage2 = desc.length > 1 || galleryImgs.length > 0 || allFeats.length > 0
+  // ── PAGE 2 ────────────────────────────────────
+  const hasPage2 = desc.length || gallery.length || allFeats.length
   let page2 = ''
   if (hasPage2) {
-    const gridClass = galleryImgs.length >= 3 ? 'grid-3' : galleryImgs.length === 2 ? 'grid-2' : 'grid-1'
+    const gridCls = gallery.length >= 3 ? 'grid-3' : gallery.length === 2 ? 'grid-2' : 'grid-1'
     page2 = `
     <div class="page">
       <div class="dossier">
+
         <div class="dossier-hd">
           <div>
             <div class="dossier-hd-title">${l.title}</div>
-            <div class="dossier-hd-loc">${l.neighbourhood || l.city || ''}</div>
+            <div class="dossier-hd-sub">${l.neighbourhood || l.city || ''}</div>
           </div>
-          <span class="dossier-ref">Ref. ${l.ref || ''}</span>
+          ${l.ref ? `<span class="dossier-ref">Ref. ${l.ref}</span>` : ''}
         </div>
 
-        ${galleryImgs.length ? `
-        <div class="photo-grid ${gridClass}">
-          ${galleryImgs.map(src => `<img src="${src}" alt="" />`).join('')}
+        ${gallery.length ? `
+        <div class="photo-grid ${gridCls}">
+          ${gallery.map(s => `<img src="${s}" alt="" />`).join('')}
         </div>` : ''}
 
-        ${desc.length > 1 ? `
+        ${desc.length ? `
         <div class="dossier-section">
-          <span class="section-label">Descripción</span>
-          <div class="dossier-desc-cols">
-            ${desc.slice(1).map(p => `<p>${p}</p>`).join('')}
+          <span class="section-lbl">Descripción</span>
+          <div class="desc-cols">
+            ${desc.map(p => `<p>${p}</p>`).join('')}
           </div>
         </div>` : ''}
 
         ${allFeats.length ? `
         <div class="dossier-section">
-          <span class="section-label">Características</span>
-          <div class="feat-wrap">
+          <span class="section-lbl">Características</span>
+          <div class="feat-grid">
             ${allFeats.map(f => `<span class="feat-pill">${f}</span>`).join('')}
           </div>
         </div>` : ''}
 
         <div class="dossier-foot">
-          ${footerLogoMarkup}
-          ${agent.name || agentContact ? `
-            <div class="footer-sep"></div>
+          ${footerLogo}
+          ${agent.name || agentLine ? `
+            <div class="footer-vsep"></div>
             <div>
               ${agent.name ? `<div class="footer-agent-name">${agent.name}</div>` : ''}
-              ${agentContact ? `<div class="footer-agent-contact">${agentContact}</div>` : ''}
+              ${agentLine  ? `<div class="footer-agent-contact">${agentLine}</div>` : ''}
             </div>` : ''}
-          <div class="footer-qr" style="margin-left:auto">
-            <div class="footer-qr-label">Ver en<br>la web</div>
-            <img src="${qrSrc}" alt="QR" />
+          <div class="footer-right">
+            <div class="footer-qr">
+              <div class="footer-qr-label">Ver en<br>la web</div>
+              <img src="${qrSrc}" alt="QR" />
+            </div>
           </div>
         </div>
+
       </div>
     </div>`
   }
 
   document.getElementById('root').innerHTML = page1 + page2
 
-  // Logo toggle
   document.getElementById('toggle-logo').addEventListener('change', function () {
-    document.querySelectorAll('.cover-logo, .cover-photo-logo, .footer-logo, .dossier-foot .footer-logo').forEach(el => {
+    document.querySelectorAll('.cover-logo, .cover-photo-logo, .footer-logo').forEach(el => {
       el.style.visibility = this.checked ? '' : 'hidden'
     })
   })
