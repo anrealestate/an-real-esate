@@ -396,3 +396,18 @@
   color: var(--gold);
   vertical-align: super;
 }
+
+/* ── Mobile ───────────────────── */
+@media (max-width: 767px) {
+  /* Chat window: slightly shorter on small phones */
+  .chat-messages { height: clamp(260px, 50vh, 380px); }
+
+  /* Chat section: less vertical padding */
+  .val-chat-section {
+    padding-top: clamp(2.5rem, 5vw, 4rem);
+    padding-bottom: clamp(3.5rem, 8vw, 6rem);
+  }
+
+  /* Hero headline: tone down on very small viewports */
+  .val-h1 { font-size: clamp(34px, 10vw, 44px); }
+}

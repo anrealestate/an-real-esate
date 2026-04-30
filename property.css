@@ -846,3 +846,20 @@
   font-size: .62rem; color: rgba(255,255,255,.28);
   margin-top: 1rem; line-height: 1.5; text-align: center;
 }
+
+/* ================================
+   Mobile optimisations — ≤ 767px
+   ================================ */
+@media (max-width: 767px) {
+  /* Raise WAFab above the fixed sticky-CTA bar (~64px) */
+  .wa-fab { bottom: 5.5rem; }
+
+  /* Spec dividers look broken when flex items wrap to new rows */
+  .ph-specs-divider { display: none; }
+  .ph-specs { gap: .75rem 1.5rem; }
+
+  /* Lightbox: side padding was 5rem leaving only 215px for the photo */
+  .lb-stage       { padding: 4.5rem 1rem 3.5rem; }
+  .lb-arrow--prev { left: .25rem; }
+  .lb-arrow--next { right: .25rem; }
+}

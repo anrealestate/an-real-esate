@@ -1625,3 +1625,37 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .ps-num { width: auto; text-align: left; font-size: clamp(3rem, 5vw, 5rem); }
   .ps-line { width: 2rem; height: 1px; background: var(--gold); opacity: .4; min-height: unset; }
 }
+
+/* ================================
+   Mobile optimisations — ≤ 767px
+   ================================ */
+@media (max-width: 767px) {
+
+  /* About heading: long translations overflow on narrow screens
+     without white-space:normal the German/Italian lines clip */
+  .at-heading {
+    font-size: clamp(22px, 6vw, 28px);
+    white-space: normal;
+  }
+
+  /* Logo frame: 3/4 portrait is ~450px tall when stacked — too much */
+  .at-img.at-logo-frame { aspect-ratio: 4/3; }
+
+  /* Stats: tighter padding keeps €500M+ inside its half-width cell */
+  .stat-item { padding: 1.5rem 1.25rem; }
+  .stat-num  { font-size: clamp(1.9rem, 7.5vw, 2.5rem); }
+
+  /* Banner dots: WAFab sits at bottom-right — move dots to avoid overlap */
+  .banner-dots { left: var(--pad); right: auto; }
+
+  /* Process steps: 2.5rem gap × 2 + 4rem number = 9rem overhead on 335px */
+  .process-step { gap: 0 1.25rem; padding-block: 1.75rem; }
+  .ps-num       { width: 2.5rem; font-size: 1.8rem; }
+
+  /* Testimonials: 32px italic for 3-sentence quotes is too large on mobile */
+  .testi-big-quote { font-size: clamp(17px, 4.8vw, 22px); line-height: 1.6; }
+  .testi-list      { min-height: 160px; }
+
+  /* Form inputs: iOS auto-zooms on focus if font-size < 16px */
+  .finput { font-size: 16px; }
+}
