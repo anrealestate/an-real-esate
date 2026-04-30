@@ -6,8 +6,7 @@
       "price": "€830,000",
       "ref": "AN-2026-001",
       "neighbourhood": "Gràcia, Barcelona",
-      "type": "apartment",
-      "status": "sale",
+      "type": "sale",
       "badge_type": "Apartment",
       "beds": 2,
       "baths": 2,
@@ -118,10 +117,11 @@
           "dist": "25 min drive"
         }
       ],
-      "published": true,
       "address": "Carrer de la Fraternitat, 21, Barcelona, Spain",
       "doorFloor": "bajos",
-      "zip": "08012"
+      "zip": "08012",
+      "stage": "active",
+      "propertyType": "apartment"
     },
     {
       "slug": "eixample-golden-square-rent",
@@ -129,8 +129,7 @@
       "price": "€7,700",
       "ref": "AN-46749",
       "neighbourhood": "Eixample, Barcelona",
-      "type": "apartment",
-      "status": "rent",
+      "type": "rent",
       "badge_type": "Apartment",
       "beds": 3,
       "baths": 3,
@@ -404,7 +403,8 @@
           "dist": "20 min drive"
         }
       ],
-      "published": true
+      "stage": "active",
+      "propertyType": "apartment"
     },
     {
       "slug": "sant-gervasi-galvany",
@@ -412,8 +412,7 @@
       "price": "€520,000",
       "ref": "AN-1012",
       "neighbourhood": "Sant Gervasi, Barcelona",
-      "type": "apartment",
-      "status": "sale",
+      "type": "sale",
       "badge_type": "Apartment",
       "beds": 2,
       "baths": 1,
@@ -580,8 +579,8 @@
           "dist": "25 min drive"
         }
       ],
-      "published": true,
-      "sold": true
+      "stage": "sold",
+      "propertyType": "apartment"
     },
     {
       "slug": "el-born-corner",
@@ -589,8 +588,7 @@
       "price": "€1,095,000",
       "ref": "AN-46330",
       "neighbourhood": "El Born, Barcelona",
-      "type": "apartment",
-      "status": "sale",
+      "type": "sale",
       "badge_type": "Apartment",
       "beds": 4,
       "baths": 3,
@@ -683,8 +681,8 @@
           "dist": "20 min drive"
         }
       ],
-      "published": true,
-      "sold": true
+      "stage": "sold",
+      "propertyType": "apartment"
     },
     {
       "slug": "rambla-catalunya-corner",
@@ -692,8 +690,7 @@
       "price": "€1,395,000",
       "ref": "AN-10007",
       "neighbourhood": "Eixample, Barcelona",
-      "type": "apartment",
-      "status": "sale",
+      "type": "sale",
       "badge_type": "Apartment",
       "beds": 3,
       "baths": 3,
@@ -798,8 +795,8 @@
           "dist": "20 min drive"
         }
       ],
-      "published": true,
-      "sold": true
+      "stage": "sold",
+      "propertyType": "apartment"
     },
     {
       "slug": "eixample-golden-mile",
@@ -807,8 +804,7 @@
       "price": "€1,200,000",
       "ref": "AN-10006",
       "neighbourhood": "Dreta de l'Eixample, Barcelona",
-      "type": "apartment",
-      "status": "sale",
+      "type": "sale",
       "badge_type": "Apartment",
       "beds": 3,
       "baths": 3,
@@ -932,8 +928,8 @@
           "dist": "20 min drive"
         }
       ],
-      "published": true,
-      "sold": true
+      "stage": "sold",
+      "propertyType": "apartment"
     },
     {
       "slug": "vallvidrera-villa",
@@ -941,8 +937,7 @@
       "price": "€5,500,000",
       "ref": "AN-AN1005",
       "neighbourhood": "Vallvidrera, Barcelona",
-      "type": "villa",
-      "status": "sale",
+      "type": "sale",
       "badge_type": "Villa",
       "beds": 6,
       "baths": 6,
@@ -1196,7 +1191,8 @@
           "dist": "30 min drive"
         }
       ],
-      "published": true
+      "stage": "active",
+      "propertyType": "villa"
     },
     {
       "slug": "eixample-villarroel",
@@ -1204,8 +1200,7 @@
       "price": "€820,000",
       "ref": "AN-AN1004",
       "neighbourhood": "Eixample, Barcelona",
-      "type": "apartment",
-      "status": "sale",
+      "type": "sale",
       "badge_type": "Apartment",
       "beds": 3,
       "baths": 2,
@@ -1309,8 +1304,83 @@
           "dist": "20 min drive"
         }
       ],
-      "published": true,
-      "sold": true
+      "stage": "sold",
+      "propertyType": "apartment"
+    },
+    {
+      "slug": "prueba",
+      "title": "prueba",
+      "price": "€500000",
+      "ref": "AN202601",
+      "neighbourhood": "Eixample, Barcelona",
+      "address": "Carrer de Muntaner, 189, Barcelona, Spain",
+      "doorFloor": "3",
+      "doorNum": "1",
+      "zip": "08036",
+      "type": "sale",
+      "propertyType": "apartment",
+      "badge_type": "Apartment",
+      "beds": 3,
+      "baths": 2,
+      "size": "100",
+      "land": "0",
+      "floor": "4th",
+      "year": 1930,
+      "condition": "To renovate",
+      "energy": "D",
+      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777550321/an-realestate/poma9mwccqkax7iotdzq.jpg",
+      "images": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777550321/an-realestate/poma9mwccqkax7iotdzq.jpg",
+          "alt": "2026-04-24_Magarola_19_Sant_Cugat_del_Vallès_03"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777550319/an-realestate/mhn1hnyljenx5bi0ei3z.jpg",
+          "alt": "2026-04-24_Magarola_19_Sant_Cugat_del_Vallès_01"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777550320/an-realestate/jwyyjdzuev41u54hfac9.jpg",
+          "alt": "2026-04-24_Magarola_19_Sant_Cugat_del_Vallès_04"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777550322/an-realestate/xsidjaxmwotencdtdnfh.jpg",
+          "alt": "2026-04-24_Magarola_19_Sant_Cugat_del_Vallès_09"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777550323/an-realestate/qqgdckcm0pg3rhwnzq3s.jpg",
+          "alt": "2026-04-24_Magarola_19_Sant_Cugat_del_Vallès_10"
+        }
+      ],
+      "description": [
+        "feafgahgethcwgetghcwrhtwrgsgceg",
+        "cryherhcdftgbdfynhdvthcrsgsrhbcery"
+      ],
+      "features": {
+        "Interior": [
+          "High Ceilings",
+          "Vaulted Ceiling(s)"
+        ],
+        "Flooring": [
+          "Marble Flooring"
+        ],
+        "Kitchen": [
+          "Equipped Kitchen",
+          "Oven"
+        ],
+        "Climate": [
+          "Air conditioning"
+        ],
+        "Outdoor": [
+          "Balcony"
+        ],
+        "Building": [
+          "Elevator"
+        ],
+        "Views": [
+          "City Views"
+        ]
+      },
+      "stage": "active"
     }
   ]
 }
