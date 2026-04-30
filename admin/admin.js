@@ -238,6 +238,9 @@ function loadData() {
           if (p?.doorNum)    l.doorNum    = p.doorNum
           if (p?.zip)        l.zip        = p.zip
         })
+        // Add listings that only exist in cache (e.g. drafts not yet published to the static JSON)
+        const draftsOnly = prev.filter(p => !_listings.find(l => l.slug === p.slug))
+        _listings = [..._listings, ...draftsOnly]
       }
     }
   } catch {}
@@ -320,7 +323,39 @@ function quickToggle(slug, field) {
   toast(`${field === 'published' ? (l[field] ? 'Publicada' : 'Ocultada') : (l[field] ? 'Marcada vendida' : 'Marcada disponible')}`, 'success')
 }
 
+// ── REFERENCIA AUTO ───────────────────────────
+const REF_KEY = 'an_ref_published'
+
+function generateRef() {
+  const year = new Date().getFullYear()
+  const prefix = `AN${year}`
+  const allNums = _listings
+    .map(l => l.ref || '')
+    .concat(JSON.parse(localStorage.getItem(REF_KEY) || '[]'))
+    .filter(r => r.startsWith(prefix))
+    .map(r => parseInt(r.slice(prefix.length), 10))
+    .filter(n => !isNaN(n))
+  const next = allNums.length > 0 ? Math.max(...allNums) + 1 : 1
+  return prefix + String(next).padStart(2, '0')
+}
+
+
+function lockRef(ref) {
+  const locked = JSON.parse(localStorage.getItem(REF_KEY) || '[]')
+  if (!locked.includes(ref)) {
+    locked.push(ref)
+    localStorage.setItem(REF_KEY, JSON.stringify(locked))
+  }
+}
+
+// Llama resetRefCounter() desde la consola del navegador para reiniciar el contador (solo para pruebas)
+window.resetRefCounter = function () {
+  localStorage.removeItem(REF_KEY)
+  toast('Contador de referencias reiniciado', 'success')
+}
+
 // ── FORM ──────────────────────────────────────
+
 function showForm(slug) {
   try { _showForm(slug) } catch(e) { console.error('[showForm error]', e); alert('Error al abrir formulario: ' + e.message) }
 }
@@ -344,7 +379,7 @@ function _showForm(slug) {
   document.getElementById('f-original-slug').value = l.slug || ''
   document.getElementById('f-title').value         = l.title || ''
   document.getElementById('f-slug').value          = l.slug || ''
-  document.getElementById('f-ref').value           = l.ref || ''
+  document.getElementById('f-ref').value           = isNew ? generateRef() : (l.ref || '')
 
   // Price: parse "€830,000" or "€7,700/mes" back into num + postfix
   const _priceStr = l.price || ''
@@ -583,6 +618,8 @@ async function saveProperty() {
     else delete addrs[slug]
     localStorage.setItem('an_addresses', JSON.stringify(addrs))
   } catch {}
+
+  if (listing.published && listing.ref) lockRef(listing.ref)
 
   _formDirty = false
   cacheListings()
