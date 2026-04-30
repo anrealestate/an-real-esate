@@ -51,7 +51,28 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-add-new')?.addEventListener('click', () => showForm(null))
   document.getElementById('btn-back').addEventListener('click', showPropsList)
   document.getElementById('btn-save').addEventListener('click', saveProperty)
+  document.getElementById('btn-pdf').addEventListener('click', openPropertyPdf)
   document.getElementById('btn-delete').addEventListener('click', confirmDelete)
+
+  // Agent settings
+  const agentModal = document.getElementById('agent-modal')
+  document.getElementById('agent-settings-btn').addEventListener('click', () => {
+    document.getElementById('ag-name').value    = localStorage.getItem('an_agent_name')    || ''
+    document.getElementById('ag-phone').value   = localStorage.getItem('an_agent_phone')   || ''
+    document.getElementById('ag-email').value   = localStorage.getItem('an_agent_email')   || ''
+    document.getElementById('ag-license').value = localStorage.getItem('an_agent_license') || ''
+    agentModal.classList.remove('hidden')
+  })
+  document.getElementById('agent-modal-close').addEventListener('click', () => agentModal.classList.add('hidden'))
+  agentModal.addEventListener('click', e => { if (e.target === agentModal) agentModal.classList.add('hidden') })
+  document.getElementById('ag-save-btn').addEventListener('click', () => {
+    localStorage.setItem('an_agent_name',    document.getElementById('ag-name').value.trim())
+    localStorage.setItem('an_agent_phone',   document.getElementById('ag-phone').value.trim())
+    localStorage.setItem('an_agent_email',   document.getElementById('ag-email').value.trim())
+    localStorage.setItem('an_agent_license', document.getElementById('ag-license').value.trim())
+    agentModal.classList.add('hidden')
+    toast('Datos guardados', 'success')
+  })
   document.getElementById('btn-translate').addEventListener('click', translateListing)
   // Sidebar nav
   document.querySelectorAll('.sb-link').forEach(link => {
@@ -687,6 +708,12 @@ function switchView(name) {
 }
 
 // ── SAVE ──────────────────────────────────────
+function openPropertyPdf() {
+  const slug = document.getElementById('f-slug').value.trim()
+  if (!slug) { toast('Guarda la propiedad primero para generar el PDF', 'error'); return }
+  window.open('../property-print.html?slug=' + encodeURIComponent(slug), '_blank')
+}
+
 async function saveProperty() {
   const slug = document.getElementById('f-slug').value.trim()
     .toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')

@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Property PDF</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="data-listings.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #091F38;
+      --gold:   #C8A96E;
+      --text:   #1C1A14;
+      --muted:  #7A7060;
+      --paper:  #FAF8F4;
+      --border: #E2DAD0;
+    }
+
+    @page { size: A4; margin: 0; }
+
+    html {
+      font-family: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ── PRINT BAR (screen only) ── */
+    .print-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 44px;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      gap: 12px;
+      z-index: 999;
+      font-size: 12px;
+      color: rgba(255,255,255,.6);
+    }
+    .print-bar strong { color: white; font-weight: 500; }
+    .print-bar-actions { margin-left: auto; display: flex; gap: 8px; }
+    .btn-print {
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      padding: 7px 20px;
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: opacity .15s;
+    }
+    .btn-print:hover { opacity: .85; }
+    .btn-close {
+      background: rgba(255,255,255,.08);
+      color: rgba(255,255,255,.6);
+      border: none;
+      padding: 7px 14px;
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      cursor: pointer;
+      border-radius: 2px;
+    }
+
+    @media screen {
+      body {
+        padding-top: 60px;
+        background: #1a1a1a;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        padding-bottom: 48px;
+      }
+    }
+    @media print {
+      .print-bar { display: none !important; }
+      body { padding: 0; background: white; }
+    }
+
+    /* ── PAGE ── */
+    .page {
+      width: 210mm;
+      height: 297mm;
+      background: var(--paper);
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+    }
+    @media screen {
+      .page { box-shadow: 0 8px 48px rgba(0,0,0,.55); }
+    }
+
+    /* ════════════════════════════════
+       PAGE 1 — COVER
+    ════════════════════════════════ */
+    .cover {
+      display: grid;
+      grid-template-columns: 82mm 1fr;
+      grid-template-rows: 1fr 13mm;
+      height: 100%;
+    }
+
+    /* LEFT PANEL */
+    .cover-panel {
+      background: var(--navy);
+      padding: 10mm 8mm 0 9mm;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .cover-logo { margin-bottom: auto; }
+    .cover-logo img {
+      height: 9mm;
+      width: auto;
+      filter: brightness(0) invert(1);
+      opacity: .88;
+      display: block;
+    }
+    .cover-logo-text {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 18pt;
+      font-weight: 300;
+      letter-spacing: 5px;
+      color: rgba(255,255,255,.85);
+    }
+
+    .cover-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 6pt;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 0.25mm solid rgba(200,169,110,.4);
+      padding: 1.5mm 2.5mm;
+      margin-bottom: 5mm;
+      margin-top: auto;
+      width: fit-content;
+    }
+
+    .cover-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 26pt;
+      font-weight: 300;
+      line-height: 1.1;
+      color: white;
+      margin-bottom: 2.5mm;
+      letter-spacing: -.3px;
+    }
+
+    .cover-location {
+      font-size: 7pt;
+      font-weight: 400;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: .85;
+      margin-bottom: 6mm;
+    }
+
+    .cover-rule {
+      width: 14mm;
+      height: 0.25mm;
+      background: rgba(200,169,110,.45);
+      margin-bottom: 5.5mm;
+    }
+
+    .cover-price {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 20pt;
+      font-weight: 400;
+      color: var(--gold);
+      margin-bottom: 5mm;
+      letter-spacing: -.2px;
+    }
+
+    .cover-specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5mm 4mm;
+      margin-bottom: 6mm;
+    }
+    .cover-spec-val {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 14pt;
+      font-weight: 300;
+      color: white;
+      display: block;
+      line-height: 1;
+    }
+    .cover-spec-lbl {
+      font-size: 6pt;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.35);
+      display: block;
+      margin-top: 1mm;
+    }
+
+    .cover-desc {
+      font-size: 7.5pt;
+      line-height: 1.7;
+      color: rgba(255,255,255,.52);
+      font-weight: 300;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 9;
+      -webkit-box-orient: vertical;
+      padding-bottom: 8mm;
+    }
+
+    /* PHOTO */
+    .cover-photo {
+      overflow: hidden;
+    }
+    .cover-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .cover-photo-empty {
+      width: 100%;
+      height: 100%;
+      background: #0d2540;
+    }
+
+    /* FOOTER BAR */
+    .cover-footer {
+      grid-column: 1 / -1;
+      background: white;
+      border-top: 0.25mm solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 8mm;
+      gap: 4mm;
+    }
+
+    .footer-logo img { height: 7mm; width: auto; }
+    .footer-logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11pt;
+      font-weight: 400;
+      letter-spacing: 3px;
+      color: var(--navy);
+    }
+
+    .footer-sep {
+      width: 0.25mm;
+      height: 7mm;
+      background: var(--border);
+      margin: 0 2mm;
+    }
+
+    .footer-agent-name {
+      font-size: 7.5pt;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .footer-agent-contact {
+      font-size: 6.5pt;
+      color: var(--muted);
+      margin-top: .6mm;
+    }
+
+    .footer-ref {
+      margin-left: auto;
+      font-size: 6.5pt;
+      letter-spacing: 1px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .footer-qr {
+      display: flex;
+      align-items: center;
+      gap: 2.5mm;
+      margin-left: 4mm;
+    }
+    .footer-qr img { width: 9mm; height: 9mm; }
+    .footer-qr-label {
+      font-size: 5.5pt;
+      color: var(--muted);
+      line-height: 1.4;
+      text-align: right;
+    }
+
+    /* ════════════════════════════════
+       PAGE 2 — DOSSIER
+    ════════════════════════════════ */
+    .dossier {
+      padding: 11mm 12mm 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dossier-hd {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-bottom: 4mm;
+      border-bottom: 0.25mm solid var(--border);
+      margin-bottom: 6mm;
+    }
+    .dossier-hd-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16pt;
+      font-weight: 300;
+      color: var(--navy);
+      letter-spacing: -.2px;
+    }
+    .dossier-hd-loc {
+      font-size: 7pt;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 1mm;
+    }
+    .dossier-ref {
+      font-size: 6.5pt;
+      letter-spacing: 1px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* Photo grid */
+    .photo-grid {
+      display: grid;
+      gap: 1.5mm;
+      margin-bottom: 6mm;
+    }
+    .photo-grid.grid-3 { grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 44mm; }
+    .photo-grid.grid-2 { grid-template-columns: 1fr 1fr; grid-template-rows: 44mm; }
+    .photo-grid.grid-1 { grid-template-columns: 1fr; grid-template-rows: 44mm; }
+
+    .photo-grid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: .5mm;
+    }
+
+    /* Description */
+    .dossier-section + .dossier-section { margin-top: 5mm; }
+    .section-label {
+      font-size: 6pt;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 3mm;
+      display: block;
+    }
+
+    .dossier-desc-cols {
+      columns: 2;
+      column-gap: 8mm;
+      font-size: 7.5pt;
+      line-height: 1.72;
+      color: #3A3628;
+      font-weight: 300;
+    }
+    .dossier-desc-cols p + p { margin-top: 2.5mm; }
+
+    /* Features */
+    .feat-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5mm;
+    }
+    .feat-pill {
+      font-size: 6.5pt;
+      padding: 1.2mm 3mm;
+      border: 0.2mm solid var(--border);
+      border-radius: 20mm;
+      color: var(--muted);
+      background: white;
+      white-space: nowrap;
+    }
+
+    /* Dossier footer */
+    .dossier-foot {
+      margin-top: auto;
+      padding: 4mm 0 8mm;
+      border-top: 0.25mm solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 4mm;
+    }
+    .dossier-foot .footer-logo img { height: 7mm; }
+    .dossier-foot .footer-logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11pt;
+      letter-spacing: 3px;
+      color: var(--navy);
+    }
+  </style>
+</head>
+<body>
+
+<div class="print-bar">
+  <strong id="print-title">Cargando…</strong>
+  <div class="print-bar-actions">
+    <button class="btn-close" onclick="history.back()">← Volver</button>
+    <button class="btn-print" onclick="window.print()">Guardar PDF</button>
+  </div>
+</div>
+
+<div id="root"></div>
+
+<script>
+;(function () {
+  const slug = new URLSearchParams(location.search).get('slug')
+  const dataEl = document.getElementById('listings-data')
+  let listings = []
+  try { listings = JSON.parse(dataEl.textContent).listings || [] } catch {}
+
+  const l = listings.find(x => x.slug === slug)
+  if (!l) { document.getElementById('root').innerHTML = '<div style="padding:40px;color:#fff;font-family:sans-serif">Propiedad no encontrada</div>'; return }
+
+  document.title = l.title + ' — AN Real Estate'
+  document.getElementById('print-title').textContent = l.title
+
+  const agent = {
+    name:    localStorage.getItem('an_agent_name')    || '',
+    phone:   localStorage.getItem('an_agent_phone')   || '',
+    email:   localStorage.getItem('an_agent_email')   || '',
+    license: localStorage.getItem('an_agent_license') || '',
+  }
+  const logoDataUrl = localStorage.getItem('an_wm_logo') || ''
+
+  const imgs = (l.images || [])
+    .map(i => typeof i === 'string' ? { src: i } : i)
+    .filter(i => !i.hidden)
+    .map(i => i.src)
+  const hero = imgs[0] || l.image || ''
+  const galleryImgs = imgs.slice(1, 4)
+
+  const desc = Array.isArray(l.description) ? l.description : l.description ? [l.description] : []
+  const isRent = l.type === 'rent' || l.status === 'rent'
+  const priceLabel = isRent ? l.price + '<small>/mo</small>' : l.price
+  const saleLabel  = isRent ? 'En Alquiler' : 'En Venta'
+
+  const allFeats = l.features ? Object.values(l.features).flat() : []
+
+  const propUrl = 'https://anrealestate.es/property.html?slug=' + slug
+  const qrSrc   = 'https://api.qrserver.com/v1/create-qr-code/?size=80x80&color=091F38&bgcolor=FAF8F4&data=' + encodeURIComponent(propUrl)
+
+  function spec(val, lbl) {
+    if (!val && val !== 0) return ''
+    return `<div class="cover-spec">
+      <span class="cover-spec-val">${val}</span>
+      <span class="cover-spec-lbl">${lbl}</span>
+    </div>`
+  }
+
+  const logoMarkup = logoDataUrl
+    ? `<img src="${logoDataUrl}" />`
+    : `<span class="cover-logo-text">AN</span>`
+
+  const footerLogoMarkup = logoDataUrl
+    ? `<div class="footer-logo"><img src="${logoDataUrl}" /></div>`
+    : `<div class="footer-logo"><span class="footer-logo-text">AN</span></div>`
+
+  const agentContact = [agent.phone, agent.email].filter(Boolean).join(' · ')
+    + (agent.license ? ' · ' + agent.license : '')
+
+  // ── PAGE 1
+  const page1 = `
+  <div class="page">
+    <div class="cover">
+      <div class="cover-panel">
+        <div class="cover-logo">${logoMarkup}</div>
+        <span class="cover-badge">${saleLabel} &nbsp;·&nbsp; ${l.badge_type || l.propertyType || ''}</span>
+        <h1 class="cover-title">${l.title}</h1>
+        <p class="cover-location">${l.neighbourhood || l.city || ''}</p>
+        <div class="cover-rule"></div>
+        <p class="cover-price">${priceLabel}</p>
+        <div class="cover-specs">
+          ${spec(l.beds, 'Dormitorios')}
+          ${spec(l.baths, 'Baños')}
+          ${spec(l.size ? l.size + ' m²' : '', 'Superficie')}
+          ${spec(l.garage ? l.garage + ' plz.' : '', 'Garaje')}
+        </div>
+        <div class="cover-rule"></div>
+        <p class="cover-desc">${desc[0] || ''}</p>
+      </div>
+      <div class="cover-photo">
+        ${hero ? `<img src="${hero}" alt="${l.title}" />` : '<div class="cover-photo-empty"></div>'}
+      </div>
+      <div class="cover-footer">
+        ${footerLogoMarkup}
+        ${agent.name || agentContact ? `
+          <div class="footer-sep"></div>
+          <div>
+            ${agent.name ? `<div class="footer-agent-name">${agent.name}</div>` : ''}
+            ${agentContact ? `<div class="footer-agent-contact">${agentContact}</div>` : ''}
+          </div>` : ''}
+        <span class="footer-ref">Ref. ${l.ref || ''}</span>
+        <div class="footer-qr">
+          <div class="footer-qr-label">Ver en<br>la web</div>
+          <img src="${qrSrc}" alt="QR" />
+        </div>
+      </div>
+    </div>
+  </div>`
+
+  // ── PAGE 2
+  const hasPage2 = desc.length > 1 || galleryImgs.length > 0 || allFeats.length > 0
+  let page2 = ''
+  if (hasPage2) {
+    const gridClass = galleryImgs.length >= 3 ? 'grid-3' : galleryImgs.length === 2 ? 'grid-2' : 'grid-1'
+    page2 = `
+    <div class="page">
+      <div class="dossier">
+        <div class="dossier-hd">
+          <div>
+            <div class="dossier-hd-title">${l.title}</div>
+            <div class="dossier-hd-loc">${l.neighbourhood || l.city || ''}</div>
+          </div>
+          <span class="dossier-ref">Ref. ${l.ref || ''}</span>
+        </div>
+
+        ${galleryImgs.length ? `
+        <div class="photo-grid ${gridClass}">
+          ${galleryImgs.map(src => `<img src="${src}" alt="" />`).join('')}
+        </div>` : ''}
+
+        ${desc.length > 1 ? `
+        <div class="dossier-section">
+          <span class="section-label">Descripción</span>
+          <div class="dossier-desc-cols">
+            ${desc.slice(1).map(p => `<p>${p}</p>`).join('')}
+          </div>
+        </div>` : ''}
+
+        ${allFeats.length ? `
+        <div class="dossier-section">
+          <span class="section-label">Características</span>
+          <div class="feat-wrap">
+            ${allFeats.map(f => `<span class="feat-pill">${f}</span>`).join('')}
+          </div>
+        </div>` : ''}
+
+        <div class="dossier-foot">
+          ${footerLogoMarkup}
+          ${agent.name || agentContact ? `
+            <div class="footer-sep"></div>
+            <div>
+              ${agent.name ? `<div class="footer-agent-name">${agent.name}</div>` : ''}
+              ${agentContact ? `<div class="footer-agent-contact">${agentContact}</div>` : ''}
+            </div>` : ''}
+          <div class="footer-qr" style="margin-left:auto">
+            <div class="footer-qr-label">Ver en<br>la web</div>
+            <img src="${qrSrc}" alt="QR" />
+          </div>
+        </div>
+      </div>
+    </div>`
+  }
+
+  document.getElementById('root').innerHTML = page1 + page2
+})()
+</script>
+</body>
+</html>

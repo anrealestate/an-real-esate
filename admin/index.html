@@ -72,6 +72,10 @@
         <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         Web principal
       </a>
+      <button class="sb-btn sb-btn--ghost" id="agent-settings-btn">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Mis datos
+      </button>
       <button class="sb-btn sb-btn--ghost" id="logout-btn">Cerrar sesión</button>
     </div>
   </aside>
@@ -137,7 +141,11 @@
             </select>
             <button class="btn-outline" id="btn-translate">🌐</button>
           </div>
-          <button class="btn-outline" id="btn-save" data-i18n="btn.save">Guardar borrador</button>
+          <button class="btn-outline btn-pdf" id="btn-pdf" title="Generar PDF">
+            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            PDF
+          </button>
+          <button class="btn-outline" id="btn-save" data-i18n="btn.save">Guardar</button>
         </div>
       </header>
 
@@ -770,6 +778,28 @@
 <div id="toast" class="toast hidden"></div>
 
 <!-- CONFIRM DIALOG -->
+<div id="agent-modal" class="agent-modal hidden">
+  <div class="agent-modal-box">
+    <div class="agent-modal-hd">
+      <span class="agent-modal-title">Mis datos</span>
+      <button class="agent-modal-close" id="agent-modal-close">×</button>
+    </div>
+    <div class="agent-modal-body">
+      <label class="agent-field-label">Nombre</label>
+      <input class="agent-field-input" id="ag-name" type="text" placeholder="Álvaro Navarro" />
+      <label class="agent-field-label">Teléfono</label>
+      <input class="agent-field-input" id="ag-phone" type="text" placeholder="+34 600 000 000" />
+      <label class="agent-field-label">Email</label>
+      <input class="agent-field-input" id="ag-email" type="email" placeholder="email@agencia.com" />
+      <label class="agent-field-label">Nº de licencia / colegiado</label>
+      <input class="agent-field-input" id="ag-license" type="text" placeholder="API-XXXX" />
+    </div>
+    <div class="agent-modal-foot">
+      <button class="btn-gold" id="ag-save-btn">Guardar</button>
+    </div>
+  </div>
+</div>
+
 <div id="img-preview-overlay" class="img-preview-overlay hidden">
   <button id="img-preview-close" class="img-preview-close">×</button>
   <button id="img-preview-prev" class="img-preview-nav img-preview-prev">‹</button>

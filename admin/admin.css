@@ -1143,6 +1143,74 @@ input[type="range"] {
 .toast.error   { border-color: rgba(192,57,43,.4); color: #e07070; }
 
 /* ── CONFIRM DIALOG ─────────────────────────── */
+.btn-pdf {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  opacity: .8;
+}
+.btn-pdf:hover { opacity: 1; }
+
+.agent-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(9,31,56,.7);
+  backdrop-filter: blur(4px);
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.agent-modal.hidden { display: none; }
+.agent-modal-box {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  width: 360px;
+  overflow: hidden;
+}
+.agent-modal-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+.agent-modal-title { font-size: .85rem; font-weight: 500; color: var(--text); }
+.agent-modal-close {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 1.4rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+}
+.agent-modal-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+.agent-field-label { font-size: .7rem; color: var(--muted); letter-spacing: .5px; }
+.agent-field-input {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--text);
+  font-size: .82rem;
+  padding: .5rem .75rem;
+  width: 100%;
+  font-family: inherit;
+}
+.agent-field-input:focus { outline: none; border-color: var(--gold); }
+.agent-modal-foot {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+}
+
 .img-preview-overlay {
   position: fixed;
   inset: 0;
