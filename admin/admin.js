@@ -27,6 +27,7 @@ let _editSlug    = null
 let _filter      = 'all'
 let _formDirty   = false
 let _wmPosition  = 'bottom-left'
+let _wmAutoApply = localStorage.getItem('an_wm_auto') === '1'
 let _mediaItems  = []
 let _wmProcessed = []
 let _visitSort   = 'date'
@@ -117,14 +118,27 @@ document.addEventListener('DOMContentLoaded', () => {
   // Upload: gallery (multiple)
   document.getElementById('upload-gallery-files').addEventListener('change', async e => {
     const files = [...e.target.files]
-    e.target.value = ''  // reset immediately so the same file can be re-selected after any error
+    e.target.value = ''
     if (!files.length) return
+
+    let applyWm = false
+    if (_wmAutoApply) {
+      applyWm = await showConfirmAsync(
+        `¿Aplicar logo AN a ${files.length === 1 ? 'esta foto' : `estas ${files.length} fotos`} antes de subirlas?`
+      )
+    }
+
+    let logoDataUrl = null
+    if (applyWm) logoDataUrl = await getLogoDataUrl()
+
     const total = files.length
     let successCount = 0
     try {
       for (let i = 0; i < files.length; i++) {
-        document.getElementById('upload-gallery-status').textContent = `Subiendo ${i+1} de ${total}…`
-        const url = await uploadFile(files[i], 'upload-gallery-progress', 'upload-gallery-fill', 'upload-gallery-status')
+        document.getElementById('upload-gallery-status').textContent = `${applyWm ? 'Procesando' : 'Subiendo'} ${i+1} de ${total}…`
+        let fileToUpload = files[i]
+        if (applyWm) fileToUpload = dataUrlToFile(await processWatermark(files[i], logoDataUrl), files[i].name)
+        const url = await uploadFile(fileToUpload, 'upload-gallery-progress', 'upload-gallery-fill', 'upload-gallery-status')
         if (url) { successCount++; addGalleryCard({ src: url, alt: files[i].name.replace(/\.[^.]+$/, '') }); saveToMediaLibrary(url, files[i].name) }
       }
     } catch (err) {
@@ -133,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } finally {
       document.getElementById('upload-gallery-progress').classList.add('hidden')
     }
-    if (successCount > 0) toast(`${successCount} imagen${successCount>1?'es':''} subida${successCount>1?'s':''}`, 'success')
+    if (successCount > 0) toast(`${successCount} imagen${successCount>1?'es':''} subida${successCount>1?'s':''}${applyWm ? ' con logo' : ''}`, 'success')
     else if (successCount === 0 && total > 0) toast('No se pudo subir ninguna imagen', 'error')
   })
 
@@ -1310,6 +1324,13 @@ function initWatermarkTool() {
     })
   })
 
+  const autoApplyEl = document.getElementById('wm-auto-apply')
+  autoApplyEl.checked = _wmAutoApply
+  autoApplyEl.addEventListener('change', () => {
+    _wmAutoApply = autoApplyEl.checked
+    localStorage.setItem('an_wm_auto', _wmAutoApply ? '1' : '0')
+  })
+
   fileInput.addEventListener('change', () => handleWmFiles(fileInput.files))
 
   dropArea.addEventListener('dragover', e => { e.preventDefault(); dropArea.style.borderColor = 'var(--gold)' })
@@ -1447,6 +1468,29 @@ function downloadAll() {
     a.href = dataUrl
     a.download = name.replace(/\.[^.]+$/, '') + '_AN.jpg'
     a.click()
+  })
+}
+
+function dataUrlToFile(dataUrl, name) {
+  const [header, data] = dataUrl.split(',')
+  const mime = header.match(/:(.*?);/)[1]
+  const bytes = atob(data)
+  const arr = new Uint8Array(bytes.length)
+  for (let i = 0; i < bytes.length; i++) arr[i] = bytes.charCodeAt(i)
+  return new File([arr], name, { type: mime })
+}
+
+function showConfirmAsync(msg) {
+  return new Promise(resolve => {
+    document.getElementById('confirm-msg').textContent = msg
+    document.getElementById('confirm-overlay').classList.remove('hidden')
+    document.getElementById('confirm-ok').addEventListener('click', () => {
+      document.getElementById('confirm-overlay').classList.add('hidden')
+      resolve(true)
+    }, { once: true })
+    document.getElementById('confirm-cancel').addEventListener('click', () => {
+      resolve(false)
+    }, { once: true })
   })
 }
 

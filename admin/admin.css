@@ -902,6 +902,24 @@ textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
 
 .wm-group label span { color: var(--gold); }
 
+.wm-auto-label {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  cursor: pointer;
+  font-size: var(--fs-xs);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: .6rem .8rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  transition: border-color .2s;
+}
+.wm-auto-label:hover { border-color: var(--gold); }
+.wm-auto-label input[type="checkbox"] { accent-color: var(--gold); width: 15px; height: 15px; cursor: pointer; }
+.wm-auto-label span { color: var(--text); }
+
 input[type="range"] {
   width: 100%;
   accent-color: var(--gold);
