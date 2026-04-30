@@ -233,21 +233,33 @@
     /* PHOTO */
     .cover-photo {
       overflow: hidden;
-      background: #0b1e33;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: relative;
     }
     .cover-photo img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
       display: block;
     }
     .cover-photo-empty {
       width: 100%;
       height: 100%;
       background: #0b1e33;
+    }
+    .cover-photo-logo {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .cover-photo-logo img {
+      width: 52%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      opacity: 1;
     }
 
     /* FOOTER BAR */
@@ -461,8 +473,8 @@
 
   const allImgs = (l.images || []).map(i => typeof i === 'string' ? { src: i } : i)
   const visibleImgs = allImgs.filter(i => !i.hidden).map(i => i.src)
-  const hero = visibleImgs[0] || l.image || ''
-  const galleryImgs = visibleImgs.slice(1, 4)
+  const hero = l.pdf_hero || visibleImgs[0] || l.image || ''
+  const galleryImgs = visibleImgs.slice(0, 3)
 
   const desc = Array.isArray(l.description) ? l.description : l.description ? [l.description] : []
   const isRent = l.type === 'rent' || l.status === 'rent'
@@ -517,6 +529,7 @@
       </div>
       <div class="cover-photo">
         ${hero ? `<img src="${hero}" alt="${l.title}" />` : '<div class="cover-photo-empty"></div>'}
+        ${logoDataUrl ? `<div class="cover-photo-logo"><img src="${logoDataUrl}" alt="logo" /></div>` : ''}
       </div>
       <div class="cover-footer">
         ${footerLogoMarkup}
@@ -593,7 +606,7 @@
 
   // Logo toggle
   document.getElementById('toggle-logo').addEventListener('change', function () {
-    document.querySelectorAll('.cover-logo, .footer-logo, .dossier-foot .footer-logo').forEach(el => {
+    document.querySelectorAll('.cover-logo, .cover-photo-logo, .footer-logo, .dossier-foot .footer-logo').forEach(el => {
       el.style.visibility = this.checked ? '' : 'hidden'
     })
   })

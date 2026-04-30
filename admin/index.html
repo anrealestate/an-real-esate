@@ -390,6 +390,27 @@
             </div>
             <div id="gallery-list"></div>
           </div>
+
+          <!-- PDF Hero photo -->
+          <div class="list-block pdf-hero-block">
+            <div class="list-hd">
+              <span class="list-title">Foto portada PDF</span>
+              <label class="btn-add btn-upload-lbl" id="pdf-hero-upload-label">
+                <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+                <span id="pdf-hero-upload-text">+ Subir foto</span>
+                <input type="file" id="pdf-hero-file" accept="image/*" style="display:none" />
+              </label>
+            </div>
+            <p class="gal-hint">Foto limpia sin marca de agua, exclusiva para el PDF. No aparece en la web.</p>
+            <div id="pdf-hero-preview" class="pdf-hero-preview hidden">
+              <img id="pdf-hero-img" src="" alt="PDF hero" />
+              <button type="button" id="pdf-hero-remove" class="pdf-hero-remove">× Quitar</button>
+            </div>
+            <div class="upload-progress hidden" id="pdf-hero-progress">
+              <div class="progress-bar"><div class="progress-fill" id="pdf-hero-fill"></div></div>
+              <span id="pdf-hero-status">Subiendo…</span>
+            </div>
+          </div>
         </div>
 
         <!-- TAB: descripción -->

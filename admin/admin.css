@@ -772,6 +772,33 @@ textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
   margin: 0;
 }
 
+.pdf-hero-block { margin-top: .75rem; }
+.pdf-hero-preview {
+  position: relative;
+  margin: .5rem .75rem .75rem;
+  width: 160px;
+}
+.pdf-hero-preview img {
+  width: 160px;
+  height: 106px;
+  object-fit: cover;
+  border-radius: 5px;
+  display: block;
+  border: 1px solid var(--border);
+}
+.pdf-hero-remove {
+  position: absolute;
+  top: 4px; right: 4px;
+  background: rgba(0,0,0,.65);
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  font-size: 10px;
+  padding: 2px 6px;
+  cursor: pointer;
+}
+.pdf-hero-remove:hover { background: #b03030; }
+
 .dyn-row {
   display: flex;
   align-items: flex-start;

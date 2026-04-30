@@ -114,6 +114,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // Dynamic list add buttons
   document.getElementById('add-gallery-url').addEventListener('click', () => addGalleryCard())
   document.getElementById('apply-logo-gallery').addEventListener('click', applyLogoToGallery)
+
+  // PDF hero upload
+  document.getElementById('pdf-hero-file').addEventListener('change', async e => {
+    const file = e.target.files[0]
+    e.target.value = ''
+    if (!file) return
+    document.getElementById('pdf-hero-progress').classList.remove('hidden')
+    document.getElementById('pdf-hero-status').textContent = 'Subiendo…'
+    const url = await uploadFile(file, null, 'pdf-hero-fill', 'pdf-hero-status')
+    document.getElementById('pdf-hero-progress').classList.add('hidden')
+    if (url) { setPdfHero(url); _formDirty = true }
+  })
+  document.getElementById('pdf-hero-remove').addEventListener('click', () => {
+    setPdfHero('')
+    _formDirty = true
+  })
   document.getElementById('add-para').addEventListener('click', () => addDescRow())
   document.getElementById('add-detail').addEventListener('click', () => addDetailRow())
   document.getElementById('add-feat-cat')?.addEventListener('click', () => addFeatCat())
@@ -615,6 +631,9 @@ function _showForm(slug) {
   ;(l.images || (l.image ? [{ src: l.image, alt: l.title }] : [])).forEach(img => addGalleryCard(img))
   refreshGalleryBadges()
 
+  // PDF hero
+  setPdfHero(l.pdf_hero || '')
+
   // Description
   const descEl = document.getElementById('desc-list')
   descEl.innerHTML = ''
@@ -708,6 +727,21 @@ function switchView(name) {
 }
 
 // ── SAVE ──────────────────────────────────────
+function setPdfHero(url) {
+  const preview = document.getElementById('pdf-hero-preview')
+  const img     = document.getElementById('pdf-hero-img')
+  const text    = document.getElementById('pdf-hero-upload-text')
+  if (url) {
+    img.src = url
+    preview.classList.remove('hidden')
+    text.textContent = 'Cambiar foto'
+  } else {
+    img.src = ''
+    preview.classList.add('hidden')
+    text.textContent = '+ Subir foto'
+  }
+}
+
 function openPropertyPdf() {
   const slug = document.getElementById('f-slug').value.trim()
   if (!slug) { toast('Guarda la propiedad primero para generar el PDF', 'error'); return }
@@ -745,6 +779,9 @@ async function saveProperty() {
   const firstVisible = images.find(img => !img.hidden)
   const mainImage = firstVisible?.src || images[0]?.src || ''
   document.getElementById('f-image').value = mainImage
+
+  const pdfHeroEl = document.getElementById('pdf-hero-img')
+  const pdfHero = (pdfHeroEl.src && !pdfHeroEl.src.endsWith('/admin/index.html')) ? pdfHeroEl.src : ''
 
   // Build details
   const detailRows = document.querySelectorAll('#details-list .detail-row')
@@ -828,6 +865,7 @@ async function saveProperty() {
     energy:        document.getElementById('f-energy').value || undefined,
     image:        mainImage || undefined,
     images:       images.length ? images : undefined,
+    pdf_hero:     pdfHero || undefined,
     description:  description.length ? description : undefined,
     details:      details.length ? details : undefined,
     features:     Object.keys(features).length ? features : undefined,
