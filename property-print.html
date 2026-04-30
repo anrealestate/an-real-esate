@@ -320,7 +320,7 @@
     <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,.5);cursor:pointer">
       <input type="checkbox" id="toggle-logo" checked style="accent-color:var(--gold)" /> Logo
     </label>
-    <button class="btn-close" onclick="window.close()">← Volver</button>
+    <button class="btn-close" onclick="if(window.opener&&!window.opener.closed){window.close()}else if(history.length>1){history.back()}else{window.location.href='/admin/index.html'}">← Volver</button>
     <button class="btn-print" onclick="window.print()">Guardar PDF</button>
   </div>
 </div>
