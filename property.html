@@ -391,7 +391,7 @@
 
             <button type="button" class="pc-dossier" id="btn-dossier" data-i18n="btn.dossier">
               <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-              Descargar dossier
+              Download Dossier
             </button>
 
             <a href="https://wa.me/34628020434" class="pc-whatsapp" target="_blank" rel="noopener">
@@ -495,7 +495,7 @@
       <p class="dossier-sub" data-i18n="dossier.sub">Leave your contact details and download the full dossier for this property.</p>
       <form class="dossier-form" id="dossier-form" novalidate>
         <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_subject" id="dossier-subject" value="Solicitud de dossier — AN Real Estate" />
+        <input type="hidden" name="_subject" id="dossier-subject" value="Dossier Request — AN Real Estate" />
         <input type="hidden" name="propiedad" id="dossier-property" value="" />
         <div class="dossier-fg">
           <input type="text" name="nombre" class="dossier-input" placeholder="Your name" data-i18n="dossier.name_ph" required autocomplete="name" />
@@ -569,7 +569,7 @@
       var slugParam = new URLSearchParams(location.search).get('slug') || ''
       var title = titleEl ? titleEl.textContent : slugParam
       document.getElementById('dossier-title').textContent = title || (I18N[getLang()]||I18N.en)['dossier.title']
-      document.getElementById('dossier-subject').value = 'Solicitud de dossier — ' + title
+      document.getElementById('dossier-subject').value = (I18N[getLang()]||I18N.en)['dossier.subject_prefix'] + title
       document.getElementById('dossier-property').value = title + ' (' + slugParam + ')'
       overlay.classList.add('is-open')
       form.querySelector('.dossier-input').focus()
