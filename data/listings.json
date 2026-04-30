@@ -1330,6 +1330,86 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Eixample"
+    },
+    {
+      "slug": "aasfas",
+      "title": "aasfas",
+      "price": "€1790000",
+      "ref": "AN202602",
+      "province": "Barcelona",
+      "city": "Sant Cugat del Vallès",
+      "zone": "Les Planes",
+      "neighbourhood": "Les Planes, Sant Cugat del Vallès",
+      "address": "Calle Magarola, 19, Sant Cugat del Vallès, Spain",
+      "zip": "08196",
+      "type": "sale",
+      "propertyType": "villa",
+      "badge_type": "Villa",
+      "beds": 2,
+      "baths": 1,
+      "size": "510",
+      "year": 1981,
+      "condition": "To renovate",
+      "energy": "E",
+      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777554681/an-realestate/nivmss4mss24dxmh9yxq.jpg",
+      "images": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777554681/an-realestate/nivmss4mss24dxmh9yxq.jpg",
+          "alt": "2026-04-24_Magarola_19_Sant_Cugat_del_Vallès_03"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777554676/an-realestate/cojhx2uj045ylmqc1oww.jpg",
+          "alt": "2026-04-24_Magarola_19_Sant_Cugat_del_Vallès_01"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777554677/an-realestate/j0wg2jse25bn52lzfvv8.jpg",
+          "alt": "2026-04-24_Magarola_19_Sant_Cugat_del_Vallès_06"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777554678/an-realestate/bifnq3yscxmfmdbryetf.jpg",
+          "alt": "2026-04-24_Magarola_19_Sant_Cugat_del_Vallès_05"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777554678/an-realestate/vvxclf3cty38zcdatirw.jpg",
+          "alt": "2026-04-24_Magarola_19_Sant_Cugat_del_Vallès_11"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777554679/an-realestate/irghmwy0wcnrkght3zxa.jpg",
+          "alt": "2026-04-24_Magarola_19_Sant_Cugat_del_Vallès_04"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777554682/an-realestate/yxid5w7hotkehba0bjdr.jpg",
+          "alt": "2026-04-24_Magarola_19_Sant_Cugat_del_Vallès_02"
+        }
+      ],
+      "description": [
+        "gsdthsrctrtgrstgsrtgsr",
+        "fcxadrgcwsrtgxsrgtrstgse"
+      ],
+      "features": {
+        "Interior": [
+          "Ceilings with moldings"
+        ],
+        "Flooring": [
+          "Wooden Flooring"
+        ],
+        "Kitchen": [
+          "Equipped Kitchen"
+        ],
+        "Climate": [
+          "Heating"
+        ],
+        "Outdoor": [
+          "Terrace"
+        ],
+        "Building": [
+          "Concierge Service"
+        ],
+        "Views": [
+          "City Views"
+        ]
+      },
+      "stage": "active"
     }
   ]
 }
