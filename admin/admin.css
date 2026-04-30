@@ -1531,7 +1531,7 @@ input[type="range"] {
   .sb-link svg { width: 18px; height: 18px; flex-shrink: 0; }
 
   /* ── Main: clears bottom nav, tighter padding ─ */
-  .main { padding-bottom: 72px; }
+  .main { padding-bottom: 72px; overflow-y: visible; }
   .view { padding: 1rem .85rem 1.5rem; }
 
   /* ── View header ──────────────────────────── */
