@@ -121,7 +121,10 @@
       "doorFloor": "bajos",
       "zip": "08012",
       "stage": "active",
-      "propertyType": "apartment"
+      "propertyType": "apartment",
+      "province": "Barcelona",
+      "city": "Barcelona",
+      "zone": "Gràcia"
     },
     {
       "slug": "eixample-golden-square-rent",
@@ -404,7 +407,10 @@
         }
       ],
       "stage": "active",
-      "propertyType": "apartment"
+      "propertyType": "apartment",
+      "province": "Barcelona",
+      "city": "Barcelona",
+      "zone": "Eixample"
     },
     {
       "slug": "sant-gervasi-galvany",
@@ -580,7 +586,10 @@
         }
       ],
       "stage": "sold",
-      "propertyType": "apartment"
+      "propertyType": "apartment",
+      "province": "Barcelona",
+      "city": "Barcelona",
+      "zone": "Sant Gervasi"
     },
     {
       "slug": "el-born-corner",
@@ -682,7 +691,10 @@
         }
       ],
       "stage": "sold",
-      "propertyType": "apartment"
+      "propertyType": "apartment",
+      "province": "Barcelona",
+      "city": "Barcelona",
+      "zone": "El Born"
     },
     {
       "slug": "rambla-catalunya-corner",
@@ -796,7 +808,10 @@
         }
       ],
       "stage": "sold",
-      "propertyType": "apartment"
+      "propertyType": "apartment",
+      "province": "Barcelona",
+      "city": "Barcelona",
+      "zone": "Eixample"
     },
     {
       "slug": "eixample-golden-mile",
@@ -929,7 +944,10 @@
         }
       ],
       "stage": "sold",
-      "propertyType": "apartment"
+      "propertyType": "apartment",
+      "province": "Barcelona",
+      "city": "Barcelona",
+      "zone": "Dreta de l'Eixample"
     },
     {
       "slug": "vallvidrera-villa",
@@ -1192,7 +1210,10 @@
         }
       ],
       "stage": "active",
-      "propertyType": "villa"
+      "propertyType": "villa",
+      "province": "Barcelona",
+      "city": "Barcelona",
+      "zone": "Vallvidrera"
     },
     {
       "slug": "eixample-villarroel",
@@ -1305,82 +1326,10 @@
         }
       ],
       "stage": "sold",
-      "propertyType": "apartment"
-    },
-    {
-      "slug": "prueba",
-      "title": "prueba",
-      "price": "€500000",
-      "ref": "AN202601",
-      "neighbourhood": "Eixample, Barcelona",
-      "address": "Carrer de Muntaner, 189, Barcelona, Spain",
-      "doorFloor": "3",
-      "doorNum": "1",
-      "zip": "08036",
-      "type": "sale",
       "propertyType": "apartment",
-      "badge_type": "Apartment",
-      "beds": 3,
-      "baths": 2,
-      "size": "100",
-      "land": "0",
-      "floor": "4th",
-      "year": 1930,
-      "condition": "To renovate",
-      "energy": "D",
-      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777550321/an-realestate/poma9mwccqkax7iotdzq.jpg",
-      "images": [
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777550321/an-realestate/poma9mwccqkax7iotdzq.jpg",
-          "alt": "2026-04-24_Magarola_19_Sant_Cugat_del_Vallès_03"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777550319/an-realestate/mhn1hnyljenx5bi0ei3z.jpg",
-          "alt": "2026-04-24_Magarola_19_Sant_Cugat_del_Vallès_01"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777550320/an-realestate/jwyyjdzuev41u54hfac9.jpg",
-          "alt": "2026-04-24_Magarola_19_Sant_Cugat_del_Vallès_04"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777550322/an-realestate/xsidjaxmwotencdtdnfh.jpg",
-          "alt": "2026-04-24_Magarola_19_Sant_Cugat_del_Vallès_09"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777550323/an-realestate/qqgdckcm0pg3rhwnzq3s.jpg",
-          "alt": "2026-04-24_Magarola_19_Sant_Cugat_del_Vallès_10"
-        }
-      ],
-      "description": [
-        "feafgahgethcwgetghcwrhtwrgsgceg",
-        "cryherhcdftgbdfynhdvthcrsgsrhbcery"
-      ],
-      "features": {
-        "Interior": [
-          "High Ceilings",
-          "Vaulted Ceiling(s)"
-        ],
-        "Flooring": [
-          "Marble Flooring"
-        ],
-        "Kitchen": [
-          "Equipped Kitchen",
-          "Oven"
-        ],
-        "Climate": [
-          "Air conditioning"
-        ],
-        "Outdoor": [
-          "Balcony"
-        ],
-        "Building": [
-          "Elevator"
-        ],
-        "Views": [
-          "City Views"
-        ]
-      },
-      "stage": "draft"
+      "province": "Barcelona",
+      "city": "Barcelona",
+      "zone": "Eixample"
     }
   ]
 }
