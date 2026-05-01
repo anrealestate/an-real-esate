@@ -253,6 +253,7 @@
   cursor: pointer;
   transition: border-color var(--fast), color var(--fast), background var(--fast);
   border-radius: 99px;
+  animation: msgIn .4s cubic-bezier(.22,.68,0,1.2) both;
 }
 .chat-opt:hover {
   border-color: var(--gold);
