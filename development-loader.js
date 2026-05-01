@@ -1,0 +1,387 @@
+/* ================================
+   development-loader.js
+   Reads ?slug= from URL and populates
+   development.html dynamically
+   ================================ */
+;(function () {
+  function esc(str) {
+    return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')
+  }
+
+  const slug = new URLSearchParams(location.search).get('slug')
+
+  const el = document.getElementById('listings-data')
+  if (!el) return
+  let listings = []
+  try { listings = JSON.parse(el.textContent).listings || [] } catch { return }
+
+  /* Merge admin localStorage cache (same pattern as property-loader.js) */
+  try {
+    const cached = JSON.parse(localStorage.getItem('an_listings_cache') || '{}').listings || []
+    if (cached.length && listings.length) {
+      const serverBySlug = Object.fromEntries(listings.map(l => [l.slug, l]))
+      const merged = []
+      const seen = new Set()
+      cached.forEach(c => { merged.push({ ...c, ...(serverBySlug[c.slug] || {}) }); seen.add(c.slug) })
+      listings.forEach(l => { if (!seen.has(l.slug)) merged.push(l) })
+      listings = merged
+    } else if (cached.length) {
+      listings = cached
+    }
+  } catch {}
+
+  const listing = listings.find(l => l.slug === (slug || ''))
+  if (!listing || listing.propertyType !== 'development') return
+
+  /* ── Map helpers (copied from property-loader.js) ── */
+  const MAP_STYLE = [
+    { elementType: 'geometry',            stylers: [{ color: '#18180f' }] },
+    { elementType: 'labels.text.fill',    stylers: [{ color: '#9a8f7a' }] },
+    { elementType: 'labels.text.stroke',  stylers: [{ color: '#18180f' }] },
+    { featureType: 'road',               elementType: 'geometry',           stylers: [{ color: '#252519' }] },
+    { featureType: 'road.arterial',      elementType: 'geometry',           stylers: [{ color: '#2b2b1e' }] },
+    { featureType: 'road.highway',       elementType: 'geometry',           stylers: [{ color: '#323224' }] },
+    { featureType: 'road',               elementType: 'labels.text.fill',   stylers: [{ color: '#7a7060' }] },
+    { featureType: 'water',              elementType: 'geometry',           stylers: [{ color: '#0b0e12' }] },
+    { featureType: 'landscape',          elementType: 'geometry',           stylers: [{ color: '#1a1a12' }] },
+    { featureType: 'poi',                stylers: [{ visibility: 'off' }] },
+    { featureType: 'transit',            stylers: [{ visibility: 'off' }] },
+    { featureType: 'administrative',     elementType: 'geometry.stroke',    stylers: [{ color: '#2e2e22' }] },
+    { featureType: 'administrative.locality', elementType: 'labels.text.fill', stylers: [{ color: '#c8b99a' }] },
+  ]
+
+  function renderOsmMap(coord) {
+    const mapEl = document.getElementById('prop-map')
+    if (!mapEl) return
+    const { lat, lng } = coord
+    const d = 0.008
+    const bbox = `${lng - d},${lat - d},${lng + d},${lat + d}`
+    mapEl.innerHTML = `<iframe
+      src="https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat},${lng}"
+      style="width:100%;height:100%;border:none;filter:invert(1) hue-rotate(200deg) saturate(.6) brightness(.85)"
+      loading="lazy"
+    ></iframe>`
+  }
+
+  function renderMap(coord) {
+    const mapEl = document.getElementById('prop-map')
+    if (!mapEl) return
+    window._propMapCoord = coord
+    const map = new google.maps.Map(mapEl, {
+      center: coord,
+      zoom: 15,
+      styles: MAP_STYLE,
+      disableDefaultUI: true,
+      zoomControl: true,
+      gestureHandling: 'cooperative',
+      backgroundColor: '#18180f',
+    })
+    new google.maps.Marker({
+      position: coord,
+      map,
+      icon: {
+        path: 'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z',
+        fillColor: '#c8a96e', fillOpacity: 1, strokeColor: '#18180f', strokeWeight: 1,
+        scale: 2, anchor: new google.maps.Point(12, 22),
+      }
+    })
+  }
+
+  window.gm_authFailure = function () {
+    const coord = window._propMapCoord
+    if (coord) renderOsmMap(coord)
+  }
+
+  function initMap() {
+    if (listing.lat && listing.lng) {
+      renderMap({ lat: parseFloat(listing.lat), lng: parseFloat(listing.lng) })
+      return
+    }
+    const address = listing.address || listing.neighbourhood || listing.city
+    if (!address) return
+    if (window.google && window.google.maps) {
+      new google.maps.Geocoder().geocode({ address }, (results, status) => {
+        if (status === 'OK' && results[0]) {
+          const loc = results[0].geometry.location
+          renderMap({ lat: loc.lat(), lng: loc.lng() })
+        }
+      })
+    }
+  }
+
+  var _mapAttempts = 0
+  function tryInitMap() {
+    if (window.google && window.google.maps) { initMap(); return }
+    if (++_mapAttempts < 25) setTimeout(tryInitMap, 400)
+    else if (listing.lat && listing.lng) renderOsmMap({ lat: parseFloat(listing.lat), lng: parseFloat(listing.lng) })
+  }
+
+  /* ── Main render ── */
+  function renderContent() {
+    const lang = (typeof getLang === 'function') ? getLang() : (localStorage.getItem('an_lang') || 'en')
+
+    /* Meta + OG */
+    const firstImg = (listing.images || []).find(i => !(typeof i === 'object' ? i.hidden : false))
+    const ogImg = typeof firstImg === 'string' ? firstImg : (firstImg?.src || listing.image || '')
+    const pageUrl = `https://anrealestate.es/development.html?slug=${esc(listing.slug)}`
+    document.title = `${listing.title} — ${listing.price} — AN Real Estate`
+    document.querySelector('meta[name="description"]')?.setAttribute('content', (listing.description || [])[0] || '')
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content', `${listing.title} — AN Real Estate`)
+    document.querySelector('meta[property="og:url"]')?.setAttribute('content', pageUrl)
+    if (ogImg) {
+      document.querySelector('meta[property="og:image"]')?.setAttribute('content', ogImg)
+      document.querySelector('meta[name="twitter:image"]')?.setAttribute('content', ogImg)
+    }
+    let canonEl = document.querySelector('link[rel="canonical"]')
+    if (!canonEl) { canonEl = document.createElement('link'); canonEl.rel = 'canonical'; document.head.appendChild(canonEl) }
+    canonEl.href = pageUrl
+
+    /* JSON-LD */
+    const jsonLdEl = document.getElementById('property-jsonld')
+    if (jsonLdEl) {
+      jsonLdEl.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'RealEstateListing',
+        'name': listing.title,
+        'description': (listing.description || [])[0] || '',
+        'url': pageUrl,
+        'image': ogImg,
+        'address': { '@type': 'PostalAddress', 'streetAddress': listing.address || '', 'addressLocality': listing.city || '' }
+      })
+    }
+
+    /* Breadcrumb */
+    const bcTitle = document.getElementById('dv-bc-title')
+    if (bcTitle) bcTitle.textContent = listing.title
+
+    /* Gallery */
+    const imgs = (listing.images || [])
+      .filter(i => !(typeof i === 'object' ? i.hidden : false))
+      .map(i => typeof i === 'string' ? { src: i, alt: listing.title } : i)
+
+    const heroEl  = document.getElementById('dv-pg-hero')
+    const heroImg = document.getElementById('dv-hero-img')
+    const gridEl  = document.getElementById('dv-pg-grid')
+
+    if (imgs.length && heroEl && heroImg) {
+      heroEl.dataset.src = imgs[0].src
+      heroImg.src = imgs[0].src
+      heroImg.alt = imgs[0].alt || listing.title
+      heroEl.removeAttribute('hidden')
+    }
+
+    if (gridEl && imgs.length > 1) {
+      const cells = imgs.slice(1, 5)
+      const isLast = i => i === cells.length - 1 && imgs.length > 5
+      gridEl.innerHTML = cells.map((img, i) => `
+        <button class="pg-cell${isLast(i) ? ' pg-cell--last' : ''}" data-src="${esc(img.src)}">
+          <img src="${esc(img.src)}" alt="${esc(img.alt || listing.title)}" loading="lazy" />
+          ${isLast(i) ? `<div class="pg-more-overlay"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>View all ${imgs.length} photos</div>` : ''}
+        </button>`).join('')
+      gridEl.style.display = ''
+    }
+
+    /* Update lb-counter */
+    const lbCounter = document.getElementById('lb-counter')
+    if (lbCounter) lbCounter.textContent = `1 / ${imgs.length}`
+
+    /* Header bar */
+    const titleEl = document.getElementById('dv-title')
+    if (titleEl) titleEl.textContent = listing.title
+
+    const addrEl = document.getElementById('dv-address-text')
+    if (addrEl) addrEl.textContent = listing.address || listing.neighbourhood || ''
+
+    const priceEl = document.getElementById('dv-price')
+    if (priceEl) priceEl.textContent = listing.price || '—'
+
+    const refEl = document.getElementById('dv-ref')
+    if (refEl && listing.ref) refEl.textContent = `Ref. ${listing.ref}`
+
+    /* Badges */
+    const badgesEl = document.getElementById('dv-badges')
+    if (badgesEl) {
+      const statusClass = {
+        'pre-construction': 'dv-badge--status-pre',
+        'under construction': 'dv-badge--status-construction',
+        'ready': 'dv-badge--status-ready',
+      }[(listing.constructionStatus || '').toLowerCase()] || 'dv-badge--status-pre'
+      badgesEl.innerHTML =
+        `<span class="dv-badge dv-badge--type">New Development</span>` +
+        (listing.constructionStatus ? `<span class="dv-badge ${statusClass}">${esc(listing.constructionStatus)}</span>` : '')
+    }
+
+    /* Stats row */
+    const set = (id, val) => { const e = document.getElementById(id); if (e && val) e.textContent = val }
+    set('dv-floors',       listing.totalFloors ? String(listing.totalFloors) : null)
+    set('dv-res-count',    listing.totalUnits  ? String(listing.totalUnits)  : null)
+    set('dv-amenities-area', listing.amenitiesArea || null)
+    set('dv-delivery',     listing.deliveryDate || null)
+    set('dv-status-stat',  listing.constructionStatus || null)
+
+    /* Description */
+    const descEl = document.getElementById('dv-description')
+    if (descEl && listing.description?.length) {
+      descEl.innerHTML = listing.description.map(p => `<p>${esc(p)}</p>`).join('')
+    }
+
+    /* Features */
+    const featSection = document.getElementById('dv-features-section')
+    const featEl = document.getElementById('dv-features')
+    if (featSection && featEl && listing.features && Object.keys(listing.features).length) {
+      featEl.innerHTML = Object.entries(listing.features).map(([cat, items]) => `
+        <div class="dv-feat-group">
+          <p class="dv-feat-title">${esc(cat)}</p>
+          <ul class="dv-feat-list">${items.map(f => `<li>${esc(f)}</li>`).join('')}</ul>
+        </div>`).join('')
+      featSection.removeAttribute('hidden')
+    }
+
+    /* Units */
+    const unitsSection = document.getElementById('dv-units-section')
+    const unitGrid     = document.getElementById('dv-unit-grid')
+    const unitFilters  = document.getElementById('dv-unit-filters')
+    if (unitsSection && unitGrid && listing.units?.length) {
+      const AVAIL_LABEL = { available: 'Available', reserved: 'Reserved', sold: 'Sold' }
+      const availClass  = { available: 'dv-unit-avail--available', reserved: 'dv-unit-avail--reserved', sold: 'dv-unit-avail--sold' }
+
+      /* Derive filter categories */
+      const bedsSet = new Set(listing.units.map(u => u.beds))
+      const filterMap = {
+        0: 'Studio',
+        1: '1 Bed',
+        2: '2 Bed',
+        3: '3 Bed',
+        4: '4+ Bed',
+      }
+      const filterLabels = [...bedsSet].sort((a, b) => a - b)
+        .map(b => ({ beds: b, label: filterMap[b] || `${b} Bed` }))
+
+      if (unitFilters && filterLabels.length > 1) {
+        filterLabels.forEach(({ beds, label }) => {
+          const btn = document.createElement('button')
+          btn.className = 'dv-uftab'
+          btn.dataset.ufilter = String(beds)
+          btn.textContent = label
+          unitFilters.appendChild(btn)
+        })
+
+        unitFilters.querySelectorAll('.dv-uftab').forEach(tab => {
+          tab.addEventListener('click', () => {
+            unitFilters.querySelectorAll('.dv-uftab').forEach(t => t.classList.remove('active'))
+            tab.classList.add('active')
+            const f = tab.dataset.ufilter
+            unitGrid.querySelectorAll('.dv-unit-card').forEach(card => {
+              card.classList.toggle('hidden', f !== 'all' && card.dataset.beds !== f)
+            })
+          })
+        })
+      }
+
+      unitGrid.innerHTML = listing.units.map(u => {
+        const sizeRange  = u.sizeMin && u.sizeMax ? `${u.sizeMin}–${u.sizeMax} sq ft` : (u.sizeMin ? `${u.sizeMin} sq ft` : '')
+        const avail      = u.availability || 'available'
+        const availLabel = AVAIL_LABEL[avail] || avail
+        const aClass     = availClass[avail] || 'dv-unit-avail--available'
+        const isSold     = avail === 'sold'
+        return `
+          <div class="dv-unit-card" data-beds="${u.beds ?? 0}">
+            <div class="dv-unit-head">
+              <span class="dv-unit-id">${esc(u.id)}</span>
+              <span class="dv-unit-avail ${aClass}">${esc(availLabel)}</span>
+            </div>
+            <p class="dv-unit-layout">${esc(u.layout || '')}</p>
+            <div class="dv-unit-meta">
+              ${sizeRange ? `<span>${esc(sizeRange)}</span>` : ''}
+              ${u.floorsAvailable ? `<span>Floors ${esc(u.floorsAvailable)}</span>` : ''}
+            </div>
+            <p class="dv-unit-price">${esc(u.priceFrom || '—')}</p>
+            ${!isSold ? `<a href="#enquire" class="dv-unit-cta" onclick="document.querySelector('#prop-form [name=message]').value='I am interested in unit type ${esc(u.id)} (${esc(u.layout||'')}).'">Enquire</a>` : ''}
+          </div>`
+      }).join('')
+
+      unitsSection.removeAttribute('hidden')
+    }
+
+    /* Details */
+    const detailsSection = document.getElementById('dv-details-section')
+    const detailsEl = document.getElementById('dv-details')
+    if (detailsSection && detailsEl && listing.details?.length) {
+      detailsEl.innerHTML = listing.details.map(d =>
+        `<div class="pd-row"><span class="pd-key">${esc(d.key)}</span><span class="pd-val">${esc(d.val)}</span></div>`
+      ).join('')
+      detailsSection.removeAttribute('hidden')
+    }
+
+    /* Team */
+    const teamSection = document.getElementById('dv-team-section')
+    const teamEl = document.getElementById('dv-team')
+    const TEAM_DESCS = {
+      'North Development': 'Alliance between Oak Capital and Edifica — two firms with extensive experience in innovative residential projects. Mission: create residential concepts with added value, maximising returns for investors.',
+      'Mc+G Architecture': 'Studio Mc+G Architecture specialises in hotel and resort design, historic preservation, commercial retail and residential projects. Founded by Jennifer McConney with over 600 projects across 18 years of practice.',
+      'Urban Robot Associates': 'Multidisciplinary design collective based in Miami Beach, specialising in architecture, interior design, landscape architecture and urban design. Every project is built to elevate the human experience.',
+      'North Management': 'Created by North Development to maintain its property portfolio under the highest standards of service, design and operational excellence — drawing on decades of luxury hospitality leadership.',
+      'Fortune Development Sales': 'The leading exclusive on-site sales and marketing representative for third-party development projects in South Florida. Over 80 of the region\'s most successful projects; 21 offices worldwide.',
+    }
+    const teamMembers = [
+      listing.developer       && { role: 'Developer',         name: listing.developer },
+      listing.architect       && { role: 'Architecture',      name: listing.architect },
+      listing.interiorDesign  && { role: 'Interior Design',   name: listing.interiorDesign },
+      listing.managementCompany && { role: 'Property Management', name: listing.managementCompany },
+      listing.salesAgency     && { role: 'Sales & Marketing', name: listing.salesAgency },
+    ].filter(Boolean)
+
+    if (teamSection && teamEl && teamMembers.length) {
+      teamEl.innerHTML = teamMembers.map(m => `
+        <div class="dv-team-card">
+          <p class="dv-team-role">${esc(m.role)}</p>
+          <p class="dv-team-name">${esc(m.name)}</p>
+          ${TEAM_DESCS[m.name] ? `<p class="dv-team-desc">${esc(TEAM_DESCS[m.name])}</p>` : ''}
+        </div>`).join('')
+      teamSection.removeAttribute('hidden')
+    }
+
+    /* Aside */
+    const asidePriceEl = document.getElementById('dv-aside-price')
+    if (asidePriceEl) asidePriceEl.textContent = listing.price || '—'
+
+    const pscPrice = document.getElementById('dv-psc-price')
+    if (pscPrice) pscPrice.textContent = listing.price || '—'
+
+    const asideMeta = document.getElementById('dv-aside-meta')
+    if (asideMeta) {
+      const rows = [
+        listing.totalFloors     && { k: 'Floors',    v: String(listing.totalFloors) },
+        listing.totalUnits      && { k: 'Residences', v: String(listing.totalUnits) },
+        listing.deliveryDate    && { k: 'Delivery',   v: listing.deliveryDate },
+        listing.constructionStatus && { k: 'Status',  v: listing.constructionStatus },
+      ].filter(Boolean)
+      asideMeta.innerHTML = rows.map(r => `
+        <div class="dv-aside-meta-row">
+          <span class="dv-aside-meta-key">${esc(r.k)}</span>
+          <span class="dv-aside-meta-val">${esc(r.v)}</span>
+        </div>`).join('')
+    }
+
+    /* Brochure */
+    const brochureLink = document.getElementById('dv-brochure-link')
+    if (brochureLink && listing.brochureUrl) {
+      brochureLink.href = listing.brochureUrl
+      brochureLink.style.display = ''
+    }
+
+    /* Hidden form field */
+    const propField = document.getElementById('dv-property-field')
+    if (propField) propField.value = `${listing.title} — ${listing.price} — ${listing.neighbourhood}`
+
+    /* Map */
+    tryInitMap()
+  }
+
+  renderContent()
+
+  window.addEventListener('an:langchange', () => {
+    renderContent()
+    if (typeof applyI18n === 'function') applyI18n((typeof getLang === 'function') ? getLang() : 'en')
+  })
+})()

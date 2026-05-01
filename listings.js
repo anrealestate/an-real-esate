@@ -31,7 +31,7 @@ async function initListings() {
   }
 
   cachedListings = listings
-    .filter(l => ['active', 'reserved', 'sold'].includes(l.stage) || l.published)
+    .filter(l => (['active', 'reserved', 'sold'].includes(l.stage) || l.published) && !l.parent_slug)
     .sort((a, b) => (a.order ?? 999) - (b.order ?? 999))
 
   if (!cachedListings.length) {
@@ -80,19 +80,33 @@ function renderCard(listing) {
   const href      = `property.html?slug=${listing.slug || ''}`
 
   const BADGE_LABELS = {
-    new:      { en: 'New',        es: 'Nueva',         ca: 'Nova',      fr: 'Nouveau',  de: 'Neu',         it: 'Nuovo',     ru: 'Новый' },
-    exclusive:{ en: 'Exclusive',  es: 'Exclusiva',     ca: 'Exclusiva', fr: 'Exclusif', de: 'Exklusiv',    it: 'Esclusiva', ru: 'Эксклюзив' },
-    reduced:  { en: 'Reduced',    es: 'Precio reducido',ca:'Preu reduït',fr: 'Prix réduit',de:'Reduziert',  it: 'Ridotto',   ru: 'Снижение' },
-    offmarket:{ en: 'Off-market', es: 'Fuera mercado', ca: 'Fora mercat',fr:'Hors marché',de:'Off-market', it: 'Fuori mercato', ru: 'Off-market' },
+    new:      { en: 'New',             es: 'Nueva',         ca: 'Nova',           fr: 'Nouveau',      de: 'Neu',         it: 'Nuovo',          ru: 'Новый' },
+    exclusive:{ en: 'Exclusive',       es: 'Exclusiva',     ca: 'Exclusiva',      fr: 'Exclusif',     de: 'Exklusiv',    it: 'Esclusiva',      ru: 'Эксклюзив' },
+    reduced:  { en: 'Reduced',         es: 'Precio reducido',ca:'Preu reduït',    fr: 'Prix réduit',  de: 'Reduziert',   it: 'Ridotto',        ru: 'Снижение' },
+    offmarket:{ en: 'Off-market',      es: 'Fuera mercado', ca: 'Fora mercat',    fr: 'Hors marché',  de: 'Off-market',  it: 'Fuori mercato',  ru: 'Off-market' },
+    new_dev:  { en: 'New Development', es: 'Obra Nueva',    ca: 'Nova Construcció', fr: 'Programme Neuf', de: 'Neubau',  it: 'Nuova Costruzione', ru: 'Новостройка' },
   }
-  const badgeMap = listing.badge ? BADGE_LABELS[listing.badge] : null
+  const badgeMap  = listing.badge ? BADGE_LABELS[listing.badge] : null
   const badgeText = badgeMap ? (badgeMap[lang] || badgeMap.en) : null
-  const badgeHTML = badgeText ? `<span class="prop-badge prop-badge--${listing.badge}">${badgeText}</span>` : ''
+  const badgeHTML = badgeText ? `<span class="prop-badge prop-badge--${escHtml(listing.badge)}">${badgeText}</span>` : ''
+
+  const isDev = listing.propertyType === 'development'
+  const devHref = `development.html?slug=${listing.slug || ''}`
+  const cardHref = isDev ? devHref : href
+  const cardType = isDev ? `development ${listType}` : dataType
+
+  const specsHTML = isDev
+    ? `<p class="prop-specs prop-specs--dev">${listing.totalFloors ? listing.totalFloors + ' floors' : ''} ${listing.totalFloors && listing.totalUnits ? '&nbsp;·&nbsp;' : ''} ${listing.totalUnits ? listing.totalUnits + ' residences' : ''} &nbsp;·&nbsp; ${listing.constructionStatus || 'Pre-construction'}</p>`
+    : `<p class="prop-specs">${propType ? escHtml(propType) + ' &nbsp;·&nbsp; ' : ''}${escHtml(String(listing.beds))} ${L['card.bed']||'bed'} &nbsp;·&nbsp; ${escHtml(String(listing.baths))} ${L['card.bath']||'bath'} &nbsp;·&nbsp; ${escHtml(String(listing.size))} m²</p>`
+
+  const imgHTML = listing.image
+    ? `<img src="${escHtml(listing.image)}" alt="${escHtml(listing.title)}" class="prop-img" loading="lazy" />`
+    : `<div class="prop-img prop-img--placeholder"></div>`
 
   return `
-    <a href="${escHtml(href)}" class="prop-card" data-type="${escHtml(dataType)}">
+    <a href="${escHtml(cardHref)}" class="prop-card${isDev ? ' prop-card--dev' : ''}" data-type="${escHtml(cardType)}">
       <div class="prop-img-wrap">
-        <img src="${escHtml(listing.image)}" alt="${escHtml(listing.title)}" class="prop-img" loading="lazy" />
+        ${imgHTML}
         <span class="prop-tag ${tagClass}">${escHtml(tagLabel)}</span>
         ${badgeHTML}
       </div>
@@ -102,7 +116,7 @@ function renderCard(listing) {
           <span class="prop-price">${priceHTML}</span>
         </div>
         <h3 class="prop-title">${escHtml(title)}</h3>
-        <p class="prop-specs">${propType ? escHtml(propType) + ' &nbsp;·&nbsp; ' : ''}${escHtml(String(listing.beds))} ${L['card.bed']||'bed'} &nbsp;·&nbsp; ${escHtml(String(listing.baths))} ${L['card.bath']||'bath'} &nbsp;·&nbsp; ${escHtml(String(listing.size))} m²</p>
+        ${specsHTML}
       </div>
     </a>`
 }

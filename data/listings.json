@@ -1,6 +1,243 @@
 {
   "listings": [
     {
+      "slug": "house-of-wellness-brickell",
+      "title": "House of Wellness",
+      "propertyType": "development",
+      "type": "sale",
+      "stage": "active",
+      "badge": "new_dev",
+      "badge_type": "New Development",
+      "neighbourhood": "Brickell, Miami",
+      "province": "Florida",
+      "city": "Miami",
+      "zone": "Brickell",
+      "address": "152 SW 9th Street, Miami, Florida 33130",
+      "lat": 25.7633,
+      "lng": -80.1942,
+      "price": "From $420,000",
+      "ref": "AN-2026-HOW",
+      "beds": 1,
+      "baths": 1,
+      "size": "450",
+      "image": "",
+      "images": [],
+      "description": [
+        "A landmark residential tower at 152 SW 9th Street, Brickell, built around a complete philosophy of intentional living. The defining feature is the Integrated Wellness Method — a structured five-pillar programme led by an on-site Lifestyle Director who delivers a personalised health evaluation at move-in, an individual wellness plan with continuous expert follow-up, and a dedicated mobile application integrating real-time health data and service reservations.",
+        "The 22,000 sq ft of amenities across 34 floors include a state-of-the-art fitness centre with private personal training suite, functional training zones, cold plunge, full-service spa with Steam Room, Sauna and Hammam, and a rooftop pool with panoramic skyline views. Community spaces range from a Clubhouse with event kitchen to co-working areas, juice bar, podcast room and pet-friendly facilities. In-house wellness services encompass IV therapy, physical therapy, nutritionist consultations, massage therapy and weekly yoga and meditation sessions.",
+        "Residences feature loft-style ceiling heights of 9'4\", premium appliances, two-tone cabinetry with terrazzo countertops, and porcelain tile bathrooms. Select units offer exceptional views over Brickell and Biscayne Bay and polished concrete balconies."
+      ],
+      "details": [
+        {
+          "key": "Address",
+          "val": "152 SW 9th Street, Miami, Florida 33130"
+        },
+        {
+          "key": "Total floors",
+          "val": "34"
+        },
+        {
+          "key": "Total residences",
+          "val": "656"
+        },
+        {
+          "key": "Parking levels",
+          "val": "5"
+        },
+        {
+          "key": "Amenities area",
+          "val": "22,000 sq ft"
+        },
+        {
+          "key": "Ceiling height",
+          "val": "9'4\" loft-style"
+        },
+        {
+          "key": "Construction status",
+          "val": "Pre-construction"
+        },
+        {
+          "key": "Estimated delivery",
+          "val": "2027"
+        },
+        {
+          "key": "Developer",
+          "val": "North Development"
+        },
+        {
+          "key": "Architecture",
+          "val": "Mc+G Architecture"
+        },
+        {
+          "key": "Interiors",
+          "val": "Urban Robot Associates"
+        },
+        {
+          "key": "Management",
+          "val": "North Management"
+        },
+        {
+          "key": "Sales",
+          "val": "Fortune Development Sales"
+        },
+        {
+          "key": "Reference",
+          "val": "AN-2026-HOW"
+        }
+      ],
+      "features": {
+        "Fitness & Active Living": [
+          "State-of-the-art gymnasium",
+          "Private personal training suite",
+          "Indoor & outdoor functional training area",
+          "Terrace for fitness classes",
+          "Cold plunge"
+        ],
+        "Wellness & Community": [
+          "Rooftop Clubhouse with event kitchen",
+          "Outdoor BBQ & lounge area",
+          "Co-working spaces",
+          "Social lounge",
+          "Juice bar / pantry",
+          "Podcast room",
+          "Uber Lounge",
+          "Pet spa and park"
+        ],
+        "Spa & Relaxation": [
+          "Full-service spa",
+          "Steam Room and Sauna",
+          "Hammam Spa",
+          "Rooftop pool with skyline views",
+          "Lounge chairs and cabanas"
+        ],
+        "Health Services": [
+          "360° health evaluation at move-in",
+          "Personalised wellness plans",
+          "Nutritionist consultations",
+          "Personal training",
+          "Physical therapy",
+          "Massage therapy",
+          "Aesthetics services",
+          "IV therapy",
+          "Weekly yoga & meditation sessions",
+          "On-site Lifestyle Director"
+        ]
+      },
+      "constructionStatus": "Pre-construction",
+      "deliveryDate": "2027",
+      "totalUnits": 656,
+      "totalFloors": 34,
+      "amenitiesArea": "22,000 sq ft",
+      "developer": "North Development",
+      "architect": "Mc+G Architecture",
+      "interiorDesign": "Urban Robot Associates",
+      "managementCompany": "North Management",
+      "salesAgency": "Fortune Development Sales",
+      "brochureUrl": null,
+      "units": [
+        {
+          "id": "A1",
+          "layout": "Studio · 1 Bath",
+          "beds": 0,
+          "baths": 1,
+          "sizeMin": 450,
+          "sizeMax": 520,
+          "priceFrom": "$420,000",
+          "floorsAvailable": "8–33",
+          "availability": "available"
+        },
+        {
+          "id": "A2",
+          "layout": "1 Bed · 1 Bath",
+          "beds": 1,
+          "baths": 1,
+          "sizeMin": 565,
+          "sizeMax": 630,
+          "priceFrom": "$530,000",
+          "floorsAvailable": "8–33",
+          "availability": "available"
+        },
+        {
+          "id": "A3",
+          "layout": "1 Bed · 1 Bath",
+          "beds": 1,
+          "baths": 1,
+          "sizeMin": 585,
+          "sizeMax": 650,
+          "priceFrom": "$550,000",
+          "floorsAvailable": "8–33",
+          "availability": "available"
+        },
+        {
+          "id": "B1",
+          "layout": "2 Bed · 2 Bath",
+          "beds": 2,
+          "baths": 2,
+          "sizeMin": 745,
+          "sizeMax": 840,
+          "priceFrom": "$700,000",
+          "floorsAvailable": "8–33",
+          "availability": "available"
+        },
+        {
+          "id": "B2",
+          "layout": "2 Bed · 2 Bath",
+          "beds": 2,
+          "baths": 2,
+          "sizeMin": 775,
+          "sizeMax": 870,
+          "priceFrom": "$730,000",
+          "floorsAvailable": "8–33",
+          "availability": "available"
+        },
+        {
+          "id": "B3",
+          "layout": "2 Bed · 2 Bath",
+          "beds": 2,
+          "baths": 2,
+          "sizeMin": 795,
+          "sizeMax": 895,
+          "priceFrom": "$760,000",
+          "floorsAvailable": "8–33",
+          "availability": "available"
+        },
+        {
+          "id": "B4",
+          "layout": "2 Bed · 2 Bath",
+          "beds": 2,
+          "baths": 2,
+          "sizeMin": 820,
+          "sizeMax": 920,
+          "priceFrom": "$790,000",
+          "floorsAvailable": "8–33",
+          "availability": "available"
+        },
+        {
+          "id": "C1",
+          "layout": "3 Bed · 2 Bath",
+          "beds": 3,
+          "baths": 2,
+          "sizeMin": 960,
+          "sizeMax": 1060,
+          "priceFrom": "$1,020,000",
+          "floorsAvailable": "8–33",
+          "availability": "available"
+        },
+        {
+          "id": "C4",
+          "layout": "3 Bed · 3 Bath",
+          "beds": 3,
+          "baths": 3,
+          "sizeMin": 1050,
+          "sizeMax": 1160,
+          "priceFrom": "$1,120,000",
+          "floorsAvailable": "8–33",
+          "availability": "available"
+        }
+      ],
+      "order": 0
+    },
+    {
       "slug": "gracia-garden",
       "title": "Exquisite Brand-New Garden Residence in Gràcia",
       "price": "€830,000",

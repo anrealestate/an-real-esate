@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Development — AN Real Estate</title>
+  <meta name="description" content="New residential development. AN High End Real Estate — AICAT 13069." />
+  <meta property="og:type"        content="website" />
+  <meta property="og:site_name"   content="AN Real Estate" />
+  <meta property="og:url"         content="https://anrealestate.es/development.html" />
+  <meta property="og:title"       content="New Development — AN Real Estate" />
+  <meta property="og:description" content="New residential development. AN High End Real Estate." />
+  <meta property="og:image"       content="https://res.cloudinary.com/dbume3eak/image/upload/v1777641811/an-realestate/og-image.png" />
+  <meta property="og:locale"      content="en_US" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="New Development — AN Real Estate" />
+  <meta name="twitter:description" content="New residential development. AN High End Real Estate." />
+  <meta name="twitter:image"       content="https://res.cloudinary.com/dbume3eak/image/upload/v1777641811/an-realestate/og-image.png" />
+  <script type="application/ld+json" id="property-jsonld">{}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="property.css" />
+  <link rel="stylesheet" href="development.css" />
+  <script src="i18n.js"></script>
+</head>
+<body>
+
+  <header class="header scrolled" id="site-header">
+    <div class="holder">
+      <div class="header-block">
+        <div class="header-left">
+          <button class="mob-nav-icon" id="hamburger" aria-label="Menu" aria-expanded="false">
+            <span></span><span></span>
+          </button>
+          <nav class="hn-left" aria-label="Primary left">
+            <a href="index.html#properties" class="hn-link" data-i18n="nav.properties">Properties</a>
+            <a href="index.html#services"   class="hn-link" data-i18n="nav.services">Services</a>
+          </nav>
+        </div>
+        <a href="index.html" class="header-logo">
+          <img src="logo.svg" alt="AN Real Estate" class="header-logo-img" />
+        </a>
+        <div class="header-right">
+          <nav class="hn-right" aria-label="Primary right">
+            <a href="about.html"         class="hn-link" data-i18n="nav.about">About</a>
+            <a href="valuation.html"     class="hn-link" data-i18n="nav.valuation">Free Valuation</a>
+            <a href="index.html#contact" class="hn-link" data-i18n="nav.contact">Contact</a>
+          </nav>
+          <div class="lang-switcher" id="lang-switcher">
+            <button class="lang-btn" id="lang-current" aria-expanded="false" aria-haspopup="listbox" onclick="toggleLangDropdown(event)">EN</button>
+            <div class="lang-dropdown" id="lang-dropdown">
+              <button class="lang-opt" data-lang="en" onclick="pickLang('en',event)">EN — English</button>
+              <button class="lang-opt" data-lang="es" onclick="pickLang('es',event)">ES — Español</button>
+              <button class="lang-opt" data-lang="ca" onclick="pickLang('ca',event)">CA — Català</button>
+              <button class="lang-opt" data-lang="fr" onclick="pickLang('fr',event)">FR — Français</button>
+              <button class="lang-opt" data-lang="de" onclick="pickLang('de',event)">DE — Deutsch</button>
+              <button class="lang-opt" data-lang="it" onclick="pickLang('it',event)">IT — Italiano</button>
+              <button class="lang-opt" data-lang="ru" onclick="pickLang('ru',event)">RU — Русский</button>
+            </div>
+          </div>
+          <a href="#" class="header-phone tel-js" data-a="+34" data-b="628" data-c="02" data-d="04" data-e="34"></a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+    <nav class="drawer-nav">
+      <a href="index.html#properties" class="drawer-link" data-i18n="nav.properties">Properties</a>
+      <a href="index.html#services"   class="drawer-link" data-i18n="nav.services">Services</a>
+      <a href="about.html"            class="drawer-link" data-i18n="nav.about">About</a>
+      <a href="valuation.html"        class="drawer-link" data-i18n="nav.valuation">Free Valuation</a>
+      <a href="index.html#contact"    class="drawer-link" data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="drawer-foot">
+      <div class="lang-switcher" id="lang-switcher-mob">
+        <button class="lang-btn" onclick="toggleLangDropdown(event)">EN</button>
+        <div class="lang-dropdown" id="lang-dropdown-mob">
+          <button class="lang-opt" data-lang="en" onclick="pickLang('en',event)">EN — English</button>
+          <button class="lang-opt" data-lang="es" onclick="pickLang('es',event)">ES — Español</button>
+          <button class="lang-opt" data-lang="ca" onclick="pickLang('ca',event)">CA — Català</button>
+          <button class="lang-opt" data-lang="fr" onclick="pickLang('fr',event)">FR — Français</button>
+          <button class="lang-opt" data-lang="de" onclick="pickLang('de',event)">DE — Deutsch</button>
+          <button class="lang-opt" data-lang="it" onclick="pickLang('it',event)">IT — Italiano</button>
+          <button class="lang-opt" data-lang="ru" onclick="pickLang('ru',event)">RU — Русский</button>
+        </div>
+      </div>
+      <a href="#" class="drawer-phone tel-js" data-a="+34" data-b="628" data-c="02" data-d="04" data-e="34"></a>
+    </div>
+  </div>
+
+  <!-- BREADCRUMB -->
+  <nav class="prop-breadcrumb" aria-label="Breadcrumb">
+    <div class="holder">
+      <a href="index.html" data-i18n="bread.home">Home</a>
+      <span>›</span>
+      <a href="index.html#properties" data-i18n="bread.properties">Properties</a>
+      <span>›</span>
+      <span>New Developments</span>
+      <span>›</span>
+      <span id="dv-bc-title" aria-current="page">Project</span>
+    </div>
+  </nav>
+
+  <!-- GALLERY MOSAIC -->
+  <section class="pg-section">
+    <div class="pg-mosaic">
+      <div class="pg-hero" id="dv-pg-hero" role="button" tabindex="0" aria-label="View photo 1" data-src="">
+        <img id="dv-hero-img" src="" alt="" loading="eager" />
+      </div>
+      <div class="pg-grid-side" id="dv-pg-grid"></div>
+    </div>
+  </section>
+
+  <!-- PROJECT HEADER -->
+  <div class="dv-bar">
+    <div class="holder">
+
+      <div class="dv-bar-main">
+        <div>
+          <div class="dv-badges" id="dv-badges"></div>
+          <h1 class="dv-title" id="dv-title">New Development</h1>
+          <p class="dv-address" id="dv-address">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+            <span id="dv-address-text">Location</span>
+          </p>
+        </div>
+        <div class="dv-price-block">
+          <p class="dv-price" id="dv-price">—</p>
+          <p class="dv-ref" id="dv-ref"></p>
+        </div>
+      </div>
+
+      <div class="dv-stats" id="dv-stats">
+        <div class="dv-stat">
+          <span class="dv-stat-val" id="dv-floors">—</span>
+          <span class="dv-stat-key">Floors</span>
+        </div>
+        <div class="dv-stat">
+          <span class="dv-stat-val" id="dv-res-count">—</span>
+          <span class="dv-stat-key">Residences</span>
+        </div>
+        <div class="dv-stat">
+          <span class="dv-stat-val" id="dv-amenities-area">—</span>
+          <span class="dv-stat-key">Amenities</span>
+        </div>
+        <div class="dv-stat">
+          <span class="dv-stat-val" id="dv-delivery">—</span>
+          <span class="dv-stat-key">Delivery</span>
+        </div>
+        <div class="dv-stat">
+          <span class="dv-stat-val dv-stat-val--status" id="dv-status-stat">—</span>
+          <span class="dv-stat-key">Status</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="dv-body">
+    <div class="holder">
+      <div class="dv-layout">
+
+        <!-- MAIN CONTENT -->
+        <main class="dv-main">
+
+          <!-- Description -->
+          <section class="dv-section">
+            <h2 class="dv-section-h" data-i18n="section.description">Description</h2>
+            <div class="dv-desc" id="dv-description"></div>
+          </section>
+
+          <!-- Features -->
+          <section class="dv-section" id="dv-features-section" hidden>
+            <h2 class="dv-section-h">Features &amp; Amenities</h2>
+            <div class="dv-features" id="dv-features"></div>
+          </section>
+
+          <!-- Available Units -->
+          <section class="dv-section" id="dv-units-section" hidden>
+            <h2 class="dv-section-h">Available Units</h2>
+            <div class="dv-unit-filters" id="dv-unit-filters" role="tablist">
+              <button class="dv-uftab active" data-ufilter="all">All</button>
+            </div>
+            <div class="dv-unit-grid" id="dv-unit-grid"></div>
+            <p class="dv-units-note">Prices and availability are indicative and subject to change without notice. Contact us for current availability and a personalised proposal.</p>
+          </section>
+
+          <!-- Project Details -->
+          <section class="dv-section" id="dv-details-section" hidden>
+            <h2 class="dv-section-h" data-i18n="section.details">Project Details</h2>
+            <div class="dv-details prop-details" id="dv-details"></div>
+          </section>
+
+          <!-- Development Team -->
+          <section class="dv-section" id="dv-team-section" hidden>
+            <h2 class="dv-section-h">Development Team</h2>
+            <div class="dv-team" id="dv-team"></div>
+          </section>
+
+          <!-- Location -->
+          <section class="dv-section" id="dv-map-section">
+            <h2 class="dv-section-h" data-i18n="section.location">Location</h2>
+            <div class="dv-map-wrap">
+              <div id="prop-map"></div>
+            </div>
+          </section>
+
+        </main>
+
+        <!-- SIDEBAR -->
+        <aside class="dv-aside">
+          <div class="dv-aside-card" id="enquire">
+
+            <p class="dv-aside-eyebrow">Starting from</p>
+            <p class="dv-aside-price" id="dv-aside-price">—</p>
+            <div class="dv-aside-divider"></div>
+
+            <div class="dv-aside-meta" id="dv-aside-meta"></div>
+
+            <form class="pc-form" id="prop-form" novalidate>
+              <input type="hidden" name="property" id="dv-property-field" value="" />
+              <div class="fg">
+                <label class="flabel" data-i18n="form.name">Name</label>
+                <input type="text" name="name" class="finput" placeholder="Your full name" data-i18n="form.name_ph" required />
+              </div>
+              <div class="fg">
+                <label class="flabel" data-i18n="form.email">Email</label>
+                <input type="email" name="email" class="finput" placeholder="your@email.com" data-i18n="form.email_ph" required />
+              </div>
+              <div class="fg">
+                <label class="flabel" data-i18n="form.phone">Phone</label>
+                <input type="tel" name="phone" class="finput" placeholder="+1 305 000 0000" data-i18n="form.phone_ph" />
+              </div>
+              <div class="fg">
+                <label class="flabel" data-i18n="form.message">Message</label>
+                <textarea name="message" class="finput ftextarea" rows="3" placeholder="I'm interested in this development…" data-i18n="form.msg_ph" data-i18n-val="form.msg_val"></textarea>
+              </div>
+              <button type="submit" class="button pc-submit" data-i18n="form.submit">Request Information</button>
+            </form>
+
+            <a id="dv-brochure-link" href="#" target="_blank" rel="noopener" class="dv-aside-brochure" style="display:none">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              Download Brochure
+            </a>
+
+            <a href="https://wa.me/34628020434" class="pc-whatsapp" target="_blank" rel="noopener">
+              <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+              <span data-i18n="sidebar.whatsapp">Chat on WhatsApp</span>
+            </a>
+
+            <a href="#" class="pc-tel tel-js" data-a="+34" data-b="628" data-c="02" data-d="04" data-e="34">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span class="tel-text"></span>
+            </a>
+
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="holder">
+      <div class="footer-top">
+        <a href="index.html" class="footer-logo">
+          <img src="logo.svg" alt="AN Real Estate" class="header-logo-img" />
+        </a>
+        <nav class="footer-nav">
+          <a href="index.html#properties" class="fn-link" data-i18n="nav.properties">Properties</a>
+          <a href="index.html#services"   class="fn-link" data-i18n="nav.services">Services</a>
+          <a href="about.html"            class="fn-link" data-i18n="nav.about">About</a>
+          <a href="valuation.html"        class="fn-link" data-i18n="nav.valuation">Free Valuation</a>
+          <a href="index.html#contact"    class="fn-link" data-i18n="nav.contact">Contact</a>
+        </nav>
+      </div>
+      <div class="footer-text">
+        <p data-i18n="footer.disclaimer">AN High End Real Estate is a licensed property agency specialising in luxury residential real estate in Barcelona and Catalonia. Registered with the Registro de Agentes Inmobiliarios de Cataluña: AICAT 13069. All properties are subject to availability. Prices shown are indicative and subject to change without notice.</p>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          <span>© 2026 AN High End Real Estate · Barcelona</span>
+          <a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
+          <a href="legal.html"   data-i18n="footer.legal">Legal Notice</a>
+          <a href="cookies.html" data-i18n="footer.cookies">Cookie Policy</a>
+        </div>
+        <div class="footer-studio">anrealestate.es</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lb-overlay" id="lb-overlay" role="dialog" aria-modal="true" aria-label="Photo gallery">
+    <button class="lb-close" id="lb-close" aria-label="Close gallery">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <button class="lb-arrow lb-arrow--prev" id="lb-prev" aria-label="Previous photo">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="lb-stage">
+      <img class="lb-img" id="lb-img" src="" alt="" />
+    </div>
+    <button class="lb-arrow lb-arrow--next" id="lb-next" aria-label="Next photo">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <div class="lb-counter" id="lb-counter">1 / 1</div>
+  </div>
+
+  <!-- Mobile sticky -->
+  <div class="prop-sticky-cta" id="prop-sticky-cta">
+    <p class="psc-price" id="dv-psc-price">—</p>
+    <a href="#enquire" class="button">Request Info</a>
+  </div>
+
+  <a href="https://wa.me/34628020434" class="wa-fab" aria-label="WhatsApp" target="_blank" rel="noopener">
+    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+  </a>
+
+  <!-- Cookie banner (same as other pages) -->
+  <div class="cookie-banner is-hidden" id="cookie-banner" role="dialog" aria-live="polite">
+    <p class="cookie-text" data-i18n="cookie.text">We use cookies to improve your experience and analyse traffic. By accepting, you consent to our use of cookies.</p>
+    <div class="cookie-actions">
+      <button id="cookie-accept" class="cookie-btn cookie-btn--accept" data-i18n="cookie.accept">Accept</button>
+      <button id="cookie-reject" class="cookie-btn" data-i18n="cookie.reject">Essential only</button>
+    </div>
+  </div>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg7_3UefA_rzfXRAwCMS42A4Z7lx4BUTc" async defer></script>
+  <script src="data-listings.js"></script>
+  <script src="development-loader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="main.js"></script>
+  <script src="property.js"></script>
+  <script src="animations.js"></script>
+  <script src="photo-protect.js"></script>
+
+  <script>
+  ;(function(){
+    var lang = (typeof getLang === 'function') ? getLang() : 'en'
+    var t = function(k){ return (window.I18N&&window.I18N[lang]&&window.I18N[lang][k]) || (window.I18N&&window.I18N.en&&window.I18N.en[k]) || k }
+    var consent = localStorage.getItem('an_cookie_consent')
+    if (!consent) {
+      setTimeout(function(){ var b=document.getElementById('cookie-banner'); if(b) b.classList.remove('is-hidden') }, 800)
+    }
+    function dismiss(val) {
+      localStorage.setItem('an_cookie_consent', val)
+      var b = document.getElementById('cookie-banner')
+      if (b) b.classList.add('is-hidden')
+    }
+    document.getElementById('cookie-accept').addEventListener('click', function(){ dismiss('accepted') })
+    document.getElementById('cookie-reject').addEventListener('click', function(){ dismiss('essential') })
+  })();
+  </script>
+
+</body>
+</html>

@@ -133,6 +133,22 @@
     /* ── breadcrumb ── */
     const bcLast = document.querySelector('.prop-breadcrumb [aria-current]')
     if (bcLast) bcLast.textContent = listing.title
+    if (listing.parent_slug) {
+      const parent = listings.find(l => l.slug === listing.parent_slug)
+      if (parent) {
+        const bcHolder = document.querySelector('.prop-breadcrumb .holder')
+        if (bcHolder) {
+          const regionSpan = Array.from(bcHolder.querySelectorAll('span'))
+            .find(s => !s.hasAttribute('aria-current') && s.textContent.trim() !== '›')
+          if (regionSpan) {
+            const link = document.createElement('a')
+            link.href = `development.html?slug=${esc(parent.slug)}`
+            link.textContent = parent.title
+            regionSpan.replaceWith(link)
+          }
+        }
+      }
+    }
 
     /* ── badges ── */
     const badgeType = document.querySelector('.ph-badge--type')
