@@ -24,7 +24,7 @@ async function initListings() {
   if (!listings.length) {
     try {
       const res = await fetch('/data/listings.json')
-      if (!res.ok) throw new Error()
+      if (!res.ok) throw new Error(`Failed to fetch listings: ${res.status}`)
       const data = await res.json()
       listings = Array.isArray(data) ? data : (data.listings || [])
     } catch { return }
