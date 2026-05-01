@@ -190,37 +190,6 @@
 }
 .chat-messages::-webkit-scrollbar { display: none; }
 
-/* ── Chat progress indicator ─── */
-.chat-progress {
-  display: flex;
-  align-items: center;
-  gap: .75rem;
-  margin-bottom: .75rem;
-  padding-bottom: .75rem;
-  border-bottom: 1px solid var(--border);
-}
-.chat-progress-bar {
-  flex: 1;
-  height: 2px;
-  background: var(--border);
-  border-radius: 2px;
-  overflow: hidden;
-}
-.chat-progress-fill {
-  height: 100%;
-  background: var(--gold);
-  border-radius: 2px;
-  transition: width .4s ease;
-  width: 0%;
-}
-.chat-progress-label {
-  font-size: var(--fs-2xs);
-  letter-spacing: .08em;
-  color: var(--muted);
-  white-space: nowrap;
-  min-width: 2.5rem;
-  text-align: right;
-}
 
 /* individual message row */
 .chat-msg {

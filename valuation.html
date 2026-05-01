@@ -197,12 +197,7 @@
           <p class="val-chat-sub" data-i18n="chat.sub">A few questions, then I'll come back to you personally.</p>
         </div>
         <div class="chat-wrap">
-          <div class="chat-progress" id="chat-progress" hidden>
-            <div class="chat-progress-bar"><div class="chat-progress-fill" id="chat-progress-fill"></div></div>
-            <span class="chat-progress-label" id="chat-progress-label"></span>
-          </div>
           <div class="chat-messages" id="chat-messages" aria-live="polite"></div>
-          </div>
           <div id="chat-input-area"></div>
           <div class="chat-restart-wrap" id="chat-restart-wrap" hidden>
             <button class="chat-restart-btn" id="chat-restart-btn" data-i18n="chat.restart">Start over</button>
@@ -721,20 +716,6 @@
     var inputEl       = document.getElementById('chat-input-area')
     var restartWrap   = document.getElementById('chat-restart-wrap')
     var restartBtn    = document.getElementById('chat-restart-btn')
-    var progressEl    = document.getElementById('chat-progress')
-    var progressFill  = document.getElementById('chat-progress-fill')
-    var progressLabel = document.getElementById('chat-progress-label')
-
-    function updateProgress() {
-      if (!progressEl || !c.steps) return
-      var total    = c.steps.length
-      var answered = Math.min(stepIndex, total)
-      if (answered === 0) { progressEl.hidden = true; return }
-      progressEl.hidden = false
-      var pct = Math.round((answered / total) * 100)
-      progressFill.style.width = pct + '%'
-      progressLabel.textContent = answered + ' / ' + total
-    }
     function showRestartBtn() {
       if (restartWrap) restartWrap.hidden = false
     }
@@ -896,7 +877,6 @@
         clearInput()
         stepIndex++
         showRestartBtn()
-        updateProgress()
         if (opt.r) {
           showTyping(650).then(function() {
             addMsg(opt.r, 'agent')
@@ -932,7 +912,7 @@
 
     function finalize() {
       var name = answers.name || ''
-      if (progressEl) progressEl.hidden = true
+
       showTyping(900).then(function() {
         addMsg(c.final(name), 'agent')
         setTimeout(function() {
@@ -978,7 +958,7 @@
       msgsEl.innerHTML  = ''
       inputEl.innerHTML = ''
       hideRestartBtn()
-      if (progressEl) progressEl.hidden = true
+
       showTyping(600).then(function() {
         addMsg(c.greeting, 'agent')
         setTimeout(function() { advance() }, 600)
