@@ -435,7 +435,13 @@
 @media (max-width: 600px) {
   .val-trust-inner {
     flex-direction: column;
+    align-items: center;
     gap: 1.6rem;
+  }
+  .val-trust-item {
+    flex: none;
+    width: 100%;
+    align-items: center;
   }
   .val-trust-sep {
     width: 2.5rem;
