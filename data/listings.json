@@ -1719,6 +1719,101 @@
       },
       "stage": "active",
       "order": 1
+    },
+    {
+      "slug": "house-of-wellness",
+      "title": "HOUSE OF WELLNESS",
+      "price": "",
+      "ref": "AN202603",
+      "neighbourhood": "",
+      "type": "sale",
+      "propertyType": "apartment",
+      "badge_type": "Apartment",
+      "beds": 2,
+      "baths": 1,
+      "size": "",
+      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677915/an-realestate/w1syoftzetnriaxtq5q1.jpg",
+      "images": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677915/an-realestate/w1syoftzetnriaxtq5q1.jpg",
+          "alt": "How_Interior_Unit_Balcony_B5"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677916/an-realestate/s6wukmphyzocjttiosby.jpg",
+          "alt": "How_Interior_Unit_B1"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677917/an-realestate/mmk3ybaiwlxrzsrxap82.jpg",
+          "alt": "How_Interior_Unit_A1"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677914/an-realestate/ukoylb2hbydgk9nl0v22.jpg",
+          "alt": "How_Interior_Unit_Kitchen_B5"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677917/an-realestate/s9bdavbhmq97oysueash.jpg",
+          "alt": "How_Exterior_Sunset_Bayview_South"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677919/an-realestate/lqexvq7dt6qcelstlbrc.jpg",
+          "alt": "How_Building_Hero_Closeup"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677920/an-realestate/ggpldoezuylxomc1zfe3.jpg",
+          "alt": "HoW_Exterior_Rooftop_BayView_Daytime"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677921/an-realestate/ett9q37ezpgjbqiu0bkz.jpg",
+          "alt": "HoW_Exterior_PoolView_Sunset"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677921/an-realestate/hfescspqkcixsq8mtioh.jpg",
+          "alt": "HoW_Exterior_PoolView_Dusk"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677922/an-realestate/pjqocz4qdtte3k74zxia.jpg",
+          "alt": "HoW_Exterior_PoolCity_View"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677923/an-realestate/l6n7tyfswbsmjwaiuv1w.jpg",
+          "alt": "HoW_Exterior_Hero_Daytime"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677924/an-realestate/yln9ncprxczizybhdn57.jpg",
+          "alt": "HoW_Exterior_Facade_GroundView"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677925/an-realestate/zfk2kwac9zhhzpxqddpm.jpg",
+          "alt": "HoW_Exterior_City_Hero_Sunset"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677926/an-realestate/gr9zsng0execqhmxl3bm.jpg",
+          "alt": "HoW_Amenities_JuiceBar"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677926/an-realestate/fbr78ilujvbloggxfvzh.jpg",
+          "alt": "HoW_Amenities_Hammam_Steam"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677927/an-realestate/p6bngcht5nfwwkl0di7o.jpg",
+          "alt": "HoW_Amenities_Gym"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677928/an-realestate/oixnrswcvs3oi2nw2z3f.jpg",
+          "alt": "HoW_Amenities_Coworking"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677929/an-realestate/nqga7lgxp0troivcyjyu.jpg",
+          "alt": "HoW_Amenities_Birdeye_Pool"
+        }
+      ],
+      "description": [
+        "A landmark residential tower at 152 SW 9th Street, Brickell, built around a complete philosophy of intentional living. The defining feature is the Integrated  \n  Wellness Method — a structured five-pillar programme led by an on-site Lifestyle Director who delivers a personalised health evaluation at move-in, an         \n  individual wellness plan with continuous expert follow-up, and a dedicated mobile application integrating real-time health data and service reservations.",
+        "The 22,000 sq ft of amenities across 34 floors include a state-of-the-art fitness centre with private personal training suite, functional training zones, cold \n  plunge, full-service spa with Steam Room, Sauna and Hammam, and a rooftop pool with panoramic skyline views. Community spaces range from a Clubhouse with event\n   kitchen to co-working areas, juice bar, podcast room and pet-friendly facilities. In-house wellness services encompass IV therapy, physical therapy,          \n  nutritionist consultations, massage therapy and weekly yoga and meditation sessions.",
+        "Residences feature loft-style ceiling heights of 9'4\", premium appliances, two-tone cabinetry with terrazzo countertops, and porcelain tile bathrooms. Select  \n  units offer exceptional views over Brickell and Biscayne Bay and polished concrete balconies. Developed by North Development — the alliance between Oak Capital\n   and Edifica — with architecture by Mc+G Architecture and interiors by Urban Robot Associates"
+      ],
+      "stage": "draft",
+      "order": 10
     }
   ]
 }
