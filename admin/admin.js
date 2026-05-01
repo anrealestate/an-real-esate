@@ -20,6 +20,10 @@ const CLD_UPLOAD_URL    = `https://api.cloudinary.com/v1_1/${CLD_CLOUD}/image/up
 const MEDIA_KEY         = 'an_media_library'
 const VISITS_KEY        = 'an_visits'
 
+function escHtml(s) {
+  return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')
+}
+
 // ── STAGE SYSTEM ──────────────────────────────
 const STAGES      = ['draft', 'active', 'reserved', 'sold', 'withdrawn']
 const STAGE_LABEL = { draft:'Borrador', active:'Activa', reserved:'Reservada', sold:'Vendida', withdrawn:'Retirada' }
@@ -527,10 +531,10 @@ function renderTable() {
       </td>
       <td><img class="pt-thumb" src="${l.image || ''}" alt="" onerror="this.style.display='none'" /></td>
       <td>
-        <div class="pt-title">${l.title}</div>
-        <div class="pt-loc">${l.neighbourhood || ''}</div>
+        <div class="pt-title">${escHtml(l.title)}</div>
+        <div class="pt-loc">${escHtml(l.neighbourhood || '')}</div>
       </td>
-      <td class="pt-price">${l.price || '—'}</td>
+      <td class="pt-price">${escHtml(l.price || '—')}</td>
       <td>${typeBadge}</td>
       <td>
         <div class="stage-dropdown-wrap" id="stage-wrap-${l.slug}">
@@ -877,6 +881,9 @@ async function saveProperty() {
     .toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
 
   if (!slug) { toast('El slug es obligatorio', 'error'); return }
+
+  const title = document.getElementById('f-title').value.trim()
+  if (!title) { toast('El título es obligatorio', 'error'); document.querySelector('.ftab[data-tab="basic"]')?.click(); return }
 
   const original = document.getElementById('f-original-slug').value
 
@@ -1261,7 +1268,7 @@ function showImproveModal(data, targetTextarea) {
   const copyBtn = (id, label) =>
     `<button type="button" class="btn-copy-section" onclick="navigator.clipboard.writeText(document.getElementById('${id}').textContent).then(()=>this.textContent='✓').catch(()=>{});setTimeout(()=>this.textContent='${label}',1500)">${label}</button>`
 
-  const kw = Array.isArray(data.keywords) ? data.keywords.join(' · ') : ''
+  const kw = Array.isArray(data.keywords) ? data.keywords.map(escHtml).join(' · ') : ''
 
   const modal = document.createElement('div')
   modal.id = 'improve-modal'
@@ -1275,23 +1282,20 @@ function showImproveModal(data, targetTextarea) {
       <div class="improve-modal-body">
         ${data.h1 ? `<div class="im-section">
           <div class="im-label">📝 H1 SUGERIDO ${copyBtn('im-h1','Copiar')}</div>
-          <div class="im-content" id="im-h1">${data.h1}</div>
+          <div class="im-content" id="im-h1">${escHtml(data.h1)}</div>
         </div>` : ''}
         ${data.titleTag ? `<div class="im-section">
           <div class="im-label">🔍 TITLE TAG ${copyBtn('im-tt','Copiar')}</div>
-          <div class="im-content im-mono" id="im-tt">${data.titleTag}</div>
+          <div class="im-content im-mono" id="im-tt">${escHtml(data.titleTag)}</div>
         </div>` : ''}
         ${data.metaDescription ? `<div class="im-section">
           <div class="im-label">📋 META DESCRIPTION ${copyBtn('im-md','Copiar')}</div>
-          <div class="im-content im-mono" id="im-md">${data.metaDescription}</div>
+          <div class="im-content im-mono" id="im-md">${escHtml(data.metaDescription)}</div>
         </div>` : ''}
         ${data.editorial ? `<div class="im-section">
           <div class="im-label">✍️ TEXTO EDITORIAL ${copyBtn('im-ed','Copiar')}</div>
-          <div class="im-content im-editorial" id="im-ed">${data.editorial.replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>')}</div>
-          <button type="button" class="btn-use-text" onclick="
-            document.querySelector('#improve-modal ~ * .desc-textarea, #improve-modal').closest('.view').querySelector('.desc-textarea');
-            (function(){var ta=arguments[0];ta.value=document.getElementById('im-ed').innerText;document.getElementById('improve-modal').remove()})(${JSON.stringify(null)})
-          ">← Usar en descripción</button>
+          <div class="im-content im-editorial" id="im-ed">${escHtml(data.editorial).replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>')}</div>
+          <button type="button" class="btn-use-text">← Usar en descripción</button>
         </div>` : ''}
         ${kw ? `<div class="im-section">
           <div class="im-label">🏷️ KEYWORDS ${copyBtn('im-kw','Copiar')}</div>
@@ -1316,8 +1320,8 @@ function addDetailRow(d = {}) {
   const div = document.createElement('div')
   div.className = 'dyn-row detail-row'
   div.innerHTML = `
-    <input class="det-key" type="text" data-i18n-ph="ph.det_key" placeholder="${uiStr('ph.det_key')}" value="${d.key || ''}" style="flex:1" />
-    <input class="det-val" type="text" data-i18n-ph="ph.det_val" placeholder="${uiStr('ph.det_val')}" value="${d.val || ''}" style="flex:1" />
+    <input class="det-key" type="text" data-i18n-ph="ph.det_key" placeholder="${uiStr('ph.det_key')}" value="${escHtml(d.key || '')}" style="flex:1" />
+    <input class="det-val" type="text" data-i18n-ph="ph.det_val" placeholder="${uiStr('ph.det_val')}" value="${escHtml(d.val || '')}" style="flex:1" />
     <button type="button" class="dyn-row-del" title="Eliminar">×</button>`
   div.querySelector('.dyn-row-del').onclick = () => div.remove()
   document.getElementById('details-list').appendChild(div)
@@ -1429,11 +1433,11 @@ async function ghPut(token, path, content, sha, message) {
 
 async function publishToWeb() {
   // Get or ask for GitHub token (stored locally, never leaves the browser)
-  let token = localStorage.getItem('an_gh_token') || ''
+  let token = sessionStorage.getItem('an_gh_token') || ''
   if (!token) {
-    token = prompt('GitHub Personal Access Token (scope: repo):\n\nSólo se pide una vez — se guarda en este navegador.')?.trim() || ''
+    token = prompt('GitHub Personal Access Token (scope: repo):\n\nSe guarda en la sesión actual del navegador.')?.trim() || ''
     if (!token) return
-    localStorage.setItem('an_gh_token', token)
+    sessionStorage.setItem('an_gh_token', token)
   }
 
   const btn = document.getElementById('publish-btn')
@@ -1473,7 +1477,7 @@ async function publishToWeb() {
     toast(`✓ ${results.length} archivos subidos — ${listings.length} propiedades. La web se actualizará en ~30 s.`, 'success')
   } catch (e) {
     if (e.message.includes('401') || e.message.includes('Bad credentials')) {
-      localStorage.removeItem('an_gh_token')
+      sessionStorage.removeItem('an_gh_token')
       toast('Token inválido — eliminado. Intenta de nuevo para introducir uno nuevo.', 'error')
     } else {
       toast('Error al subir: ' + e.message, 'error')
@@ -1548,19 +1552,23 @@ function _buildMapAt(coord) {
   _mapPickerMarker = marker
 }
 
-function _geocodeAndBuild(addr) {
+function _geocodeAndBuild(addr, silent = true) {
   fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(addr)}&format=json&limit=1`, {
     headers: { 'Accept-Language': 'es', 'User-Agent': 'AN-RealEstate-Admin/1.0' }
   })
   .then(r => r.json())
   .then(results => {
-    if (!results.length) return
+    if (!results.length) {
+      if (!silent) toast('No se encontraron coordenadas para esa dirección', 'error')
+      return
+    }
     const coord = { lat: parseFloat(results[0].lat), lng: parseFloat(results[0].lon) }
     _buildMapAt(coord)
     document.getElementById('f-lat').value = coord.lat.toFixed(7)
     document.getElementById('f-lng').value = coord.lng.toFixed(7)
+    if (!silent) toast('Mapa centrado en la dirección', 'success')
   })
-  .catch(() => {})
+  .catch(() => { if (!silent) toast('Error al obtener coordenadas', 'error') })
 }
 
 function initMapPicker(lat, lng, address) {
@@ -1590,7 +1598,8 @@ function openMapPickerTab() {
 document.addEventListener('click', e => {
   if (e.target.id !== 'btn-map-reset') return
   const addr = document.getElementById('f-address')?.value.trim()
-  if (addr) _geocodeAndBuild(addr)
+  if (!addr) { toast('Escribe una dirección primero', 'error'); return }
+  _geocodeAndBuild(addr, false)
 })
 
 // ── GOOGLE MAPS AUTOCOMPLETE ───────────────────
@@ -2027,7 +2036,7 @@ async function applyLogoToGallery() {
   progressWrap.classList.remove('hidden')
   try {
     for (let i = 0; i < cards.length; i++) {
-      if (_wmAbort) { toast('Proceso cancelado', ''); break }
+      if (_wmAbort) { statusEl.textContent = 'Cancelado'; toast('Proceso cancelado', ''); break }
       const card = cards[i]
       const img  = card.querySelector('img')
       statusEl.textContent = `Procesando ${i + 1} de ${total}…`
@@ -3031,6 +3040,7 @@ function buildAgentPDF(v) {
 async function syncRemoteVisits() {
   try {
     const r = await fetch('/api/get-visits')
+    if (!r.ok) throw new Error(`HTTP ${r.status}`)
     const data = await r.json()
     if (!data.configured) { toast('⚠ Almacenamiento remoto no configurado', 'error'); return }
     if (!data.visits?.length) { toast('Sync: 0 visitas en servidor', ''); return }

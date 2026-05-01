@@ -1642,6 +1642,7 @@ input[type="range"] {
 
   /* ── Watermark tool: already single-col, just tighten ── */
   .wm-layout { gap: 1rem; }
+  .wm-results { grid-template-columns: 1fr; }
 
   /* ── Confirm / modal boxes: full width ────── */
   .confirm-box { width: 92vw; padding: 1.5rem; }
