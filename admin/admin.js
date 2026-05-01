@@ -425,32 +425,30 @@ function handleVisitParam() {
 
 // ── DATA ──────────────────────────────────────
 function loadData() {
+  // Read inline bootstrap data (may be stale — only updated on publish)
+  let inlineListings = []
   const el = document.getElementById('listings-data')
   if (el) {
-    try { _listings = JSON.parse(el.textContent).listings || [] } catch {}
+    try { inlineListings = JSON.parse(el.textContent).listings || [] } catch {}
   }
 
-  // Merge admin-only fields (address, etc.) from cache — the static JSON never has them
+  // Read localStorage cache (always written on every admin save/change — always fresh)
+  let cachedListings = []
   try {
-    const prev = JSON.parse(localStorage.getItem('an_listings_cache') || '{}').listings || []
-    if (prev.length) {
-      if (!_listings.length) {
-        _listings = prev
-      } else {
-        _listings.forEach(l => {
-          const p = prev.find(c => c.slug === l.slug)
-          if (p?.address)             l.address    = p.address
-          if (p?.doorFloor)           l.doorFloor  = p.doorFloor
-          if (p?.doorNum)             l.doorNum    = p.doorNum
-          if (p?.zip)                 l.zip        = p.zip
-          if (p?.order !== undefined) l.order      = p.order
-        })
-        // Add listings that only exist in cache (e.g. drafts not yet published to the static JSON)
-        const draftsOnly = prev.filter(p => !_listings.find(l => l.slug === p.slug))
-        _listings = [..._listings, ...draftsOnly]
-      }
-    }
+    cachedListings = JSON.parse(localStorage.getItem('an_listings_cache') || '{}').listings || []
   } catch {}
+
+  if (cachedListings.length) {
+    // Cache is the source of truth — it reflects every change the user has ever made
+    _listings = cachedListings
+    // Append any inline-only slugs (e.g. first load after clearing storage on a fresh device)
+    inlineListings.forEach(il => {
+      if (!_listings.find(l => l.slug === il.slug)) _listings.push(il)
+    })
+  } else {
+    // No cache (fresh install / cleared storage) — fall back to inline data
+    _listings = inlineListings
+  }
 
   // Migrate old data model (published/sold/status/type) → new (stage/type/propertyType)
   _listings.forEach(l => {
@@ -1474,7 +1472,19 @@ async function publishToWeb() {
     await ghPut(token, 'data-listings.js', dlContent, dlFile.sha, `Sync data-listings.js (${listings.length} properties)`)
     results.push('data-listings.js')
 
-    toast(`✓ ${results.length} archivos subidos — ${listings.length} propiedades. La web se actualizará en ~30 s.`, 'success')
+    // 4 — admin/index.html inline data (keeps admin in sync so it never reads stale data on reload)
+    const adminFile    = await ghGet(token, 'admin/index.html')
+    const adminContent = decodeURIComponent(escape(atob(adminFile.content.replace(/\n/g, ''))))
+    const adminUpdated = adminContent.replace(
+      /(<script[^>]+id="listings-data"[^>]*>)([\s\S]*?)(<\/script>)/,
+      `$1${inlineJson}$3`
+    )
+    if (adminUpdated !== adminContent) {
+      await ghPut(token, 'admin/index.html', adminUpdated, adminFile.sha, `Sync admin listings data (${listings.length} properties)`)
+      results.push('admin/index.html')
+    }
+
+    toast(`✓ Publicado — ${listings.length} propiedades. La web se actualizará en ~30 s.`, 'success')
   } catch (e) {
     if (e.message.includes('401') || e.message.includes('Bad credentials')) {
       sessionStorage.removeItem('an_gh_token')
