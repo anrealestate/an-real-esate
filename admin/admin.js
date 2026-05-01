@@ -919,7 +919,10 @@ function switchView(name) {
   _formDirty = false
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active', 'hidden'))
   document.getElementById('view-' + name)?.classList.add('active')
-  if (name === 'watermark') void renderLivePreview()
+  if (name === 'watermark') requestAnimationFrame(() => {
+    if (_cachedSampleImg) _paintPreview()
+    else void renderLivePreview()
+  })
 }
 
 // ── SAVE ──────────────────────────────────────
@@ -1956,63 +1959,49 @@ function drawWatermarkLogoOnCtx(ctx, logoImg, rect, opacity) {
   ctx.restore()
 }
 
-/** Escala la vista previa tipo “cover”: object-fit no cubre bien el elemento canvas en todos los navegadores. */
-function fitWmPreviewCanvas() {
-  const wrap = document.getElementById('wm-live-canvas-wrap')
-  const canvas = document.getElementById('wm-preview-canvas')
-  if (!wrap || !canvas || canvas.classList.contains('hidden')) return
-  const bw = canvas.width
-  const bh = canvas.height
-  if (!bw || !bh) return
-  const rw = wrap.clientWidth
-  const rh = wrap.clientHeight
-  if (rw < 2 || rh < 2) return
-  const scale = Math.max(rw / bw, rh / bh)
-  canvas.style.width = `${bw * scale}px`
-  canvas.style.height = `${bh * scale}px`
-}
-
-function scheduleFitWmPreviewCanvas() {
-  requestAnimationFrame(() => {
-    fitWmPreviewCanvas()
-    requestAnimationFrame(() => fitWmPreviewCanvas())
-  })
-}
-
 function initWmPreviewResizeObserver() {
   const wrap = document.getElementById('wm-live-canvas-wrap')
   if (!wrap || typeof ResizeObserver === 'undefined') return
   if (_wmPreviewResizeObs) _wmPreviewResizeObs.disconnect()
-  _wmPreviewResizeObs = new ResizeObserver(() => scheduleFitWmPreviewCanvas())
+  _wmPreviewResizeObs = new ResizeObserver(() => { if (_cachedSampleImg) _paintPreview() })
   _wmPreviewResizeObs.observe(wrap)
 }
 
-// Synchronous paint — preview solo usa el logo guardado (nunca el fallback AN aquí)
+// Synchronous paint — dibuja la imagen con lógica cover directamente al tamaño del contenedor
 function _paintPreview() {
+  const wrap   = document.getElementById('wm-live-canvas-wrap')
   const canvas = document.getElementById('wm-preview-canvas')
   const empty  = document.getElementById('wm-live-empty')
   const hintNoLogo = document.getElementById('wm-live-hint-no-logo')
-  if (!canvas || !empty || !_cachedSampleImg) return
+  if (!wrap || !canvas || !empty || !_cachedSampleImg) return
 
-  const w = _cachedSampleImg.naturalWidth  || _cachedSampleImg.width
-  const h = _cachedSampleImg.naturalHeight || _cachedSampleImg.height
+  const dw = wrap.clientWidth
+  const dh = wrap.clientHeight
+  if (dw < 2 || dh < 2) return
 
-  canvas.width = w
-  canvas.height = h
+  const dpr = window.devicePixelRatio || 1
+  canvas.width  = Math.round(dw * dpr)
+  canvas.height = Math.round(dh * dpr)
+
   const ctx = canvas.getContext('2d')
-  ctx.drawImage(_cachedSampleImg, 0, 0, w, h)
+  ctx.scale(dpr, dpr)
+
+  // Cover: escala la imagen para llenar el contenedor, centrada
+  const iw = _cachedSampleImg.naturalWidth  || _cachedSampleImg.width
+  const ih = _cachedSampleImg.naturalHeight || _cachedSampleImg.height
+  const sc = Math.max(dw / iw, dh / ih)
+  ctx.drawImage(_cachedSampleImg, (dw - iw * sc) / 2, (dh - ih * sc) / 2, iw * sc, ih * sc)
 
   if (_cachedLogoImg) {
     const sizeRatio = parseInt(document.getElementById('wm-size').value, 10) / 100
     const opacity   = parseInt(document.getElementById('wm-opacity').value, 10) / 100
-    const rect = computeWatermarkLogoRect(w, h, _cachedLogoImg, _wmPosition, sizeRatio)
+    const rect = computeWatermarkLogoRect(dw, dh, _cachedLogoImg, _wmPosition, sizeRatio)
     drawWatermarkLogoOnCtx(ctx, _cachedLogoImg, rect, opacity)
   }
 
   canvas.classList.remove('hidden')
   empty.classList.add('hidden')
   if (hintNoLogo) hintNoLogo.classList.toggle('hidden', !!_cachedLogoImg)
-  scheduleFitWmPreviewCanvas()
 }
 
 // Loads/reloads images then paints — call when logo or sample changes
@@ -2027,8 +2016,6 @@ async function renderLivePreview() {
     _cachedSampleImg = null
     _cachedLogoImg = null
     canvas.classList.add('hidden')
-    canvas.style.width = ''
-    canvas.style.height = ''
     empty.classList.remove('hidden')
     if (hintNoLogo) hintNoLogo.classList.add('hidden')
     return
@@ -2068,8 +2055,6 @@ async function renderLivePreview() {
     _cachedSampleImg = null
     _cachedLogoImg = null
     canvas.classList.add('hidden')
-    canvas.style.width = ''
-    canvas.style.height = ''
     empty.classList.remove('hidden')
     if (hintNoLogo) hintNoLogo.classList.add('hidden')
   }
