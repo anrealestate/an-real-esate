@@ -298,7 +298,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .drawer-nav {
   display: flex;
   flex-direction: column;
-  border-top: 1px solid var(--border);
 }
 .drawer-link {
   display: block;
@@ -306,8 +305,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   font-family: var(--serif);
   font-size: clamp(1.4rem, 5vw, 1.75rem);
   font-weight: 300;
-  color: var(--cream);
-  border-bottom: 1px solid var(--border);
+  color: rgba(240,235,224,.6);
   transition: color var(--fast);
   opacity: 0;
 }
@@ -319,16 +317,17 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .mobile-drawer.open .drawer-link:nth-child(3) { animation-delay: .14s; }
 .mobile-drawer.open .drawer-link:nth-child(4) { animation-delay: .19s; }
 .mobile-drawer.open .drawer-link:nth-child(5) { animation-delay: .24s; }
-.drawer-link:hover { color: var(--gold); }
-.drawer-link[aria-current="page"] { color: var(--gold); }
+.drawer-link:hover { color: var(--cream); }
+.drawer-link[aria-current="page"] { color: var(--cream); }
 
 .drawer-link--cta {
-  margin-top: .75rem;
-  padding: .85rem 1.25rem;
+  display: block;
+  width: fit-content;
+  margin: 1rem auto 0;
+  padding: .75rem 2rem;
   border: 1px solid rgba(201,169,110,.4);
   border-radius: 2px;
   color: var(--gold);
-  text-align: center;
   letter-spacing: .06em;
   font-size: var(--fs-sm);
   font-family: var(--sans);
@@ -340,12 +339,15 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   padding-top: 1.5rem;
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 .drawer-phone, .drawer-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
   font-size: var(--fs-xs);
   color: var(--muted);
-  letter-spacing: .08em;
+  letter-spacing: .06em;
   transition: color var(--fast);
 }
 .drawer-phone:hover, .drawer-wa:hover { color: var(--cream); }
