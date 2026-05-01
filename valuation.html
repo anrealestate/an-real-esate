@@ -806,7 +806,12 @@
             input.focus()
             return
           }
-          if (step.key === 'email' && val && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) { input.focus(); return }
+          if (step.key === 'email' && val && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+            input.classList.add('is-required')
+            setTimeout(function() { input.classList.remove('is-required') }, 600)
+            input.focus()
+            return
+          }
           onTextAnswer(step, val)
         }
 

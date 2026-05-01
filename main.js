@@ -131,7 +131,32 @@ if (bannerSlides.length > 1) resetBannerTimer()
 /* ================================
    Contact form
    ================================ */
-document.getElementById('contact-form')?.addEventListener('submit', async e => {
+const contactForm = document.getElementById('contact-form')
+
+if (contactForm) {
+  const nameInput  = contactForm.querySelector('[name="name"]')
+  const emailInput = contactForm.querySelector('[name="email"]')
+
+  const getLangT = () => {
+    const lang = (typeof getLang === 'function') ? getLang() : 'en'
+    return k => window.I18N?.[lang]?.[k] || window.I18N?.en?.[k] || k
+  }
+
+  emailInput?.addEventListener('blur', () => {
+    const val = emailInput.value.trim()
+    if (!val) { clearFieldError(emailInput); return }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+      showFieldError(emailInput, getLangT()('form.err.email'))
+    } else {
+      clearFieldError(emailInput)
+    }
+  })
+
+  emailInput?.addEventListener('input', () => clearFieldError(emailInput))
+  nameInput?.addEventListener('input',  () => clearFieldError(nameInput))
+}
+
+contactForm?.addEventListener('submit', async e => {
   e.preventDefault()
   const form = e.target
   const btn  = form.querySelector('button[type="submit"]')
@@ -140,13 +165,13 @@ document.getElementById('contact-form')?.addEventListener('submit', async e => {
   const name  = nameInput.value.trim()
   const email = emailInput.value.trim()
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-  let valid = true
-  if (!name)    { showFieldError(nameInput,  'Please enter your name');             valid = false } else clearFieldError(nameInput)
-  if (!emailOk) { showFieldError(emailInput, 'Please enter a valid email address'); valid = false } else clearFieldError(emailInput)
-  if (!valid) return
-
   const lang = (typeof getLang === 'function') ? getLang() : 'en'
   const t = k => window.I18N?.[lang]?.[k] || window.I18N?.en?.[k] || k
+  let valid = true
+  if (!name)    { showFieldError(nameInput,  t('form.err.name'));  valid = false } else clearFieldError(nameInput)
+  if (!emailOk) { showFieldError(emailInput, t('form.err.email')); valid = false } else clearFieldError(emailInput)
+  if (!valid) return
+
   btn.textContent = t('form.sending')
   btn.disabled    = true
 
