@@ -1436,7 +1436,7 @@ async function publishToWeb() {
   let token = sessionStorage.getItem('an_gh_token') || ''
   if (!token) {
     token = prompt('GitHub Personal Access Token (scope: repo):\n\nSe guarda en la sesión actual del navegador.')?.trim() || ''
-    if (!token) return
+    if (!token) { toast('Publicación cancelada', ''); return }
     sessionStorage.setItem('an_gh_token', token)
   }
 
@@ -1474,17 +1474,19 @@ async function publishToWeb() {
     await ghPut(token, 'data-listings.js', dlContent, dlFile.sha, `Sync data-listings.js (${listings.length} properties)`)
     results.push('data-listings.js')
 
-    // 4 — admin/index.html inline data (keeps admin in sync so it never reads stale data on reload)
-    const adminFile    = await ghGet(token, 'admin/index.html')
-    const adminContent = decodeURIComponent(escape(atob(adminFile.content.replace(/\n/g, ''))))
-    const adminUpdated = adminContent.replace(
-      /(<script[^>]+id="listings-data"[^>]*>)([\s\S]*?)(<\/script>)/,
-      `$1${inlineJson}$3`
-    )
-    if (adminUpdated !== adminContent) {
-      await ghPut(token, 'admin/index.html', adminUpdated, adminFile.sha, `Sync admin listings data (${listings.length} properties)`)
-      results.push('admin/index.html')
-    }
+    // 4 — admin/index.html inline data (best-effort — failure does not block publish success)
+    try {
+      const adminFile    = await ghGet(token, 'admin/index.html')
+      const adminContent = decodeURIComponent(escape(atob(adminFile.content.replace(/\n/g, ''))))
+      const adminUpdated = adminContent.replace(
+        /(<script[^>]+id="listings-data"[^>]*>)([\s\S]*?)(<\/script>)/,
+        `$1${inlineJson}$3`
+      )
+      if (adminUpdated !== adminContent) {
+        await ghPut(token, 'admin/index.html', adminUpdated, adminFile.sha, `Sync admin listings data (${listings.length} properties)`)
+        results.push('admin/index.html')
+      }
+    } catch { /* non-critical — admin uses localStorage cache as primary source anyway */ }
 
     toast(`✓ Publicado — ${listings.length} propiedades. La web se actualizará en ~30 s.`, 'success')
   } catch (e) {
