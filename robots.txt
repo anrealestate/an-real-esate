@@ -2,5 +2,9 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /api/
+Disallow: /admin.html
+Disallow: /visit.html
+Disallow: /og-image-generator.html
+Disallow: /property-print.html
 
 Sitemap: https://anrealestate.es/sitemap.xml

@@ -1,4 +1,5 @@
-const ALLOWED_ORIGINS = ['https://anrealestate.es', 'https://www.anrealestate.es', 'https://an-real-esate-topaz.vercel.app']
+// Canonical prod origins only (Vercel preview URLs change). Add one if you call this endpoint from a preview deploy.
+const ALLOWED_ORIGINS = ['https://anrealestate.es', 'https://www.anrealestate.es']
 
 export default async function handler(req, res) {
   const origin = req.headers.origin || ''

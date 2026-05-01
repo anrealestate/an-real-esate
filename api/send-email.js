@@ -32,7 +32,11 @@ export default async function handler(req, res) {
       body: JSON.stringify(payload)
     })
     const data = await r.json().catch(() => ({}))
-    return { ok: r.ok, status: r.status, data }
+    const msg =
+      (data && (data.message || data.error || data.name)) ||
+      (Array.isArray(data?.errors) && data.errors.map((e) => e.message).filter(Boolean).join('; ')) ||
+      ''
+    return { ok: r.ok, status: r.status, data, message: msg || undefined }
   }
 
   const results = []
@@ -51,7 +55,13 @@ export default async function handler(req, res) {
 <a href="mailto:alvaro@anrealestate.es">alvaro@anrealestate.es</a> · anrealestate.es</p>`,
       attachments: [{ filename: `HojaVisita_${safeRef}.pdf`, content: clientPdfBase64 }]
     })
-    results.push({ type: 'client', ok: r.ok, status: r.status })
+    results.push({
+      type: 'client',
+      ok: r.ok,
+      status: r.status,
+      ...(r.message && { error: r.message }),
+      ...(r.data && !r.ok && Object.keys(r.data).length && { resend: r.data }),
+    })
   }
 
   if (agentPdfBase64) {
@@ -67,8 +77,15 @@ export default async function handler(req, res) {
 <p>Adjunto encontrará el documento completo del agente con dirección y datos de verificación.</p>`,
       attachments: [{ filename: `HojaVisita_AGENTE_${safeRef}.pdf`, content: agentPdfBase64 }]
     })
-    results.push({ type: 'agent', ok: r.ok, status: r.status })
+    results.push({
+      type: 'agent',
+      ok: r.ok,
+      status: r.status,
+      ...(r.message && { error: r.message }),
+      ...(r.data && !r.ok && Object.keys(r.data).length && { resend: r.data }),
+    })
   }
 
-  return res.json({ ok: results.every(r => r.ok), results })
+  const allOk = results.length > 0 && results.every((x) => x.ok)
+  return res.status(allOk ? 200 : 502).json({ ok: allOk, results })
 }
