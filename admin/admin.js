@@ -85,6 +85,7 @@ let _wmSampleDataUrl = localStorage.getItem(WM_SAMPLE_LS_KEY) || null
 let _previewGen      = 0
 let _cachedSampleImg = null
 let _cachedLogoImg   = null
+let _wmPreviewResizeObs = null
 let _mediaItems  = []
 let _wmProcessed = []
 let _visitSort   = 'date'
@@ -1887,6 +1888,8 @@ function initWatermarkTool() {
 
   renderLivePreview()
 
+  initWmPreviewResizeObserver()
+
   fileInput.addEventListener('change', () => handleWmFiles(fileInput.files))
 
   dropArea.addEventListener('dragover', e => { e.preventDefault(); dropArea.style.borderColor = 'var(--gold)' })
@@ -1953,6 +1956,37 @@ function drawWatermarkLogoOnCtx(ctx, logoImg, rect, opacity) {
   ctx.restore()
 }
 
+/** Escala la vista previa tipo “cover”: object-fit no cubre bien el elemento canvas en todos los navegadores. */
+function fitWmPreviewCanvas() {
+  const wrap = document.getElementById('wm-live-canvas-wrap')
+  const canvas = document.getElementById('wm-preview-canvas')
+  if (!wrap || !canvas || canvas.classList.contains('hidden')) return
+  const bw = canvas.width
+  const bh = canvas.height
+  if (!bw || !bh) return
+  const rw = wrap.clientWidth
+  const rh = wrap.clientHeight
+  if (rw < 2 || rh < 2) return
+  const scale = Math.max(rw / bw, rh / bh)
+  canvas.style.width = `${bw * scale}px`
+  canvas.style.height = `${bh * scale}px`
+}
+
+function scheduleFitWmPreviewCanvas() {
+  requestAnimationFrame(() => {
+    fitWmPreviewCanvas()
+    requestAnimationFrame(() => fitWmPreviewCanvas())
+  })
+}
+
+function initWmPreviewResizeObserver() {
+  const wrap = document.getElementById('wm-live-canvas-wrap')
+  if (!wrap || typeof ResizeObserver === 'undefined') return
+  if (_wmPreviewResizeObs) _wmPreviewResizeObs.disconnect()
+  _wmPreviewResizeObs = new ResizeObserver(() => scheduleFitWmPreviewCanvas())
+  _wmPreviewResizeObs.observe(wrap)
+}
+
 // Synchronous paint — preview solo usa el logo guardado (nunca el fallback AN aquí)
 function _paintPreview() {
   const canvas = document.getElementById('wm-preview-canvas')
@@ -1978,6 +2012,7 @@ function _paintPreview() {
   canvas.classList.remove('hidden')
   empty.classList.add('hidden')
   if (hintNoLogo) hintNoLogo.classList.toggle('hidden', !!_cachedLogoImg)
+  scheduleFitWmPreviewCanvas()
 }
 
 // Loads/reloads images then paints — call when logo or sample changes
@@ -1992,6 +2027,8 @@ async function renderLivePreview() {
     _cachedSampleImg = null
     _cachedLogoImg = null
     canvas.classList.add('hidden')
+    canvas.style.width = ''
+    canvas.style.height = ''
     empty.classList.remove('hidden')
     if (hintNoLogo) hintNoLogo.classList.add('hidden')
     return
@@ -2031,6 +2068,8 @@ async function renderLivePreview() {
     _cachedSampleImg = null
     _cachedLogoImg = null
     canvas.classList.add('hidden')
+    canvas.style.width = ''
+    canvas.style.height = ''
     empty.classList.remove('hidden')
     if (hintNoLogo) hintNoLogo.classList.add('hidden')
   }
