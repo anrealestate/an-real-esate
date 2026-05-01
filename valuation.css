@@ -639,7 +639,9 @@
     text-align: center;
   }
 
-  .val-sub { margin: 0 auto; }
+  .val-sub { margin: 0 auto; text-align: center; }
+
+  .val-hero-cta { margin-left: auto; margin-right: auto; }
 
   /* Why: single column */
   .val-why-list {
