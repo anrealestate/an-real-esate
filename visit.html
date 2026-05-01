@@ -486,9 +486,8 @@
     /* ── DNI photo capture ── */
     var dniPhotoDataUrl = ''
 
-    document.getElementById('vs-photo-input').addEventListener('change', function (e) {
-      var file = e.target.files[0]
-      if (!file) return
+    function processPhotoFile(file) {
+      if (!file || !file.type.startsWith('image/')) return
       var reader = new FileReader()
       reader.onload = function (ev) {
         var img = new Image()
@@ -506,7 +505,7 @@
           preview.hidden = false
           document.getElementById('vs-photo-placeholder').hidden = true
           document.getElementById('vs-photo-change').hidden = false
-          document.getElementById('vs-photo-wrap').classList.remove('vs-photo--err')
+          document.getElementById('vs-photo-wrap').classList.remove('vs-photo--err', 'vs-photo--drag')
           document.getElementById('vs-ai-verify-wrap').hidden = false
           document.getElementById('vs-ai-result').hidden = true
           document.getElementById('vs-ai-result').className = 'vs-ai-result'
@@ -514,6 +513,19 @@
         img.src = ev.target.result
       }
       reader.readAsDataURL(file)
+    }
+
+    var photoWrap = document.getElementById('vs-photo-wrap')
+    photoWrap.addEventListener('dragover', function (e) { e.preventDefault(); photoWrap.classList.add('vs-photo--drag') })
+    photoWrap.addEventListener('dragleave', function () { photoWrap.classList.remove('vs-photo--drag') })
+    photoWrap.addEventListener('drop', function (e) {
+      e.preventDefault()
+      photoWrap.classList.remove('vs-photo--drag')
+      processPhotoFile(e.dataTransfer.files[0])
+    })
+
+    document.getElementById('vs-photo-input').addEventListener('change', function (e) {
+      processPhotoFile(e.target.files[0])
     })
 
     /* ── AI document verification ── */

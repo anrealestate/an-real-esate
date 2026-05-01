@@ -532,6 +532,7 @@ body {
 }
 .vs-photo-wrap:hover { border-color: var(--vs-gold); }
 .vs-photo--err { border-color: var(--vs-err) !important; animation: vs-shake .35s ease; }
+.vs-photo--drag { border-color: var(--vs-gold) !important; background: rgba(196,160,96,.08); }
 
 .vs-photo-placeholder {
   display: flex;
