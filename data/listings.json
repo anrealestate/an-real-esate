@@ -698,41 +698,45 @@
       "title": "Stunning Refurbished Corner Apartment on Rambla de Catalunya",
       "price": "€1,395,000",
       "ref": "AN-10007",
+      "province": "Barcelona",
+      "city": "Barcelona",
+      "zone": "Eixample",
       "neighbourhood": "Eixample, Barcelona",
       "type": "sale",
+      "propertyType": "apartment",
       "badge_type": "Apartment",
       "beds": 3,
       "baths": 3,
       "size": "150",
       "floor": "Upper",
-      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404790/an-realestate/rambla-catalunya-corner/RAMBLA_CATALUNYA-2_Pagina_01_Imagen_0001-scaled.jpg",
+      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658485/an-realestate/r4lebuljkf8vrqfgtwc4.jpg",
       "images": [
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404790/an-realestate/rambla-catalunya-corner/RAMBLA_CATALUNYA-2_Pagina_01_Imagen_0001-scaled.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658485/an-realestate/r4lebuljkf8vrqfgtwc4.jpg",
           "alt": "Stunning Refurbished Corner Apartment on Rambla de Catalunya"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404790/an-realestate/rambla-catalunya-corner/RAMBLA_CATALUNYA-2_Pagina_24_Imagen_0001-scaled.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658486/an-realestate/wdxbcppisdafcqbzhegv.jpg",
           "alt": "Stunning Refurbished Corner Apartment on Rambla de Catalunya"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404790/an-realestate/rambla-catalunya-corner/RAMBLA_CATALUNYA-2_Pagina_18_Imagen_0001-scaled.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658488/an-realestate/s0wdnd7rbhbybxwivnfy.jpg",
           "alt": "Stunning Refurbished Corner Apartment on Rambla de Catalunya"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404791/an-realestate/rambla-catalunya-corner/RAMBLA_CATALUNYA-2_Pagina_17_Imagen_0001-scaled.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658489/an-realestate/cwttlbhhqj6yxzbxaofg.jpg",
           "alt": "Stunning Refurbished Corner Apartment on Rambla de Catalunya"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404791/an-realestate/rambla-catalunya-corner/RAMBLA_CATALUNYA-2_Pagina_07_Imagen_0001-scaled.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658490/an-realestate/h1uqyf3h9iymer1cpars.jpg",
           "alt": "Stunning Refurbished Corner Apartment on Rambla de Catalunya"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404791/an-realestate/rambla-catalunya-corner/RAMBLA_CATALUNYA-2_Pagina_05_Imagen_0001-1.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658491/an-realestate/wznbihan1lqttsvw5lfx.jpg",
           "alt": "Stunning Refurbished Corner Apartment on Rambla de Catalunya"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404791/an-realestate/rambla-catalunya-corner/Captura-de-pantalla-2024-10-13-a-las-14.00.30.png",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658492/an-realestate/bpbnfdif4mtiqwg8tk9s.jpg",
           "alt": "Stunning Refurbished Corner Apartment on Rambla de Catalunya"
         }
       ],
@@ -772,18 +776,20 @@
         }
       ],
       "features": {
-        "Interior": [
+        "Climate": [
+          "Air conditioning"
+        ],
+        "Building": [
+          "Elevator",
+          "Modernist building"
+        ],
+        "Additional": [
           "High ceilings with original mouldings",
           "Marble flooring",
           "Wooden flooring",
           "Private balcony",
           "Alarm system",
-          "Air conditioning"
-        ],
-        "Building": [
-          "Elevator",
-          "Concierge service",
-          "Modernist building"
+          "Concierge service"
         ]
       },
       "nearby": [
@@ -805,10 +811,6 @@
         }
       ],
       "stage": "sold",
-      "propertyType": "apartment",
-      "province": "Barcelona",
-      "city": "Barcelona",
-      "zone": "Eixample",
       "order": 7
     },
     {
@@ -1217,37 +1219,41 @@
       "title": "Newly Renovated 3-Bedroom Apartment with Timeless Elegance in Eixample",
       "price": "€820,000",
       "ref": "AN-AN1004",
+      "province": "Barcelona",
+      "city": "Barcelona",
+      "zone": "Eixample",
       "neighbourhood": "Eixample, Barcelona",
       "type": "sale",
+      "propertyType": "apartment",
       "badge_type": "Apartment",
       "beds": 3,
       "baths": 2,
       "size": "104",
       "floor": "Upper",
-      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/eixample-villarroel/villarroel.jpg",
+      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658469/an-realestate/aqraljzsldpfbkctt0qk.jpg",
       "images": [
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/eixample-villarroel/villarroel.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658469/an-realestate/aqraljzsldpfbkctt0qk.jpg",
           "alt": "Newly Renovated 3-Bedroom Apartment with Timeless Elegance in Eixample"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404802/an-realestate/eixample-villarroel/final_cropped_image_6.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658470/an-realestate/rj4xvkoyfaryk89mruzq.jpg",
           "alt": "Newly Renovated 3-Bedroom Apartment with Timeless Elegance in Eixample"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404802/an-realestate/eixample-villarroel/final_cropped_image_7.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658471/an-realestate/ff8mpywmraxcgqngy0f8.jpg",
           "alt": "Newly Renovated 3-Bedroom Apartment with Timeless Elegance in Eixample"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404802/an-realestate/eixample-villarroel/final_cropped_image_8.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658472/an-realestate/zz71qpemmssox3obyqkf.jpg",
           "alt": "Newly Renovated 3-Bedroom Apartment with Timeless Elegance in Eixample"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404802/an-realestate/eixample-villarroel/final_cropped_image_4.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658472/an-realestate/fcj1ol54tzfuesfvv5bs.jpg",
           "alt": "Newly Renovated 3-Bedroom Apartment with Timeless Elegance in Eixample"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404802/an-realestate/eixample-villarroel/framed_plan_image_high_res.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658473/an-realestate/i3sufeakdokso1kntryp.jpg",
           "alt": "Newly Renovated 3-Bedroom Apartment with Timeless Elegance in Eixample"
         }
       ],
@@ -1291,16 +1297,16 @@
         }
       ],
       "features": {
-        "Interior": [
+        "Building": [
+          "Elevator",
+          "Modernist building"
+        ],
+        "Additional": [
           "Expansive open-plan living",
           "Master suite with walk-in closet",
           "State-of-the-art kitchen",
           "Parquet flooring",
-          "South-facing terrace"
-        ],
-        "Building": [
-          "Modernist building",
-          "Elevator",
+          "South-facing terrace",
           "Fully restored period building"
         ]
       },
@@ -1323,10 +1329,6 @@
         }
       ],
       "stage": "sold",
-      "propertyType": "apartment",
-      "province": "Barcelona",
-      "city": "Barcelona",
-      "zone": "Eixample",
       "order": 6
     },
     {
