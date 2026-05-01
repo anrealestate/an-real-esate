@@ -237,6 +237,10 @@
   flex-wrap: wrap;
   gap: .5rem;
 }
+.chat-options--inline {
+  margin-left: calc(32px + .6rem);
+  margin-top: .5rem;
+}
 .chat-opt {
   padding: .55rem 1.15rem;
   font-family: var(--sans);

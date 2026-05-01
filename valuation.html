@@ -745,7 +745,7 @@
       if (showAvatar) row.innerHTML = '<div class="chat-avatar"><span>AN</span></div>'
       var bubble = document.createElement('div')
       bubble.className = 'chat-bubble'
-      if (!showAvatar && who === 'agent') bubble.style.marginLeft = 'calc(28px + .6rem)'
+      if (!showAvatar && who === 'agent') bubble.style.marginLeft = 'calc(32px + .6rem)'
       row.appendChild(bubble)
       msgsEl.appendChild(row)
       lastWho = who
@@ -783,15 +783,18 @@
       clearInput()
       if (step.type === 'buttons') {
         var wrap = document.createElement('div')
-        wrap.className = 'chat-options'
-        step.opts.forEach(function(opt) {
-          var btn = document.createElement('button')
-          btn.className = 'chat-opt'
-          btn.textContent = opt.l
-          btn.addEventListener('click', function() { onBtnAnswer(step, opt, wrap) })
-          wrap.appendChild(btn)
+        wrap.className = 'chat-options chat-options--inline'
+        msgsEl.appendChild(wrap)
+        step.opts.forEach(function(opt, idx) {
+          setTimeout(function() {
+            var btn = document.createElement('button')
+            btn.className = 'chat-opt'
+            btn.textContent = opt.l
+            btn.addEventListener('click', function() { onBtnAnswer(step, opt, wrap) })
+            wrap.appendChild(btn)
+            scrollBottom()
+          }, idx * 180)
         })
-        inputEl.appendChild(wrap)
         scrollBottom()
       } else {
         var row = document.createElement('div')
