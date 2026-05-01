@@ -37,7 +37,7 @@
    Reset
    ================================ */
 *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; }
 body {
   font-family: var(--sans);
   font-size: var(--fs-md);
@@ -1732,6 +1732,28 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   margin-top: .3rem;
   line-height: 1.4;
 }
+
+/* ================================
+   Skip link — keyboard accelerator
+   ================================ */
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  padding: .5rem 1.25rem;
+  background: var(--gold);
+  color: var(--bg);
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: top .15s;
+}
+.skip-link:focus { top: .75rem; }
 
 /* ================================
    Focus states — keyboard navigation

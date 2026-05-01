@@ -3,6 +3,7 @@
    ============================================= */
 var I18N = {
   en: {
+    'a11y.skip': 'Skip to content',
     'nav.properties': 'Properties', 'nav.services': 'Services', 'nav.about': 'About', 'nav.contact': 'Contact',
     'prop.for_sale': 'For Sale', 'prop.for_rent': 'For Rent', 'prop.sold': 'Sold', 'prop.reserved': 'Reserved',
     'spec.bedrooms': 'Bedrooms', 'spec.bathrooms': 'Bathrooms', 'spec.built_area': 'Built area', 'spec.floor': 'Floor',
@@ -130,6 +131,7 @@ var I18N = {
     'why.07': 'A team behind. Only me in front. You just decide.',
   },
   es: {
+    'a11y.skip': 'Saltar al contenido',
     'nav.properties': 'Propiedades', 'nav.services': 'Servicios', 'nav.about': 'Sobre nosotros', 'nav.contact': 'Contacto',
     'prop.for_sale': 'En Venta', 'prop.for_rent': 'En Alquiler', 'prop.sold': 'Vendido', 'prop.reserved': 'Reservado',
     'spec.bedrooms': 'Dormitorios', 'spec.bathrooms': 'Baños', 'spec.built_area': 'Superficie', 'spec.floor': 'Planta',
@@ -257,6 +259,7 @@ var I18N = {
     'why.07': 'Detrás hay un equipo. Delante, solo yo. Tú solo decides.',
   },
   ca: {
+    'a11y.skip': 'Saltar al contingut',
     'nav.properties': 'Propietats', 'nav.services': 'Serveis', 'nav.about': 'Sobre nosaltres', 'nav.contact': 'Contacte',
     'prop.for_sale': 'En Venda', 'prop.for_rent': 'En Lloguer', 'prop.sold': 'Venut', 'prop.reserved': 'Reservat',
     'spec.bedrooms': 'Habitacions', 'spec.bathrooms': 'Banys', 'spec.built_area': 'Superfície', 'spec.floor': 'Planta',
@@ -384,6 +387,7 @@ var I18N = {
     'why.07': 'Darrere hi ha un equip. Davant, només jo. Tu només decideixes.',
   },
   fr: {
+    'a11y.skip': 'Aller au contenu',
     'nav.properties': 'Propriétés', 'nav.services': 'Services', 'nav.about': 'À propos', 'nav.contact': 'Contact',
     'prop.for_sale': 'À Vendre', 'prop.for_rent': 'À Louer', 'prop.sold': 'Vendu', 'prop.reserved': 'Réservé',
     'spec.bedrooms': 'Chambres', 'spec.bathrooms': 'Salles de bain', 'spec.built_area': 'Surface habitable', 'spec.floor': 'Étage',
@@ -511,6 +515,7 @@ var I18N = {
     'why.07': 'Une équipe derrière. Moi seul devant. Vous ne faites que décider.',
   },
   de: {
+    'a11y.skip': 'Zum Inhalt springen',
     'nav.properties': 'Immobilien', 'nav.services': 'Leistungen', 'nav.about': 'Über uns', 'nav.contact': 'Kontakt',
     'prop.for_sale': 'Zu Verkaufen', 'prop.for_rent': 'Zu Vermieten', 'prop.sold': 'Verkauft', 'prop.reserved': 'Reserviert',
     'spec.bedrooms': 'Schlafzimmer', 'spec.bathrooms': 'Badezimmer', 'spec.built_area': 'Wohnfläche', 'spec.floor': 'Etage',
@@ -638,6 +643,7 @@ var I18N = {
     'why.07': 'Ein Team dahinter. Nur ich davor. Sie entscheiden.',
   },
   it: {
+    'a11y.skip': 'Salta al contenuto',
     'nav.properties': 'Proprietà', 'nav.services': 'Servizi', 'nav.about': 'Chi siamo', 'nav.contact': 'Contatti',
     'prop.for_sale': 'In Vendita', 'prop.for_rent': 'In Affitto', 'prop.sold': 'Venduto', 'prop.reserved': 'Riservato',
     'spec.bedrooms': 'Camere', 'spec.bathrooms': 'Bagni', 'spec.built_area': 'Superficie', 'spec.floor': 'Piano',
@@ -765,6 +771,7 @@ var I18N = {
     'why.07': 'Una squadra dietro. Solo io davanti. Lei decide.',
   },
   ru: {
+    'a11y.skip': 'Перейти к содержимому',
     'nav.properties': 'Объекты', 'nav.services': 'Услуги', 'nav.about': 'О нас', 'nav.contact': 'Контакты',
     'prop.for_sale': 'Продаётся', 'prop.for_rent': 'В аренду', 'prop.sold': 'Продано', 'prop.reserved': 'Зарезервировано',
     'spec.bedrooms': 'Спальни', 'spec.bathrooms': 'Ванные', 'spec.built_area': 'Площадь', 'spec.floor': 'Этаж',
