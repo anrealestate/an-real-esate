@@ -126,7 +126,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Gràcia",
-      "order": 2
+      "order": 3
     },
     {
       "slug": "eixample-golden-square-rent",
@@ -413,7 +413,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Eixample",
-      "order": 3
+      "order": 4
     },
     {
       "slug": "sant-gervasi-galvany",
@@ -699,7 +699,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "El Born",
-      "order": 4
+      "order": 5
     },
     {
       "slug": "rambla-catalunya-corner",
@@ -817,7 +817,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Eixample",
-      "order": 5
+      "order": 6
     },
     {
       "slug": "eixample-golden-mile",
@@ -954,7 +954,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Dreta de l'Eixample",
-      "order": 6
+      "order": 7
     },
     {
       "slug": "vallvidrera-villa",
@@ -1218,7 +1218,7 @@
         }
       ],
       "stage": "active",
-      "order": 7
+      "order": 2
     },
     {
       "slug": "eixample-villarroel",
