@@ -413,7 +413,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Eixample",
-      "order": 3
+      "order": 4
     },
     {
       "slug": "sant-gervasi-galvany",
@@ -593,7 +593,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Sant Gervasi",
-      "order": 4
+      "order": 5
     },
     {
       "slug": "el-born-corner",
@@ -699,7 +699,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "El Born",
-      "order": 5
+      "order": 6
     },
     {
       "slug": "rambla-catalunya-corner",
@@ -817,7 +817,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Eixample",
-      "order": 6
+      "order": 7
     },
     {
       "slug": "eixample-golden-mile",
@@ -954,7 +954,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Dreta de l'Eixample",
-      "order": 7
+      "order": 8
     },
     {
       "slug": "vallvidrera-villa",
@@ -1222,7 +1222,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Vallvidrera",
-      "order": 8
+      "order": 3
     },
     {
       "slug": "eixample-villarroel",
