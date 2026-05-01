@@ -266,20 +266,22 @@
   font-size: var(--fs-xs);
   font-weight: 400;
   letter-spacing: .05em;
-  border: 1px solid var(--border);
-  color: var(--cream-dim);
-  background: transparent;
+  border: 1px solid rgba(240,235,224,.25);
+  color: var(--cream);
+  background: rgba(240,235,224,.06);
   cursor: pointer;
   transition: border-color var(--fast), color var(--fast), background var(--fast);
-  border-radius: 2px;
+  border-radius: 99px;
 }
 .chat-opt:hover {
   border-color: var(--gold);
   color: var(--gold);
+  background: rgba(201,169,110,.1);
 }
 .chat-opt.is-selected {
   border-color: var(--gold);
-  color: var(--gold);
+  color: var(--bg);
+  background: var(--gold);
   pointer-events: none;
 }
 .chat-opt--send {
