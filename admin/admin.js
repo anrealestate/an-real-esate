@@ -30,7 +30,7 @@ let _listings    = []
 let _editSlug    = null
 let _filter      = 'all'
 let _formDirty   = false
-let _wmPosition  = 'bottom-left'
+let _wmPosition  = localStorage.getItem('an_wm_pos') || 'bottom-left'
 let _wmAutoApply     = localStorage.getItem('an_wm_auto') === '1'
 let _wmSampleDataUrl = localStorage.getItem('an_wm_sample') || null
 let _previewGen      = 0
@@ -1612,14 +1612,23 @@ function initWatermarkTool() {
   const sizeSlider    = document.getElementById('wm-size')
   const opacitySlider = document.getElementById('wm-opacity')
 
+  // Restore saved settings
+  const savedSize    = localStorage.getItem('an_wm_size')
+  const savedOpacity = localStorage.getItem('an_wm_opacity')
+  if (savedSize)    { sizeSlider.value    = savedSize;    document.getElementById('wm-size-val').textContent    = savedSize    + '%' }
+  if (savedOpacity) { opacitySlider.value = savedOpacity; document.getElementById('wm-opacity-val').textContent = savedOpacity + '%' }
+  document.querySelectorAll('.pos-btn').forEach(b => b.classList.toggle('active', b.dataset.pos === _wmPosition))
+
   sizeSlider.addEventListener('input', () => {
     document.getElementById('wm-size-val').textContent = sizeSlider.value + '%'
+    localStorage.setItem('an_wm_size', sizeSlider.value)
     reprocessAll()
     _paintPreview()
   })
 
   opacitySlider.addEventListener('input', () => {
     document.getElementById('wm-opacity-val').textContent = opacitySlider.value + '%'
+    localStorage.setItem('an_wm_opacity', opacitySlider.value)
     reprocessAll()
     _paintPreview()
   })
@@ -1629,6 +1638,7 @@ function initWatermarkTool() {
       document.querySelectorAll('.pos-btn').forEach(b => b.classList.remove('active'))
       btn.classList.add('active')
       _wmPosition = btn.dataset.pos
+      localStorage.setItem('an_wm_pos', _wmPosition)
       reprocessAll()
       _paintPreview()
     })
