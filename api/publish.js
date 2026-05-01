@@ -1,4 +1,9 @@
-// Canonical prod origins only (Vercel preview URLs change). Add one if you call this endpoint from a preview deploy.
+// Server-side publish endpoint (alternative to the client-side publishToWeb() in admin.js).
+// Currently NOT called by the admin — admin.js publishes directly via GitHub API using the
+// user's personal token stored in localStorage. This endpoint uses the server GITHUB_TOKEN
+// env var instead, which is more secure. Wire it up in admin.js if you want to move the
+// token off the browser.
+// Canonical prod origins only — add a preview URL here if you call it from a Vercel preview deploy.
 const ALLOWED_ORIGINS = ['https://anrealestate.es', 'https://www.anrealestate.es']
 
 export default async function handler(req, res) {
