@@ -19,6 +19,22 @@ const CLD_PRESET        = 'f3eiclx5'
 const CLD_UPLOAD_URL    = `https://api.cloudinary.com/v1_1/${CLD_CLOUD}/image/upload`
 const MEDIA_KEY         = 'an_media_library'
 const VISITS_KEY        = 'an_visits'
+/** Vista previa watermark: v2 ignora muestras viejas que suelen traer la marca AN ya “quemada”. */
+const WM_SAMPLE_LS_KEY    = 'an_wm_sample_v2'
+const WM_SAMPLE_LS_LEGACY = 'an_wm_sample'
+/** Al cambiar versión se borran todas las muestras guardadas una vez (marca quemada en el JPG). */
+const WM_SAMPLE_SCHEMA_KEY = 'an_wm_sample_schema'
+const WM_SAMPLE_SCHEMA_VER = '4'
+
+function migrateWmSampleStorageOnce() {
+  try {
+    if (localStorage.getItem(WM_SAMPLE_SCHEMA_KEY) === WM_SAMPLE_SCHEMA_VER) return
+    localStorage.removeItem(WM_SAMPLE_LS_KEY)
+    localStorage.removeItem(WM_SAMPLE_LS_LEGACY)
+    localStorage.setItem(WM_SAMPLE_SCHEMA_KEY, WM_SAMPLE_SCHEMA_VER)
+  } catch { /* ignore */ }
+}
+migrateWmSampleStorageOnce()
 
 function escHtml(s) {
   return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')
@@ -65,7 +81,7 @@ let _filter      = 'all'
 let _formDirty   = false
 let _wmPosition  = localStorage.getItem('an_wm_pos') || 'bottom-left'
 let _wmAutoApply     = localStorage.getItem('an_wm_auto') === '1'
-let _wmSampleDataUrl = localStorage.getItem('an_wm_sample') || null
+let _wmSampleDataUrl = localStorage.getItem(WM_SAMPLE_LS_KEY) || null
 let _previewGen      = 0
 let _cachedSampleImg = null
 let _cachedLogoImg   = null
@@ -1757,6 +1773,10 @@ function initWatermarkTool() {
   const sizeSlider    = document.getElementById('wm-size')
   const opacitySlider = document.getElementById('wm-opacity')
 
+  try {
+    localStorage.removeItem(WM_SAMPLE_LS_LEGACY)
+  } catch { /* ignore */ }
+
   // Restore saved settings
   const savedSize    = localStorage.getItem('an_wm_size')
   const savedOpacity = localStorage.getItem('an_wm_opacity')
@@ -1833,8 +1853,21 @@ function initWatermarkTool() {
   function setSampleBtnText(hasImage) {
     const t = document.getElementById('wm-sample-btn-text')
     if (t) t.textContent = hasImage ? 'Cambiar imagen' : 'Subir imagen de ejemplo'
+    document.getElementById('wm-sample-clear')?.classList.toggle('hidden', !hasImage)
   }
   setSampleBtnText(!!_wmSampleDataUrl)
+
+  document.getElementById('wm-sample-clear')?.addEventListener('click', () => {
+    _wmSampleDataUrl = null
+    _cachedSampleImg = null
+    try {
+      localStorage.removeItem(WM_SAMPLE_LS_KEY)
+      localStorage.removeItem(WM_SAMPLE_LS_LEGACY)
+    } catch { /* ignore */ }
+    setSampleBtnText(false)
+    renderLivePreview()
+    toast('Ejemplo eliminado. Sube una foto original sin marca para la vista previa.', '')
+  })
 
   document.getElementById('wm-sample-file').addEventListener('change', e => {
     const file = e.target.files[0]
@@ -1843,7 +1876,9 @@ function initWatermarkTool() {
     const reader = new FileReader()
     reader.onload = ev => {
       _wmSampleDataUrl = ev.target.result
-      try { localStorage.setItem('an_wm_sample', _wmSampleDataUrl) } catch { /* quota */ }
+      try {
+        localStorage.setItem(WM_SAMPLE_LS_KEY, _wmSampleDataUrl)
+      } catch { /* quota */ }
       setSampleBtnText(true)
       renderLivePreview()
     }
@@ -1909,11 +1944,11 @@ function drawWatermarkLogoOnCtx(ctx, logoImg, rect, opacity) {
   const { x, y, w, h } = rect
   ctx.save()
   ctx.globalAlpha = opacity
-  const blur = Math.max(3, Math.min(14, w * 0.015))
-  ctx.shadowColor = 'rgba(0,0,0,0.55)'
+  const blur = Math.max(10, Math.min(36, w * 0.048))
+  ctx.shadowColor = 'rgba(0,0,0,0.82)'
   ctx.shadowBlur = blur
   ctx.shadowOffsetX = 0
-  ctx.shadowOffsetY = Math.max(1, blur * 0.22)
+  ctx.shadowOffsetY = Math.max(3, blur * 0.38)
   ctx.drawImage(logoImg, x, y, w, h)
   ctx.restore()
 }

@@ -700,14 +700,17 @@
           <div class="wm-live-preview">
             <div class="wm-live-header">
               <span class="wm-live-title">Vista previa</span>
-              <label class="wm-sample-btn" id="wm-sample-label">
-                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
-                <span id="wm-sample-btn-text">Subir imagen de ejemplo</span>
-                <input type="file" id="wm-sample-file" accept="image/*" />
-              </label>
+              <div class="wm-live-header-actions">
+                <button type="button" class="wm-sample-clear hidden" id="wm-sample-clear">Quitar ejemplo</button>
+                <label class="wm-sample-btn" id="wm-sample-label">
+                  <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+                  <span id="wm-sample-btn-text">Subir imagen de ejemplo</span>
+                  <input type="file" id="wm-sample-file" accept="image/*" />
+                </label>
+              </div>
             </div>
             <p class="wm-live-hint hidden" id="wm-live-hint-no-logo">Sube un logo arriba para verlo aquí. La marca por defecto AN solo se usa al procesar fotos si no hay logo personalizado.</p>
-            <p class="wm-live-footnote">Si aparecen dos marcas, la imagen de ejemplo puede estar ya procesada: vuelve a subir una foto original sin marca.</p>
+            <p class="wm-live-footnote">La vista previa solo dibuja <strong>una</strong> vez tu archivo de logo. Si aparece «AN» muy pegado debajo del nombre, suele ser el <strong>propio PNG del logo</strong> (abre el archivo y comprueba) o una <strong>foto de ejemplo</strong> ya marcada: usa <strong>Quitar ejemplo</strong> y sube un JPG sin procesar.</p>
             <div class="wm-live-canvas-wrap" id="wm-live-canvas-wrap">
               <canvas id="wm-preview-canvas" class="hidden"></canvas>
               <div class="wm-live-empty" id="wm-live-empty">
