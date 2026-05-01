@@ -133,8 +133,12 @@
       "title": "Refined Luxury in Barcelona's Golden Square",
       "price": "€7,700",
       "ref": "AN-46749",
+      "province": "Barcelona",
+      "city": "Barcelona",
+      "zone": "Eixample",
       "neighbourhood": "Eixample, Barcelona",
       "type": "rent",
+      "propertyType": "apartment",
       "badge_type": "Apartment",
       "beds": 3,
       "baths": 3,
@@ -335,6 +339,7 @@
           "alt": "Refined Luxury in Barcelona's Golden Square"
         }
       ],
+      "youtubeUrl": "https://youtu.be/wfIJzfqOryw",
       "description": [
         "Newly renovated principal-floor apartment on the prestigious Rambla de Catalunya, in the heart of Barcelona's Golden Square. A curated masterpiece blending period elegance with contemporary design.",
         "Spacious living and dining room with characteristic Eixample balconies overlooking the boulevard, an independent fully equipped kitchen, three double bedrooms with bespoke built-in wardrobes, and three contemporary bathrooms.",
@@ -375,7 +380,7 @@
         }
       ],
       "features": {
-        "Interior": [
+        "Additional": [
           "Spacious living & dining room",
           "Eixample balconies",
           "Fully equipped kitchen",
@@ -383,9 +388,7 @@
           "Bespoke built-in wardrobes",
           "Solid wooden floors",
           "High ceilings",
-          "Double glazing"
-        ],
-        "Climate": [
+          "Double glazing",
           "Ducted air conditioning",
           "Central heating"
         ]
@@ -409,10 +412,6 @@
         }
       ],
       "stage": "active",
-      "propertyType": "apartment",
-      "province": "Barcelona",
-      "city": "Barcelona",
-      "zone": "Eixample",
       "order": 4
     },
     {
