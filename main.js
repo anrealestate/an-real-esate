@@ -206,6 +206,15 @@ contactForm?.addEventListener('submit', async e => {
   } catch {
     btn.textContent = t('form.error')
     btn.disabled    = false
+    const submitWrap = form.querySelector('.join-submit')
+    if (submitWrap && !submitWrap.querySelector('.form-error-alt')) {
+      const alt = document.createElement('p')
+      alt.className = 'form-error-alt'
+      alt.innerHTML = t('form.error.alt')
+        .replace('{wa}',    'https://wa.me/34628020434')
+        .replace('{email}', 'mailto:alvaro@anrealestate.es')
+      submitWrap.appendChild(alt)
+    }
     setTimeout(() => { btn.textContent = t('contact.submit') }, 4000)
   }
 })

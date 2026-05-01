@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Not Found — AN Real Estate</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <script src="i18n.js"></script>
+  <style>
+    .notfound-wrap {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(2rem, 8vw, 6rem) var(--pad);
+      text-align: center;
+    }
+    .notfound-num {
+      font-family: var(--serif);
+      font-size: clamp(6rem, 20vw, 14rem);
+      line-height: 1;
+      color: var(--gold);
+      opacity: .18;
+      user-select: none;
+      letter-spacing: -.03em;
+    }
+    .notfound-title {
+      font-family: var(--serif);
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      color: var(--cream);
+      margin-top: -1rem;
+      letter-spacing: -.01em;
+    }
+    .notfound-sub {
+      margin-top: 1rem;
+      color: var(--muted);
+      font-size: var(--fs-sm);
+      max-width: 36ch;
+    }
+    .notfound-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2.5rem;
+    }
+    .notfound-sep {
+      width: 1px;
+      height: 40px;
+      background: var(--border);
+      align-self: center;
+    }
+    @media (max-width: 480px) {
+      .notfound-sep { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link" data-i18n="a11y.skip">Skip to content</a>
+
+  <!-- HEADER -->
+  <header class="header scrolled" id="site-header">
+    <div class="holder">
+      <div class="header-block">
+        <div class="header-left">
+          <nav class="hn-left" aria-label="Primary left">
+            <a href="index.html#properties" class="hn-link" data-i18n="nav.properties">Properties</a>
+            <a href="index.html#services"   class="hn-link" data-i18n="nav.services">Services</a>
+          </nav>
+        </div>
+        <a href="index.html" class="header-logo">
+          <img src="logo.svg" alt="AN Real Estate" class="header-logo-img" />
+        </a>
+        <div class="header-right">
+          <nav class="hn-right" aria-label="Primary right">
+            <a href="about.html"     class="hn-link" data-i18n="nav.about">About</a>
+            <a href="valuation.html" class="hn-link hn-link--cta" data-i18n="nav.valuation">Sell with me</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <div class="notfound-wrap">
+      <p class="notfound-num" aria-hidden="true">404</p>
+      <h1 class="notfound-title" data-i18n="notfound.title">Page not found.</h1>
+      <p class="notfound-sub" data-i18n="notfound.sub">The page you're looking for doesn't exist or may have moved.</p>
+      <div class="notfound-actions">
+        <a href="index.html" class="button" data-i18n="notfound.home">Back to Home</a>
+        <div class="notfound-sep" aria-hidden="true"></div>
+        <a href="index.html#properties" class="button button--outline" data-i18n="nav.properties">Properties</a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+  ;(function(){
+    var lang = localStorage.getItem('an_lang') || navigator.language.slice(0,2) || 'en'
+    if (window.I18N && !window.I18N[lang]) lang = 'en'
+    if (window.applyI18n) applyI18n(lang)
+    else if (window.I18N) {
+      var L = window.I18N[lang] || window.I18N.en || {}
+      document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        var k = el.getAttribute('data-i18n'); if (L[k]) el.textContent = L[k]
+      })
+    }
+  })()
+  </script>
+</body>
+</html>

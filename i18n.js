@@ -4,6 +4,7 @@
 var I18N = {
   en: {
     'a11y.skip': 'Skip to content',
+    'notfound.title': 'Page not found.', 'notfound.sub': "The page you're looking for doesn't exist or may have moved.", 'notfound.home': 'Back to Home',
     'nav.properties': 'Properties', 'nav.services': 'Services', 'nav.about': 'About', 'nav.contact': 'Contact',
     'prop.for_sale': 'For Sale', 'prop.for_rent': 'For Rent', 'prop.sold': 'Sold', 'prop.reserved': 'Reserved',
     'spec.bedrooms': 'Bedrooms', 'spec.bathrooms': 'Bathrooms', 'spec.built_area': 'Built area', 'spec.floor': 'Floor',
@@ -80,6 +81,7 @@ var I18N = {
     'contact.submit': 'Send Message',
     'form.sending': 'Sending…', 'form.sent': 'Message Sent ✓', 'form.error': 'Error — try again',
     'form.err.name': 'Please enter your name', 'form.err.email': 'Please enter a valid email address',
+    'form.error.alt': 'Or reach me directly: <a href="{wa}" target="_blank" rel="noopener">WhatsApp</a> · <a href="{email}">alvaro@anrealestate.es</a>',
     'form.toast_contact': "Message sent — I'll be in touch shortly.",
     'form.request_submit': 'Request Viewing',
     'form.requesting': 'Sending…', 'form.requested': 'Request Sent ✓',
@@ -133,6 +135,7 @@ var I18N = {
   },
   es: {
     'a11y.skip': 'Saltar al contenido',
+    'notfound.title': 'Página no encontrada.', 'notfound.sub': 'La página que buscas no existe o puede que haya cambiado.', 'notfound.home': 'Volver al inicio',
     'nav.properties': 'Propiedades', 'nav.services': 'Servicios', 'nav.about': 'Sobre nosotros', 'nav.contact': 'Contacto',
     'prop.for_sale': 'En Venta', 'prop.for_rent': 'En Alquiler', 'prop.sold': 'Vendido', 'prop.reserved': 'Reservado',
     'spec.bedrooms': 'Dormitorios', 'spec.bathrooms': 'Baños', 'spec.built_area': 'Superficie', 'spec.floor': 'Planta',
@@ -209,6 +212,7 @@ var I18N = {
     'contact.submit': 'Enviar Mensaje',
     'form.sending': 'Enviando…', 'form.sent': 'Mensaje enviado ✓', 'form.error': 'Error — inténtalo de nuevo',
     'form.err.name': 'Indica tu nombre', 'form.err.email': 'Escribe un email válido',
+    'form.error.alt': 'O escríbeme directamente: <a href="{wa}" target="_blank" rel="noopener">WhatsApp</a> · <a href="{email}">alvaro@anrealestate.es</a>',
     'form.toast_contact': 'Mensaje enviado — me pondré en contacto pronto.',
     'form.request_submit': 'Solicitar visita',
     'form.requesting': 'Enviando…', 'form.requested': 'Solicitud enviada ✓',
@@ -262,6 +266,7 @@ var I18N = {
   },
   ca: {
     'a11y.skip': 'Saltar al contingut',
+    'notfound.title': 'Pàgina no trobada.', 'notfound.sub': "La pàgina que cerques no existeix o pot haver-se mogut.", 'notfound.home': 'Tornar a l\'inici',
     'nav.properties': 'Propietats', 'nav.services': 'Serveis', 'nav.about': 'Sobre nosaltres', 'nav.contact': 'Contacte',
     'prop.for_sale': 'En Venda', 'prop.for_rent': 'En Lloguer', 'prop.sold': 'Venut', 'prop.reserved': 'Reservat',
     'spec.bedrooms': 'Habitacions', 'spec.bathrooms': 'Banys', 'spec.built_area': 'Superfície', 'spec.floor': 'Planta',
@@ -338,6 +343,7 @@ var I18N = {
     'contact.submit': 'Enviar Missatge',
     'form.sending': 'Enviant…', 'form.sent': 'Missatge enviat ✓', 'form.error': 'Error — torna-ho a intentar',
     'form.err.name': 'Indica el teu nom', 'form.err.email': 'Escriu un email vàlid',
+    'form.error.alt': 'O escriu-me directament: <a href="{wa}" target="_blank" rel="noopener">WhatsApp</a> · <a href="{email}">alvaro@anrealestate.es</a>',
     'form.toast_contact': "Missatge enviat — em posaré en contacte aviat.",
     'form.request_submit': 'Sol·licitar visita',
     'form.requesting': 'Enviant…', 'form.requested': 'Sol·licitud enviada ✓',
@@ -391,6 +397,7 @@ var I18N = {
   },
   fr: {
     'a11y.skip': 'Aller au contenu',
+    'notfound.title': 'Page introuvable.', 'notfound.sub': "La page que vous recherchez n'existe pas ou a peut-être été déplacée.", 'notfound.home': "Retour à l'accueil",
     'nav.properties': 'Propriétés', 'nav.services': 'Services', 'nav.about': 'À propos', 'nav.contact': 'Contact',
     'prop.for_sale': 'À Vendre', 'prop.for_rent': 'À Louer', 'prop.sold': 'Vendu', 'prop.reserved': 'Réservé',
     'spec.bedrooms': 'Chambres', 'spec.bathrooms': 'Salles de bain', 'spec.built_area': 'Surface habitable', 'spec.floor': 'Étage',
@@ -467,6 +474,7 @@ var I18N = {
     'contact.submit': 'Envoyer',
     'form.sending': 'Envoi…', 'form.sent': 'Message envoyé ✓', 'form.error': 'Erreur — réessayez',
     'form.err.name': 'Veuillez indiquer votre nom', 'form.err.email': 'Veuillez entrer un email valide',
+    'form.error.alt': 'Ou contactez-moi directement : <a href="{wa}" target="_blank" rel="noopener">WhatsApp</a> · <a href="{email}">alvaro@anrealestate.es</a>',
     'form.toast_contact': "Message envoyé — je vous contacterai bientôt.",
     'form.request_submit': 'Demander une visite',
     'form.requesting': 'Envoi…', 'form.requested': 'Demande envoyée ✓',
@@ -520,6 +528,7 @@ var I18N = {
   },
   de: {
     'a11y.skip': 'Zum Inhalt springen',
+    'notfound.title': 'Seite nicht gefunden.', 'notfound.sub': 'Die gesuchte Seite existiert nicht oder wurde verschoben.', 'notfound.home': 'Zurück zur Startseite',
     'nav.properties': 'Immobilien', 'nav.services': 'Leistungen', 'nav.about': 'Über uns', 'nav.contact': 'Kontakt',
     'prop.for_sale': 'Zu Verkaufen', 'prop.for_rent': 'Zu Vermieten', 'prop.sold': 'Verkauft', 'prop.reserved': 'Reserviert',
     'spec.bedrooms': 'Schlafzimmer', 'spec.bathrooms': 'Badezimmer', 'spec.built_area': 'Wohnfläche', 'spec.floor': 'Etage',
@@ -596,6 +605,7 @@ var I18N = {
     'contact.submit': 'Nachricht Senden',
     'form.sending': 'Wird gesendet…', 'form.sent': 'Nachricht gesendet ✓', 'form.error': 'Fehler — erneut versuchen',
     'form.err.name': 'Bitte Namen eingeben', 'form.err.email': 'Bitte gültige E-Mail eingeben',
+    'form.error.alt': 'Oder direkt kontaktieren: <a href="{wa}" target="_blank" rel="noopener">WhatsApp</a> · <a href="{email}">alvaro@anrealestate.es</a>',
     'form.toast_contact': "Nachricht gesendet — ich melde mich in Kürze.",
     'form.request_submit': 'Besichtigung anfragen',
     'form.requesting': 'Wird gesendet…', 'form.requested': 'Anfrage gesendet ✓',
@@ -649,6 +659,7 @@ var I18N = {
   },
   it: {
     'a11y.skip': 'Salta al contenuto',
+    'notfound.title': 'Pagina non trovata.', 'notfound.sub': 'La pagina che stai cercando non esiste o potrebbe essere stata spostata.', 'notfound.home': 'Torna alla home',
     'nav.properties': 'Proprietà', 'nav.services': 'Servizi', 'nav.about': 'Chi siamo', 'nav.contact': 'Contatti',
     'prop.for_sale': 'In Vendita', 'prop.for_rent': 'In Affitto', 'prop.sold': 'Venduto', 'prop.reserved': 'Riservato',
     'spec.bedrooms': 'Camere', 'spec.bathrooms': 'Bagni', 'spec.built_area': 'Superficie', 'spec.floor': 'Piano',
@@ -725,6 +736,7 @@ var I18N = {
     'contact.submit': 'Invia Messaggio',
     'form.sending': 'Invio…', 'form.sent': 'Messaggio inviato ✓', 'form.error': 'Errore — riprova',
     'form.err.name': 'Inserisci il tuo nome', 'form.err.email': "Inserisci un'email valida",
+    'form.error.alt': 'O contattami direttamente: <a href="{wa}" target="_blank" rel="noopener">WhatsApp</a> · <a href="{email}">alvaro@anrealestate.es</a>',
     'form.toast_contact': "Messaggio inviato — ti contatterò presto.",
     'form.request_submit': 'Richiedi visita',
     'form.requesting': 'Invio…', 'form.requested': 'Richiesta inviata ✓',
@@ -778,6 +790,7 @@ var I18N = {
   },
   ru: {
     'a11y.skip': 'Перейти к содержимому',
+    'notfound.title': 'Страница не найдена.', 'notfound.sub': 'Страница, которую вы ищете, не существует или была перемещена.', 'notfound.home': 'На главную',
     'nav.properties': 'Объекты', 'nav.services': 'Услуги', 'nav.about': 'О нас', 'nav.contact': 'Контакты',
     'prop.for_sale': 'Продаётся', 'prop.for_rent': 'В аренду', 'prop.sold': 'Продано', 'prop.reserved': 'Зарезервировано',
     'spec.bedrooms': 'Спальни', 'spec.bathrooms': 'Ванные', 'spec.built_area': 'Площадь', 'spec.floor': 'Этаж',
@@ -854,6 +867,7 @@ var I18N = {
     'contact.submit': 'Отправить сообщение',
     'form.sending': 'Отправка…', 'form.sent': 'Сообщение отправлено ✓', 'form.error': 'Ошибка — попробуйте снова',
     'form.err.name': 'Пожалуйста, введите имя', 'form.err.email': 'Пожалуйста, введите корректный email',
+    'form.error.alt': 'Или свяжитесь напрямую: <a href="{wa}" target="_blank" rel="noopener">WhatsApp</a> · <a href="{email}">alvaro@anrealestate.es</a>',
     'form.toast_contact': "Сообщение отправлено — я свяжусь с вами.",
     'form.request_submit': 'Записаться на просмотр',
     'form.requesting': 'Отправка…', 'form.requested': 'Заявка отправлена ✓',

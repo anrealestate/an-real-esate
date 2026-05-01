@@ -1773,3 +1773,13 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .wa-fab:focus-visible         { outline: 3px solid var(--gold); outline-offset: 5px; }
 .mob-nav-icon:focus-visible   { outline: 2px solid var(--gold); outline-offset: 4px; }
 .link-flash:focus-visible     { outline: 2px solid var(--gold); outline-offset: 4px; }
+
+.form-error-alt {
+  margin-top: .75rem;
+  font-size: var(--fs-2xs);
+  letter-spacing: .04em;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.form-error-alt a { color: var(--gold); text-decoration: none; }
+.form-error-alt a:hover { text-decoration: underline; }
