@@ -293,6 +293,10 @@
   border-color: rgba(201,169,110,.5);
   background: rgba(240,235,224,.08);
 }
+.chat-input-row.is-disabled {
+  opacity: .3;
+  pointer-events: none;
+}
 
 .chat-input {
   flex: 1;

@@ -202,6 +202,12 @@
           </div>
           <div class="chat-messages" id="chat-messages" aria-live="polite"></div>
           <div id="chat-input-area"></div>
+          <div class="chat-input-row is-disabled" id="chat-input-row">
+            <input type="text" class="chat-input" id="chat-input-static" placeholder="" disabled />
+            <button class="chat-send-btn" id="chat-send-btn" type="button">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
         </div>
         <!-- DIRECT CONTACT STRIP -->
         <div class="val-direct">
@@ -715,8 +721,38 @@
 
     var msgsEl        = document.getElementById('chat-messages')
     var inputEl       = document.getElementById('chat-input-area')
+    var inputRow      = document.getElementById('chat-input-row')
+    var chatInput     = document.getElementById('chat-input-static')
+    var sendBtn       = document.getElementById('chat-send-btn')
     var restartWrap   = document.getElementById('chat-restart-wrap')
     var restartBtn    = document.getElementById('chat-restart-btn')
+    var currentStep   = null
+
+    function submitCurrent() {
+      if (!currentStep || currentStep.type === 'buttons') return
+      var val = chatInput.value.trim()
+      if (!val && !currentStep.optional && !currentStep.skip) {
+        chatInput.classList.add('is-required')
+        setTimeout(function() { chatInput.classList.remove('is-required') }, 600)
+        chatInput.focus()
+        return
+      }
+      if (currentStep.key === 'email' && val && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+        chatInput.classList.add('is-required')
+        setTimeout(function() { chatInput.classList.remove('is-required') }, 600)
+        chatInput.focus()
+        return
+      }
+      onTextAnswer(currentStep, val)
+    }
+    sendBtn.addEventListener('click', submitCurrent)
+    chatInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        var pac = document.querySelector('.pac-container')
+        if (pac && pac.getBoundingClientRect().height > 0) return
+        submitCurrent()
+      }
+    })
     function showRestartBtn() {
       if (restartWrap) restartWrap.hidden = false
     }
@@ -777,11 +813,24 @@
       return new Promise(function(resolve) { setTimeout(resolve, ms || 300) })
     }
 
-    function clearInput() { inputEl.innerHTML = '' }
+    function clearInput() {
+      chatInput.value = ''
+      chatInput.disabled = true
+      chatInput.type = 'text'
+      chatInput.placeholder = ''
+      inputRow.classList.add('is-disabled')
+      inputEl.innerHTML = ''
+      currentStep = null
+    }
 
     function renderInput(step) {
-      clearInput()
+      currentStep = step
+      inputEl.innerHTML = ''
+
       if (step.type === 'buttons') {
+        chatInput.disabled = true
+        chatInput.placeholder = ''
+        inputRow.classList.add('is-disabled')
         var wrap = document.createElement('div')
         wrap.className = 'chat-options chat-options--inline'
         msgsEl.appendChild(wrap)
@@ -797,54 +846,18 @@
         })
         scrollBottom()
       } else {
-        var row = document.createElement('div')
-        row.className = 'chat-input-row'
+        chatInput.disabled = false
+        chatInput.type = step.type || 'text'
+        chatInput.value = ''
+        chatInput.placeholder = step.ph || ''
+        if (step.type === 'number') { chatInput.min = '1'; chatInput.inputMode = 'numeric' }
+        else { chatInput.removeAttribute('min'); chatInput.inputMode = '' }
+        inputRow.classList.remove('is-disabled')
 
-        var input = document.createElement('input')
-        input.type = step.type || 'text'
-        input.className = 'chat-input'
-        input.placeholder = step.ph || ''
-        if (step.type === 'number') { input.min = '1'; input.inputMode = 'numeric' }
-
-        var arrow = document.createElement('button')
-        arrow.className = 'chat-send-btn'
-        arrow.type = 'button'
-        arrow.innerHTML = '<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>'
-
-        function submit() {
-          var val = input.value.trim()
-          if (!val && !step.optional && !step.skip) {
-            input.classList.add('is-required')
-            setTimeout(function() { input.classList.remove('is-required') }, 600)
-            input.focus()
-            return
-          }
-          if (step.key === 'email' && val && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
-            input.classList.add('is-required')
-            setTimeout(function() { input.classList.remove('is-required') }, 600)
-            input.focus()
-            return
-          }
-          onTextAnswer(step, val)
-        }
-
-        arrow.addEventListener('click', submit)
-        input.addEventListener('keydown', function(e) {
-          if (e.key === 'Enter') {
-            var pac = document.querySelector('.pac-container')
-            if (pac && pac.getBoundingClientRect().height > 0) return
-            submit()
-          }
-        })
-        row.appendChild(input)
-        row.appendChild(arrow)
-        inputEl.appendChild(row)
-
-        /* Google Places autocomplete for address field */
         if (step.key === 'address') {
           function tryAutocomplete() {
             if (window.google && window.google.maps && window.google.maps.places) {
-              var ac = new google.maps.places.Autocomplete(input, {
+              var ac = new google.maps.places.Autocomplete(chatInput, {
                 types: ['geocode'],
                 componentRestrictions: { country: 'es' },
                 fields: ['formatted_address']
@@ -852,8 +865,8 @@
               ac.addListener('place_changed', function() {
                 var place = ac.getPlace()
                 if (place && place.formatted_address) {
-                  input.value = place.formatted_address
-                  input.focus()
+                  chatInput.value = place.formatted_address
+                  chatInput.focus()
                 }
               })
             } else {
@@ -871,7 +884,7 @@
           inputEl.appendChild(skipBtn)
         }
 
-        setTimeout(function() { if (chatInView()) input.focus({ preventScroll: true }) }, 80)
+        setTimeout(function() { if (chatInView()) chatInput.focus({ preventScroll: true }) }, 80)
       }
     }
 
