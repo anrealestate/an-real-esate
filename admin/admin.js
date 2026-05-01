@@ -1433,11 +1433,11 @@ async function ghPut(token, path, content, sha, message) {
 
 async function publishToWeb() {
   // Get or ask for GitHub token (stored locally, never leaves the browser)
-  let token = sessionStorage.getItem('an_gh_token') || ''
+  let token = localStorage.getItem('an_gh_token') || ''
   if (!token) {
-    token = prompt('GitHub Personal Access Token (scope: repo):\n\nSe guarda en la sesión actual del navegador.')?.trim() || ''
+    token = prompt('GitHub Personal Access Token (scope: repo):\n\nSólo se pide una vez — se guarda en este navegador.')?.trim() || ''
     if (!token) { toast('Publicación cancelada', ''); return }
-    sessionStorage.setItem('an_gh_token', token)
+    localStorage.setItem('an_gh_token', token)
   }
 
   const btn = document.getElementById('publish-btn')
@@ -1491,7 +1491,7 @@ async function publishToWeb() {
     toast(`✓ Publicado — ${listings.length} propiedades. La web se actualizará en ~30 s.`, 'success')
   } catch (e) {
     if (e.message.includes('401') || e.message.includes('Bad credentials')) {
-      sessionStorage.removeItem('an_gh_token')
+      localStorage.removeItem('an_gh_token')
       toast('Token inválido — eliminado. Intenta de nuevo para introducir uno nuevo.', 'error')
     } else {
       toast('Error al subir: ' + e.message, 'error')
