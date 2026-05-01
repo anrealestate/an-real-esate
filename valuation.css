@@ -217,7 +217,6 @@
 .chat-msg--agent .chat-bubble {
   background: rgba(240,235,224,.05);
   color: var(--cream);
-  border: 1px solid var(--border);
   border-bottom-left-radius: 0;
 }
 .chat-msg--user .chat-bubble {
