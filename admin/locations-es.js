@@ -8,7 +8,9 @@ var LOCATIONS_ES = {
     'Huelva','Huesca','Jaén','León','Lleida','La Rioja','Lugo','Madrid','Málaga',
     'Melilla','Murcia','Navarra','Ourense','Palencia','Las Palmas','Pontevedra',
     'Salamanca','Santa Cruz de Tenerife','Segovia','Sevilla','Soria','Tarragona',
-    'Teruel','Toledo','Valencia','Valladolid','Vizcaya','Zamora','Zaragoza'
+    'Teruel','Toledo','Valencia','Valladolid','Vizcaya','Zamora','Zaragoza',
+    /* ── USA ── */
+    'Florida'
   ],
 
   cities: {
@@ -64,6 +66,13 @@ var LOCATIONS_ES = {
     'Vizcaya': ['Bilbao','Getxo','Barakaldo','Basauri','Leioa','Santurtzi','Portugalete','Sestao','Galdakao','Durango','Berango','Sopelana','Plentzia','Gorliz'],
     'Zamora': ['Zamora','Benavente'],
     'Zaragoza': ['Zaragoza','Huesca','Calatayud','Ejea de los Caballeros','Tarazona'],
+    /* ── USA ── */
+    'Florida': [
+      'Miami','Miami Beach','Coral Gables','Coconut Grove','Brickell',
+      'Key Biscayne','Aventura','Bal Harbour','Sunny Isles Beach','Surfside',
+      'Bay Harbor Islands','Fisher Island','Edgewater','Wynwood','Design District',
+      'Doral','Hialeah','North Miami Beach','Pinecrest','South Miami'
+    ],
   },
 
   zones: {
@@ -201,5 +210,35 @@ var LOCATIONS_ES = {
     'Salou': ['Centro','Cap Salou','Cala Font','La Pineda'],
     'Cambrils': ['Centro','Cap de Sant Pere','Cambrils Port','Vilafortuny'],
     'Tarragona': ['Centro','Part Alta','Eixample','Torreforta','Bonavista'],
+    /* ── FLORIDA / MIAMI ── */
+    'Miami': [
+      'Brickell','Downtown Miami','Coconut Grove','Coral Gables','Little Havana',
+      'Little Haiti','Wynwood','Design District','Edgewater','Midtown','Allapattah',
+      'Upper East Side','Buena Vista','Flagami','West Flagler','Overtown'
+    ],
+    'Miami Beach': [
+      'South Beach','Mid-Beach','North Beach','Venetian Islands','Sunset Islands',
+      'Nautilus','La Gorce','Bay Road','Normandy Isles','North Shore'
+    ],
+    'Coral Gables': [
+      'Country Club Pines','Crafts Section','Golden Gate','Brickell Station',
+      'Old Cutler Road','Coconut Grove North','Riviera'
+    ],
+    'Brickell': [
+      'Brickell Key','East Brickell','West Brickell','Brickell Heights','Mary Brickell Village'
+    ],
+    'Coconut Grove': [
+      'North Coconut Grove','South Coconut Grove','Silver Bluff','Peacock Park'
+    ],
+    'Key Biscayne': ['Crandon Park','Village of Key Biscayne','Bill Baggs'],
+    'Aventura': ['Aventura Mall Area','Turnberry','Williams Island','Golden Beach'],
+    'Sunny Isles Beach': ['Trump Towers Area','Acqualina','Jade Beach','Portofino Tower'],
+    'Bal Harbour': ['Bal Harbour Village','Bal Harbour Shops Area'],
+    'Surfside': ['Surfside Oceanfront','Surfside Town Center'],
+    'Edgewater': ['Aria on the Bay','One Paraiso','Elysee'],
+    'Wynwood': ['Wynwood Walls','Wynwood North','Wynwood South'],
+    'Design District': ['Moore Building Area','Palm Court','NE 2nd Ave'],
+    'Doral': ['Downtown Doral','CityPlace Doral','Doral Isles'],
+    'Fisher Island': ['Fisher Island Drive'],
   }
 }
