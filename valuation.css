@@ -9,17 +9,16 @@
 
 /* ── HERO ─────────────────────── */
 .val-top {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 92vh;
+  display: flex;
+  min-height: 72vh;
 }
 
 .val-top-left {
   background: var(--bg);
   display: flex;
   align-items: center;
+  width: 100%;
   padding: clamp(7rem, 12vw, 10rem) clamp(3rem, 6vw, 6rem) clamp(5rem, 8vw, 7rem);
-  border-right: 1px solid var(--border);
 }
 
 .val-top-right {
