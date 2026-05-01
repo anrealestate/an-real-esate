@@ -642,6 +642,7 @@
   .val-top-right img { object-position: center 20%; }
 
   .val-top-inner {
+    width: 100%;
     max-width: 100%;
     text-align: center;
   }
