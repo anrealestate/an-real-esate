@@ -711,6 +711,7 @@
     var c         = {}
     var stepIndex = 0
     var answers   = {}
+    var lastWho   = null
 
     var msgsEl        = document.getElementById('chat-messages')
     var inputEl       = document.getElementById('chat-input-area')
@@ -740,12 +741,14 @@
     function addMsg(text, who) {
       var row = document.createElement('div')
       row.className = 'chat-msg chat-msg--' + who
-      var avatarHTML = who === 'agent' ? '<div class="chat-avatar"><span>AN</span></div>' : ''
-      row.innerHTML = avatarHTML
+      var showAvatar = who === 'agent' && lastWho !== 'agent'
+      if (showAvatar) row.innerHTML = '<div class="chat-avatar"><span>AN</span></div>'
       var bubble = document.createElement('div')
       bubble.className = 'chat-bubble'
+      if (!showAvatar && who === 'agent') bubble.style.marginLeft = 'calc(28px + .6rem)'
       row.appendChild(bubble)
       msgsEl.appendChild(row)
+      lastWho = who
       scrollBottom()
 
       return new Promise(function(resolve) {
@@ -770,15 +773,8 @@
       })
     }
 
-    function showTyping(ms) {
-      return new Promise(function(resolve) {
-        var row = document.createElement('div')
-        row.className = 'chat-typing-row'
-        row.innerHTML = '<div class="chat-typing"><span></span><span></span><span></span></div>'
-        msgsEl.appendChild(row)
-        scrollBottom()
-        setTimeout(function() { row.remove(); resolve() }, ms || 750)
-      })
+    function delay(ms) {
+      return new Promise(function(resolve) { setTimeout(resolve, ms || 300) })
     }
 
     function clearInput() { inputEl.innerHTML = '' }
@@ -889,7 +885,7 @@
         stepIndex++
         showRestartBtn()
         if (opt.r) {
-          showTyping(650).then(function() {
+          delay(400).then(function() {
             addMsg(opt.r, 'agent').then(function() {
               setTimeout(function() { advance() }, 300)
             })
@@ -913,7 +909,7 @@
     function advance() {
       if (stepIndex < c.steps.length) {
         var step = c.steps[stepIndex]
-        showTyping().then(function() {
+        delay(350).then(function() {
           addMsg(step.q, 'agent').then(function() {
             setTimeout(function() { renderInput(step) }, 300)
           })
@@ -926,7 +922,7 @@
     function finalize() {
       var name = answers.name || ''
 
-      showTyping(900).then(function() {
+      delay(400).then(function() {
         addMsg(c.final(name), 'agent').then(function() {
         setTimeout(function() {
           var wrap = document.createElement('div')
@@ -971,9 +967,10 @@
       answers   = {}
       msgsEl.innerHTML  = ''
       inputEl.innerHTML = ''
+      lastWho = null
       hideRestartBtn()
 
-      showTyping(600).then(function() {
+      delay(300).then(function() {
         addMsg(c.greeting, 'agent').then(function() {
           setTimeout(function() { advance() }, 400)
         })
