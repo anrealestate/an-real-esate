@@ -118,6 +118,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Dynamic list add buttons
   document.getElementById('add-gallery-url').addEventListener('click', () => addGalleryCard())
+  document.getElementById('reverse-gallery').addEventListener('click', () => {
+    const list = document.getElementById('gallery-list')
+    const cards = [...list.querySelectorAll('.gal-card')]
+    cards.reverse().forEach(c => list.appendChild(c))
+    refreshGalleryBadges()
+    toast('Orden de fotos invertido', 'success')
+  })
   document.getElementById('apply-logo-gallery').addEventListener('click', applyLogoToGallery)
 
   // PDF hero upload
