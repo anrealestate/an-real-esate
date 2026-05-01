@@ -2170,6 +2170,13 @@ select:disabled { opacity: .45; cursor: default; }
   padding: 0 .25rem;
   opacity: .7;
 }
+.sb-deploy-hint code {
+  font-size: 9px;
+  background: var(--bg3);
+  padding: 0 .2rem;
+  border-radius: 3px;
+  word-break: break-word;
+}
 
 /* ── FORM PROGRESS BAR ───────────────────────── */
 .form-progress-bar {
