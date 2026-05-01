@@ -209,7 +209,7 @@
 /* bubbles */
 .chat-bubble {
   max-width: 78%;
-  padding: .9rem 1.25rem;
+  padding: .5rem .85rem;
   font-size: var(--fs-sm);
   line-height: 1.65;
   border-radius: 2px;
