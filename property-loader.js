@@ -7,6 +7,34 @@
   function esc(str) {
     return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')
   }
+
+  function extractYoutubeVideoId(input) {
+    if (!input || typeof input !== 'string') return null
+    const s = input.trim()
+    if (!s) return null
+    if (/^[a-zA-Z0-9_-]{11}$/.test(s)) return s
+    try {
+      const u = new URL(/^https?:\/\//i.test(s) ? s : 'https://' + s)
+      const host = u.hostname.replace(/^www\./, '')
+      if (host === 'youtu.be') {
+        const id = u.pathname.replace(/^\//, '').split('/')[0]
+        return /^[a-zA-Z0-9_-]{11}$/.test(id) ? id : null
+      }
+      if (host === 'youtube.com' || host === 'm.youtube.com' || host === 'youtube-nocookie.com') {
+        if (u.pathname.startsWith('/embed/')) {
+          const id = u.pathname.slice('/embed/'.length).split('/')[0].split('?')[0]
+          return /^[a-zA-Z0-9_-]{11}$/.test(id) ? id : null
+        }
+        if (u.pathname.startsWith('/shorts/')) {
+          const id = u.pathname.slice('/shorts/'.length).split('/')[0].split('?')[0]
+          return /^[a-zA-Z0-9_-]{11}$/.test(id) ? id : null
+        }
+        const v = u.searchParams.get('v')
+        return v && /^[a-zA-Z0-9_-]{11}$/.test(v) ? v : null
+      }
+    } catch (_) {}
+    return null
+  }
   const slug = new URLSearchParams(location.search).get('slug')
 
   const el = document.getElementById('listings-data')
@@ -142,6 +170,24 @@
     if (descEl && listing.description) {
       const paras = Array.isArray(listing.description) ? listing.description : [listing.description]
       descEl.innerHTML = paras.map(p => `<p>${esc(p)}</p>`).join('')
+    }
+
+    /* ── YouTube (nocookie + modest UI params) ── */
+    const vidSec = document.getElementById('prop-video-section')
+    const vidFrame = document.getElementById('prop-video-iframe')
+    if (vidSec && vidFrame) {
+      const yid = extractYoutubeVideoId(listing.youtubeUrl || listing.videoYoutubeUrl || '')
+      if (yid) {
+        vidSec.hidden = false
+        vidFrame.src =
+          'https://www.youtube-nocookie.com/embed/' +
+          encodeURIComponent(yid) +
+          '?rel=0&modestbranding=1&playsinline=1'
+      } else {
+        vidSec.hidden = true
+        vidFrame.src = ''
+        vidFrame.removeAttribute('src')
+      }
     }
 
     /* ── property details table ── */

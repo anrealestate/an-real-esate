@@ -24,6 +24,35 @@ function escHtml(s) {
   return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')
 }
 
+/** Accept watch URL, youtu.be, shorts, embed, or bare 11-char id → video id or null */
+function extractYoutubeVideoId(input) {
+  if (!input || typeof input !== 'string') return null
+  const s = input.trim()
+  if (!s) return null
+  if (/^[a-zA-Z0-9_-]{11}$/.test(s)) return s
+  try {
+    const u = new URL(/^https?:\/\//i.test(s) ? s : 'https://' + s)
+    const host = u.hostname.replace(/^www\./, '')
+    if (host === 'youtu.be') {
+      const id = u.pathname.replace(/^\//, '').split('/')[0]
+      return /^[a-zA-Z0-9_-]{11}$/.test(id) ? id : null
+    }
+    if (host === 'youtube.com' || host === 'm.youtube.com' || host === 'youtube-nocookie.com') {
+      if (u.pathname.startsWith('/embed/')) {
+        const id = u.pathname.slice('/embed/'.length).split('/')[0].split('?')[0]
+        return /^[a-zA-Z0-9_-]{11}$/.test(id) ? id : null
+      }
+      if (u.pathname.startsWith('/shorts/')) {
+        const id = u.pathname.slice('/shorts/'.length).split('/')[0].split('?')[0]
+        return /^[a-zA-Z0-9_-]{11}$/.test(id) ? id : null
+      }
+      const v = u.searchParams.get('v')
+      return v && /^[a-zA-Z0-9_-]{11}$/.test(v) ? v : null
+    }
+  } catch (_) {}
+  return null
+}
+
 // ── STAGE SYSTEM ──────────────────────────────
 const STAGES      = ['draft', 'active', 'reserved', 'sold', 'withdrawn']
 const STAGE_LABEL = { draft:'Borrador', active:'Activa', reserved:'Reservada', sold:'Vendida', withdrawn:'Retirada' }
@@ -781,6 +810,7 @@ function _showForm(slug) {
 
   // PDF hero
   setPdfHero(l.pdf_hero || '')
+  document.getElementById('f-youtube-url').value = l.youtubeUrl || ''
 
   // Description
   const descEl = document.getElementById('desc-list')
@@ -957,6 +987,12 @@ async function saveProperty() {
     const matched = items.filter(i => checkedValues.has(i))
     if (matched.length) features[cat] = matched
   })
+  const ytRaw = document.getElementById('f-youtube-url').value.trim()
+  if (ytRaw && !extractYoutubeVideoId(ytRaw)) {
+    toast('URL de YouTube no válida (youtube.com, youtu.be o shorts).', 'error')
+    return
+  }
+
   const customRaw = document.getElementById('f-feats-custom').value.trim()
   if (customRaw) {
     features['Additional'] = customRaw.split('\n').map(s => s.trim()).filter(Boolean)
@@ -1019,6 +1055,7 @@ async function saveProperty() {
     image:        mainImage || undefined,
     images:       images.length ? images : undefined,
     pdf_hero:     pdfHero || undefined,
+    youtubeUrl:   ytRaw || undefined,
     description:  description.length ? description : undefined,
     details:      details.length ? details : undefined,
     features:     Object.keys(features).length ? features : undefined,
