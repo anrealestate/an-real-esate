@@ -94,11 +94,12 @@
 }
 
 .val-trust-item {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: .35rem;
-  padding: 0 clamp(2rem, 6vw, 5rem);
+  padding: 0 1rem;
   text-align: center;
 }
 
