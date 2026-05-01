@@ -389,10 +389,10 @@ function logout() {
   document.getElementById('login-screen').classList.remove('hidden')
 }
 
-async function showApp() {
+function showApp() {
   document.getElementById('login-screen').classList.add('hidden')
   document.getElementById('app').classList.remove('hidden')
-  await loadData()
+  loadData()
   loadMediaLibrary()
   handleVisitParam()
   const initLang = document.getElementById('f-source-lang')?.value || 'es'
@@ -424,50 +424,30 @@ function handleVisitParam() {
 }
 
 // ── DATA ──────────────────────────────────────
-async function loadData() {
-  // Priority: localStorage cache (always fresh) → /data/listings.json (canonical publish) → inline HTML (last resort)
+function loadData() {
+  // Read inline bootstrap data (may be stale — only updated on publish)
+  let inlineListings = []
+  const el = document.getElementById('listings-data')
+  if (el) {
+    try { inlineListings = JSON.parse(el.textContent).listings || [] } catch {}
+  }
 
-  // 1. localStorage cache — updated on every save, reorder, stage-change
+  // Read localStorage cache (always written on every admin save/change — always fresh)
   let cachedListings = []
   try {
     cachedListings = JSON.parse(localStorage.getItem('an_listings_cache') || '{}').listings || []
   } catch {}
 
   if (cachedListings.length) {
+    // Cache is the source of truth — it reflects every change the user has ever made
     _listings = cachedListings
-    // Append any inline-only slugs missing from cache (e.g. new device, partial cache loss)
-    const el = document.getElementById('listings-data')
-    if (el) {
-      try {
-        const inlineListings = JSON.parse(el.textContent).listings || []
-        inlineListings.forEach(il => {
-          if (!_listings.find(l => l.slug === il.slug)) _listings.push(il)
-        })
-      } catch {}
-    }
+    // Append any inline-only slugs (e.g. first load after clearing storage on a fresh device)
+    inlineListings.forEach(il => {
+      if (!_listings.find(l => l.slug === il.slug)) _listings.push(il)
+    })
   } else {
-    // Fresh session (incognito / different browser / cleared storage)
-    // Fetch canonical published data — bypasses CDN cache to get absolute latest state
-    try {
-      const res = await fetch('/data/listings.json?_nc=' + Date.now(), { cache: 'no-cache' })
-      if (res.ok) {
-        const data = await res.json()
-        _listings = Array.isArray(data) ? data : (data.listings || [])
-      }
-    } catch {}
-
-    // Absolute last resort: inline embed in this admin HTML
-    if (!_listings.length) {
-      const el = document.getElementById('listings-data')
-      if (el) {
-        try { _listings = JSON.parse(el.textContent).listings || [] } catch {}
-      }
-    }
-
-    if (_listings.length) {
-      // Warn: working from published state — unpublished changes from other browsers aren't here
-      toast('⚠ Sesión nueva — cargando datos publicados. Cambios guardados solo en otro navegador no están disponibles aquí.', 'warning', 7000)
-    }
+    // No cache (fresh install / cleared storage) — fall back to inline data
+    _listings = inlineListings
   }
 
   // Migrate old data model (published/sold/status/type) → new (stage/type/propertyType)
@@ -1508,7 +1488,6 @@ async function publishToWeb() {
       }
     } catch { /* non-critical — admin uses localStorage cache as primary source anyway */ }
 
-    cacheListings()
     toast(`✓ Publicado — ${listings.length} propiedades. La web se actualizará en ~30 s.`, 'success')
   } catch (e) {
     if (e.message.includes('401') || e.message.includes('Bad credentials')) {
@@ -2878,7 +2857,7 @@ async function translateListing() {
 
 // ── TOAST ─────────────────────────────────────
 let _toastTimer
-function toast(msg, type = '', duration = 3200) {
+function toast(msg, type = '') {
   const el = document.getElementById('toast')
   el.innerHTML = ''
   el.textContent = msg
@@ -2886,7 +2865,7 @@ function toast(msg, type = '', duration = 3200) {
   clearTimeout(_toastTimer)
   clearTimeout(_undoTimer)
   _undoFn = null
-  _toastTimer = setTimeout(() => el.className = 'toast hidden', duration)
+  _toastTimer = setTimeout(() => el.className = 'toast hidden', 3200)
 }
 
 function toastUndo(msg, undoFn) {

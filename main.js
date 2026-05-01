@@ -189,7 +189,7 @@ contactForm?.addEventListener('submit', async e => {
         _template: 'table',
       }),
     })
-    if (!res.ok) throw new Error(`Contact form failed: ${res.status}`)
+    if (!res.ok) throw new Error()
     btn.textContent       = t('form.sent')
     btn.style.background  = 'var(--gold)'
     btn.style.borderColor = 'var(--gold)'

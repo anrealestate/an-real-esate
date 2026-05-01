@@ -152,7 +152,7 @@ document.getElementById('prop-form')?.addEventListener('submit', async e => {
         _template: 'table',
       }),
     })
-    if (!res.ok) throw new Error(`Enquiry form failed: ${res.status}`)
+    if (!res.ok) throw new Error()
     btn.textContent        = t('form.requested')
     btn.style.background   = 'var(--gold)'
     btn.style.borderColor  = 'var(--gold)'
