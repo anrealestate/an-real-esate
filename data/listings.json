@@ -126,7 +126,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Gràcia",
-      "order": 3
+      "order": 2
     },
     {
       "slug": "eixample-golden-square-rent",
@@ -413,36 +413,40 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Eixample",
-      "order": 4
+      "order": 3
     },
     {
       "slug": "sant-gervasi-galvany",
       "title": "Renovated Residence with Historic Charm in Sant Gervasi",
       "price": "€520,000",
       "ref": "AN-1012",
-      "province": "Barcelona",
-      "city": "Barcelona",
-      "zone": "Sant Gervasi",
       "neighbourhood": "Sant Gervasi, Barcelona",
       "type": "sale",
-      "propertyType": "apartment",
       "badge_type": "Apartment",
       "beds": 2,
       "baths": 1,
       "size": "86",
       "floor": "Upper",
-      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404787/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-43-2.jpg",
+      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404786/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-2.jpg",
       "images": [
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404787/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-43-2.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404786/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-2.jpg",
+          "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404785/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-3.jpg",
+          "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404786/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-4.jpg",
+          "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404786/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-8.jpg",
           "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
         },
         {
           "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404786/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-9.jpg",
-          "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404787/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-43.jpg",
           "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
         },
         {
@@ -455,6 +459,14 @@
         },
         {
           "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404787/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-12.jpg",
+          "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404787/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-43.jpg",
+          "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404787/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-43-2.jpg",
           "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
         },
         {
@@ -486,11 +498,7 @@
           "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404786/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-2.jpg",
-          "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404785/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-3.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404789/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-44.jpg",
           "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
         },
         {
@@ -498,15 +506,11 @@
           "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404786/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-4.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404789/an-realestate/sant-gervasi-galvany/IMG_9580-2-1.jpg",
           "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404786/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-8.jpg",
-          "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404789/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-44.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404789/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-20-15-19-23-1.jpg",
           "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
         }
       ],
@@ -550,18 +554,18 @@
         }
       ],
       "features": {
-        "Climate": [
-          "Air conditioning",
-          "Heating"
-        ],
-        "Additional": [
+        "Interior": [
           "35 m² living-dining area",
           "Open-plan kitchen",
           "2 double bedrooms",
           "Exposed Catalan vaulting",
           "High ceilings",
           "Wooden flooring",
-          "Private balcony",
+          "Private balcony"
+        ],
+        "Equipment": [
+          "Air conditioning",
+          "Heating",
           "Security door",
           "One apartment per floor"
         ]
@@ -585,7 +589,11 @@
         }
       ],
       "stage": "sold",
-      "order": 9
+      "propertyType": "apartment",
+      "province": "Barcelona",
+      "city": "Barcelona",
+      "zone": "Sant Gervasi",
+      "order": 4
     },
     {
       "slug": "el-born-corner",
@@ -698,45 +706,41 @@
       "title": "Stunning Refurbished Corner Apartment on Rambla de Catalunya",
       "price": "€1,395,000",
       "ref": "AN-10007",
-      "province": "Barcelona",
-      "city": "Barcelona",
-      "zone": "Eixample",
       "neighbourhood": "Eixample, Barcelona",
       "type": "sale",
-      "propertyType": "apartment",
       "badge_type": "Apartment",
       "beds": 3,
       "baths": 3,
       "size": "150",
       "floor": "Upper",
-      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658485/an-realestate/r4lebuljkf8vrqfgtwc4.jpg",
+      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404790/an-realestate/rambla-catalunya-corner/RAMBLA_CATALUNYA-2_Pagina_01_Imagen_0001-scaled.jpg",
       "images": [
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658485/an-realestate/r4lebuljkf8vrqfgtwc4.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404790/an-realestate/rambla-catalunya-corner/RAMBLA_CATALUNYA-2_Pagina_01_Imagen_0001-scaled.jpg",
           "alt": "Stunning Refurbished Corner Apartment on Rambla de Catalunya"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658486/an-realestate/wdxbcppisdafcqbzhegv.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404790/an-realestate/rambla-catalunya-corner/RAMBLA_CATALUNYA-2_Pagina_24_Imagen_0001-scaled.jpg",
           "alt": "Stunning Refurbished Corner Apartment on Rambla de Catalunya"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658488/an-realestate/s0wdnd7rbhbybxwivnfy.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404790/an-realestate/rambla-catalunya-corner/RAMBLA_CATALUNYA-2_Pagina_18_Imagen_0001-scaled.jpg",
           "alt": "Stunning Refurbished Corner Apartment on Rambla de Catalunya"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658489/an-realestate/cwttlbhhqj6yxzbxaofg.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404791/an-realestate/rambla-catalunya-corner/RAMBLA_CATALUNYA-2_Pagina_17_Imagen_0001-scaled.jpg",
           "alt": "Stunning Refurbished Corner Apartment on Rambla de Catalunya"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658490/an-realestate/h1uqyf3h9iymer1cpars.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404791/an-realestate/rambla-catalunya-corner/RAMBLA_CATALUNYA-2_Pagina_07_Imagen_0001-scaled.jpg",
           "alt": "Stunning Refurbished Corner Apartment on Rambla de Catalunya"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658491/an-realestate/wznbihan1lqttsvw5lfx.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404791/an-realestate/rambla-catalunya-corner/RAMBLA_CATALUNYA-2_Pagina_05_Imagen_0001-1.jpg",
           "alt": "Stunning Refurbished Corner Apartment on Rambla de Catalunya"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658492/an-realestate/bpbnfdif4mtiqwg8tk9s.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404791/an-realestate/rambla-catalunya-corner/Captura-de-pantalla-2024-10-13-a-las-14.00.30.png",
           "alt": "Stunning Refurbished Corner Apartment on Rambla de Catalunya"
         }
       ],
@@ -776,20 +780,18 @@
         }
       ],
       "features": {
-        "Climate": [
-          "Air conditioning"
-        ],
-        "Building": [
-          "Elevator",
-          "Modernist building"
-        ],
-        "Additional": [
+        "Interior": [
           "High ceilings with original mouldings",
           "Marble flooring",
           "Wooden flooring",
           "Private balcony",
           "Alarm system",
-          "Concierge service"
+          "Air conditioning"
+        ],
+        "Building": [
+          "Elevator",
+          "Concierge service",
+          "Modernist building"
         ]
       },
       "nearby": [
@@ -811,7 +813,11 @@
         }
       ],
       "stage": "sold",
-      "order": 7
+      "propertyType": "apartment",
+      "province": "Barcelona",
+      "city": "Barcelona",
+      "zone": "Eixample",
+      "order": 6
     },
     {
       "slug": "eixample-golden-mile",
@@ -948,180 +954,176 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Dreta de l'Eixample",
-      "order": 8
+      "order": 7
     },
     {
       "slug": "vallvidrera-villa",
       "title": "Exquisite Modern Villa with 360° Views Over Barcelona",
       "price": "€5,500,000",
       "ref": "AN-AN1005",
-      "province": "Barcelona",
-      "city": "Barcelona",
-      "zone": "Vallvidrera",
       "neighbourhood": "Vallvidrera, Barcelona",
       "type": "sale",
-      "propertyType": "villa",
+      "badge": "exclusive",
       "badge_type": "Villa",
       "beds": 6,
       "baths": 6,
       "size": "634",
       "floor": "3 levels",
-      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658394/an-realestate/fuxsci735wn1vzfqma3d.jpg",
+      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404793/an-realestate/vallvidrera-villa/Mont-dorsa-68_17.jpg",
       "images": [
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658394/an-realestate/fuxsci735wn1vzfqma3d.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404793/an-realestate/vallvidrera-villa/Mont-dorsa-68_17.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658395/an-realestate/e0y92n0ydk6yzibnshkz.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404793/an-realestate/vallvidrera-villa/Mont-dorsa-68_18.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658396/an-realestate/l0guquxibfqeic4omb9z.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_19.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658397/an-realestate/tvdjgxyhttuwk3oj1qfa.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_22.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658398/an-realestate/usvg48mntlmiwpazbmsk.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_23.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658398/an-realestate/llgnq33guwdy824jxwd6.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_25.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658399/an-realestate/j37zblpzjfqyi11c7kix.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_26.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658399/an-realestate/gvi1jz6otc21glnkmlgy.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404795/an-realestate/vallvidrera-villa/Mont-dorsa-68_27.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658400/an-realestate/suagwno4gcchclsqftm0.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404795/an-realestate/vallvidrera-villa/Mont-dorsa-68_28.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658401/an-realestate/voryjocftgaf2c43pcai.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404795/an-realestate/vallvidrera-villa/Mont-dorsa-68_29.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658402/an-realestate/q8b7xmvihdz2zfwbec9t.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404795/an-realestate/vallvidrera-villa/Mont-dorsa-68_30.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658402/an-realestate/eheyjifnk0de2wql3cnd.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_31.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658403/an-realestate/gfm1gnp979x5vqx0mvfi.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_32.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658404/an-realestate/vpslvgeoyhtkyw5pmj97.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_33.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658405/an-realestate/gksrod2d8dvypjzrcoqg.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_34.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658405/an-realestate/lkmttkk3svjwjtlzfbpv.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_35.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658406/an-realestate/biwie8ampvrjddq95t69.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_36.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658407/an-realestate/qexxsddwojkkvrdpzyb1.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_38-1.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658407/an-realestate/k00sy1rqolaid2gl71ib.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_42.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658408/an-realestate/spjrcodkgfek13sm6sr8.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_48.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658409/an-realestate/ycvguy1wudckidnhvqzj.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_49.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658409/an-realestate/uvdkudsssc01itqnch1p.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_50.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658411/an-realestate/m6gtvmaxjcgf0t1vl6sn.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404798/an-realestate/vallvidrera-villa/Mont-dorsa-68_51.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658412/an-realestate/gdkvxotbshm4cvsvioql.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404798/an-realestate/vallvidrera-villa/Mont-dorsa-68_52.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658413/an-realestate/bv7tgzae2aj1aghqs5io.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404798/an-realestate/vallvidrera-villa/Mont-dorsa-68_53-1.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658414/an-realestate/uhbacs0sflvpuvttr8my.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404798/an-realestate/vallvidrera-villa/Mont-dorsa-68_54.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658414/an-realestate/rwzgyodf61m4papzlofz.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404799/an-realestate/vallvidrera-villa/Mont-dorsa-68_55.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658415/an-realestate/oz8uvfr869ihe2rtxdwj.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404799/an-realestate/vallvidrera-villa/Mont-dorsa-68_56.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658416/an-realestate/noptnzrqolunowjob3vw.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404799/an-realestate/vallvidrera-villa/Mont-dorsa-68_57.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658417/an-realestate/zy8g78pabramvd4dpxui.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404799/an-realestate/vallvidrera-villa/Mont-dorsa-68_58.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658417/an-realestate/m5sfhjych4vfgxmcfhm3.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404800/an-realestate/vallvidrera-villa/Mont-dorsa-68_59-1.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658418/an-realestate/vx3fyfecnfxfrdn3cv2t.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404802/an-realestate/vallvidrera-villa/Mont-dorsa-68_60.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658419/an-realestate/nmotgesnmb09u93aj7bp.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/vallvidrera-villa/Mont-dorsa-68_61.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658419/an-realestate/ka2wplkuvttxr2uyj4ww.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404800/an-realestate/vallvidrera-villa/Mont-dorsa-68_62.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658420/an-realestate/fucsnfxlspnehmor6vjk.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/vallvidrera-villa/Mont-dorsa-68_63.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658421/an-realestate/oysia41ccjytzvrupezp.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/vallvidrera-villa/Mont-dorsa-68_64.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658422/an-realestate/j20ql3dxyopi5jvxqhkk.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404800/an-realestate/vallvidrera-villa/Mont-dorsa-68_65-1.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658423/an-realestate/diiulnwgpk0acrwnrnqd.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/vallvidrera-villa/Mont-dorsa-68_66-1.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         }
       ],
-      "pdf_hero": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658441/an-realestate/mcrnqnrmwk2sdkdh6l8k.jpg",
       "description": [
         "A once-in-a-generation opportunity to acquire one of Barcelona's most extraordinary private residences. Completed in 2022, this three-level contemporary villa sits on a prime corner plot in Vallvidrera with unobstructed 360° panoramic views over the city and the Mediterranean.",
         "The villa spans 634 m² across three levels: ground level with seven-car garage, wine cellar, and service areas; lower floor with open-plan living, dining, and premium kitchen opening to the garden; first floor with four luxury en-suite bedrooms including a 70 m² master suite; top level with multi-purpose rooms and a 117 m² terrace.",
@@ -1174,19 +1176,23 @@
         }
       ],
       "features": {
-        "Additional": [
+        "Interior": [
           "70 m² master suite",
           "6 en-suite bedrooms",
           "Open-plan living & dining",
           "Premium kitchen",
           "Wine cellar",
-          "Smart home automation",
+          "Smart home automation"
+        ],
+        "Outdoor": [
           "Climate-controlled pool",
           "117 m² roof terrace",
           "Private garden",
           "Finnish sauna",
           "7-car garage",
-          "360° panoramic views",
+          "360° panoramic views"
+        ],
+        "Sustainability": [
           "Energy class A",
           "Solar panels",
           "Aerothermal underfloor heating",
@@ -1212,48 +1218,48 @@
         }
       ],
       "stage": "active",
-      "order": 2
+      "propertyType": "villa",
+      "province": "Barcelona",
+      "city": "Barcelona",
+      "zone": "Vallvidrera",
+      "order": 8
     },
     {
       "slug": "eixample-villarroel",
       "title": "Newly Renovated 3-Bedroom Apartment with Timeless Elegance in Eixample",
       "price": "€820,000",
       "ref": "AN-AN1004",
-      "province": "Barcelona",
-      "city": "Barcelona",
-      "zone": "Eixample",
       "neighbourhood": "Eixample, Barcelona",
       "type": "sale",
-      "propertyType": "apartment",
       "badge_type": "Apartment",
       "beds": 3,
       "baths": 2,
       "size": "104",
       "floor": "Upper",
-      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658469/an-realestate/aqraljzsldpfbkctt0qk.jpg",
+      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/eixample-villarroel/villarroel.jpg",
       "images": [
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658469/an-realestate/aqraljzsldpfbkctt0qk.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/eixample-villarroel/villarroel.jpg",
           "alt": "Newly Renovated 3-Bedroom Apartment with Timeless Elegance in Eixample"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658470/an-realestate/rj4xvkoyfaryk89mruzq.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404802/an-realestate/eixample-villarroel/final_cropped_image_6.jpg",
           "alt": "Newly Renovated 3-Bedroom Apartment with Timeless Elegance in Eixample"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658471/an-realestate/ff8mpywmraxcgqngy0f8.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404802/an-realestate/eixample-villarroel/final_cropped_image_7.jpg",
           "alt": "Newly Renovated 3-Bedroom Apartment with Timeless Elegance in Eixample"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658472/an-realestate/zz71qpemmssox3obyqkf.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404802/an-realestate/eixample-villarroel/final_cropped_image_8.jpg",
           "alt": "Newly Renovated 3-Bedroom Apartment with Timeless Elegance in Eixample"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658472/an-realestate/fcj1ol54tzfuesfvv5bs.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404802/an-realestate/eixample-villarroel/final_cropped_image_4.jpg",
           "alt": "Newly Renovated 3-Bedroom Apartment with Timeless Elegance in Eixample"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658473/an-realestate/i3sufeakdokso1kntryp.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404802/an-realestate/eixample-villarroel/framed_plan_image_high_res.jpg",
           "alt": "Newly Renovated 3-Bedroom Apartment with Timeless Elegance in Eixample"
         }
       ],
@@ -1297,16 +1303,16 @@
         }
       ],
       "features": {
-        "Building": [
-          "Elevator",
-          "Modernist building"
-        ],
-        "Additional": [
+        "Interior": [
           "Expansive open-plan living",
           "Master suite with walk-in closet",
           "State-of-the-art kitchen",
           "Parquet flooring",
-          "South-facing terrace",
+          "South-facing terrace"
+        ],
+        "Building": [
+          "Modernist building",
+          "Elevator",
           "Fully restored period building"
         ]
       },
@@ -1329,7 +1335,11 @@
         }
       ],
       "stage": "sold",
-      "order": 6
+      "propertyType": "apartment",
+      "province": "Barcelona",
+      "city": "Barcelona",
+      "zone": "Eixample",
+      "order": 9
     },
     {
       "slug": "villa-cascades",
