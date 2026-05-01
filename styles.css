@@ -306,6 +306,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   transition: color var(--fast);
 }
 .drawer-link:hover { color: var(--gold); }
+.drawer-link[aria-current="page"] { color: var(--gold); }
 
 .drawer-foot { padding-top: 1.5rem; }
 .drawer-phone {
