@@ -86,6 +86,26 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   height: auto;
   display: block;
 }
+.loader-dots {
+  display: flex;
+  gap: 6px;
+  margin-top: 2rem;
+  justify-content: center;
+}
+.loader-dots span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.3;
+  animation: loader-pulse 1.2s ease-in-out infinite;
+}
+.loader-dots span:nth-child(2) { animation-delay: .2s; }
+.loader-dots span:nth-child(3) { animation-delay: .4s; }
+@keyframes loader-pulse {
+  0%, 80%, 100% { opacity: 0.3; transform: scale(1); }
+  40%           { opacity: 1;   transform: scale(1.4); }
+}
 
 /* ================================
    Header
@@ -166,6 +186,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .hn-link:hover { color: var(--cream); }
 .hn-link:hover::before { transform: scaleX(1); }
+.hn-link[aria-current="page"] { color: var(--cream); }
+.hn-link[aria-current="page"]::before { transform: scaleX(1); }
+.hn-link--cta[aria-current="page"] { background: var(--gold); color: var(--bg); }
 
 .hn-link--cta {
   display: inline-flex;
