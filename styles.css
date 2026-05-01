@@ -265,6 +265,31 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .mobile-drawer.open { display: block; }
 
+.drawer-close {
+  position: absolute;
+  top: 1.25rem;
+  right: var(--pad);
+  background: transparent;
+  border: none;
+  color: var(--cream-dim);
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  transition: color var(--fast);
+}
+.drawer-close:hover { color: var(--gold); }
+.drawer-close:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+
+#drawer-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 189;
+}
+#drawer-backdrop.open { display: block; }
+
 .drawer-nav {
   display: flex;
   flex-direction: column;

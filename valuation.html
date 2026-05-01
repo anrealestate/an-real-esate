@@ -89,6 +89,7 @@
   </header>
 
   <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+    <button class="drawer-close" aria-label="Close menu">&times;</button>
     <nav class="drawer-nav">
       <a href="index.html#properties" class="drawer-link" data-i18n="nav.properties">Properties</a>
       <a href="about.html"            class="drawer-link" data-i18n="nav.about">About</a>
@@ -195,6 +196,9 @@
         <div class="chat-wrap">
           <div class="chat-messages" id="chat-messages" aria-live="polite"></div>
           <div id="chat-input-area"></div>
+          <div class="chat-restart-wrap" id="chat-restart-wrap" hidden>
+            <button class="chat-restart-btn" id="chat-restart-btn" data-i18n="chat.restart">Start over</button>
+          </div>
         </div>
         <!-- DIRECT CONTACT STRIP -->
         <div class="val-direct">
@@ -704,8 +708,22 @@
     var stepIndex = 0
     var answers   = {}
 
-    var msgsEl  = document.getElementById('chat-messages')
-    var inputEl = document.getElementById('chat-input-area')
+    var msgsEl      = document.getElementById('chat-messages')
+    var inputEl     = document.getElementById('chat-input-area')
+    var restartWrap = document.getElementById('chat-restart-wrap')
+    var restartBtn  = document.getElementById('chat-restart-btn')
+
+    function showRestartBtn() {
+      if (restartWrap) restartWrap.hidden = false
+    }
+    function hideRestartBtn() {
+      if (restartWrap) restartWrap.hidden = true
+    }
+
+    restartBtn && restartBtn.addEventListener('click', function() {
+      var lang = (typeof getLang === 'function') ? getLang() : (localStorage.getItem('an_lang') || 'en')
+      startChat(lang)
+    })
 
     function chatInView() {
       var r = msgsEl.getBoundingClientRect()
@@ -850,6 +868,7 @@
         addMsg(opt.l, 'user')
         clearInput()
         stepIndex++
+        showRestartBtn()
         if (opt.r) {
           showTyping(650).then(function() {
             addMsg(opt.r, 'agent')
@@ -866,6 +885,7 @@
       if (value) addMsg(value, 'user')
       clearInput()
       stepIndex++
+      showRestartBtn()
       setTimeout(function() { advance() }, 300)
     }
 
@@ -927,6 +947,7 @@
       answers   = {}
       msgsEl.innerHTML  = ''
       inputEl.innerHTML = ''
+      hideRestartBtn()
       showTyping(600).then(function() {
         addMsg(c.greeting, 'agent')
         setTimeout(function() { advance() }, 600)

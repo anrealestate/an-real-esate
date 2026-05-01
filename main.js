@@ -68,22 +68,36 @@ if (hero) {
 const hamburger = document.getElementById('hamburger')
 const drawer    = document.getElementById('mobile-drawer')
 
+const backdrop = document.createElement('div')
+backdrop.id = 'drawer-backdrop'
+document.body.appendChild(backdrop)
+
+function closeDrawer() {
+  drawer.classList.remove('open')
+  hamburger.classList.remove('open')
+  hamburger.setAttribute('aria-expanded', 'false')
+  drawer.setAttribute('aria-hidden', 'true')
+  document.body.style.overflow = ''
+  backdrop.classList.remove('open')
+}
+
 hamburger?.addEventListener('click', () => {
   const open = drawer.classList.toggle('open')
   hamburger.classList.toggle('open', open)
   hamburger.setAttribute('aria-expanded', open)
   drawer.setAttribute('aria-hidden', !open)
   document.body.style.overflow = open ? 'hidden' : ''
+  backdrop.classList.toggle('open', open)
 })
 
-document.querySelectorAll('.drawer-link, .drawer-phone').forEach(el => {
-  el.addEventListener('click', () => {
-    drawer.classList.remove('open')
-    hamburger.classList.remove('open')
-    hamburger.setAttribute('aria-expanded', 'false')
-    drawer.setAttribute('aria-hidden', 'true')
-    document.body.style.overflow = ''
-  })
+backdrop.addEventListener('click', closeDrawer)
+
+document.querySelectorAll('.drawer-link, .drawer-phone, .drawer-close').forEach(el => {
+  el.addEventListener('click', closeDrawer)
+})
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer()
 })
 
 /* ================================

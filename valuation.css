@@ -377,6 +377,29 @@
 }
 .chat-skip:hover { color: var(--cream-dim); }
 
+.chat-restart-wrap {
+  display: flex;
+  justify-content: center;
+  padding-top: 1.25rem;
+}
+.chat-restart-btn {
+  font-size: var(--fs-2xs);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: none;
+  border: none;
+  border-bottom: 1px solid transparent;
+  cursor: pointer;
+  padding: 0 0 2px;
+  transition: color var(--fast), border-color var(--fast);
+}
+.chat-restart-btn:hover {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+.chat-restart-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+
 /* ── Responsive ──────────────── */
 @media (max-width: 600px) {
   .val-trust-inner {
