@@ -387,10 +387,11 @@ function loadData() {
       } else {
         _listings.forEach(l => {
           const p = prev.find(c => c.slug === l.slug)
-          if (p?.address)    l.address    = p.address
-          if (p?.doorFloor)  l.doorFloor  = p.doorFloor
-          if (p?.doorNum)    l.doorNum    = p.doorNum
-          if (p?.zip)        l.zip        = p.zip
+          if (p?.address)             l.address    = p.address
+          if (p?.doorFloor)           l.doorFloor  = p.doorFloor
+          if (p?.doorNum)             l.doorNum    = p.doorNum
+          if (p?.zip)                 l.zip        = p.zip
+          if (p?.order !== undefined) l.order      = p.order
         })
         // Add listings that only exist in cache (e.g. drafts not yet published to the static JSON)
         const draftsOnly = prev.filter(p => !_listings.find(l => l.slug === p.slug))
