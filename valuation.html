@@ -741,9 +741,33 @@
       var row = document.createElement('div')
       row.className = 'chat-msg chat-msg--' + who
       var avatarHTML = who === 'agent' ? '<div class="chat-avatar"><span>AN</span></div>' : ''
-      row.innerHTML = avatarHTML + '<div class="chat-bubble">' + text + '</div>'
+      row.innerHTML = avatarHTML
+      var bubble = document.createElement('div')
+      bubble.className = 'chat-bubble'
+      row.appendChild(bubble)
       msgsEl.appendChild(row)
       scrollBottom()
+
+      return new Promise(function(resolve) {
+        if (who !== 'agent') {
+          bubble.textContent = text
+          scrollBottom()
+          resolve()
+          return
+        }
+        var i = 0
+        var speed = Math.max(12, Math.min(30, 1200 / text.length))
+        function typeNext() {
+          if (i < text.length) {
+            bubble.textContent += text[i++]
+            scrollBottom()
+            setTimeout(typeNext, speed)
+          } else {
+            resolve()
+          }
+        }
+        typeNext()
+      })
     }
 
     function showTyping(ms) {
@@ -866,8 +890,9 @@
         showRestartBtn()
         if (opt.r) {
           showTyping(650).then(function() {
-            addMsg(opt.r, 'agent')
-            setTimeout(function() { advance() }, 400)
+            addMsg(opt.r, 'agent').then(function() {
+              setTimeout(function() { advance() }, 300)
+            })
           })
         } else {
           setTimeout(function() { advance() }, 350)
@@ -889,8 +914,9 @@
       if (stepIndex < c.steps.length) {
         var step = c.steps[stepIndex]
         showTyping().then(function() {
-          addMsg(step.q, 'agent')
-          setTimeout(function() { renderInput(step) }, 400)
+          addMsg(step.q, 'agent').then(function() {
+            setTimeout(function() { renderInput(step) }, 300)
+          })
         })
       } else {
         finalize()
@@ -901,7 +927,7 @@
       var name = answers.name || ''
 
       showTyping(900).then(function() {
-        addMsg(c.final(name), 'agent')
+        addMsg(c.final(name), 'agent').then(function() {
         setTimeout(function() {
           var wrap = document.createElement('div')
           wrap.className = 'chat-options'
@@ -912,7 +938,8 @@
           wrap.appendChild(btn)
           inputEl.appendChild(wrap)
           scrollBottom()
-        }, 500)
+        }, 300)
+        })
       })
     }
 
@@ -947,8 +974,9 @@
       hideRestartBtn()
 
       showTyping(600).then(function() {
-        addMsg(c.greeting, 'agent')
-        setTimeout(function() { advance() }, 600)
+        addMsg(c.greeting, 'agent').then(function() {
+          setTimeout(function() { advance() }, 400)
+        })
       })
     }
 
