@@ -593,7 +593,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Sant Gervasi",
-      "order": 4
+      "order": 9
     },
     {
       "slug": "el-born-corner",
@@ -699,7 +699,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "El Born",
-      "order": 5
+      "order": 4
     },
     {
       "slug": "rambla-catalunya-corner",
@@ -817,7 +817,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Eixample",
-      "order": 6
+      "order": 5
     },
     {
       "slug": "eixample-golden-mile",
@@ -954,173 +954,177 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Dreta de l'Eixample",
-      "order": 7
+      "order": 6
     },
     {
       "slug": "vallvidrera-villa",
       "title": "Exquisite Modern Villa with 360° Views Over Barcelona",
       "price": "€5,500,000",
       "ref": "AN-AN1005",
+      "province": "Barcelona",
+      "city": "Barcelona",
+      "zone": "Vallvidrera",
       "neighbourhood": "Vallvidrera, Barcelona",
       "type": "sale",
-      "badge": "exclusive",
+      "propertyType": "villa",
       "badge_type": "Villa",
       "beds": 6,
       "baths": 6,
       "size": "634",
       "floor": "3 levels",
-      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404793/an-realestate/vallvidrera-villa/Mont-dorsa-68_17.jpg",
+      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660639/an-realestate/wiqglvljt17whin5l03a.jpg",
       "images": [
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404793/an-realestate/vallvidrera-villa/Mont-dorsa-68_17.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660639/an-realestate/wiqglvljt17whin5l03a.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404793/an-realestate/vallvidrera-villa/Mont-dorsa-68_18.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660640/an-realestate/jryxn5sqb4s7j0qi8hqs.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_19.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660641/an-realestate/eivosrciqkq678anreaj.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_22.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660642/an-realestate/d4bgibaxre6q7xxn4aal.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_23.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660642/an-realestate/j6hodrb1thm6gaihn9cm.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_25.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660643/an-realestate/plj7a5yyqigxeaqqugtv.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_26.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660644/an-realestate/it1qciq9gr6g3i7yr6zp.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404795/an-realestate/vallvidrera-villa/Mont-dorsa-68_27.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660645/an-realestate/lshq7akaqvczwa4ltujp.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404795/an-realestate/vallvidrera-villa/Mont-dorsa-68_28.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660645/an-realestate/un07dmlibcqe7bmesflj.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404795/an-realestate/vallvidrera-villa/Mont-dorsa-68_29.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660646/an-realestate/i16bz2y9wvzg3j7hchtp.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404795/an-realestate/vallvidrera-villa/Mont-dorsa-68_30.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660647/an-realestate/k5ah1ui1buqua9t8lqi9.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_31.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660648/an-realestate/ixnitdxklm7tjqch006f.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_32.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660648/an-realestate/uf9lsap8yexkzklnsrbd.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_33.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660649/an-realestate/fqldbgjtv3za3mducay4.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_34.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660651/an-realestate/gfpw1knitfkcvqdxmdnp.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona",
+          "hidden": true
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660651/an-realestate/ggnbi1cwg8qbax6hxv17.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_35.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660652/an-realestate/hydg2fo83jn6cjiodrxm.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_36.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660653/an-realestate/x9xhsymr0zlk4je64qu8.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_38-1.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660654/an-realestate/lv4aaaac3t5g0gpsoeyo.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_42.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660655/an-realestate/fkq3avgnjdswfgijklro.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_48.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660655/an-realestate/hht9talj8rbcllbur780.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_49.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660656/an-realestate/bhtcvfin28brlvbztl4b.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_50.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660657/an-realestate/bakwr3a8g52zphmmjme9.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404798/an-realestate/vallvidrera-villa/Mont-dorsa-68_51.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660658/an-realestate/uxn77ctjag7wh3wkcmhp.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404798/an-realestate/vallvidrera-villa/Mont-dorsa-68_52.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660659/an-realestate/bmem8g4ujlxrsjjapujq.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404798/an-realestate/vallvidrera-villa/Mont-dorsa-68_53-1.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660660/an-realestate/dyqahdpuyrbextvjkyn2.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404798/an-realestate/vallvidrera-villa/Mont-dorsa-68_54.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660660/an-realestate/jbu7i2tj54o0noxqbb43.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404799/an-realestate/vallvidrera-villa/Mont-dorsa-68_55.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660661/an-realestate/h6fwp5qpemp6dfvljcrf.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404799/an-realestate/vallvidrera-villa/Mont-dorsa-68_56.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660662/an-realestate/utu5phls3ob9e6nmxprd.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404799/an-realestate/vallvidrera-villa/Mont-dorsa-68_57.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660662/an-realestate/boxe7e68jlpjuezayfcw.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404799/an-realestate/vallvidrera-villa/Mont-dorsa-68_58.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660663/an-realestate/bc8j4ob77ipzjyjqltzt.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404800/an-realestate/vallvidrera-villa/Mont-dorsa-68_59-1.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660664/an-realestate/ydhuqfxenq9fconrcooz.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404802/an-realestate/vallvidrera-villa/Mont-dorsa-68_60.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660665/an-realestate/htcjuvmypmkmbdtbskad.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/vallvidrera-villa/Mont-dorsa-68_61.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660666/an-realestate/b6thfietey681jc3ts3z.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404800/an-realestate/vallvidrera-villa/Mont-dorsa-68_62.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660666/an-realestate/fzezzlmcuwi3evtpwdqa.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/vallvidrera-villa/Mont-dorsa-68_63.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660667/an-realestate/cmqscxcpg5jaqjjknkld.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/vallvidrera-villa/Mont-dorsa-68_64.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660668/an-realestate/bzrych51ybyzwatkskey.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404800/an-realestate/vallvidrera-villa/Mont-dorsa-68_65-1.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/vallvidrera-villa/Mont-dorsa-68_66-1.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660650/an-realestate/kasu7prfatwkarhkeqrx.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         }
       ],
@@ -1176,23 +1180,19 @@
         }
       ],
       "features": {
-        "Interior": [
+        "Additional": [
           "70 m² master suite",
           "6 en-suite bedrooms",
           "Open-plan living & dining",
           "Premium kitchen",
           "Wine cellar",
-          "Smart home automation"
-        ],
-        "Outdoor": [
+          "Smart home automation",
           "Climate-controlled pool",
           "117 m² roof terrace",
           "Private garden",
           "Finnish sauna",
           "7-car garage",
-          "360° panoramic views"
-        ],
-        "Sustainability": [
+          "360° panoramic views",
           "Energy class A",
           "Solar panels",
           "Aerothermal underfloor heating",
@@ -1218,11 +1218,7 @@
         }
       ],
       "stage": "active",
-      "propertyType": "villa",
-      "province": "Barcelona",
-      "city": "Barcelona",
-      "zone": "Vallvidrera",
-      "order": 8
+      "order": 7
     },
     {
       "slug": "eixample-villarroel",
@@ -1339,7 +1335,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Eixample",
-      "order": 9
+      "order": 8
     },
     {
       "slug": "villa-cascades",
