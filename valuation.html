@@ -115,6 +115,10 @@
             <span class="text-wrap"><span class="text-inner"><em data-i18n="val.h2">Álvaro.</em></span></span>
           </h1>
           <p class="val-sub" data-i18n="val.sub">I help you understand your options. No commitment.</p>
+          <a href="#val-chat" class="val-hero-cta" onclick="document.getElementById('val-chat').scrollIntoView({behavior:'smooth'});return false;">
+            <span data-i18n="val.cta">Tell me about your property</span>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
         </div>
       </div>
       <div class="val-top-right">
@@ -148,10 +152,7 @@
     <section class="val-why">
       <div class="holder">
         <div class="val-why-head reveal">
-          <h2 class="val-why-h2">
-            <span class="text-wrap"><span class="text-inner" data-i18n="why.h1">Why Sell</span></span>
-            <span class="text-wrap"><span class="text-inner"><em data-i18n="why.h2">with Me</em></span></span>
-          </h2>
+          <p class="val-why-eyebrow"><span data-i18n="why.h1">Why Sell</span> <span data-i18n="why.h2">with Me</span></p>
         </div>
         <ol class="val-why-list reveal">
           <li class="val-why-item"><span class="val-why-num">01</span><p class="val-why-text" data-i18n="why.01">One contact, one commitment — from first valuation to notary.</p></li>
@@ -175,20 +176,8 @@
       </div>
     </div>
 
-    <!-- DIRECT CONTACT STRIP -->
-    <div class="val-direct">
-      <div class="holder">
-        <div class="val-direct-inner">
-          <span class="val-direct-label" data-i18n="val.direct.label">Prefer to talk directly —</span>
-          <a href="tel:+34628020434" class="val-direct-link">+34 628 02 04 34</a>
-          <span class="val-direct-sep">·</span>
-          <a href="https://wa.me/34628020434" class="val-direct-link" target="_blank" rel="noopener" data-i18n="val.direct.whatsapp">WhatsApp</a>
-        </div>
-      </div>
-    </div>
-
     <!-- CHAT -->
-    <section class="val-chat-section">
+    <section class="val-chat-section" id="val-chat">
       <div class="holder">
         <div class="val-chat-intro reveal">
           <h2 class="val-chat-h2">
@@ -199,6 +188,15 @@
         <div class="chat-wrap">
           <div class="chat-messages" id="chat-messages" aria-live="polite"></div>
           <div id="chat-input-area"></div>
+        </div>
+        <!-- DIRECT CONTACT STRIP -->
+        <div class="val-direct">
+          <div class="val-direct-inner">
+            <span class="val-direct-label" data-i18n="val.direct.label">Prefer to talk directly —</span>
+            <a href="tel:+34628020434" class="val-direct-link">+34 628 02 04 34</a>
+            <span class="val-direct-sep">·</span>
+            <a href="https://wa.me/34628020434" class="val-direct-link" target="_blank" rel="noopener" data-i18n="val.direct.whatsapp">WhatsApp</a>
+          </div>
         </div>
       </div>
     </section>

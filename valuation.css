@@ -67,10 +67,25 @@
   margin: 0;
 }
 
+.val-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  margin-top: 2.5rem;
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  transition: gap var(--fast);
+}
+.val-hero-cta:hover { gap: .85rem; }
+
 /* ── TRUST STRIP ─────────────── */
 .val-trust {
   border-bottom: 1px solid var(--border);
-  padding: clamp(2rem, 4.5vw, 3rem) 0;
+  padding: clamp(2.5rem, 5vw, 3.5rem) 0;
 }
 
 .val-trust-inner {
@@ -422,8 +437,11 @@
 /* ── Direct contact strip ─────── */
 .val-direct {
   border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 1.75rem 0;
+  padding: 1.5rem 0 0;
+  margin-top: 2rem;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .val-direct-inner {
   display: flex;
@@ -465,7 +483,16 @@
 .val-why-head {
   text-align: left;
   max-width: 960px;
-  margin: 0 auto clamp(2.5rem, 5vw, 4rem);
+  margin: 0 auto clamp(2rem, 4vw, 3rem);
+}
+
+.val-why-eyebrow {
+  font-family: var(--sans);
+  font-size: var(--fs-2xs);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0;
 }
 
 .val-why-h2 {
@@ -507,8 +534,11 @@
 
 .val-why-item--full {
   grid-column: 1 / -1;
-  max-width: calc(50% - clamp(1.5rem, 3vw, 2.5rem));
   border-bottom: 1px solid var(--border);
+  padding-bottom: 2.5rem;
+}
+.val-why-item--full .val-why-text {
+  color: var(--cream);
 }
 
 .val-why-num {
