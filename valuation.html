@@ -890,7 +890,7 @@
         var step = c.steps[stepIndex]
         showTyping().then(function() {
           addMsg(step.q, 'agent')
-          renderInput(step)
+          setTimeout(function() { renderInput(step) }, 400)
         })
       } else {
         finalize()
