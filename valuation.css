@@ -384,8 +384,8 @@
 
 .chat-restart-wrap {
   display: flex;
-  justify-content: center;
-  padding-top: 1.25rem;
+  justify-content: flex-end;
+  margin-bottom: .75rem;
 }
 .chat-restart-btn {
   font-size: var(--fs-2xs);
