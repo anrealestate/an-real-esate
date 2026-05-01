@@ -1347,6 +1347,8 @@
       "zone": "Les Planes",
       "neighbourhood": "Les Planes, Sant Cugat del Vallès",
       "address": "Calle Magarola, 19, Sant Cugat del Vallès, Spain",
+      "lat": 41.4328796,
+      "lng": 2.0927754,
       "zip": "08196",
       "type": "sale",
       "propertyType": "villa",
@@ -1671,31 +1673,51 @@
       ],
       "features": {
         "Interior": [
-          "Ceilings with moldings"
+          "Ceilings with moldings",
+          "Open Floorplan",
+          "Natural Light",
+          "Walk-In Closet(s)",
+          "Walk-in wardrobe(s)",
+          "Library",
+          "Playroom",
+          "Utility room",
+          "Storage",
+          "Split Bedroom"
         ],
         "Flooring": [
           "Solid Wooden Floor",
           "Wooden Flooring"
         ],
         "Kitchen": [
-          "Equipped Kitchen"
+          "Equipped Kitchen",
+          "Oven",
+          "Refrigerator",
+          "Dishwasher",
+          "Microwave",
+          "Freezer",
+          "Range Hood",
+          "Solid Wood Cabinets"
         ],
         "Climate": [
-          "Heating"
+          "Air conditioning",
+          "Heating",
+          "Gas Water Heater",
+          "Washer",
+          "Dryer"
         ],
         "Outdoor": [
-          "Terrace"
+          "Terrace",
+          "Garden",
+          "Parking"
         ],
         "Building": [
-          "Concierge Service"
+          "Alarm"
         ],
-        "Views": [
-          "City Views"
+        "Additional": [
+          "Vistas a la naturaleza"
         ]
       },
       "stage": "active",
-      "lat": 41.4328796,
-      "lng": 2.0927754,
       "order": 1
     }
   ]
