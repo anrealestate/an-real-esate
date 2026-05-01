@@ -40,6 +40,9 @@ let _mediaItems  = []
 let _wmProcessed = []
 let _visitSort   = 'date'
 let _visitSortDir = -1
+let _wmAbort     = false
+let _undoFn      = null
+let _undoTimer   = null
 
 // ── INIT ──────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
@@ -102,19 +105,57 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
   // Form tabs
-  document.querySelectorAll('.ftab').forEach(tab => {
+  document.querySelectorAll('.ftab').forEach((tab, _, tabs) => {
     tab.addEventListener('click', () => {
       document.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'))
       document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active', 'hidden'))
       tab.classList.add('active')
       document.getElementById('tab-' + tab.dataset.tab).classList.add('active')
       if (tab.dataset.tab === 'nearby') openMapPickerTab()
+      const allTabs = [...tabs]
+      const idx = allTabs.indexOf(tab)
+      const prog = document.getElementById('form-tab-progress')
+      if (prog) { prog.style.width = ((idx + 1) / allTabs.length * 100) + '%' }
     })
   })
 
   // Mark form dirty on any input/change inside the form view
   document.getElementById('view-form').addEventListener('input',  () => { _formDirty = true })
   document.getElementById('view-form').addEventListener('change', () => { _formDirty = true })
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+      if (document.getElementById('view-form')?.classList.contains('active')) {
+        e.preventDefault(); saveProperty()
+      }
+    }
+    if (e.key === 'Escape') {
+      if (document.getElementById('view-form')?.classList.contains('active') && !document.querySelector('.modal:not(.hidden)')) {
+        showPropsList()
+      }
+    }
+  })
+
+  // Offline detection
+  window.addEventListener('offline', () => toast('Sin conexión a internet', 'error'))
+  window.addEventListener('online',  () => toast('Conexión restaurada', 'success'))
+
+  // Swipe between form tabs on mobile
+  let _swipeX = 0
+  const viewForm = document.getElementById('view-form')
+  viewForm.addEventListener('touchstart', e => { _swipeX = e.touches[0].clientX }, { passive: true })
+  viewForm.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - _swipeX
+    if (Math.abs(dx) < 70) return
+    const tabs = [...document.querySelectorAll('.ftab')]
+    const activeIdx = tabs.findIndex(t => t.classList.contains('active'))
+    const nextIdx = dx < 0 ? Math.min(activeIdx + 1, tabs.length - 1) : Math.max(activeIdx - 1, 0)
+    if (nextIdx !== activeIdx) tabs[nextIdx].click()
+  }, { passive: true })
+
+  // FAB publish button
+  document.getElementById('fab-publish')?.addEventListener('click', publishToWeb)
 
   // Dynamic list add buttons
   document.getElementById('add-gallery-url').addEventListener('click', () => addGalleryCard())
@@ -503,6 +544,9 @@ function renderTable() {
         <div class="row-actions">
           <button class="act-btn act-edit" title="Editar" onclick="showForm('${l.slug}')">
             <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </button>
+          <button class="act-btn act-clone" title="Duplicar" onclick="cloneProperty('${l.slug}')">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
           </button>
           <button class="act-btn act-del" title="Eliminar" onclick="confirmDelete('${l.slug}')">
             <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
@@ -995,23 +1039,42 @@ async function saveProperty() {
 }
 
 // ── DELETE ────────────────────────────────────
-let _deleteSlug = null
-
 function confirmDelete(slug) {
-  _deleteSlug = typeof slug === 'string' ? slug : _editSlug
-  const l = _listings.find(x => x.slug === _deleteSlug)
+  const deleteSlug = typeof slug === 'string' ? slug : _editSlug
+  const l = _listings.find(x => x.slug === deleteSlug)
   if (!l) return
-  document.getElementById('confirm-msg').textContent = `¿Eliminar "${l.title}"? Esta acción no se puede deshacer.`
-  document.getElementById('confirm-overlay').classList.remove('hidden')
-  document.getElementById('confirm-ok').onclick = () => {
-    _listings = _listings.filter(x => x.slug !== _deleteSlug)
-    document.getElementById('confirm-overlay').classList.add('hidden')
+  const backup = JSON.parse(JSON.stringify(l))
+  _listings = _listings.filter(x => x.slug !== deleteSlug)
+  cacheListings()
+  if (_editSlug === deleteSlug) showPropsList()
+  renderTable()
+  updateSummary()
+  toastUndo(`"${l.title.length > 28 ? l.title.substring(0, 26) + '…' : l.title}" eliminada`, () => {
+    _listings.push(backup)
     cacheListings()
-    toast('Propiedad eliminada', 'success')
-    showPropsList()
     renderTable()
     updateSummary()
-  }
+    toast('Eliminación deshecha', 'success')
+  })
+}
+
+// ── CLONE ─────────────────────────────────────
+function cloneProperty(slug) {
+  const original = _listings.find(l => l.slug === slug)
+  if (!original) return
+  const clone = JSON.parse(JSON.stringify(original))
+  const maxOrder = _listings.reduce((m, l) => Math.max(m, l.order ?? 0), 0)
+  clone.stage = 'draft'
+  clone.order = maxOrder + 1
+  let base = slug + '-copy', i = 2
+  clone.slug = base
+  while (_listings.find(l => l.slug === clone.slug)) clone.slug = base + '-' + i++
+  clone.title = original.title + ' (copia)'
+  _listings.push(clone)
+  cacheListings()
+  renderTable()
+  updateSummary()
+  toast('Propiedad duplicada como borrador', 'success')
 }
 
 // ── GALLERY CARDS ─────────────────────────────
@@ -1958,9 +2021,13 @@ async function applyLogoToGallery() {
   const total = cards.length
   let successCount = 0
 
+  _wmAbort = false
+  const cancelBtn = document.getElementById('gallery-cancel-btn')
+  if (cancelBtn) cancelBtn.classList.remove('hidden')
   progressWrap.classList.remove('hidden')
   try {
     for (let i = 0; i < cards.length; i++) {
+      if (_wmAbort) { toast('Proceso cancelado', ''); break }
       const card = cards[i]
       const img  = card.querySelector('img')
       statusEl.textContent = `Procesando ${i + 1} de ${total}…`
@@ -1981,13 +2048,14 @@ async function applyLogoToGallery() {
     }
   } finally {
     setProgress('upload-gallery-fill', 100)
+    if (cancelBtn) cancelBtn.classList.add('hidden')
     setTimeout(() => progressWrap.classList.add('hidden'), 600)
   }
 
   if (successCount > 0) {
     await saveProperty()
     toast(`Logo aplicado a ${successCount} foto${successCount > 1 ? 's' : ''} — publica para ver los cambios en la web`, 'success')
-  } else {
+  } else if (!_wmAbort) {
     toast('No se pudo aplicar el logo (¿CORS?)', 'error')
   }
 }
@@ -2768,11 +2836,25 @@ async function translateListing() {
 let _toastTimer
 function toast(msg, type = '') {
   const el = document.getElementById('toast')
+  el.innerHTML = ''
   el.textContent = msg
   el.className = `toast ${type}`
   clearTimeout(_toastTimer)
+  clearTimeout(_undoTimer)
+  _undoFn = null
   _toastTimer = setTimeout(() => el.className = 'toast hidden', 3200)
 }
+
+function toastUndo(msg, undoFn) {
+  const el = document.getElementById('toast')
+  el.innerHTML = `<span>${msg}</span><button class="toast-undo" onclick="window._execUndo()">Deshacer</button>`
+  el.className = 'toast warning'
+  _undoFn = undoFn
+  clearTimeout(_toastTimer)
+  clearTimeout(_undoTimer)
+  _undoTimer = setTimeout(() => { el.className = 'toast hidden'; _undoFn = null }, 5000)
+}
+window._execUndo = () => { if (_undoFn) { _undoFn(); _undoFn = null; clearTimeout(_undoTimer); document.getElementById('toast').className = 'toast hidden' } }
 
 // ── HOJAS DE VISITA ───────────────────────────
 let _visitsInited = false

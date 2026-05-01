@@ -175,6 +175,7 @@
         <button class="ftab" data-tab="feats" data-i18n="tab.feats">Características</button>
         <button class="ftab" data-tab="nearby" data-i18n="tab.nearby">Ubicación</button>
       </div>
+      <div class="form-progress-bar"><div id="form-tab-progress" style="width:16.67%"></div></div>
 
       <form id="prop-form" autocomplete="off">
         <input type="hidden" id="f-original-slug" />
@@ -401,6 +402,7 @@
             <div class="upload-progress hidden" id="upload-gallery-progress">
               <div class="progress-bar"><div class="progress-fill" id="upload-gallery-fill"></div></div>
               <span id="upload-gallery-status" data-i18n="uploading">Subiendo…</span>
+              <button type="button" id="gallery-cancel-btn" class="btn-cancel-wm hidden" onclick="_wmAbort=true">Cancelar</button>
             </div>
             <div id="gallery-list"></div>
           </div>
@@ -2573,5 +2575,8 @@
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="admin.js"></script>
+<button class="fab-publish" id="fab-publish" title="Publicar en la web" aria-label="Publicar en la web">
+  <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+</button>
 </body>
 </html>
