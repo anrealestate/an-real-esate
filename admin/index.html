@@ -637,7 +637,7 @@
       <header class="view-hd">
         <div>
           <h1>Watermark de fotos</h1>
-          <p class="view-sub">Añade el logo AN automáticamente a tus imágenes</p>
+          <p class="view-sub">Logo, posición, tamaño y opacidad se guardan en este navegador. La vista previa muestra solo tu logo sobre la foto de ejemplo.</p>
         </div>
       </header>
 
@@ -657,10 +657,9 @@
               <img id="wm-logo-preview" class="wm-logo-preview hidden" alt="Logo" />
               <label class="wm-logo-upload" id="wm-logo-upload-label">
                 <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
-                <span id="wm-logo-upload-text">Subir logo (PNG/SVG)</span>
+                <span id="wm-logo-upload-text">Personalizar logo</span>
                 <input type="file" id="wm-logo-file" accept="image/png,image/svg+xml,image/webp" />
               </label>
-              <button type="button" class="wm-logo-remove hidden" id="wm-logo-remove" title="Eliminar logo">✕ Quitar</button>
             </div>
           </div>
           <div class="wm-group">
@@ -672,7 +671,7 @@
               <button type="button" class="pos-btn" data-pos="mid-left">←</button>
               <button type="button" class="pos-btn" data-pos="center">+</button>
               <button type="button" class="pos-btn" data-pos="mid-right">→</button>
-              <button type="button" class="pos-btn active" data-pos="bottom-left">↙</button>
+              <button type="button" class="pos-btn" data-pos="bottom-left">↙</button>
               <button type="button" class="pos-btn" data-pos="bottom-center">↓</button>
               <button type="button" class="pos-btn" data-pos="bottom-right">↘</button>
             </div>
@@ -707,6 +706,8 @@
                 <input type="file" id="wm-sample-file" accept="image/*" />
               </label>
             </div>
+            <p class="wm-live-hint hidden" id="wm-live-hint-no-logo">Sube un logo arriba para verlo aquí. La marca por defecto AN solo se usa al procesar fotos si no hay logo personalizado.</p>
+            <p class="wm-live-footnote">Si aparecen dos marcas, la imagen de ejemplo puede estar ya procesada: vuelve a subir una foto original sin marca.</p>
             <div class="wm-live-canvas-wrap" id="wm-live-canvas-wrap">
               <canvas id="wm-preview-canvas" class="hidden"></canvas>
               <div class="wm-live-empty" id="wm-live-empty">

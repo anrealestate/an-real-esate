@@ -902,6 +902,7 @@ function switchView(name) {
   _formDirty = false
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active', 'hidden'))
   document.getElementById('view-' + name)?.classList.add('active')
+  if (name === 'watermark') void renderLivePreview()
 }
 
 // ── SAVE ──────────────────────────────────────
@@ -1795,27 +1796,19 @@ function initWatermarkTool() {
     localStorage.setItem('an_wm_auto', _wmAutoApply ? '1' : '0')
   })
 
-  function setLogoPreview(dataUrl) {
+  async function refreshLogoPreview() {
     const preview = document.getElementById('wm-logo-preview')
     const label   = document.getElementById('wm-logo-upload-label')
     const text    = document.getElementById('wm-logo-upload-text')
-    const remove  = document.getElementById('wm-logo-remove')
-    if (dataUrl) {
-      preview.src = dataUrl
-      preview.classList.remove('hidden')
-      label.classList.add('wm-logo-has')
-      text.textContent = 'Cambiar logo'
-      remove.classList.remove('hidden')
-    } else {
-      preview.src = ''
-      preview.classList.add('hidden')
-      label.classList.remove('wm-logo-has')
-      text.textContent = 'Subir logo (PNG/SVG)'
-      remove.classList.add('hidden')
-    }
+    const url     = await getLogoDataUrl()
+    const custom  = !!localStorage.getItem('an_wm_logo')
+    preview.src = url
+    preview.classList.remove('hidden')
+    label.classList.add('wm-logo-has')
+    text.textContent = custom ? 'Cambiar logo' : 'Personalizar logo'
   }
 
-  setLogoPreview(localStorage.getItem('an_wm_logo'))
+  void refreshLogoPreview()
 
   document.getElementById('wm-logo-file').addEventListener('change', e => {
     const file = e.target.files[0]
@@ -1823,19 +1816,17 @@ function initWatermarkTool() {
     if (!file) return
     const reader = new FileReader()
     reader.onload = ev => {
-      localStorage.setItem('an_wm_logo', ev.target.result)
-      setLogoPreview(ev.target.result)
+      try {
+        localStorage.setItem('an_wm_logo', ev.target.result)
+      } catch {
+        toast('No se pudo guardar el logo (almacenamiento lleno)', 'error')
+        return
+      }
+      void refreshLogoPreview()
       toast('Logo guardado', 'success')
       renderLivePreview()
     }
     reader.readAsDataURL(file)
-  })
-
-  document.getElementById('wm-logo-remove').addEventListener('click', () => {
-    localStorage.removeItem('an_wm_logo')
-    setLogoPreview(null)
-    toast('Logo eliminado — se usará el logo de texto AN', 'success')
-    renderLivePreview()
   })
 
   // Sample image for live preview
@@ -1898,42 +1889,60 @@ async function reprocessAll() {
   // For now just show a hint
 }
 
-// Synchronous paint — always reads current settings, no async race possible
+function computeWatermarkLogoRect(canvasW, canvasH, logoImg, pos, sizeRatio) {
+  const nw = logoImg.naturalWidth || logoImg.width
+  const nh = logoImg.naturalHeight || logoImg.height
+  const logoW = canvasW * sizeRatio
+  const logoH = nh * (logoW / nw)
+  const margin = canvasW * 0.025
+  let x = margin
+  let y = canvasH - logoH - margin
+  if (pos.includes('right'))                          x = canvasW - logoW - margin
+  if (pos.includes('center') && !pos.includes('mid')) x = (canvasW - logoW) / 2
+  if (pos.includes('top'))                            y = margin
+  if (pos.includes('mid'))                            y = (canvasH - logoH) / 2
+  if (pos === 'center') { x = (canvasW - logoW) / 2; y = (canvasH - logoH) / 2 }
+  return { x, y, w: logoW, h: logoH }
+}
+
+function drawWatermarkLogoOnCtx(ctx, logoImg, rect, opacity) {
+  const { x, y, w, h } = rect
+  ctx.save()
+  ctx.globalAlpha = opacity
+  const blur = Math.max(3, Math.min(14, w * 0.015))
+  ctx.shadowColor = 'rgba(0,0,0,0.55)'
+  ctx.shadowBlur = blur
+  ctx.shadowOffsetX = 0
+  ctx.shadowOffsetY = Math.max(1, blur * 0.22)
+  ctx.drawImage(logoImg, x, y, w, h)
+  ctx.restore()
+}
+
+// Synchronous paint — preview solo usa el logo guardado (nunca el fallback AN aquí)
 function _paintPreview() {
   const canvas = document.getElementById('wm-preview-canvas')
   const empty  = document.getElementById('wm-live-empty')
-  if (!canvas || !empty || !_cachedSampleImg || !_cachedLogoImg) return
+  const hintNoLogo = document.getElementById('wm-live-hint-no-logo')
+  if (!canvas || !empty || !_cachedSampleImg) return
 
-  // Render at native resolution — CSS (width:100%) scales for display, output is pixel-perfect
   const w = _cachedSampleImg.naturalWidth  || _cachedSampleImg.width
   const h = _cachedSampleImg.naturalHeight || _cachedSampleImg.height
 
-  canvas.width = 0
-  canvas.width  = w
+  canvas.width = w
   canvas.height = h
   const ctx = canvas.getContext('2d')
   ctx.drawImage(_cachedSampleImg, 0, 0, w, h)
 
-  const sizeRatio = parseInt(document.getElementById('wm-size').value) / 100
-  const opacity   = parseInt(document.getElementById('wm-opacity').value) / 100
-  const logoW  = w * sizeRatio
-  const logoH  = _cachedLogoImg.height * (logoW / _cachedLogoImg.width)
-  const margin = w * 0.025
-  const pos    = _wmPosition
-
-  let x = margin, y = h - logoH - margin
-  if (pos.includes('right'))                          x = w - logoW - margin
-  if (pos.includes('center') && !pos.includes('mid')) x = (w - logoW) / 2
-  if (pos.includes('top'))                            y = margin
-  if (pos.includes('mid'))                            y = (h - logoH) / 2
-  if (pos === 'center') { x = (w - logoW) / 2; y = (h - logoH) / 2 }
-
-  ctx.globalAlpha = opacity
-  ctx.drawImage(_cachedLogoImg, x, y, logoW, logoH)
-  ctx.globalAlpha = 1
+  if (_cachedLogoImg) {
+    const sizeRatio = parseInt(document.getElementById('wm-size').value, 10) / 100
+    const opacity   = parseInt(document.getElementById('wm-opacity').value, 10) / 100
+    const rect = computeWatermarkLogoRect(w, h, _cachedLogoImg, _wmPosition, sizeRatio)
+    drawWatermarkLogoOnCtx(ctx, _cachedLogoImg, rect, opacity)
+  }
 
   canvas.classList.remove('hidden')
   empty.classList.add('hidden')
+  if (hintNoLogo) hintNoLogo.classList.toggle('hidden', !!_cachedLogoImg)
 }
 
 // Loads/reloads images then paints — call when logo or sample changes
@@ -1941,25 +1950,55 @@ async function renderLivePreview() {
   const gen    = ++_previewGen
   const canvas = document.getElementById('wm-preview-canvas')
   const empty  = document.getElementById('wm-live-empty')
+  const hintNoLogo = document.getElementById('wm-live-hint-no-logo')
   if (!canvas || !empty) return
 
   if (!_wmSampleDataUrl) {
     _cachedSampleImg = null
+    _cachedLogoImg = null
     canvas.classList.add('hidden')
     empty.classList.remove('hidden')
+    if (hintNoLogo) hintNoLogo.classList.add('hidden')
     return
   }
 
-  const logoDataUrl = await getLogoDataUrl()
-  if (gen !== _previewGen) return
+  const customLogo = localStorage.getItem('an_wm_logo')
+  const loadImg = src =>
+    new Promise((resolve, reject) => {
+      const i = new Image()
+      i.onload = () => resolve(i)
+      i.onerror = () => reject(new Error('load failed'))
+      i.src = src
+    })
 
-  const loadImg = src => new Promise(r => { const i = new Image(); i.onload = () => r(i); i.src = src })
-  const [sampleImg, logoImg] = await Promise.all([loadImg(_wmSampleDataUrl), loadImg(logoDataUrl)])
-  if (gen !== _previewGen) return
+  try {
+    const sampleImg = await loadImg(_wmSampleDataUrl)
+    if (gen !== _previewGen) return
 
-  _cachedSampleImg = sampleImg
-  _cachedLogoImg   = logoImg
-  _paintPreview()
+    _cachedSampleImg = sampleImg
+
+    if (!customLogo) {
+      _cachedLogoImg = null
+      if (hintNoLogo) hintNoLogo.classList.remove('hidden')
+      _paintPreview()
+      return
+    }
+
+    const logoImg = await loadImg(customLogo)
+    if (gen !== _previewGen) return
+
+    _cachedLogoImg = logoImg
+    if (hintNoLogo) hintNoLogo.classList.add('hidden')
+    _paintPreview()
+  } catch {
+    if (gen !== _previewGen) return
+    toast('No se pudo cargar la vista previa', 'error')
+    _cachedSampleImg = null
+    _cachedLogoImg = null
+    canvas.classList.add('hidden')
+    empty.classList.remove('hidden')
+    if (hintNoLogo) hintNoLogo.classList.add('hidden')
+  }
 }
 
 function getLogoDataUrl() {
@@ -2015,26 +2054,10 @@ function processWatermark(file, logoDataUrl) {
 
         const logo = new Image()
         logo.onload = () => {
-          const sizeRatio = parseInt(document.getElementById('wm-size').value) / 100
-          const opacity   = parseInt(document.getElementById('wm-opacity').value) / 100
-          const logoW = canvas.width * sizeRatio
-          const logoH = logo.height * (logoW / logo.width)
-          const margin = canvas.width * 0.025
-          const pos = _wmPosition
-
-          let x = margin
-          let y = canvas.height - logoH - margin
-
-          if (pos.includes('right'))  x = canvas.width - logoW - margin
-          if (pos.includes('center') && !pos.includes('mid')) x = (canvas.width - logoW) / 2
-          if (pos.includes('top'))    y = margin
-          if (pos.includes('mid'))    y = (canvas.height - logoH) / 2
-          if (pos === 'center')       { x = (canvas.width - logoW) / 2; y = (canvas.height - logoH) / 2 }
-
-          ctx.globalAlpha = opacity
-          ctx.drawImage(logo, x, y, logoW, logoH)
-          ctx.globalAlpha = 1
-
+          const sizeRatio = parseInt(document.getElementById('wm-size').value, 10) / 100
+          const opacity   = parseInt(document.getElementById('wm-opacity').value, 10) / 100
+          const rect = computeWatermarkLogoRect(canvas.width, canvas.height, logo, _wmPosition, sizeRatio)
+          drawWatermarkLogoOnCtx(ctx, logo, rect, opacity)
           resolve(canvas.toDataURL('image/jpeg', 0.92))
         }
         logo.src = logoDataUrl
@@ -2057,21 +2080,10 @@ function processWatermarkFromUrl(url, logoDataUrl) {
       ctx.drawImage(img, 0, 0)
       const logo = new Image()
       logo.onload = () => {
-        const sizeRatio = parseInt(document.getElementById('wm-size').value) / 100
-        const opacity   = parseInt(document.getElementById('wm-opacity').value) / 100
-        const logoW  = canvas.width * sizeRatio
-        const logoH  = logo.height * (logoW / logo.width)
-        const margin = canvas.width * 0.025
-        const pos    = _wmPosition
-        let x = margin, y = canvas.height - logoH - margin
-        if (pos.includes('right'))                          x = canvas.width - logoW - margin
-        if (pos.includes('center') && !pos.includes('mid')) x = (canvas.width - logoW) / 2
-        if (pos.includes('top'))                            y = margin
-        if (pos.includes('mid'))                            y = (canvas.height - logoH) / 2
-        if (pos === 'center') { x = (canvas.width - logoW) / 2; y = (canvas.height - logoH) / 2 }
-        ctx.globalAlpha = opacity
-        ctx.drawImage(logo, x, y, logoW, logoH)
-        ctx.globalAlpha = 1
+        const sizeRatio = parseInt(document.getElementById('wm-size').value, 10) / 100
+        const opacity   = parseInt(document.getElementById('wm-opacity').value, 10) / 100
+        const rect = computeWatermarkLogoRect(canvas.width, canvas.height, logo, _wmPosition, sizeRatio)
+        drawWatermarkLogoOnCtx(ctx, logo, rect, opacity)
         resolve(canvas.toDataURL('image/jpeg', 0.92))
       }
       logo.onerror = () => reject(new Error('Logo load failed'))

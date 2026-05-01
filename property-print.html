@@ -326,6 +326,37 @@
 
 <script>
 ;(function () {
+  /** Misma marca por defecto que admin (`getLogoDataUrl`): siempre hay imagen en PDF. */
+  function buildDefaultAnLogoDataUrl() {
+    const c = document.createElement('canvas')
+    c.width = 320
+    c.height = 80
+    const ctx = c.getContext('2d')
+    ctx.clearRect(0, 0, c.width, c.height)
+    ctx.fillStyle = 'rgba(9,31,56,0.72)'
+    ctx.beginPath()
+    ctx.roundRect(0, 0, c.width, c.height, 12)
+    ctx.fill()
+    ctx.fillStyle = '#c9a96e'
+    ctx.font = 'bold 42px Georgia, serif'
+    ctx.letterSpacing = '8px'
+    ctx.textAlign = 'left'
+    ctx.textBaseline = 'middle'
+    ctx.fillText('AN', 20, 40)
+    ctx.fillStyle = 'rgba(201,169,110,0.5)'
+    ctx.fillRect(88, 16, 1, 48)
+    ctx.fillStyle = 'rgba(232,220,200,0.9)'
+    ctx.font = '500 16px "Jost", Arial, sans-serif'
+    ctx.letterSpacing = '3px'
+    ctx.fillText('REAL ESTATE', 100, 40)
+    return c.toDataURL('image/png')
+  }
+
+  function getPdfLogoDataUrl() {
+    const stored = localStorage.getItem('an_wm_logo')
+    return stored || buildDefaultAnLogoDataUrl()
+  }
+
   const slug = new URLSearchParams(location.search).get('slug')
   const dataEl = document.getElementById('listings-data')
   let listings = []
@@ -362,7 +393,7 @@
     email:   localStorage.getItem('an_agent_email')   || '',
     license: localStorage.getItem('an_agent_license') || '',
   }
-  const logoDataUrl = localStorage.getItem('an_wm_logo') || ''
+  const logoDataUrl = getPdfLogoDataUrl()
 
   const allImgs   = (l.images || []).map(i => typeof i === 'string' ? { src: i } : i)
   const visible   = allImgs.filter(i => !i.hidden).map(i => i.src)
@@ -408,13 +439,9 @@
     return `<div class="cover-spec"><span class="cover-spec-val">${val}</span><span class="cover-spec-lbl">${lbl}</span></div>`
   }
 
-  const logoEl = logoDataUrl
-    ? `<img src="${logoDataUrl}" />`
-    : `<span class="cover-logo-text">AN</span>`
+  const logoEl = `<img src="${logoDataUrl}" />`
 
-  const footerLogo = logoDataUrl
-    ? `<div class="footer-logo"><img src="${logoDataUrl}" /></div>`
-    : `<div class="footer-logo"><span class="footer-logo-text">AN</span></div>`
+  const footerLogo = `<div class="footer-logo"><img src="${logoDataUrl}" /></div>`
 
   const agentLine = [agent.phone, agent.email].filter(Boolean).join('  ·  ')
     + (agent.license ? '  ·  ' + agent.license : '')
@@ -451,7 +478,7 @@
 
       <div class="cover-photo">
         ${hero ? `<img src="${hero}" alt="${l.title}" />` : '<div class="cover-photo-empty"></div>'}
-        ${logoDataUrl ? `<div class="cover-photo-logo"><img src="${logoDataUrl}" alt="logo" /></div>` : ''}
+        <div class="cover-photo-logo"><img src="${logoDataUrl}" alt="logo" /></div>
       </div>
 
       <div class="cover-footer">

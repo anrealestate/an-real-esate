@@ -961,7 +961,8 @@ textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
   display: grid;
   grid-template-columns: 260px 1fr;
   gap: 2rem;
-  align-items: start;
+  align-items: stretch;
+  min-height: calc(100vh - 220px);
 }
 
 .wm-controls {
@@ -988,11 +989,36 @@ textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
 .wm-group label span { color: var(--gold); }
 
 /* Live preview */
-.wm-live-preview { display: flex; flex-direction: column; gap: .6rem; margin-bottom: 1.4rem; }
+.wm-live-preview {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  flex: 1;
+  min-height: 0;
+  margin-bottom: 0;
+}
 
 .wm-live-header {
   display: flex; align-items: center; justify-content: space-between;
   font-size: var(--fs-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+  flex-shrink: 0;
+}
+
+.wm-live-hint {
+  margin: 0;
+  font-size: .72rem;
+  line-height: 1.45;
+  color: var(--gold);
+  letter-spacing: .04em;
+}
+
+.wm-live-footnote {
+  margin: 0;
+  font-size: .68rem;
+  line-height: 1.4;
+  color: var(--muted);
+  opacity: .85;
+  letter-spacing: .03em;
 }
 
 .wm-sample-btn {
@@ -1006,20 +1032,42 @@ textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
 .wm-sample-btn input[type="file"] { display: none; }
 
 .wm-live-canvas-wrap {
-  position: relative; width: 100%;
-  border-radius: 8px; overflow: hidden;
-  background: repeating-conic-gradient(#1e1e1e 0% 25%, #161616 0% 50%) 0 0 / 12px 12px;
-  min-height: 240px;
-  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  width: 100%;
   flex: 1;
+  height: min(52vh, 560px);
+  min-height: 240px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: repeating-conic-gradient(#1e1e1e 0% 25%, #161616 0% 50%) 0 0 / 12px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#wm-preview-canvas { display: block; width: 100%; height: auto; border-radius: 8px; }
+#wm-preview-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
 
 .wm-live-empty {
-  display: flex; flex-direction: column; align-items: center; gap: .6rem;
-  padding: 2.5rem 1rem; text-align: center;
-  font-size: var(--fs-xs); color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  align-self: stretch;
+  flex: 1;
+  width: 100%;
+  min-height: min(52vh, 560px);
+  padding: 2.5rem 1rem;
+  text-align: center;
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  box-sizing: border-box;
 }
 
 .wm-logo-area { display: flex; flex-direction: column; gap: .5rem; }
@@ -1038,16 +1086,6 @@ textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
 }
 .wm-logo-upload:hover, .wm-logo-upload.wm-logo-has { border-color: var(--gold); color: var(--gold); border-style: solid; }
 .wm-logo-upload input[type="file"] { display: none; }
-
-.wm-logo-remove {
-  align-self: flex-start;
-  background: none; border: none;
-  font-size: .7rem; color: var(--muted);
-  cursor: pointer; padding: 0;
-  letter-spacing: .05em;
-  transition: color .15s;
-}
-.wm-logo-remove:hover { color: #e05; }
 
 .wm-auto-label {
   display: flex;
@@ -1118,13 +1156,14 @@ input[type="range"] {
   background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: var(--r);
-  min-height: 400px;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-start;
   padding: 1.25rem;
-  gap: 1rem;
+  gap: .75rem;
+  flex: 1;
 }
 
 .wm-placeholder {
