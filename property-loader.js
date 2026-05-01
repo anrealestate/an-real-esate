@@ -55,7 +55,9 @@
     document.querySelector('meta[name="twitter:image"]')?.setAttribute('content', ogImg)
     document.querySelector('meta[property="og:title"]')?.setAttribute('content', `${listing.title} — ${priceLabel} — AN Real Estate`)
     document.querySelector('meta[property="og:url"]')?.setAttribute('content', pageUrl)
-    document.querySelector('link[rel="canonical"]')?.setAttribute('href', pageUrl)
+    let canonEl = document.querySelector('link[rel="canonical"]')
+    if (!canonEl) { canonEl = document.createElement('link'); canonEl.rel = 'canonical'; document.head.appendChild(canonEl) }
+    canonEl.href = pageUrl
 
     /* ── JSON-LD structured data ── */
     const jsonLdEl = document.getElementById('property-jsonld')
