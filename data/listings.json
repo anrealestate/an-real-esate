@@ -954,7 +954,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Dreta de l'Eixample",
-      "order": 6
+      "order": 7
     },
     {
       "slug": "vallvidrera-villa",
@@ -1222,7 +1222,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Vallvidrera",
-      "order": 7
+      "order": 8
     },
     {
       "slug": "eixample-villarroel",
@@ -1339,7 +1339,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Eixample",
-      "order": 8
+      "order": 9
     },
     {
       "slug": "villa-cascades",
@@ -1700,7 +1700,7 @@
       "stage": "active",
       "lat": 41.4328796,
       "lng": 2.0927754,
-      "order": 9
+      "order": 6
     }
   ]
 }
