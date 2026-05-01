@@ -299,12 +299,18 @@
 .chat-input-row {
   display: flex;
   align-items: center;
-  gap: .6rem;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: .55rem;
-  transition: border-color var(--fast);
+  gap: .5rem;
+  background: rgba(240,235,224,.06);
+  border: 1px solid rgba(240,235,224,.15);
+  border-radius: 99px;
+  padding: .55rem .55rem .55rem 1.1rem;
+  margin-top: .75rem;
+  transition: border-color var(--fast), background var(--fast);
 }
-.chat-input-row:focus-within { border-color: var(--gold); }
+.chat-input-row:focus-within {
+  border-color: rgba(201,169,110,.5);
+  background: rgba(240,235,224,.08);
+}
 
 .chat-input {
   flex: 1;
@@ -316,7 +322,7 @@
   outline: none;
   min-width: 0;
 }
-.chat-input::placeholder { color: rgba(240,235,224,.2); }
+.chat-input::placeholder { color: rgba(240,235,224,.3); }
 .chat-input.is-required { animation: shake .3s ease; }
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
@@ -326,18 +332,25 @@
 
 .chat-send-btn {
   flex-shrink: 0;
-  background: transparent;
+  width: 32px;
+  height: 32px;
+  background: rgba(240,235,224,.1);
   border: none;
-  color: var(--gold);
+  border-radius: 50%;
+  color: var(--cream-dim);
   cursor: pointer;
-  padding: .2rem;
   display: flex;
   align-items: center;
-  opacity: .4;
-  transition: opacity var(--fast);
+  justify-content: center;
+  opacity: .5;
+  transition: opacity var(--fast), background var(--fast), color var(--fast);
 }
 .chat-send-btn:hover,
-.chat-input-row:focus-within .chat-send-btn { opacity: 1; }
+.chat-input-row:focus-within .chat-send-btn {
+  opacity: 1;
+  background: var(--gold);
+  color: var(--bg);
+}
 
 /* ── Seller testimonial ──────────── */
 .val-testi {
