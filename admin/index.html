@@ -365,12 +365,6 @@
               </select>
             </div>
 
-            <div class="fg fg-2">
-              <label for="f-youtube-url">Vídeo (YouTube) <em>(opcional)</em></label>
-              <input type="url" id="f-youtube-url" placeholder="https://www.youtube.com/watch?v=…" autocomplete="off" />
-              <p class="gal-hint" style="margin-top:.35rem">Pega la URL (No listado recomendado). Reproductor discreto en la ficha (youtube-nocookie).</p>
-            </div>
-
           </div>
 
           <input type="hidden" id="f-badge-type" />
@@ -432,6 +426,12 @@
               <div class="progress-bar"><div class="progress-fill" id="pdf-hero-fill"></div></div>
               <span id="pdf-hero-status">Subiendo…</span>
             </div>
+          </div>
+
+          <div class="list-block">
+            <div class="list-hd"><span class="list-title">Vídeo (YouTube)</span></div>
+            <p class="gal-hint">Pega la URL del vídeo (recomendado: No listado). En la ficha se usa reproductor discreto (youtube-nocookie, 16:9).</p>
+            <input type="url" id="f-youtube-url" placeholder="https://www.youtube.com/watch?v=…" autocomplete="off" aria-label="URL de YouTube" style="width:100%;max-width:42rem;padding:.65rem .85rem;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.25);color:inherit;font-size:.88rem" />
           </div>
         </div>
 
