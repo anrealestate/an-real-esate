@@ -126,7 +126,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Gràcia",
-      "order": 2
+      "order": 3
     },
     {
       "slug": "eixample-golden-square-rent",
@@ -420,33 +420,29 @@
       "title": "Renovated Residence with Historic Charm in Sant Gervasi",
       "price": "€520,000",
       "ref": "AN-1012",
+      "province": "Barcelona",
+      "city": "Barcelona",
+      "zone": "Sant Gervasi",
       "neighbourhood": "Sant Gervasi, Barcelona",
       "type": "sale",
+      "propertyType": "apartment",
       "badge_type": "Apartment",
       "beds": 2,
       "baths": 1,
       "size": "86",
       "floor": "Upper",
-      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404786/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-2.jpg",
+      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404787/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-43-2.jpg",
       "images": [
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404786/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-2.jpg",
-          "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404785/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-3.jpg",
-          "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404786/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-4.jpg",
-          "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404786/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-8.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404787/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-43-2.jpg",
           "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
         },
         {
           "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404786/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-9.jpg",
+          "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404787/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-43.jpg",
           "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
         },
         {
@@ -459,14 +455,6 @@
         },
         {
           "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404787/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-12.jpg",
-          "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404787/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-43.jpg",
-          "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404787/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-43-2.jpg",
           "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
         },
         {
@@ -498,7 +486,11 @@
           "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404789/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-44.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404786/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-2.jpg",
+          "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404785/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-3.jpg",
           "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
         },
         {
@@ -506,11 +498,15 @@
           "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404789/an-realestate/sant-gervasi-galvany/IMG_9580-2-1.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404786/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-4.jpg",
           "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404789/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-20-15-19-23-1.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404786/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-8.jpg",
+          "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404789/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-44.jpg",
           "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
         }
       ],
@@ -554,18 +550,18 @@
         }
       ],
       "features": {
-        "Interior": [
+        "Climate": [
+          "Air conditioning",
+          "Heating"
+        ],
+        "Additional": [
           "35 m² living-dining area",
           "Open-plan kitchen",
           "2 double bedrooms",
           "Exposed Catalan vaulting",
           "High ceilings",
           "Wooden flooring",
-          "Private balcony"
-        ],
-        "Equipment": [
-          "Air conditioning",
-          "Heating",
+          "Private balcony",
           "Security door",
           "One apartment per floor"
         ]
@@ -589,11 +585,7 @@
         }
       ],
       "stage": "sold",
-      "propertyType": "apartment",
-      "province": "Barcelona",
-      "city": "Barcelona",
-      "zone": "Sant Gervasi",
-      "order": 5
+      "order": 9
     },
     {
       "slug": "el-born-corner",
@@ -699,7 +691,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "El Born",
-      "order": 6
+      "order": 5
     },
     {
       "slug": "rambla-catalunya-corner",
@@ -1217,7 +1209,7 @@
         }
       ],
       "stage": "active",
-      "order": 3
+      "order": 2
     },
     {
       "slug": "eixample-villarroel",
@@ -1334,7 +1326,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Eixample",
-      "order": 9
+      "order": 6
     },
     {
       "slug": "villa-cascades",
