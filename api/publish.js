@@ -1,28 +1,23 @@
-/* Netlify Function — POST /api/publish
-   Writes updated listings to GitHub (3 files) so Netlify auto-deploys. */
+const ALLOWED_ORIGINS = ['https://anrealestate.es', 'https://www.anrealestate.es', 'https://an-real-esate-topaz.vercel.app']
 
-exports.handler = async function (event) {
-  // Reflect origin so 'null' (file://) is explicitly allowed — * doesn't match null in Chrome
-  const origin = event.headers?.origin || event.headers?.Origin || '*'
-  const cors = {
-    'Access-Control-Allow-Origin': origin,
-    'Access-Control-Allow-Methods': 'POST,OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Vary': 'Origin',
-  }
-
-  if (event.httpMethod === 'OPTIONS') return { statusCode: 200, headers: cors, body: '' }
-  if (event.httpMethod !== 'POST')    return { statusCode: 405, headers: cors, body: '' }
+export default async function handler(req, res) {
+  const origin = req.headers.origin || ''
+  const allowedOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0]
+  res.setHeader('Access-Control-Allow-Origin', allowedOrigin)
+  res.setHeader('Vary', 'Origin')
+  res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+  if (req.method === 'OPTIONS') return res.status(200).end()
+  if (req.method !== 'POST') return res.status(405).end()
 
   const { GITHUB_TOKEN } = process.env
-  if (!GITHUB_TOKEN) return { statusCode: 503, headers: cors, body: JSON.stringify({ error: 'GitHub token not configured' }) }
+  if (!GITHUB_TOKEN) return res.status(503).json({ error: 'GitHub token not configured' })
 
-  let listings
-  try { ({ listings } = JSON.parse(event.body || '{}')) } catch { return { statusCode: 400, headers: cors, body: JSON.stringify({ error: 'Invalid JSON' }) } }
-  if (!Array.isArray(listings)) return { statusCode: 400, headers: cors, body: JSON.stringify({ error: 'Invalid listings data' }) }
+  const { listings } = req.body || {}
+  if (!Array.isArray(listings)) return res.status(400).json({ error: 'Invalid listings data' })
 
-  const OWNER   = 'dajungcho-cmyk'
-  const REPO    = 'an-reale-state'
+  const OWNER   = 'anrealestate'
+  const REPO    = 'an-real-esate'
   const BRANCH  = 'main'
   const apiBase = `https://api.github.com/repos/${OWNER}/${REPO}/contents`
 
@@ -79,8 +74,8 @@ exports.handler = async function (event) {
     await putFile('data-listings.js', dlContent, dlFile.sha, `Sync data-listings.js (${listings.length} properties)`)
     results.push('data-listings.js ✓')
 
-    return { statusCode: 200, headers: cors, body: JSON.stringify({ ok: true, count: listings.length, updated: results }) }
+    return res.status(200).json({ ok: true, count: listings.length, updated: results })
   } catch (e) {
-    return { statusCode: 502, headers: cors, body: JSON.stringify({ ok: false, error: e.message }) }
+    return res.status(502).json({ ok: false, error: e.message })
   }
 }
