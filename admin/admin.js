@@ -679,12 +679,14 @@ function _showForm(slug) {
   document.getElementById('form-title').textContent = isNew ? 'Nueva propiedad' : l.title || 'Editar propiedad'
   document.getElementById('btn-delete').style.display = isNew ? 'none' : ''
 
-  // Reset tabs
+  // Reset tabs + progress bar
   document.querySelectorAll('.ftab').forEach((t, i) => t.classList.toggle('active', i === 0))
   document.querySelectorAll('.tab-panel').forEach((p, i) => {
     p.classList.remove('hidden')
     p.classList.toggle('active', i === 0)
   })
+  const _prog = document.getElementById('form-tab-progress')
+  if (_prog) _prog.style.width = '16.67%'
 
   // Basic
   document.getElementById('f-original-slug').value = l.slug || ''
