@@ -74,7 +74,7 @@ function renderCard(listing) {
   const priceHTML = isRent
     ? `${listing.price}<small>/mo</small>`
     : listing.price
-  const propType  = listing.propertyType || listing.type || ''
+  const propType   = listing.badge_type || listing.propertyType || ''
   const listType  = listing.type === 'rent' || listing.status === 'rent' ? 'rent' : 'sale'
   const dataType  = `${listType} ${propType}`
   const href      = `property.html?slug=${listing.slug || ''}`
@@ -102,7 +102,7 @@ function renderCard(listing) {
           <span class="prop-price">${priceHTML}</span>
         </div>
         <h3 class="prop-title">${escHtml(title)}</h3>
-        <p class="prop-specs">${escHtml(String(listing.beds))} ${L['card.bed']||'bed'} &nbsp;·&nbsp; ${escHtml(String(listing.baths))} ${L['card.bath']||'bath'} &nbsp;·&nbsp; ${escHtml(String(listing.size))} m²</p>
+        <p class="prop-specs">${propType ? escHtml(propType) + ' &nbsp;·&nbsp; ' : ''}${escHtml(String(listing.beds))} ${L['card.bed']||'bed'} &nbsp;·&nbsp; ${escHtml(String(listing.baths))} ${L['card.bath']||'bath'} &nbsp;·&nbsp; ${escHtml(String(listing.size))} m²</p>
       </div>
     </a>`
 }
