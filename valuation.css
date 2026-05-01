@@ -195,7 +195,9 @@
   display: flex;
   align-items: center;
   gap: .75rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: .75rem;
+  padding-bottom: .75rem;
+  border-bottom: 1px solid var(--border);
 }
 .chat-progress-bar {
   flex: 1;
