@@ -1270,6 +1270,23 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   transition: transform var(--mid) var(--ease), box-shadow var(--mid) var(--ease);
 }
 .wa-fab:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(0,0,0,.4); }
+.wa-fab-label {
+  position: absolute;
+  right: calc(100% + .625rem);
+  white-space: nowrap;
+  background: var(--bg);
+  color: var(--cream);
+  font-size: var(--fs-xs);
+  padding: .3rem .75rem;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity var(--fast) var(--ease), transform var(--fast) var(--ease);
+}
+.wa-fab:hover .wa-fab-label,
+.wa-fab:focus-visible .wa-fab-label { opacity: 1; transform: translateX(0); }
 
 /* ================================
    640px
