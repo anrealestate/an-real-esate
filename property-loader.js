@@ -41,9 +41,25 @@
   if (!el) return
   let listings = []
   try { listings = JSON.parse(el.textContent).listings || [] } catch { return }
+  /* Merge admin cache with deployed data so published fields (e.g. youtubeUrl) are not
+     wiped by an older an_listings_cache on the same browser. */
   try {
     const cached = JSON.parse(localStorage.getItem('an_listings_cache') || '{}').listings || []
-    if (cached.length) listings = cached
+    if (cached.length && listings.length) {
+      const serverBySlug = Object.fromEntries(listings.map(l => [l.slug, l]))
+      const merged = []
+      const seen = new Set()
+      cached.forEach(c => {
+        merged.push({ ...c, ...(serverBySlug[c.slug] || {}) })
+        seen.add(c.slug)
+      })
+      listings.forEach(l => {
+        if (!seen.has(l.slug)) merged.push(l)
+      })
+      listings = merged
+    } else if (cached.length) {
+      listings = cached
+    }
   } catch {}
 
   const baseListing = listings.find(l => l.slug === (slug || 'gracia-garden'))

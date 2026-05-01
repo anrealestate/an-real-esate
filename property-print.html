@@ -332,7 +332,19 @@
   try { listings = JSON.parse(dataEl.textContent).listings || [] } catch {}
   try {
     const cached = JSON.parse(localStorage.getItem('an_listings_cache') || '{}').listings || []
-    if (cached.length) listings = cached
+    if (cached.length && listings.length) {
+      const serverBySlug = Object.fromEntries(listings.map(x => [x.slug, x]))
+      const merged = []
+      const seen = new Set()
+      cached.forEach(c => {
+        merged.push({ ...c, ...(serverBySlug[c.slug] || {}) })
+        seen.add(c.slug)
+      })
+      listings.forEach(x => { if (!seen.has(x.slug)) merged.push(x) })
+      listings = merged
+    } else if (cached.length) {
+      listings = cached
+    }
   } catch {}
 
   const l = listings.find(x => x.slug === slug)
