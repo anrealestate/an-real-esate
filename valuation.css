@@ -215,13 +215,17 @@
   border-radius: 2px;
 }
 .chat-msg--agent .chat-bubble {
-  background: rgba(240,235,224,.05);
+  background: none;
   color: var(--cream);
+  font-family: var(--serif);
+  font-size: clamp(.95rem, 1.4vw, 1.05rem);
+  font-weight: 300;
+  padding-left: 0;
   border-bottom-left-radius: 0;
 }
 .chat-msg--user .chat-bubble {
-  background: var(--gold);
-  color: var(--bg);
+  background: rgba(240,235,224,.05);
+  color: var(--cream);
   font-weight: 400;
   border-bottom-right-radius: 0;
 }
