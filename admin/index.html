@@ -495,7 +495,19 @@
               <input type="range" id="gal-size-slider" min="80" max="280" value="120" step="10" />
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
             </div>
-            <p class="gal-hint" data-i18n="hint.photos">La primera foto es la imagen principal (portada). Arrastra para reordenar.</p>
+            <div class="ingest-block">
+              <div class="ingest-zone" id="portada-zone">
+                <input type="file" id="portada-file" accept="image/*" class="ingest-file-btn" tabindex="-1" />
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                Arrastra la foto de portada aquí — o haz clic para elegir archivo
+              </div>
+              <div class="ingest-controls">
+                <input type="url" id="portada-url" class="ingest-url" placeholder="URL de imagen de portada…" autocomplete="off" />
+                <button type="button" id="portada-apply" class="ingest-apply">Aplicar</button>
+              </div>
+              <div id="portada-status" class="ingest-status"></div>
+            </div>
+            <p class="gal-hint">La primera foto (★) es la portada. Arrastra las tarjetas para reordenar.</p>
             <div class="upload-progress hidden" id="upload-gallery-progress">
               <div class="progress-bar"><div class="progress-fill" id="upload-gallery-fill"></div></div>
               <span id="upload-gallery-status" data-i18n="uploading">Subiendo…</span>
@@ -528,7 +540,19 @@
           <div class="list-block">
             <div class="list-hd"><span class="list-title">Vídeo (YouTube)</span></div>
             <p class="gal-hint">Pega la URL del vídeo (recomendado: No listado). En la ficha se usa reproductor discreto (youtube-nocookie, 16:9).</p>
-            <input type="url" id="f-youtube-url" placeholder="https://www.youtube.com/watch?v=…" autocomplete="off" aria-label="URL de YouTube" style="width:100%;max-width:42rem;padding:.65rem .85rem;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.25);color:inherit;font-size:.88rem" />
+            <div class="ingest-block" style="padding-bottom:.65rem">
+              <input type="url" id="f-youtube-url" placeholder="https://www.youtube.com/watch?v=…" autocomplete="off" aria-label="URL de YouTube" class="ingest-url" style="width:100%;max-width:42rem;display:block" />
+              <div class="ingest-zone" id="yt-drop-zone" style="margin-top:.5rem;max-width:42rem">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                Arrastra aquí un enlace de YouTube
+                <span class="ingest-note">No hay pipeline de subida de vídeo — sube a YouTube (No listado) y pega la URL</span>
+              </div>
+              <div id="yt-ingest-status" class="ingest-status"></div>
+              <div id="yt-video-preview" class="ingest-video-preview">
+                <img id="yt-thumb" src="" alt="" />
+                <span id="yt-vid-id" class="ingest-video-id"></span>
+              </div>
+            </div>
           </div>
 
           <!-- Tour Virtual 360° -->
@@ -552,11 +576,20 @@
 
           <!-- Planos -->
           <div class="list-block">
-            <div class="list-hd">
-              <span class="list-title">Planos</span>
-              <button type="button" class="btn-add" onclick="addFloorPlanItem()">+ Añadir plano</button>
+            <div class="list-hd"><span class="list-title">Planos</span></div>
+            <div class="ingest-block">
+              <div class="ingest-zone" id="fp-ingest-zone">
+                <input type="file" id="fp-ingest-file" accept="image/*,.pdf" class="ingest-file-btn" tabindex="-1" multiple />
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Arrastra imagen o PDF de plano aquí — o haz clic para elegir archivo
+              </div>
+              <div class="ingest-controls">
+                <input type="url" id="fp-ingest-url" class="ingest-url" placeholder="URL imagen o PDF…" autocomplete="off" />
+                <input type="text" id="fp-ingest-label" class="ingest-fp-label" placeholder="Etiqueta (opcional)" />
+                <button type="button" id="fp-ingest-apply" class="ingest-apply">+ Añadir</button>
+              </div>
+              <div id="fp-ingest-status" class="ingest-status"></div>
             </div>
-            <p class="gal-hint">URL de imagen o PDF. Aparece en la sección "Floor Plans" de la ficha.</p>
             <div id="fp-list" class="dyn-list"></div>
           </div>
         </div>

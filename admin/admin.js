@@ -335,6 +335,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Virtual tour field
   initTourField()
 
+  // Unified ingest blocks: portada / video / floor plans
+  initPortadaIngest()
+  initVideoIngest()
+  initFloorPlanIngest()
+
   // (upload-main-file removed — use gallery upload instead)
 
   // Upload: gallery (multiple)
@@ -863,6 +868,9 @@ function _showForm(slug) {
   // PDF hero
   setPdfHero(l.pdf_hero || '')
   document.getElementById('f-youtube-url').value = l.youtubeUrl || ''
+  updateYtPreview()
+  const portadaUrl = document.getElementById('portada-url')
+  if (portadaUrl) portadaUrl.value = ''
   setTourUrl(l.virtualTourUrl || '')
 
   // Description
@@ -969,6 +977,210 @@ function switchView(name) {
 }
 
 // ── SAVE ──────────────────────────────────────
+/* ── Raw file upload (PDFs / tour packages → Cloudinary raw/upload) ── */
+async function uploadFileRaw(file) {
+  return new Promise(resolve => {
+    const xhr  = new XMLHttpRequest()
+    const form = new FormData()
+    form.append('file', file)
+    form.append('upload_preset', CLD_PRESET)
+    form.append('folder', 'an-realestate')
+    xhr.onload  = () => {
+      if (xhr.status === 200) resolve(JSON.parse(xhr.responseText).secure_url)
+      else { let m = xhr.status; try { m = JSON.parse(xhr.responseText)?.error?.message || m } catch {} toast('Error al subir: ' + m, 'error'); resolve(null) }
+    }
+    xhr.onerror = () => { toast('Error de red', 'error'); resolve(null) }
+    xhr.open('POST', CLD_RAW_UPLOAD_URL)
+    xhr.send(form)
+  })
+}
+
+/* ── Portada helpers ──
+   Strategy: portada = images[0] (first gallery card, marked ★).
+   replaceFirstGalleryCard removes the current card[0] and inserts the new one at position 0.
+   No parallel field — the gallery is the single source of truth. */
+function replaceFirstGalleryCard(img) {
+  const list  = document.getElementById('gallery-list')
+  if (!list) return
+  addGalleryCard(img)                                     // appends to end
+  const cards   = [...list.querySelectorAll('.gal-card')]
+  const newCard = cards[cards.length - 1]
+  const first   = cards.length > 1 ? cards[0] : null
+  list.insertBefore(newCard, list.firstChild)             // move to front
+  if (first) first.remove()                              // drop old cover
+  refreshGalleryBadges()
+  _formDirty = true
+}
+
+function initPortadaIngest() {
+  const zone      = document.getElementById('portada-zone')
+  const fileInput = document.getElementById('portada-file')
+  const urlInput  = document.getElementById('portada-url')
+  const applyBtn  = document.getElementById('portada-apply')
+  const statusEl  = document.getElementById('portada-status')
+  if (!zone) return
+
+  function setStatus(msg, type = '') {
+    statusEl.textContent = msg
+    statusEl.className = 'ingest-status' + (type ? ' ' + type : '')
+  }
+
+  async function handleFile(file) {
+    if (!file.type.startsWith('image/')) { setStatus('Solo imágenes de portada (JPG, PNG, WEBP…)', 'err'); return }
+    setStatus('Comprimiendo…')
+    const compressed = await compressImage(file)
+    setStatus('Subiendo…')
+    const url = await uploadFile(compressed, null, null, null)
+    if (url) {
+      replaceFirstGalleryCard({ src: url, alt: file.name.replace(/\.[^.]+$/, '') })
+      setStatus('✓ Portada actualizada', 'ok')
+      urlInput.value = ''
+      setTimeout(() => setStatus(''), 3000)
+    } else {
+      setStatus('Error al subir', 'err')
+    }
+  }
+
+  function handleUrl(url) {
+    if (!/^https?:\/\//i.test(url)) { setStatus('URL no válida', 'err'); return }
+    replaceFirstGalleryCard({ src: url, alt: '' })
+    urlInput.value = ''
+    setStatus('✓ Portada actualizada', 'ok')
+    setTimeout(() => setStatus(''), 3000)
+  }
+
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('is-over') })
+  zone.addEventListener('dragleave', () => zone.classList.remove('is-over'))
+  zone.addEventListener('drop', async e => {
+    e.preventDefault(); zone.classList.remove('is-over')
+    const url = ([e.dataTransfer.getData('text/uri-list'), e.dataTransfer.getData('text/plain')])
+      .join('\n').split('\n').map(s => s.trim()).find(s => /^https?:\/\//i.test(s))
+    if (url) { urlInput.value = url; handleUrl(url); return }
+    const file = e.dataTransfer.files?.[0]
+    if (file) await handleFile(file)
+  })
+  fileInput.addEventListener('change', async e => {
+    const file = e.target.files?.[0]; e.target.value = ''
+    if (file) await handleFile(file)
+  })
+  applyBtn.addEventListener('click', () => { const u = urlInput.value.trim(); if (u) handleUrl(u) })
+  urlInput.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); applyBtn.click() } })
+}
+
+/* ── Video ingest (URL-only — no video file upload pipeline) ──
+   File drops are rejected with an honest message. */
+function updateYtPreview() {
+  const ytInput   = document.getElementById('f-youtube-url')
+  const previewEl = document.getElementById('yt-video-preview')
+  const thumbImg  = document.getElementById('yt-thumb')
+  const vidIdEl   = document.getElementById('yt-vid-id')
+  const statusEl  = document.getElementById('yt-ingest-status')
+  if (!ytInput) return
+  const yid = extractYoutubeVideoId(ytInput.value.trim())
+  if (yid) {
+    if (thumbImg) thumbImg.src = `https://i.ytimg.com/vi/${yid}/mqdefault.jpg`
+    if (vidIdEl) vidIdEl.textContent = 'youtube.com/watch?v=' + yid
+    previewEl?.classList.add('visible')
+    if (statusEl) { statusEl.textContent = ''; statusEl.className = 'ingest-status' }
+  } else {
+    previewEl?.classList.remove('visible')
+    if (statusEl) {
+      const raw = ytInput.value.trim()
+      statusEl.textContent = raw ? 'URL no reconocida como YouTube' : ''
+      statusEl.className = raw ? 'ingest-status err' : 'ingest-status'
+    }
+  }
+}
+
+function initVideoIngest() {
+  const ytInput  = document.getElementById('f-youtube-url')
+  const dropZone = document.getElementById('yt-drop-zone')
+  const statusEl = document.getElementById('yt-ingest-status')
+  if (!ytInput) return
+
+  ytInput.addEventListener('input', updateYtPreview)
+
+  if (dropZone) {
+    dropZone.addEventListener('dragover', e => {
+      if (e.dataTransfer.types.some(t => t === 'text/uri-list' || t === 'text/plain')) {
+        e.preventDefault(); dropZone.classList.add('is-over')
+      }
+    })
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('is-over'))
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault(); dropZone.classList.remove('is-over')
+      const url = ([e.dataTransfer.getData('text/uri-list'), e.dataTransfer.getData('text/plain')])
+        .join('\n').split('\n').map(s => s.trim()).find(s => /^https?:\/\//i.test(s))
+      if (url) {
+        ytInput.value = url; updateYtPreview()
+      } else if (e.dataTransfer.files?.length && statusEl) {
+        statusEl.textContent = 'No se pueden subir archivos — sube a YouTube No listado y pega la URL'
+        statusEl.className = 'ingest-status err'
+        setTimeout(() => { statusEl.textContent = ''; statusEl.className = 'ingest-status' }, 5000)
+      }
+    })
+  }
+}
+
+/* ── Floor plan ingest (image + PDF) ──────────── */
+function initFloorPlanIngest() {
+  const zone       = document.getElementById('fp-ingest-zone')
+  const fileInput  = document.getElementById('fp-ingest-file')
+  const urlInput   = document.getElementById('fp-ingest-url')
+  const labelInput = document.getElementById('fp-ingest-label')
+  const applyBtn   = document.getElementById('fp-ingest-apply')
+  const statusEl   = document.getElementById('fp-ingest-status')
+  if (!zone) return
+
+  function setStatus(msg, type = '') {
+    if (!statusEl) return
+    statusEl.textContent = msg
+    statusEl.className = 'ingest-status' + (type ? ' ' + type : '')
+  }
+
+  async function handleFile(file) {
+    const isPdf = file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')
+    setStatus('Subiendo ' + file.name + '…')
+    const url = isPdf
+      ? await uploadFileRaw(file)
+      : await uploadFile(await compressImage(file), null, null, null)
+    if (url) {
+      addFloorPlanItem({ src: url, label: file.name.replace(/\.[^.]+$/, '') })
+      setStatus('✓ Plano añadido', 'ok')
+      setTimeout(() => setStatus(''), 3000)
+      _formDirty = true
+    } else {
+      setStatus('Error al subir', 'err')
+    }
+  }
+
+  function handleUrl(url, label) {
+    if (!/^https?:\/\//i.test(url)) { setStatus('URL no válida', 'err'); return }
+    addFloorPlanItem({ src: url, label: label || undefined })
+    urlInput.value = ''; labelInput.value = ''
+    setStatus('✓ Plano añadido', 'ok')
+    setTimeout(() => setStatus(''), 2500)
+    _formDirty = true
+  }
+
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('is-over') })
+  zone.addEventListener('dragleave', () => zone.classList.remove('is-over'))
+  zone.addEventListener('drop', async e => {
+    e.preventDefault(); zone.classList.remove('is-over')
+    const url = ([e.dataTransfer.getData('text/uri-list'), e.dataTransfer.getData('text/plain')])
+      .join('\n').split('\n').map(s => s.trim()).find(s => /^https?:\/\//i.test(s))
+    if (url) { urlInput.value = url; handleUrl(url, labelInput.value.trim()); return }
+    for (const file of [...(e.dataTransfer.files || [])]) await handleFile(file)
+  })
+  fileInput.addEventListener('change', async e => {
+    const files = [...e.target.files]; e.target.value = ''
+    for (const file of files) await handleFile(file)
+  })
+  applyBtn.addEventListener('click', () => { const u = urlInput.value.trim(); if (u) handleUrl(u, labelInput.value.trim()) })
+  urlInput.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); applyBtn.click() } })
+  labelInput.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); applyBtn.click() } })
+}
+
 /* ── Virtual Tour 360° helpers ── */
 function setTourUrl(url) {
   const input   = document.getElementById('f-tour-url')
