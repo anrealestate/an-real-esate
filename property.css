@@ -538,26 +538,96 @@
 }
 .pc-tel:hover { border-color: rgba(240,235,224,.3); color: var(--cream); }
 
-.pc-buy-intake {
-  scroll-margin-top: calc(7rem + env(safe-area-inset-top, 0px));
-  margin-top: 1.25rem;
-  padding: 1rem 1rem 1.05rem;
+/* ── Buy enquiry modal ── */
+.buy-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0,0,0,.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+}
+.buy-modal-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.buy-modal {
+  background: var(--bg-2);
   border: 1px solid var(--border);
-  background: rgba(240,235,224,.03);
+  width: min(480px, calc(100vw - 2rem));
+  max-height: 90dvh;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(16px);
+  transition: transform .25s ease;
+  overflow: hidden;
 }
-.pc-buy-intake-h {
-  font-size: var(--fs-xs);
-  font-weight: 500;
-  letter-spacing: .08em;
-  text-transform: uppercase;
+.buy-modal-overlay.is-open .buy-modal { transform: translateY(0); }
+.buy-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem .9rem;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.buy-modal-title {
+  font-family: var(--serif);
+  font-size: var(--fs-lg);
+  font-weight: 300;
   color: var(--gold);
-  margin: 0 0 .45rem;
-}
-.pc-buy-intake-t {
-  font-size: var(--fs-2xs);
-  line-height: 1.45;
-  color: var(--muted);
   margin: 0;
+  letter-spacing: .04em;
+}
+.buy-modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color .18s, border-color .18s;
+}
+.buy-modal-close:hover { color: var(--cream); border-color: var(--cream); }
+.buy-modal-close:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.buy-modal-body {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 1.25rem;
+}
+.buy-modal-form .fg { margin-bottom: .85rem; }
+.buy-modal-submit {
+  width: 100%;
+  justify-content: center;
+  margin-top: .25rem;
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--bg);
+  min-height: 44px;
+}
+.buy-modal-submit:hover { opacity: .88; }
+.buy-modal-submit:disabled { opacity: .55; cursor: not-allowed; }
+@media (max-width: 767px) {
+  .buy-modal-overlay { align-items: flex-end; }
+  .buy-modal {
+    width: 100%;
+    max-height: 92dvh;
+    border-bottom: none;
+    border-radius: 0;
+    transform: translateY(40px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .buy-modal-overlay, .buy-modal { transition: none; }
 }
 
 /* ── Visit sheet tool ── */

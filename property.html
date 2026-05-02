@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css?v=g5" />
-  <link rel="stylesheet" href="property.css?v=fphero3" />
+  <link rel="stylesheet" href="property.css?v=fphero4" />
   <script>
   (function () {
     try {
@@ -417,7 +417,7 @@
               </div>
               <div class="pc-form-actions">
                 <button type="submit" class="button pc-submit" data-i18n="form.submit">Request Viewing</button>
-                <a href="#buy-intake" class="button button--outline pc-reserve" data-i18n="btn.reserve">Purchase enquiry</a>
+                <button type="button" class="button button--outline pc-reserve" data-action="buy-modal" data-i18n="btn.reserve">Purchase enquiry</button>
               </div>
             </form>
 
@@ -436,10 +436,6 @@
               <span class="tel-text"></span>
             </a>
 
-            <div id="buy-intake" class="pc-buy-intake" tabindex="-1">
-              <p class="pc-buy-intake-h" data-i18n="buy.intake_h">Purchase enquiry</p>
-              <p class="pc-buy-intake-t" data-i18n="buy.intake_t">Full buyer details form coming soon. Use the enquiry form above or call us to proceed.</p>
-            </div>
 
           </div><!-- /.pc-form-block -->
 
@@ -493,6 +489,47 @@
     </div>
   </footer>
 
+  <!-- Buy enquiry modal -->
+  <div class="buy-modal-overlay" id="buy-modal-overlay"
+       role="dialog" aria-modal="true"
+       aria-labelledby="buy-modal-title" aria-hidden="true">
+    <div class="buy-modal">
+      <div class="buy-modal-head">
+        <h2 class="buy-modal-title" id="buy-modal-title" data-i18n="buy.modal_title">Purchase enquiry</h2>
+        <button class="buy-modal-close" id="buy-modal-close" aria-label="Close">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="buy-modal-body">
+        <form class="buy-modal-form" id="buy-form" novalidate>
+          <input type="hidden" name="property" />
+          <input type="hidden" name="intent" value="compra" />
+          <div class="fg">
+            <label class="flabel" data-i18n="form.name">Name</label>
+            <input type="text" name="name" class="finput" placeholder="Your full name" data-i18n="form.name_ph" required autocomplete="name" />
+          </div>
+          <div class="fg">
+            <label class="flabel" data-i18n="form.email">Email</label>
+            <input type="email" name="email" class="finput" placeholder="your@email.com" data-i18n="form.email_ph" required autocomplete="email" />
+          </div>
+          <div class="fg">
+            <label class="flabel" data-i18n="form.phone">Phone</label>
+            <input type="tel" name="phone" class="finput" placeholder="+34 600 000 000" data-i18n="form.phone_ph" autocomplete="tel" />
+          </div>
+          <div class="fg">
+            <label class="flabel" data-i18n="buy.country">Country of residence</label>
+            <input type="text" name="country" class="finput" placeholder="e.g. United Kingdom" data-i18n="buy.country_ph" autocomplete="country-name" />
+          </div>
+          <div class="fg">
+            <label class="flabel" data-i18n="buy.timeline">Budget &amp; timeline</label>
+            <textarea name="message" class="finput ftextarea" rows="2" placeholder="e.g. €1.5M budget, ready in 6 months" data-i18n="buy.timeline_ph"></textarea>
+          </div>
+          <button type="submit" class="button buy-modal-submit" id="buy-submit" data-i18n="buy.submit">Send purchase enquiry</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- LIGHTBOX -->
   <div class="lb-overlay" id="lb-overlay" role="dialog" aria-modal="true" aria-label="Photo gallery">
     <button class="lb-close" id="lb-close" aria-label="Close gallery">
@@ -515,7 +552,7 @@
     <p class="psc-price">€830,000</p>
     <div class="psc-actions">
       <a href="#enquire" class="button psc-btn psc-btn--primary" data-i18n="form.submit">Request Viewing</a>
-      <a href="#buy-intake" class="button button--outline psc-btn psc-btn--reserve" data-i18n="btn.reserve">Purchase enquiry</a>
+      <button type="button" class="button button--outline psc-btn psc-btn--reserve" data-action="buy-modal" data-i18n="btn.reserve">Purchase enquiry</button>
     </div>
   </div>
 
@@ -563,7 +600,7 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="main.js?v=ux2"></script>
-  <script src="property.js?v=ux3"></script>
+  <script src="property.js?v=ux4"></script>
   <script src="animations.js"></script>
   <script src="photo-protect.js"></script>
 

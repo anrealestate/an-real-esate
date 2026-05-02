@@ -303,3 +303,116 @@ if (stickyCta && enquireEl) {
     { threshold: 0.1 }
   ).observe(enquireEl)
 }
+
+/* ================================
+   Purchase enquiry modal
+   ================================ */
+;(() => {
+  const overlay  = document.getElementById('buy-modal-overlay')
+  const closeBtn = document.getElementById('buy-modal-close')
+  const form     = document.getElementById('buy-form')
+  const submitBtn = document.getElementById('buy-submit')
+  if (!overlay || !form) return
+
+  let lastFocus = null
+  let trapHandler = null
+
+  function trapFocus(container) {
+    if (trapHandler) document.removeEventListener('keydown', trapHandler)
+    trapHandler = e => {
+      if (!overlay.classList.contains('is-open')) return
+      if (e.key === 'Escape') { e.preventDefault(); closeBuyModal(); return }
+      if (e.key !== 'Tab') return
+      const focusable = Array.from(container.querySelectorAll(
+        'button:not([disabled]),[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])'
+      ))
+      if (!focusable.length) return
+      const first = focusable[0], last = focusable[focusable.length - 1]
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault(); last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault(); first.focus()
+      }
+    }
+    document.addEventListener('keydown', trapHandler)
+  }
+
+  function openBuyModal() {
+    lastFocus = document.activeElement
+    const propName = document.querySelector('#prop-form [name="property"]')?.value || ''
+    form.querySelector('[name="property"]').value = propName
+    overlay.classList.add('is-open')
+    overlay.setAttribute('aria-hidden', 'false')
+    document.body.style.overflow = 'hidden'
+    closeBtn.focus()
+    trapFocus(overlay)
+  }
+
+  function closeBuyModal() {
+    overlay.classList.remove('is-open')
+    overlay.setAttribute('aria-hidden', 'true')
+    document.body.style.overflow = ''
+    if (trapHandler) { document.removeEventListener('keydown', trapHandler); trapHandler = null }
+    lastFocus?.focus()
+  }
+
+  document.querySelectorAll('[data-action="buy-modal"]').forEach(btn => {
+    btn.addEventListener('click', openBuyModal)
+  })
+
+  closeBtn.addEventListener('click', closeBuyModal)
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeBuyModal() })
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault()
+    const nameInput  = form.querySelector('[name="name"]')
+    const emailInput = form.querySelector('[name="email"]')
+    const name  = nameInput.value.trim()
+    const email = emailInput.value.trim()
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+    const lang = (typeof getLang === 'function') ? getLang() : 'en'
+    const t = k => window.I18N?.[lang]?.[k] || window.I18N?.en?.[k] || k
+
+    let valid = true
+    if (!name)    { showFieldError(nameInput,  t('form.err.name'));  valid = false } else clearFieldError(nameInput)
+    if (!emailOk) { showFieldError(emailInput, t('form.err.email')); valid = false } else clearFieldError(emailInput)
+    if (!valid) return
+
+    submitBtn.textContent = t('buy.submitting')
+    submitBtn.disabled = true
+
+    const property = form.querySelector('[name="property"]').value
+
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/alvaro@anrealestate.es', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          phone:    form.querySelector('[name="phone"]').value.trim(),
+          country:  form.querySelector('[name="country"]').value.trim(),
+          message:  form.querySelector('[name="message"]').value.trim(),
+          property,
+          intent:   'compra',
+          _subject: 'Consulta de compra — ' + property,
+          _captcha: 'false',
+          _template: 'table',
+        }),
+      })
+      if (!res.ok) throw new Error()
+      submitBtn.textContent = t('buy.submitted')
+      form.reset()
+      if (typeof showToast === 'function') showToast(t('buy.toast'))
+      setTimeout(() => {
+        closeBuyModal()
+        submitBtn.textContent = t('buy.submit')
+        submitBtn.disabled = false
+      }, 2500)
+    } catch {
+      submitBtn.textContent = t('buy.error')
+      submitBtn.disabled = false
+      setTimeout(() => { submitBtn.textContent = t('buy.submit') }, 4000)
+    }
+  })
+})()
