@@ -609,6 +609,15 @@ body { background: var(--bg); color: var(--cream); min-height: 100vh; overflow-x
   margin-left: .3rem;
 }
 
+.fg-hint {
+  margin: 0;
+  font-size: .72rem;
+  line-height: 1.35;
+  color: rgba(122,143,166,.75);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
 input[type="text"],
 input[type="url"],
 input[type="number"],

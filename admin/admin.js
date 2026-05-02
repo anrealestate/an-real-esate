@@ -816,6 +816,8 @@ function _showForm(slug) {
   document.getElementById('f-beds').value          = String(l.beds ?? 2)
   document.getElementById('f-baths').value         = String(l.baths ?? 1)
   document.getElementById('f-size').value          = l.size || ''
+  const suEl = document.getElementById('f-size-unit')
+  if (suEl) suEl.value = l.sizeUnit === 'sqft' ? 'sqft' : 'm2'
   document.getElementById('f-land').value          = l.land || ''
   document.getElementById('f-garage').value        = l.garage || ''
   document.getElementById('f-floor').value         = l.floor || ''
@@ -1179,6 +1181,10 @@ async function saveProperty() {
   if (parentSlugFinal) listing.parent_slug = parentSlugFinal
   else delete listing.parent_slug
 
+  const sizeUnitVal = document.getElementById('f-size-unit')?.value || 'm2'
+  if (sizeUnitVal === 'sqft') listing.sizeUnit = 'sqft'
+  else delete listing.sizeUnit
+
   // Remove undefined keys
   Object.keys(listing).forEach(k => listing[k] === undefined && delete listing[k])
 
@@ -1188,6 +1194,16 @@ async function saveProperty() {
     else _listings.push(listing)
   } else {
     _listings.push(listing)
+  }
+
+  /* Promoción: misma unidad de superficie para todas las hijas */
+  if (listing.propertyType === 'development' && listing.slug) {
+    const sq = listing.sizeUnit === 'sqft'
+    _listings.forEach(ch => {
+      if (ch.parent_slug !== listing.slug) return
+      if (sq) ch.sizeUnit = 'sqft'
+      else delete ch.sizeUnit
+    })
   }
 
   // Save address separately so it survives page reloads (read directly from field, not from listing object)
@@ -1278,12 +1294,19 @@ function onPropertyTypeChange(type, listing) {
     if (isDevWithSlug) renderDevChildren(_editSlug)
   }
 
-  // Beds/baths/size/floor are less relevant for development mother listings
+  // Beds/baths/size/floor are less relevant for development mother listings (la unidad m²/sq ft sí cuenta para hijas)
   const devHideFields = ['f-beds','f-baths','f-size','f-floor','f-condition','f-energy']
   devHideFields.forEach(id => {
     const fg = document.getElementById(id)?.closest('.fg')
     if (fg) fg.style.opacity = isDev ? '.35' : ''
   })
+  const fgBuilt = document.getElementById('fg-built-size')
+  const fgUnit = document.getElementById('fg-size-unit')
+  if (fgBuilt) fgBuilt.style.opacity = isDev ? '.35' : ''
+  if (fgUnit) {
+    fgUnit.style.opacity = '1'
+    fgUnit.style.pointerEvents = ''
+  }
 }
 
 function onPriceCurrChange(curr) {
@@ -1343,6 +1366,8 @@ function addChildProperty() {
   requestAnimationFrame(() => {
     const parentSlugEl = document.getElementById('f-parent-slug')
     if (parentSlugEl) parentSlugEl.value = parent.slug
+    const suEl = document.getElementById('f-size-unit')
+    if (suEl) suEl.value = parent.sizeUnit === 'sqft' ? 'sqft' : 'm2'
     const parentBlockEl = document.getElementById('dev-parent-block')
     if (parentBlockEl) parentBlockEl.style.display = ''
     const refHintEl = document.getElementById('parent-ref-hint')
@@ -2765,7 +2790,7 @@ const ADMIN_UI = {
     'label.status':'Estado','label.status.sale':'En venta','label.status.rent':'En alquiler',
     'label.type':'Tipo de propiedad','label.price':'Precio','label.neighbourhood':'Barrio',
     'label.address':'Dirección exacta','label.address.hint':'(solo visible en admin y hoja de visita)',
-    'label.zip':'Código postal','label.size':'Superficie construida (m²)','label.land':'Superficie terreno (m²)',
+    'label.zip':'Código postal','label.size':'Superficie construida','label.size_unit':'Unidad de superficie','hint.size_unit':'En promociones (obra nueva), esta unidad se aplica a todas las unidades hijas al guardar la madre.','label.land':'Superficie terreno (m²)',
     'label.beds':'Habitaciones','label.baths':'Baños','label.garage':'Garaje','label.floor':'Planta',
     'label.year':'Año de construcción','label.year_ren':'Año de renovación',
     'label.condition':'Condición','label.energy':'Clase energética',
@@ -2804,7 +2829,7 @@ const ADMIN_UI = {
     'label.status':'Status','label.status.sale':'For Sale','label.status.rent':'For Rent',
     'label.type':'Property type','label.price':'Price','label.neighbourhood':'Neighbourhood',
     'label.address':'Exact address','label.address.hint':'(only visible in admin and visit sheet)',
-    'label.zip':'Postal code','label.size':'Built area (m²)','label.land':'Land area (m²)',
+    'label.zip':'Postal code','label.size':'Built area','label.size_unit':'Area unit','hint.size_unit':'For new developments, this unit applies to all child units when you save the mother listing.','label.land':'Land area (m²)',
     'label.beds':'Bedrooms','label.baths':'Bathrooms','label.garage':'Garage','label.floor':'Floor',
     'label.year':'Year built','label.year_ren':'Year renovated',
     'label.condition':'Condition','label.energy':'Energy class',
@@ -2843,7 +2868,7 @@ const ADMIN_UI = {
     'label.status':'Estat','label.status.sale':'En venda','label.status.rent':'En lloguer',
     'label.type':'Tipus de propietat','label.price':'Preu','label.neighbourhood':'Barri',
     'label.address':'Adreça exacta','label.address.hint':'(només visible a l\'admin i full de visita)',
-    'label.zip':'Codi postal','label.size':'Superfície construïda (m²)','label.land':'Superfície terreny (m²)',
+    'label.zip':'Codi postal','label.size':'Superfície construïda','label.size_unit':'Unitat de superfície','hint.size_unit':'En promocions (obra nova), aquesta unitat s’aplica a totes les unitats filles en desar la mare.','label.land':'Superfície terreny (m²)',
     'label.beds':'Habitacions','label.baths':'Banys','label.garage':'Garatge','label.floor':'Planta',
     'label.year':'Any de construcció','label.year_ren':'Any de renovació',
     'label.condition':'Condició','label.energy':'Classe energètica',
@@ -2882,7 +2907,7 @@ const ADMIN_UI = {
     'label.status':'Statut','label.status.sale':'À vendre','label.status.rent':'À louer',
     'label.type':'Type de bien','label.price':'Prix','label.neighbourhood':'Quartier',
     'label.address':'Adresse exacte','label.address.hint':'(visible uniquement dans l\'admin)',
-    'label.zip':'Code postal','label.size':'Surface construite (m²)','label.land':'Surface terrain (m²)',
+    'label.zip':'Code postal','label.size':'Surface construite','label.size_unit':'Unité de surface','hint.size_unit':'Pour les programmes neufs, cette unité s’applique à toutes les unités filles lors de l’enregistrement du programme.','label.land':'Surface terrain (m²)',
     'label.beds':'Chambres','label.baths':'Salles de bain','label.garage':'Garage','label.floor':'Étage',
     'label.year':'Année de construction','label.year_ren':'Année de rénovation',
     'label.condition':'Condition','label.energy':'Classe énergétique',
@@ -2921,7 +2946,7 @@ const ADMIN_UI = {
     'label.status':'Status','label.status.sale':'Zu verkaufen','label.status.rent':'Zu vermieten',
     'label.type':'Immobilientyp','label.price':'Preis','label.neighbourhood':'Stadtteil',
     'label.address':'Genaue Adresse','label.address.hint':'(nur im Admin und Besuchsblatt sichtbar)',
-    'label.zip':'Postleitzahl','label.size':'Wohnfläche (m²)','label.land':'Grundstücksfläche (m²)',
+    'label.zip':'Postleitzahl','label.size':'Wohnfläche','label.size_unit':'Flächeneinheit','hint.size_unit':'Bei Neubauprojekten gilt diese Einheit für alle Untereinheiten beim Speichern der Mutter-Fiches.','label.land':'Grundstücksfläche (m²)',
     'label.beds':'Schlafzimmer','label.baths':'Badezimmer','label.garage':'Garage','label.floor':'Etage',
     'label.year':'Baujahr','label.year_ren':'Renovierungsjahr',
     'label.condition':'Zustand','label.energy':'Energieklasse',
@@ -2960,7 +2985,7 @@ const ADMIN_UI = {
     'label.status':'Stato','label.status.sale':'In vendita','label.status.rent':'In affitto',
     'label.type':'Tipo di immobile','label.price':'Prezzo','label.neighbourhood':'Quartiere',
     'label.address':'Indirizzo esatto','label.address.hint':'(visibile solo in admin e scheda visita)',
-    'label.zip':'Codice postale','label.size':'Superficie costruita (m²)','label.land':'Superficie terreno (m²)',
+    'label.zip':'Codice postale','label.size':'Superficie costruita','label.size_unit':'Unità di superficie','hint.size_unit':'Per le nuove costruzioni, questa unità si applica a tutte le unità figlie salvando la scheda madre.','label.land':'Superficie terreno (m²)',
     'label.beds':'Camere da letto','label.baths':'Bagni','label.garage':'Garage','label.floor':'Piano',
     'label.year':'Anno di costruzione','label.year_ren':'Anno di ristrutturazione',
     'label.condition':'Condizione','label.energy':'Classe energetica',
@@ -2999,7 +3024,7 @@ const ADMIN_UI = {
     'label.status':'Статус','label.status.sale':'Продажа','label.status.rent':'Аренда',
     'label.type':'Тип недвижимости','label.price':'Цена','label.neighbourhood':'Район',
     'label.address':'Точный адрес','label.address.hint':'(видно только в админе и листе посещения)',
-    'label.zip':'Почтовый индекс','label.size':'Площадь (м²)','label.land':'Площадь участка (м²)',
+    'label.zip':'Почтовый индекс','label.size':'Площадь','label.size_unit':'Единица площади','hint.size_unit':'Для новостроек эта единица применяется ко всем дочерним объектам при сохранении материнской карточки.','label.land':'Площадь участка (м²)',
     'label.beds':'Спальни','label.baths':'Ванные','label.garage':'Гараж','label.floor':'Этаж',
     'label.year':'Год постройки','label.year_ren':'Год реновации',
     'label.condition':'Состояние','label.energy':'Энергокласс',
