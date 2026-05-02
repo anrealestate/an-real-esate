@@ -8,6 +8,12 @@
     return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')
   }
 
+  function formatPrice(raw) {
+    const n = typeof raw === 'number' ? raw : parseFloat(String(raw ?? '').replace(/[^0-9.]/g, ''))
+    if (isNaN(n)) return raw
+    return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n)
+  }
+
   /* Allowlist of domains permitted as virtualTourUrl src (Matterport, Kuula, etc.).
      'javascript:' and other unsafe schemes are rejected by the https-only check. */
   const TOUR_ALLOWED_HOSTS = [
@@ -354,18 +360,19 @@
     }
 
     /* ── price bar ── */
+    const displayPrice = formatPrice(listing.price)
     const priceEl = document.getElementById('ph-price')
     if (priceEl) {
       priceEl.innerHTML = isRent
-        ? `${esc(listing.price)}<small>/mo</small>`
-        : esc(listing.price)
+        ? `${esc(displayPrice)}<small>/mo</small>`
+        : esc(displayPrice)
     }
     const refEl = document.getElementById('ph-ref')
     if (refEl) refEl.textContent = `Ref. ${listing.ref}`
 
     /* ── sidebar contact panel ── */
     const pcPrice = document.querySelector('.pc-price')
-    if (pcPrice) pcPrice.innerHTML = isRent ? `${esc(listing.price)}<small>/mo</small>` : esc(listing.price)
+    if (pcPrice) pcPrice.innerHTML = isRent ? `${esc(displayPrice)}<small>/mo</small>` : esc(displayPrice)
     const pcLoc = document.querySelector('.pc-loc')
     if (pcLoc) pcLoc.textContent = listing.neighbourhood || listing.city || ''
 
@@ -664,7 +671,7 @@
 
     /* ── mobile sticky CTA ── */
     const stickyPrice = document.querySelector('.psc-price')
-    if (stickyPrice) stickyPrice.textContent = priceLabel
+    if (stickyPrice) stickyPrice.textContent = isRent ? `${displayPrice}/mo` : displayPrice
 
     // Reorder sections for new-dev units before the shell is revealed (idempotent)
     reorderPropertyMainForNewDevUnit()

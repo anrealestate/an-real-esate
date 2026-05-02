@@ -472,7 +472,7 @@
 .pc-form-actions {
   display: flex;
   flex-direction: column;
-  gap: .5rem;
+  gap: .7rem;
   margin-top: .35rem;
   width: 100%;
   min-width: 0;
@@ -512,16 +512,18 @@
   gap: .5rem;
   width: 100%;
   margin-top: 0;
-  padding: .8rem;
-  background: #25d366;
-  color: #fff;
-  font-size: var(--fs-xs);
+  padding: .85rem;
+  background: rgba(37,211,102,.07);
+  border: 1px solid rgba(37,211,102,.3);
+  color: var(--cream);
+  font-size: var(--fs-sm);
   font-weight: 500;
   letter-spacing: .06em;
   text-transform: uppercase;
-  transition: opacity var(--fast);
+  transition: background var(--fast), border-color var(--fast);
 }
-.pc-whatsapp:hover { opacity: .88; }
+.pc-whatsapp svg { color: #25d366; flex-shrink: 0; }
+.pc-whatsapp:hover { background: rgba(37,211,102,.13); border-color: rgba(37,211,102,.5); }
 
 /* Phone link */
 .pc-tel {
@@ -530,10 +532,10 @@
   justify-content: center;
   gap: .45rem;
   width: 100%;
-  margin-top: .5rem;
-  padding: .7rem;
+  margin-top: 0;
+  padding: .85rem;
   border: 1px solid var(--border);
-  font-size: var(--fs-xs);
+  font-size: var(--fs-sm);
   color: var(--cream-dim);
   letter-spacing: .06em;
   text-transform: uppercase;
@@ -780,7 +782,7 @@
   box-sizing: border-box;
   min-height: 44px;
   padding: .72rem 1rem;
-  font-size: var(--fs-xs);
+  font-size: var(--fs-sm);
   letter-spacing: .08em;
   line-height: 1.2;
   word-break: break-word;
@@ -969,7 +971,7 @@
   color: var(--gold, #c8a96e);
   font-family: inherit;
   font-size: var(--fs-sm);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: .06em;
   text-transform: uppercase;
   cursor: pointer;
