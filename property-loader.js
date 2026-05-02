@@ -3,7 +3,7 @@
    Reads ?slug= from URL and populates
    property.html dynamically from JSON
    ================================ */
-;(function () {
+;(async function () {
   function esc(str) {
     return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')
   }
@@ -41,26 +41,42 @@
     document.documentElement.classList.remove('property-shell-pending')
   }
 
-  const el = document.getElementById('listings-data')
-  if (!el) {
+  async function loadListings() {
+    try {
+      const listingsUrl = new URL('data/listings.json', window.location.href).href
+      const r = await fetch(listingsUrl, { cache: 'no-store', credentials: 'same-origin' })
+      if (r.ok) {
+        const j = await r.json()
+        if (Array.isArray(j.listings) && j.listings.length) return j.listings
+      }
+    } catch (_) {}
+    const el = document.getElementById('listings-data')
+    if (!el) return []
+    try {
+      const parsed = JSON.parse(el.textContent)
+      return Array.isArray(parsed.listings) ? parsed.listings : []
+    } catch {
+      return []
+    }
+  }
+
+  let listings = await loadListings()
+  if (!listings.length) {
     revealPropertyShell()
     return
   }
-  let listings = []
-  try {
-    listings = JSON.parse(el.textContent).listings || []
-  } catch {
-    revealPropertyShell()
-    return
-  }
-  /* Merge admin cache: datos del sitio (JSON) tienen prioridad sobre localStorage del admin */
+
+  /* Merge admin cache: servidor (JSON / bundle) gana; floorPlans siempre del servidor si vienen */
   try {
     const cached = JSON.parse(localStorage.getItem('an_listings_cache') || '{}').listings || []
     if (cached.length && listings.length) {
       const serverBySlug = Object.fromEntries(listings.map(l => [l.slug, l]))
       listings = listings.map(srv => {
         const c = cached.find(x => x.slug === srv.slug)
-        return c ? { ...c, ...srv } : srv
+        if (!c) return srv
+        const merged = { ...c, ...srv }
+        if (Array.isArray(srv.floorPlans) && srv.floorPlans.length) merged.floorPlans = srv.floorPlans
+        return merged
       })
       cached.forEach(c => {
         if (!serverBySlug[c.slug]) listings.push(c)
@@ -314,6 +330,7 @@
           </a>
         </div>`
       }).join('')
+      fpSec.removeAttribute('hidden')
       fpSec.hidden = false
     } else if (fpSec) {
       fpSec.hidden = true

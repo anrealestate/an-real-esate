@@ -78,6 +78,12 @@
       ]
     },
     {
+      "source": "/docs/(.*)\\.pdf",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400" }
+      ]
+    },
+    {
       "source": "/admin/(.*)",
       "headers": [
         { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://maps.googleapis.com https://maps.gstatic.com https://unpkg.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://res.cloudinary.com https://anrealestate.es https://maps.gstatic.com https://maps.googleapis.com; connect-src 'self' https://api.cloudinary.com https://translate.googleapis.com https://formsubmit.co https://api.github.com https://maps.googleapis.com https://api.anthropic.com https://generativelanguage.googleapis.com https://unpkg.com https://cdnjs.cloudflare.com;" }

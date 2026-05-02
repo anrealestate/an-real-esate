@@ -336,7 +336,13 @@
       "order": 3018,
       "sizeUnit": "sqft",
       "floor": 10,
-      "interiorSize": 430
+      "interiorSize": 430,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689959/an-realestate/how-floorplans/how-floorplan-page-21-of-64.pdf",
+          "label": "Floor plan · LINE 09 B1"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-1101",
@@ -462,7 +468,13 @@
       "order": 3042,
       "sizeUnit": "sqft",
       "floor": 11,
-      "interiorSize": 676
+      "interiorSize": 676,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689925/an-realestate/how-floorplans/how-floorplan-page-01-of-64.pdf",
+          "label": "Floor plan · LINE 01 C4"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-1104",
@@ -588,7 +600,13 @@
       "order": 3031,
       "sizeUnit": "sqft",
       "floor": 11,
-      "interiorSize": 505
+      "interiorSize": 505,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689930/an-realestate/how-floorplans/how-floorplan-page-04-of-64.pdf",
+          "label": "Floor plan · LINE 04 B5"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-1120",
@@ -714,7 +732,13 @@
       "order": 3049,
       "sizeUnit": "sqft",
       "floor": 11,
-      "interiorSize": 620
+      "interiorSize": 620,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689994/an-realestate/how-floorplans/how-floorplan-page-43-of-64.pdf",
+          "label": "Floor plan · LINE 20 C1"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-1205",
@@ -840,7 +864,13 @@
       "order": 3024,
       "sizeUnit": "sqft",
       "floor": 12,
-      "interiorSize": 430
+      "interiorSize": 430,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689935/an-realestate/how-floorplans/how-floorplan-page-07-of-64.pdf",
+          "label": "Floor plan · LINE 05 B1"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-1406",
@@ -966,7 +996,13 @@
       "order": 3027,
       "sizeUnit": "sqft",
       "floor": 14,
-      "interiorSize": 430
+      "interiorSize": 430,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689941/an-realestate/how-floorplans/how-floorplan-page-11-of-64.pdf",
+          "label": "Floor plan · LINE 06 B1"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-1508",
@@ -1092,7 +1128,13 @@
       "order": 3025,
       "sizeUnit": "sqft",
       "floor": 15,
-      "interiorSize": 430
+      "interiorSize": 430,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689954/an-realestate/how-floorplans/how-floorplan-page-18-of-64.pdf",
+          "label": "Floor plan · LINE 08 B1"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-1514",
@@ -1218,7 +1260,13 @@
       "order": 3045,
       "sizeUnit": "sqft",
       "floor": 15,
-      "interiorSize": 687
+      "interiorSize": 687,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689977/an-realestate/how-floorplans/how-floorplan-page-32-of-64.pdf",
+          "label": "Floor plan · LINE 14 C2"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-1523",
@@ -1344,7 +1392,13 @@
       "order": 3033,
       "sizeUnit": "sqft",
       "floor": 15,
-      "interiorSize": 466
+      "interiorSize": 466,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777690009/an-realestate/how-floorplans/how-floorplan-page-51-of-64.pdf",
+          "label": "Floor plan · LINE 23 B2"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-1611",
@@ -1470,7 +1524,13 @@
       "order": 3017,
       "sizeUnit": "sqft",
       "floor": 16,
-      "interiorSize": 435
+      "interiorSize": 435,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689970/an-realestate/how-floorplans/how-floorplan-page-28-of-64.pdf",
+          "label": "Floor plan · LINE 11 B4"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-1621",
@@ -1596,7 +1656,13 @@
       "order": 3006,
       "sizeUnit": "sqft",
       "floor": 16,
-      "interiorSize": 335
+      "interiorSize": 335,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689997/an-realestate/how-floorplans/how-floorplan-page-45-of-64.pdf",
+          "label": "Floor plan · LINE 21 N"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-1817",
@@ -1722,7 +1788,13 @@
       "order": 3038,
       "sizeUnit": "sqft",
       "floor": 18,
-      "interiorSize": 466
+      "interiorSize": 466,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689983/an-realestate/how-floorplans/how-floorplan-page-36-of-64.pdf",
+          "label": "Floor plan · LINE 17 B2"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-1818",
@@ -1848,7 +1920,13 @@
       "order": 3036,
       "sizeUnit": "sqft",
       "floor": 18,
-      "interiorSize": 430
+      "interiorSize": 430,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689986/an-realestate/how-floorplans/how-floorplan-page-38-of-64.pdf",
+          "label": "Floor plan · LINE 18 B1"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-1819",
@@ -1974,7 +2052,13 @@
       "order": 3008,
       "sizeUnit": "sqft",
       "floor": 18,
-      "interiorSize": 335
+      "interiorSize": 335,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689991/an-realestate/how-floorplans/how-floorplan-page-41-of-64.pdf",
+          "label": "Floor plan · LINE 19 N"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-1822",
@@ -2100,7 +2184,13 @@
       "order": 3034,
       "sizeUnit": "sqft",
       "floor": 18,
-      "interiorSize": 430
+      "interiorSize": 430,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777690006/an-realestate/how-floorplans/how-floorplan-page-49-of-64.pdf",
+          "label": "Floor plan · LINE 22 B1"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-1915",
@@ -2226,7 +2316,13 @@
       "order": 3001,
       "sizeUnit": "sqft",
       "floor": 19,
-      "interiorSize": 371
+      "interiorSize": 371,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689978/an-realestate/how-floorplans/how-floorplan-page-33-of-64.pdf",
+          "label": "Floor plan · LINE 15 A2"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-1920",
@@ -2352,7 +2448,13 @@
       "order": 3054,
       "sizeUnit": "sqft",
       "floor": 19,
-      "interiorSize": 620
+      "interiorSize": 620,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689992/an-realestate/how-floorplans/how-floorplan-page-42-of-64.pdf",
+          "label": "Floor plan · LINE 20 C1"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-2006",
@@ -2478,7 +2580,13 @@
       "order": 3037,
       "sizeUnit": "sqft",
       "floor": 20,
-      "interiorSize": 430
+      "interiorSize": 430,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689941/an-realestate/how-floorplans/how-floorplan-page-11-of-64.pdf",
+          "label": "Floor plan · LINE 06 B1"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-2012",
@@ -2604,7 +2712,13 @@
       "order": 3000,
       "sizeUnit": "sqft",
       "floor": 20,
-      "interiorSize": 377
+      "interiorSize": 377,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689974/an-realestate/how-floorplans/how-floorplan-page-30-of-64.pdf",
+          "label": "Floor plan · LINE 12 A3"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-2014",
@@ -2730,7 +2844,13 @@
       "order": 3048,
       "sizeUnit": "sqft",
       "floor": 20,
-      "interiorSize": 687
+      "interiorSize": 687,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689977/an-realestate/how-floorplans/how-floorplan-page-32-of-64.pdf",
+          "label": "Floor plan · LINE 14 C2"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-2105",
@@ -2856,7 +2976,13 @@
       "order": 3035,
       "sizeUnit": "sqft",
       "floor": 21,
-      "interiorSize": 430
+      "interiorSize": 430,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689937/an-realestate/how-floorplans/how-floorplan-page-09-of-64.pdf",
+          "label": "Floor plan · LINE 05 B1"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-2113",
@@ -2982,7 +3108,13 @@
       "order": 3046,
       "sizeUnit": "sqft",
       "floor": 21,
-      "interiorSize": 675
+      "interiorSize": 675,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689975/an-realestate/how-floorplans/how-floorplan-page-31-of-64.pdf",
+          "label": "Floor plan · LINE 13 C4"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-2126",
@@ -3108,7 +3240,13 @@
       "order": 3047,
       "sizeUnit": "sqft",
       "floor": 21,
-      "interiorSize": 644
+      "interiorSize": 644,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777690019/an-realestate/how-floorplans/how-floorplan-page-58-of-64.pdf",
+          "label": "Floor plan · LINE 26 C3"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-2207",
@@ -3234,7 +3372,13 @@
       "order": 3009,
       "sizeUnit": "sqft",
       "floor": 22,
-      "interiorSize": 335
+      "interiorSize": 335,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689949/an-realestate/how-floorplans/how-floorplan-page-15-of-64.pdf",
+          "label": "Floor plan · LINE 07 N"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-2209",
@@ -3360,7 +3504,13 @@
       "order": 3039,
       "sizeUnit": "sqft",
       "floor": 22,
-      "interiorSize": 430
+      "interiorSize": 430,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689960/an-realestate/how-floorplans/how-floorplan-page-22-of-64.pdf",
+          "label": "Floor plan · LINE 09 B1"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-2216",
@@ -3486,7 +3636,13 @@
       "order": 3020,
       "sizeUnit": "sqft",
       "floor": 22,
-      "interiorSize": 441
+      "interiorSize": 441,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689980/an-realestate/how-floorplans/how-floorplan-page-34-of-64.pdf",
+          "label": "Floor plan · LINE 16 B3"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-2221",
@@ -3612,7 +3768,13 @@
       "order": 3010,
       "sizeUnit": "sqft",
       "floor": 22,
-      "interiorSize": 335
+      "interiorSize": 335,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689997/an-realestate/how-floorplans/how-floorplan-page-45-of-64.pdf",
+          "label": "Floor plan · LINE 21 N"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-2303",
@@ -3738,7 +3900,13 @@
       "order": 3019,
       "sizeUnit": "sqft",
       "floor": 23,
-      "interiorSize": 435
+      "interiorSize": 435,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689928/an-realestate/how-floorplans/how-floorplan-page-03-of-64.pdf",
+          "label": "Floor plan · LINE 03 B4"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-2311",
@@ -3864,7 +4032,13 @@
       "order": 3022,
       "sizeUnit": "sqft",
       "floor": 23,
-      "interiorSize": 435
+      "interiorSize": 435,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689970/an-realestate/how-floorplans/how-floorplan-page-28-of-64.pdf",
+          "label": "Floor plan · LINE 11 B4"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-2420",
@@ -3990,7 +4164,13 @@
       "order": 3055,
       "sizeUnit": "sqft",
       "floor": 24,
-      "interiorSize": 620
+      "interiorSize": 620,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689994/an-realestate/how-floorplans/how-floorplan-page-43-of-64.pdf",
+          "label": "Floor plan · LINE 20 C1"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-2514",
@@ -4116,7 +4296,13 @@
       "order": 3050,
       "sizeUnit": "sqft",
       "floor": 25,
-      "interiorSize": 687
+      "interiorSize": 687,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689977/an-realestate/how-floorplans/how-floorplan-page-32-of-64.pdf",
+          "label": "Floor plan · LINE 14 C2"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-2519",
@@ -4242,7 +4428,13 @@
       "order": 3011,
       "sizeUnit": "sqft",
       "floor": 25,
-      "interiorSize": 335
+      "interiorSize": 335,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689991/an-realestate/how-floorplans/how-floorplan-page-41-of-64.pdf",
+          "label": "Floor plan · LINE 19 N"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-2702",
@@ -4368,7 +4560,13 @@
       "order": 3002,
       "sizeUnit": "sqft",
       "floor": 27,
-      "interiorSize": 381
+      "interiorSize": 381,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689927/an-realestate/how-floorplans/how-floorplan-page-02-of-64.pdf",
+          "label": "Floor plan · LINE 02 A3"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-2713",
@@ -4494,7 +4692,13 @@
       "order": 3052,
       "sizeUnit": "sqft",
       "floor": 27,
-      "interiorSize": 675
+      "interiorSize": 675,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689975/an-realestate/how-floorplans/how-floorplan-page-31-of-64.pdf",
+          "label": "Floor plan · LINE 13 C4"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-2820",
@@ -4620,7 +4824,13 @@
       "order": 3040,
       "sizeUnit": "sqft",
       "floor": 28,
-      "interiorSize": 620
+      "interiorSize": 620,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689994/an-realestate/how-floorplans/how-floorplan-page-43-of-64.pdf",
+          "label": "Floor plan · LINE 20 C1"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-2901",
@@ -4746,7 +4956,13 @@
       "order": 3051,
       "sizeUnit": "sqft",
       "floor": 29,
-      "interiorSize": 676
+      "interiorSize": 676,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689925/an-realestate/how-floorplans/how-floorplan-page-01-of-64.pdf",
+          "label": "Floor plan · LINE 01 C4"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-2907",
@@ -4872,7 +5088,13 @@
       "order": 3012,
       "sizeUnit": "sqft",
       "floor": 29,
-      "interiorSize": 335
+      "interiorSize": 335,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689951/an-realestate/how-floorplans/how-floorplan-page-16-of-64.pdf",
+          "label": "Floor plan · LINE 07 N"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-2926",
@@ -4998,7 +5220,13 @@
       "order": 3053,
       "sizeUnit": "sqft",
       "floor": 29,
-      "interiorSize": 644
+      "interiorSize": 644,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777690019/an-realestate/how-floorplans/how-floorplan-page-58-of-64.pdf",
+          "label": "Floor plan · LINE 26 C3"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-3003",
@@ -5124,7 +5352,13 @@
       "order": 3029,
       "sizeUnit": "sqft",
       "floor": 30,
-      "interiorSize": 435
+      "interiorSize": 435,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689928/an-realestate/how-floorplans/how-floorplan-page-03-of-64.pdf",
+          "label": "Floor plan · LINE 03 B4"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-3014",
@@ -5250,7 +5484,13 @@
       "order": 3057,
       "sizeUnit": "sqft",
       "floor": 30,
-      "interiorSize": 687
+      "interiorSize": 687,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689977/an-realestate/how-floorplans/how-floorplan-page-32-of-64.pdf",
+          "label": "Floor plan · LINE 14 C2"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-3015",
@@ -5376,7 +5616,13 @@
       "order": 3007,
       "sizeUnit": "sqft",
       "floor": 30,
-      "interiorSize": 371
+      "interiorSize": 371,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689978/an-realestate/how-floorplans/how-floorplan-page-33-of-64.pdf",
+          "label": "Floor plan · LINE 15 A2"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-3021",
@@ -5502,7 +5748,13 @@
       "order": 3013,
       "sizeUnit": "sqft",
       "floor": 30,
-      "interiorSize": 335
+      "interiorSize": 335,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689997/an-realestate/how-floorplans/how-floorplan-page-45-of-64.pdf",
+          "label": "Floor plan · LINE 21 N"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-3024",
@@ -5628,7 +5880,13 @@
       "order": 3030,
       "sizeUnit": "sqft",
       "floor": 30,
-      "interiorSize": 441
+      "interiorSize": 441,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777690013/an-realestate/how-floorplans/how-floorplan-page-54-of-64.pdf",
+          "label": "Floor plan · LINE 24 B3"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-3219",
@@ -5754,7 +6012,13 @@
       "order": 3014,
       "sizeUnit": "sqft",
       "floor": 32,
-      "interiorSize": 335
+      "interiorSize": 335,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689991/an-realestate/how-floorplans/how-floorplan-page-41-of-64.pdf",
+          "label": "Floor plan · LINE 19 N"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-3225",
@@ -5880,7 +6144,13 @@
       "order": 3004,
       "sizeUnit": "sqft",
       "floor": 32,
-      "interiorSize": 371
+      "interiorSize": 371,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777690016/an-realestate/how-floorplans/how-floorplan-page-56-of-64.pdf",
+          "label": "Floor plan · LINE 25 A2"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-3326",
@@ -6006,7 +6276,13 @@
       "order": 3056,
       "sizeUnit": "sqft",
       "floor": 33,
-      "interiorSize": 644
+      "interiorSize": 644,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777690019/an-realestate/how-floorplans/how-floorplan-page-58-of-64.pdf",
+          "label": "Floor plan · LINE 26 C3"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-801",
@@ -6132,7 +6408,13 @@
       "order": 3041,
       "sizeUnit": "sqft",
       "floor": 8,
-      "interiorSize": 676
+      "interiorSize": 676,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689925/an-realestate/how-floorplans/how-floorplan-page-01-of-64.pdf",
+          "label": "Floor plan · LINE 01 C4"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-808",
@@ -6258,7 +6540,13 @@
       "order": 3023,
       "sizeUnit": "sqft",
       "floor": 8,
-      "interiorSize": 430
+      "interiorSize": 430,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689956/an-realestate/how-floorplans/how-floorplan-page-19-of-64.pdf",
+          "label": "Floor plan · LINE 08 B1"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-810",
@@ -6384,7 +6672,13 @@
       "order": 3032,
       "sizeUnit": "sqft",
       "floor": 8,
-      "interiorSize": 505
+      "interiorSize": 505,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689964/an-realestate/how-floorplans/how-floorplan-page-24-of-64.pdf",
+          "label": "Floor plan · LINE 10 B5"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-818",
@@ -6510,7 +6804,13 @@
       "order": 3021,
       "sizeUnit": "sqft",
       "floor": 8,
-      "interiorSize": 430
+      "interiorSize": 430,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689988/an-realestate/how-floorplans/how-floorplan-page-39-of-64.pdf",
+          "label": "Floor plan · LINE 18 B1"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-911",
@@ -6636,7 +6936,13 @@
       "order": 3015,
       "sizeUnit": "sqft",
       "floor": 9,
-      "interiorSize": 435
+      "interiorSize": 435,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689970/an-realestate/how-floorplans/how-floorplan-page-28-of-64.pdf",
+          "label": "Floor plan · LINE 11 B4"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-913",
@@ -6762,7 +7068,13 @@
       "order": 3043,
       "sizeUnit": "sqft",
       "floor": 9,
-      "interiorSize": 675
+      "interiorSize": 675,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689975/an-realestate/how-floorplans/how-floorplan-page-31-of-64.pdf",
+          "label": "Floor plan · LINE 13 C4"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-916",
@@ -6888,7 +7200,13 @@
       "order": 3016,
       "sizeUnit": "sqft",
       "floor": 9,
-      "interiorSize": 441
+      "interiorSize": 441,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689980/an-realestate/how-floorplans/how-floorplan-page-34-of-64.pdf",
+          "label": "Floor plan · LINE 16 B3"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-917",
@@ -7014,7 +7332,13 @@
       "order": 3028,
       "sizeUnit": "sqft",
       "floor": 9,
-      "interiorSize": 463
+      "interiorSize": 463,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689983/an-realestate/how-floorplans/how-floorplan-page-36-of-64.pdf",
+          "label": "Floor plan · LINE 17 B2"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-919",
@@ -7140,7 +7464,13 @@
       "order": 3005,
       "sizeUnit": "sqft",
       "floor": 9,
-      "interiorSize": 334
+      "interiorSize": 334,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689989/an-realestate/how-floorplans/how-floorplan-page-40-of-64.pdf",
+          "label": "Floor plan · LINE 19 N"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-921",
@@ -7266,7 +7596,13 @@
       "order": 3003,
       "sizeUnit": "sqft",
       "floor": 9,
-      "interiorSize": 335
+      "interiorSize": 335,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777689997/an-realestate/how-floorplans/how-floorplan-page-45-of-64.pdf",
+          "label": "Floor plan · LINE 21 N"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-922",
@@ -7392,7 +7728,13 @@
       "order": 3026,
       "sizeUnit": "sqft",
       "floor": 9,
-      "interiorSize": 430
+      "interiorSize": 430,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777690006/an-realestate/how-floorplans/how-floorplan-page-49-of-64.pdf",
+          "label": "Floor plan · LINE 22 B1"
+        }
+      ]
     },
     {
       "slug": "house-of-wellness-u-926",
@@ -7518,7 +7860,13 @@
       "order": 3044,
       "sizeUnit": "sqft",
       "floor": 9,
-      "interiorSize": 644
+      "interiorSize": 644,
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/raw/upload/v1777690019/an-realestate/how-floorplans/how-floorplan-page-58-of-64.pdf",
+          "label": "Floor plan · LINE 26 C3"
+        }
+      ]
     },
     {
       "slug": "gracia-garden",
