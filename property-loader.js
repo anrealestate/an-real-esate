@@ -202,6 +202,32 @@
     return
   }
 
+  // True when this unit belongs to a new-development promotion (parent_slug → development listing).
+  // Only these units get a section reorder; standalone / resale properties keep the default HTML order.
+  const isNewDevUnit = !!(
+    baseListing.parent_slug &&
+    listings.some(p => p.slug === baseListing.parent_slug && p.propertyType === 'development')
+  )
+
+  function reorderPropertyMainForNewDevUnit() {
+    if (!isNewDevUnit) return
+    const mainEl = document.querySelector('main.prop-main')
+    if (!mainEl || mainEl.dataset.orderApplied === 'new-dev') return
+
+    const descSec  = document.getElementById('prop-description')?.closest('section')
+    const fpSec    = document.getElementById('ph-floorplans-section')
+    const detSec   = document.getElementById('prop-details')?.closest('section')
+    const featSec  = document.getElementById('prop-features-section')
+    const vidSec   = document.getElementById('prop-video-section')
+    const nearSec  = document.getElementById('prop-nearby-section')
+
+    // Append in target order; missing nodes are silently skipped
+    for (const sec of [descSec, fpSec, detSec, featSec, vidSec, nearSec]) {
+      if (sec && sec.parentElement === mainEl) mainEl.appendChild(sec)
+    }
+    mainEl.dataset.orderApplied = 'new-dev'
+  }
+
   function getTranslatedListing(lang) {
     if (lang && baseListing.translations?.[lang]) {
       const tr = baseListing.translations[lang]
@@ -604,6 +630,9 @@
     /* ── mobile sticky CTA ── */
     const stickyPrice = document.querySelector('.psc-price')
     if (stickyPrice) stickyPrice.textContent = priceLabel
+
+    // Reorder sections for new-dev units before the shell is revealed (idempotent)
+    reorderPropertyMainForNewDevUnit()
 
   }
 
