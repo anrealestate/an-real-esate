@@ -42,6 +42,7 @@
   <script type="application/ld+json" id="property-jsonld">{}</script>
 </head>
 <body>
+  <a href="#main-content" class="skip-link" data-i18n="a11y.skip">Skip to content</a>
 
   <!-- HEADER -->
   <header class="header scrolled" id="site-header">
@@ -230,7 +231,7 @@
       <div class="prop-layout">
 
         <!-- MAIN CONTENT -->
-        <main class="prop-main">
+        <main class="prop-main" id="main-content">
 
           <!-- Orden por defecto (resale / fichas sin parent_slug→development). Unidades obra nueva: property-loader reordena a Details→Plans→Description→Features→Video→Location -->
 
@@ -408,20 +409,20 @@
             <form class="pc-form" id="prop-form" novalidate>
               <input type="hidden" name="property" value="Exquisite Brand-New Garden Residence in Gràcia — €830,000 — Gràcia, Barcelona" />
               <div class="fg">
-                <label class="flabel" data-i18n="form.name">Name</label>
-                <input type="text" name="name" class="finput" placeholder="Your full name" data-i18n="form.name_ph" required />
+                <label class="flabel" for="pf-name" data-i18n="form.name">Name</label>
+                <input type="text" id="pf-name" name="name" class="finput" placeholder="Your full name" data-i18n="form.name_ph" required autocomplete="name" />
               </div>
               <div class="fg">
-                <label class="flabel" data-i18n="form.email">Email</label>
-                <input type="email" name="email" class="finput" placeholder="your@email.com" data-i18n="form.email_ph" required />
+                <label class="flabel" for="pf-email" data-i18n="form.email">Email</label>
+                <input type="email" id="pf-email" name="email" class="finput" placeholder="your@email.com" data-i18n="form.email_ph" required autocomplete="email" />
               </div>
               <div class="fg">
-                <label class="flabel" data-i18n="form.phone">Phone</label>
-                <input type="tel" name="phone" class="finput" placeholder="+34 600 000 000" data-i18n="form.phone_ph" />
+                <label class="flabel" for="pf-phone" data-i18n="form.phone">Phone</label>
+                <input type="tel" id="pf-phone" name="phone" class="finput" placeholder="+34 600 000 000" data-i18n="form.phone_ph" autocomplete="tel" inputmode="tel" />
               </div>
               <div class="fg">
-                <label class="flabel" data-i18n="form.message">Message</label>
-                <textarea name="message" class="finput ftextarea" rows="3" placeholder="I'm interested in this property…" data-i18n="form.msg_ph" data-i18n-val="form.msg_val"></textarea>
+                <label class="flabel" for="pf-message" data-i18n="form.message">Message</label>
+                <textarea id="pf-message" name="message" class="finput ftextarea" rows="3" placeholder="I'm interested in this property…" data-i18n="form.msg_ph" data-i18n-val="form.msg_val"></textarea>
               </div>
               <div class="pc-form-actions">
                 <button type="submit" class="button pc-submit" data-i18n="form.submit">Request Viewing</button>
@@ -514,24 +515,24 @@
           <input type="hidden" name="property" />
           <input type="hidden" name="intent" value="compra" />
           <div class="fg">
-            <label class="flabel" data-i18n="form.name">Name</label>
-            <input type="text" name="name" class="finput" placeholder="Your full name" data-i18n="form.name_ph" required autocomplete="name" />
+            <label class="flabel" for="bm-name" data-i18n="form.name">Name</label>
+            <input type="text" id="bm-name" name="name" class="finput" placeholder="Your full name" data-i18n="form.name_ph" required autocomplete="name" />
           </div>
           <div class="fg">
-            <label class="flabel" data-i18n="form.email">Email</label>
-            <input type="email" name="email" class="finput" placeholder="your@email.com" data-i18n="form.email_ph" required autocomplete="email" />
+            <label class="flabel" for="bm-email" data-i18n="form.email">Email</label>
+            <input type="email" id="bm-email" name="email" class="finput" placeholder="your@email.com" data-i18n="form.email_ph" required autocomplete="email" />
           </div>
           <div class="fg">
-            <label class="flabel" data-i18n="form.phone">Phone</label>
-            <input type="tel" name="phone" class="finput" placeholder="+34 600 000 000" data-i18n="form.phone_ph" autocomplete="tel" />
+            <label class="flabel" for="bm-phone" data-i18n="form.phone">Phone</label>
+            <input type="tel" id="bm-phone" name="phone" class="finput" placeholder="+34 600 000 000" data-i18n="form.phone_ph" autocomplete="tel" inputmode="tel" />
           </div>
           <div class="fg">
-            <label class="flabel" data-i18n="buy.country">Country of residence</label>
-            <input type="text" name="country" class="finput" placeholder="e.g. United Kingdom" data-i18n="buy.country_ph" autocomplete="country-name" />
+            <label class="flabel" for="bm-country" data-i18n="buy.country">Country of residence</label>
+            <input type="text" id="bm-country" name="country" class="finput" placeholder="e.g. United Kingdom" data-i18n="buy.country_ph" autocomplete="country-name" />
           </div>
           <div class="fg">
-            <label class="flabel" data-i18n="buy.timeline">Budget &amp; timeline</label>
-            <textarea name="message" class="finput ftextarea" rows="2" placeholder="e.g. €1.5M budget, ready in 6 months" data-i18n="buy.timeline_ph"></textarea>
+            <label class="flabel" for="bm-timeline" data-i18n="buy.timeline">Budget &amp; timeline</label>
+            <textarea id="bm-timeline" name="message" class="finput ftextarea" rows="2" placeholder="e.g. €1.5M budget, ready in 6 months" data-i18n="buy.timeline_ph"></textarea>
           </div>
           <button type="submit" class="button buy-modal-submit" id="buy-submit" data-i18n="buy.submit">Send purchase enquiry</button>
         </form>
@@ -585,13 +586,13 @@
         <input type="hidden" name="_subject" id="dossier-subject" value="Dossier Request — AN Real Estate" />
         <input type="hidden" name="propiedad" id="dossier-property" value="" />
         <div class="dossier-fg">
-          <input type="text" name="nombre" class="dossier-input" placeholder="Your name" data-i18n="dossier.name_ph" required autocomplete="name" />
+          <input type="text" name="nombre" class="dossier-input" placeholder="Your name" data-i18n="dossier.name_ph" aria-label="Your name" required autocomplete="name" />
         </div>
         <div class="dossier-fg">
-          <input type="email" name="email" class="dossier-input" placeholder="Email" autocomplete="email" required />
+          <input type="email" name="email" class="dossier-input" placeholder="Email" aria-label="Email" autocomplete="email" required />
         </div>
         <div class="dossier-fg">
-          <input type="tel" name="telefono" class="dossier-input" placeholder="Phone (optional)" data-i18n="dossier.phone_ph" autocomplete="tel" />
+          <input type="tel" name="telefono" class="dossier-input" placeholder="Phone (optional)" data-i18n="dossier.phone_ph" aria-label="Phone" autocomplete="tel" inputmode="tel" />
         </div>
         <button type="submit" class="dossier-btn" id="dossier-submit" data-i18n="dossier.btn">
           <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
