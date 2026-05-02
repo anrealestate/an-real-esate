@@ -348,9 +348,11 @@
       gridEl.style.display = ''
     }
 
+    /* Expose full image array so lightbox uses all photos, not just DOM cells */
+    window.__propertyGalleryImages = imgs
     /* Signal property.js that gallery DOM is ready (resolves lightbox race condition) */
     window._galleryReady = true
-    document.dispatchEvent(new CustomEvent('gallery:ready'))
+    document.dispatchEvent(new CustomEvent('gallery:ready', { detail: { images: imgs } }))
 
     /* Update lb-counter */
     const lbCounter = document.getElementById('lb-counter')

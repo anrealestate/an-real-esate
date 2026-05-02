@@ -696,45 +696,6 @@
       }
     })
 
-    // Keep hidden cells for imgs[5+] so lightbox indices stay correct (property.js reads all .pg-cell)
-    const pgSide = document.querySelector('.pg-grid-side')
-    if (pgSide && imgs.length > 5) {
-      imgs.slice(5).forEach(img => {
-        const btn = document.createElement('button')
-        btn.className = 'pg-cell'
-        btn.dataset.src = img.src
-        btn.style.display = 'none'
-        const el = document.createElement('img')
-        el.src = img.src
-        el.alt = img.alt || baseListing.title
-        btn.appendChild(el)
-        pgSide.appendChild(btn)
-      })
-    }
-
-    // Render visible overflow strip below the mosaic (Option A) — each thumb opens lightbox at correct index
-    if (imgs.length > 5) {
-      const pgSection = document.querySelector('.pg-section')
-      if (pgSection) {
-        const strip = document.createElement('div')
-        strip.className = 'pg-all-photos'
-        imgs.slice(5).forEach((img, i) => {
-          const btn = document.createElement('button')
-          btn.type = 'button'
-          btn.className = 'pg-thumb'
-          btn.dataset.index = String(i + 5)  // lightbox index: hero=0, cells[0-3]=1-4, overflow starts at 5
-          btn.setAttribute('aria-label', img.alt || `Photo ${i + 6}`)
-          const el = document.createElement('img')
-          el.src = img.src
-          el.alt = img.alt || baseListing.title
-          el.loading = 'lazy'
-          btn.appendChild(el)
-          strip.appendChild(btn)
-        })
-        pgSection.appendChild(strip)
-      }
-    }
-
     const moreText = document.querySelector('.pg-more-overlay')
     if (moreText) {
       moreText.childNodes.forEach(n => {
@@ -745,9 +706,11 @@
     if (lbCounter) lbCounter.textContent = `1 / ${imgs.length}`
   }
 
+  /* Expose full image array so lightbox uses all photos, not just DOM cells */
+  window.__propertyGalleryImages = imgs
   /* Signal property.js that gallery DOM is ready (resolves lightbox race condition) */
   window._galleryReady = true
-  document.dispatchEvent(new CustomEvent('gallery:ready'))
+  document.dispatchEvent(new CustomEvent('gallery:ready', { detail: { images: imgs } }))
 
   /* ── Map ── */
   const COORDS = {

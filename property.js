@@ -58,25 +58,28 @@ function lbClose() {
    Resolves race condition: property-loader.js / development-loader.js
    dispatch 'gallery:ready' (and set window._galleryReady) after DOM is ready.
    ================================ */
-function initGallery() {
+function initGallery(e) {
   const heroEl  = document.querySelector('.pg-hero')
   const cellEls = document.querySelectorAll('.pg-cell')
 
-  /* hero img id differs between property.html (pg-hero-img) and development.html (dv-hero-img) */
-  const heroImgEl = document.getElementById('pg-hero-img') || document.getElementById('dv-hero-img')
+  /* Use full image list from loader (avoids truncation to visible DOM cells).
+     Loader sets window.__propertyGalleryImages and also passes it as event detail. */
+  const loaderImgs = (e && e.detail && e.detail.images) || window.__propertyGalleryImages
+  if (loaderImgs && loaderImgs.length) {
+    images = loaderImgs
+  } else {
+    /* Fallback: reconstruct from DOM (≤5 images — only used if loader did not run) */
+    const heroImgEl = document.getElementById('pg-hero-img') || document.getElementById('dv-hero-img')
+    images = [
+      { src: heroEl?.dataset.src || heroImgEl?.src, alt: heroImgEl?.alt || 'Property photo' },
+      ...Array.from(cellEls).map(cell => ({
+        src: cell.dataset.src,
+        alt: cell.querySelector('img')?.alt || 'Property photo'
+      }))
+    ].filter(img => img.src)
+  }
 
-  images = [
-    {
-      src: heroEl?.dataset.src || heroImgEl?.src,
-      alt: heroImgEl?.alt || 'Property photo'
-    },
-    ...Array.from(cellEls).map(cell => ({
-      src: cell.dataset.src,
-      alt: cell.querySelector('img')?.alt || 'Property photo'
-    }))
-  ].filter(img => img.src)
-
-  /* Open triggers — hero + cells */
+  /* Open triggers — hero + visible mosaic cells (indices match loaderImgs order) */
   if (heroEl) {
     heroEl.addEventListener('click', () => lbOpen(0))
     heroEl.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') lbOpen(0) })
@@ -85,16 +88,11 @@ function initGallery() {
   cellEls.forEach((cell, i) => {
     cell.addEventListener('click', () => lbOpen(i + 1))
   })
-
-  document.querySelectorAll('.pg-thumb').forEach(btn => {
-    const idx = parseInt(btn.dataset.index, 10)
-    btn.addEventListener('click', () => lbOpen(idx))
-  })
 }
 
 /* Fire immediately if loader already ran, otherwise wait for the event */
 if (window._galleryReady) {
-  initGallery()
+  initGallery({ detail: { images: window.__propertyGalleryImages } })
 } else {
   document.addEventListener('gallery:ready', initGallery, { once: true })
 }
