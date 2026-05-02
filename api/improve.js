@@ -38,11 +38,18 @@ Respond ONLY with valid JSON (no markdown, no code blocks), with this exact stru
   "keywords": ["keyword 1", "keyword 2", "keyword 3", "keyword 4", "keyword 5"]
 }`
 
+const ALLOWED_ORIGINS = ['https://anrealestate.es', 'https://www.anrealestate.es']
+
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*')
+  const origin = req.headers.origin || ''
+  const allowedOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0]
+  res.setHeader('Access-Control-Allow-Origin', allowedOrigin)
+  res.setHeader('Vary', 'Origin')
   res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
   if (req.method === 'OPTIONS') return res.status(200).end()
   if (req.method !== 'POST') return res.status(405).end('Method Not Allowed')
+  if (!ALLOWED_ORIGINS.includes(origin)) return res.status(403).json({ error: 'Forbidden' })
 
   const { text, lang, address, price, features, audience } = req.body || {}
   if (!text?.trim()) return res.status(400).json({ error: 'No text' })
