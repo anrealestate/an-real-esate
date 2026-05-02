@@ -16,28 +16,12 @@ function clearFieldError(input) {
 }
 
 /* ================================
-   Build image list from gallery
-   ================================ */
-const heroEl = document.querySelector('.pg-hero')
-const cellEls = document.querySelectorAll('.pg-cell')
-
-const images = [
-  {
-    src: heroEl?.dataset.src || document.getElementById('pg-hero-img')?.src,
-    alt: document.getElementById('pg-hero-img')?.alt || 'Property photo'
-  },
-  ...Array.from(cellEls).map(cell => ({
-    src: cell.dataset.src,
-    alt: cell.querySelector('img')?.alt || 'Property photo'
-  }))
-].filter(img => img.src)
-
-/* ================================
    Lightbox
    ================================ */
 const lbOverlay = document.getElementById('lb-overlay')
 const lbImg     = document.getElementById('lb-img')
 const lbCounter = document.getElementById('lb-counter')
+let   images    = []
 let   current   = 0
 
 function lbShow(index) {
@@ -55,6 +39,7 @@ function lbShow(index) {
 }
 
 function lbOpen(index) {
+  if (!images.length) return
   lbShow(index)
   lbOverlay.classList.add('is-open')
   document.body.style.overflow = 'hidden'
@@ -66,19 +51,48 @@ function lbClose() {
 }
 
 /* ================================
-   Open triggers — hero + cells
+   Gallery init — deferred until loaders populate DOM
+   Resolves race condition: property-loader.js / development-loader.js
+   dispatch 'gallery:ready' (and set window._galleryReady) after DOM is ready.
    ================================ */
-if (heroEl) {
-  heroEl.addEventListener('click', () => lbOpen(0))
-  heroEl.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') lbOpen(0) })
+function initGallery() {
+  const heroEl  = document.querySelector('.pg-hero')
+  const cellEls = document.querySelectorAll('.pg-cell')
+
+  /* hero img id differs between property.html (pg-hero-img) and development.html (dv-hero-img) */
+  const heroImgEl = document.getElementById('pg-hero-img') || document.getElementById('dv-hero-img')
+
+  images = [
+    {
+      src: heroEl?.dataset.src || heroImgEl?.src,
+      alt: heroImgEl?.alt || 'Property photo'
+    },
+    ...Array.from(cellEls).map(cell => ({
+      src: cell.dataset.src,
+      alt: cell.querySelector('img')?.alt || 'Property photo'
+    }))
+  ].filter(img => img.src)
+
+  /* Open triggers — hero + cells */
+  if (heroEl) {
+    heroEl.addEventListener('click', () => lbOpen(0))
+    heroEl.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') lbOpen(0) })
+  }
+
+  cellEls.forEach((cell, i) => {
+    cell.addEventListener('click', () => lbOpen(i + 1))
+  })
 }
 
-cellEls.forEach((cell, i) => {
-  cell.addEventListener('click', () => lbOpen(i + 1))
-})
+/* Fire immediately if loader already ran, otherwise wait for the event */
+if (window._galleryReady) {
+  initGallery()
+} else {
+  document.addEventListener('gallery:ready', initGallery, { once: true })
+}
 
 /* ================================
-   Controls
+   Lightbox controls
    ================================ */
 document.getElementById('lb-close')?.addEventListener('click', lbClose)
 document.getElementById('lb-prev')?.addEventListener('click', () => lbShow(current - 1))
@@ -125,13 +139,15 @@ document.getElementById('prop-form')?.addEventListener('submit', async e => {
   const name  = nameInput.value.trim()
   const email = emailInput.value.trim()
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-  let valid = true
-  if (!name)    { showFieldError(nameInput,  'Please enter your name');          valid = false } else clearFieldError(nameInput)
-  if (!emailOk) { showFieldError(emailInput, 'Please enter a valid email address'); valid = false } else clearFieldError(emailInput)
-  if (!valid) return
 
   const lang = (typeof getLang === 'function') ? getLang() : 'en'
   const t = k => window.I18N?.[lang]?.[k] || window.I18N?.en?.[k] || k
+
+  let valid = true
+  if (!name)    { showFieldError(nameInput,  t('form.err.name'));  valid = false } else clearFieldError(nameInput)
+  if (!emailOk) { showFieldError(emailInput, t('form.err.email')); valid = false } else clearFieldError(emailInput)
+  if (!valid) return
+
   btn.textContent   = t('form.requesting')
   btn.disabled      = true
 

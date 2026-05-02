@@ -80,7 +80,7 @@
 .dv-price {
   font-family: var(--serif);
   font-size: var(--fs-lg);
-  color: var(--cream);
+  color: var(--gold);
   margin: 0 0 .25rem;
   white-space: nowrap;
 }
@@ -173,13 +173,15 @@
 }
 
 .dv-section-h {
-  font-family: var(--sans);
-  font-size: var(--fs-2xs);
-  font-weight: 500;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin: 0 0 1.25rem;
+  font-family: var(--serif);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  letter-spacing: .06em;
+  text-transform: none;
+  color: var(--cream-dim);
+  margin: 0 0 1.5rem;
+  padding-bottom: .5rem;
+  border-bottom: 1px solid var(--border);
 }
 
 .dv-desc p {
@@ -549,7 +551,7 @@
    ================================ */
 .dv-aside {
   position: sticky;
-  top: 80px;
+  top: max(7.5rem, calc(7vw + 60px));
 }
 
 .dv-aside-card {

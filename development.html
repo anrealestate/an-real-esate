@@ -17,12 +17,29 @@
   <meta name="twitter:description" content="New residential development. AN High End Real Estate." />
   <meta name="twitter:image"       content="https://res.cloudinary.com/dbume3eak/image/upload/v1777641811/an-realestate/og-image.png" />
   <script type="application/ld+json" id="property-jsonld">{}</script>
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#08101e" />
+  <link rel="preconnect" href="https://res.cloudinary.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="property.css" />
-  <link rel="stylesheet" href="development.css?v=au1" />
+  <link rel="stylesheet" href="property.css?v=bc2" />
+  <link rel="stylesheet" href="development.css?v=au2" />
+  <script>
+  (function () {
+    try {
+      var s = new URLSearchParams(location.search).get('slug')
+      if (s) document.documentElement.classList.add('property-shell-pending')
+    } catch (e) {}
+  })()
+  </script>
+  <style>
+  html.property-shell-pending #dv-dynamic-root { visibility: hidden; }
+  </style>
   <script src="i18n.js"></script>
 </head>
 <body>
@@ -104,11 +121,13 @@
     </div>
   </nav>
 
+  <div id="dv-dynamic-root">
+
   <!-- GALLERY MOSAIC -->
   <section class="pg-section">
     <div class="pg-mosaic">
       <div class="pg-hero" id="dv-pg-hero" role="button" tabindex="0" aria-label="View photo 1" data-src="">
-        <img id="dv-hero-img" src="" alt="" loading="eager" />
+        <img id="dv-hero-img" src="" alt="Development hero photo" loading="eager" />
       </div>
       <div class="pg-grid-side" id="dv-pg-grid"></div>
     </div>
@@ -285,12 +304,14 @@
     </div>
   </div>
 
+  </div><!-- /#dv-dynamic-root -->
+
   <!-- FOOTER -->
   <footer class="footer">
     <div class="holder">
       <div class="footer-top">
         <a href="index.html" class="footer-logo">
-          <img src="logo.svg" alt="AN Real Estate" class="header-logo-img" />
+          <img src="logo.svg" alt="AN Real Estate" class="footer-logo-img" />
         </a>
         <nav class="footer-nav">
           <a href="index.html#properties" class="fn-link" data-i18n="nav.properties">Properties</a>
@@ -347,7 +368,7 @@
     <p class="cookie-text" data-i18n="cookie.text">We use cookies to improve your experience and analyse traffic. By accepting, you consent to our use of cookies.</p>
     <div class="cookie-actions">
       <button id="cookie-accept" class="cookie-btn cookie-btn--accept" data-i18n="cookie.accept">Accept</button>
-      <button id="cookie-reject" class="cookie-btn" data-i18n="cookie.reject">Essential only</button>
+      <button id="cookie-reject" class="cookie-btn" data-i18n="cookie.essential">Essential only</button>
     </div>
   </div>
 

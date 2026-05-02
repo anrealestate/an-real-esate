@@ -228,6 +228,10 @@
       gridEl.style.display = ''
     }
 
+    /* Signal property.js that gallery DOM is ready (resolves lightbox race condition) */
+    window._galleryReady = true
+    document.dispatchEvent(new CustomEvent('gallery:ready'))
+
     /* Update lb-counter */
     const lbCounter = document.getElementById('lb-counter')
     if (lbCounter) lbCounter.textContent = `1 / ${imgs.length}`
@@ -527,7 +531,8 @@
             const sorted = sortArr(children, criterion)
             renderChildren(sorted)
             applyFilter(_activeFilter)
-            applyPagination(children.length)
+            const visibleCount = unitGrid.querySelectorAll('.dv-unit-card:not(.hidden)').length
+            applyPagination(visibleCount)
           })
         }
 
@@ -633,6 +638,9 @@
 
     /* Map */
     tryInitMap()
+
+    /* Reveal shell (mirrors property-loader.js anti-FOUC) */
+    document.documentElement.classList.remove('property-shell-pending')
   }
 
   renderContent()

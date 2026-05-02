@@ -414,6 +414,10 @@
     if (lbCounter) lbCounter.textContent = `1 / ${imgs.length}`
   }
 
+  /* Signal property.js that gallery DOM is ready (resolves lightbox race condition) */
+  window._galleryReady = true
+  document.dispatchEvent(new CustomEvent('gallery:ready'))
+
   /* ── Map ── */
   const COORDS = {
     'gracia-garden':               { lat: 41.4025, lng: 2.1535 },
