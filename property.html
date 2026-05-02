@@ -232,7 +232,25 @@
         <!-- MAIN CONTENT -->
         <main class="prop-main">
 
-          <!-- Orden: 1 Details → 2 Floor plans → 3 Description → 4 Features → 5 Video → 6 Location -->
+          <!-- Orden por defecto (resale / fichas sin parent_slug→development). Unidades obra nueva: property-loader reordena a Details→Plans→Description→Features→Video→Location -->
+
+          <!-- Description -->
+          <section class="prop-section">
+            <h2 class="prop-section-h" data-i18n="section.description">Description</h2>
+            <div class="prop-desc" id="prop-description">
+              <p>Ground-floor residence currently undergoing a high-spec renovation in the heart of Gràcia, adjacent to Avenida Diagonal and the Jardinets de Gràcia. A rare opportunity to acquire a property of exceptional character in one of Barcelona's most sought-after neighbourhoods.</p>
+              <p>The residence features soaring ceilings, beautifully restored Volta Catalana brickwork, and a luminous 23 m² open-plan living, dining and kitchen area. The principal suite includes a generous dressing room and a 7.30 m² bathroom. A second bedroom and a fully independent multipurpose pavilion of 18.50 m² — pre-installed for a potential third bathroom — complete the layout.</p>
+              <p>The 45 m² Mediterranean garden provides a private outdoor sanctuary in the city, ideal for entertaining or simply enjoying the Barcelona climate year-round.</p>
+            </div>
+          </section>
+
+          <!-- Video (populated by property-loader.js when listing.youtubeUrl is set) -->
+          <section class="prop-section" id="prop-video-section" hidden>
+            <h2 class="prop-section-h" data-i18n="section.video">Video tour</h2>
+            <div class="prop-video-wrap">
+              <iframe id="prop-video-iframe" title="Property video tour" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+            </div>
+          </section>
 
           <!-- Property details table -->
           <section class="prop-section">
@@ -281,22 +299,6 @@
             </div>
           </section>
 
-          <!-- Floor Plans (hero + strip — property-loader.js) -->
-          <section class="prop-section" id="ph-floorplans-section" hidden>
-            <h2 class="prop-section-h" data-i18n="section.floorplans">Floor Plans</h2>
-            <div class="fp-hero-layout" id="ph-floorplans-root"></div>
-          </section>
-
-          <!-- Description -->
-          <section class="prop-section">
-            <h2 class="prop-section-h" data-i18n="section.description">Description</h2>
-            <div class="prop-desc" id="prop-description">
-              <p>Ground-floor residence currently undergoing a high-spec renovation in the heart of Gràcia, adjacent to Avenida Diagonal and the Jardinets de Gràcia. A rare opportunity to acquire a property of exceptional character in one of Barcelona's most sought-after neighbourhoods.</p>
-              <p>The residence features soaring ceilings, beautifully restored Volta Catalana brickwork, and a luminous 23 m² open-plan living, dining and kitchen area. The principal suite includes a generous dressing room and a 7.30 m² bathroom. A second bedroom and a fully independent multipurpose pavilion of 18.50 m² — pre-installed for a potential third bathroom — complete the layout.</p>
-              <p>The 45 m² Mediterranean garden provides a private outdoor sanctuary in the city, ideal for entertaining or simply enjoying the Barcelona climate year-round.</p>
-            </div>
-          </section>
-
           <!-- Features as tags -->
           <section class="prop-section" id="prop-features-section">
             <h2 class="prop-section-h" data-i18n="section.features">Features &amp; Amenities</h2>
@@ -325,12 +327,10 @@
             </div>
           </section>
 
-          <!-- Video (populated by property-loader.js when listing.youtubeUrl is set) -->
-          <section class="prop-section" id="prop-video-section" hidden>
-            <h2 class="prop-section-h" data-i18n="section.video">Video tour</h2>
-            <div class="prop-video-wrap">
-              <iframe id="prop-video-iframe" title="Property video tour" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
-            </div>
+          <!-- Floor Plans (hero + strip — property-loader.js) -->
+          <section class="prop-section" id="ph-floorplans-section" hidden>
+            <h2 class="prop-section-h" data-i18n="section.floorplans">Floor Plans</h2>
+            <div class="fp-hero-layout" id="ph-floorplans-root"></div>
           </section>
 
           <!-- Location -->
@@ -415,7 +415,10 @@
                 <label class="flabel" data-i18n="form.message">Message</label>
                 <textarea name="message" class="finput ftextarea" rows="3" placeholder="I'm interested in this property…" data-i18n="form.msg_ph" data-i18n-val="form.msg_val"></textarea>
               </div>
-              <button type="submit" class="button pc-submit" data-i18n="form.submit">Request Viewing</button>
+              <div class="pc-form-actions">
+                <button type="submit" class="button pc-submit" data-i18n="form.submit">Request Viewing</button>
+                <a href="#buy-intake" class="button button--outline pc-reserve" data-i18n="btn.reserve">Purchase enquiry</a>
+              </div>
             </form>
 
             <button type="button" class="pc-dossier" id="btn-dossier" data-i18n="btn.dossier">
@@ -433,6 +436,10 @@
               <span class="tel-text"></span>
             </a>
 
+            <div id="buy-intake" class="pc-buy-intake" tabindex="-1">
+              <p class="pc-buy-intake-h" data-i18n="buy.intake_h">Purchase enquiry</p>
+              <p class="pc-buy-intake-t" data-i18n="buy.intake_t">Full buyer details form coming soon. Use the enquiry form above or call us to proceed.</p>
+            </div>
 
           </div><!-- /.pc-form-block -->
 
@@ -506,7 +513,10 @@
   <!-- Mobile sticky bar -->
   <div class="prop-sticky-cta" id="prop-sticky-cta">
     <p class="psc-price">€830,000</p>
-    <a href="#enquire" class="button">Request Viewing</a>
+    <div class="psc-actions">
+      <a href="#enquire" class="button psc-btn psc-btn--primary" data-i18n="form.submit">Request Viewing</a>
+      <a href="#buy-intake" class="button button--outline psc-btn psc-btn--reserve" data-i18n="btn.reserve">Purchase enquiry</a>
+    </div>
   </div>
 
   </div><!-- /#property-dynamic-root -->
@@ -549,7 +559,7 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg7_3UefA_rzfXRAwCMS42A4Z7lx4BUTc" async defer></script>
   <script src="area-format.js?v=au1"></script>
   <script src="data-listings.js?v=listings618"></script>
-  <script src="property-loader.js?v=au11"></script>
+  <script src="property-loader.js?v=au12"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="main.js?v=ux2"></script>

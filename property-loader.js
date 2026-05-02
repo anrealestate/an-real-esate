@@ -221,8 +221,8 @@
     const vidSec   = document.getElementById('prop-video-section')
     const nearSec  = document.getElementById('prop-nearby-section')
 
-    // Append in target order; missing nodes are silently skipped
-    for (const sec of [descSec, fpSec, detSec, featSec, vidSec, nearSec]) {
+    /* Obra nueva: Details → Floor plans → Description → Features → Video → Location */
+    for (const sec of [detSec, fpSec, descSec, featSec, vidSec, nearSec]) {
       if (sec && sec.parentElement === mainEl) mainEl.appendChild(sec)
     }
     mainEl.dataset.orderApplied = 'new-dev'

@@ -7,8 +7,11 @@ same index as booklet \"LINE XX\" on each sheet. Match + bedroom type + floor �
 Ambiguities / booklet gaps are resolved with explicit overrides (see OVERRIDES).
 
 Usage:
-  python3 scripts/how_assign_floorplans.py              # dry-run summary
-  python3 scripts/how_assign_floorplans.py --write    # patch data/listings.json
+  python3 scripts/how_assign_floorplans.py                    # dry-run (uses split PDFs in docs/ by default)
+  python3 scripts/how_assign_floorplans.py --write            # patch data/listings.json
+  python3 scripts/how_assign_floorplans.py --write --pdf PATH # booklet PDF instead of split dir
+
+HOW listings sin campo `floor`: se infiere del slug (…-u-1009 → piso 10).
 
 Requires: pip install pypdf
 """
@@ -29,6 +32,8 @@ ROOT = Path(__file__).resolve().parents[1]
 LISTINGS_PATH = ROOT / "data" / "listings.json"
 TOTAL_PAGES = 64
 DOC_PREFIX = "/docs/house-of-wellness-floor-plans"
+DEFAULT_SPLIT_DIR = ROOT / "docs" / "house-of-wellness-floor-plans"
+PAGE_NAME_RE = re.compile(r"how-floorplan-page-(\d+)-of-\d+\.pdf$", re.I)
 
 DEFAULT_BOOKLET_PDF = (
     Path.home()
@@ -114,6 +119,32 @@ def index_booklet(pdf_path: Path) -> list[dict]:
     return rows
 
 
+def index_booklet_from_split_dir(split_dir: Path) -> list[dict]:
+    """Same metadata as index_booklet, one PdfReader page per file under split_dir."""
+    files = [p for p in split_dir.glob("how-floorplan-page-*-of-*.pdf") if PAGE_NAME_RE.search(p.name)]
+    files.sort(key=lambda p: int(PAGE_NAME_RE.search(p.name).group(1)))  # type: ignore[union-attr]
+    if len(files) != TOTAL_PAGES:
+        sys.exit(f"Expected {TOTAL_PAGES} split PDFs in {split_dir}, found {len(files)}")
+    rows: list[dict] = []
+    for p in files:
+        m = PAGE_NAME_RE.search(p.name)
+        page_num = int(m.group(1)) if m else len(rows) + 1
+        r = PdfReader(str(p))
+        if len(r.pages) != 1:
+            sys.exit(f"Expected single-page PDF: {p.name} ({len(r.pages)} pages)")
+        raw = r.pages[0].extract_text() or ""
+        lp = line_plan(raw)
+        lv = parse_levels(raw)
+        bd = beds_hint(raw)
+        row: dict = {"page": page_num, "levels": lv, "beds": bd}
+        if lp:
+            row["kind"], row["line_or_unit"], row["plan"] = lp
+        else:
+            row["kind"] = "unknown"
+        rows.append(row)
+    return rows
+
+
 def parse_stack(desc0: str) -> tuple[int, str] | None:
     m = re.search(r"sq ft\s*·\s*(\d+)\s*([NSEW]{1,2})\s*\.", desc0 or "")
     if not m:
@@ -146,6 +177,17 @@ def pdf_src(page: int) -> str:
     return f"{DOC_PREFIX}/how-floorplan-page-{page:02d}-of-{TOTAL_PAGES}.pdf"
 
 
+def infer_floor_from_slug(u: dict) -> int | None:
+    """HOW units often omit JSON `floor`; derive from slug …-u-1009 → floor 10, unit 09."""
+    m = re.search(r"-u-(\d+)\s*$", u.get("slug") or "")
+    if not m:
+        return None
+    digits = m.group(1).zfill(4)
+    if len(digits) < 3:
+        return None
+    return int(digits[:-2])
+
+
 def assign_pages(index: list[dict], how: list[dict]) -> tuple[dict[str, int], list[tuple]]:
     """Returns ref -> page, and list of (ref, note) warnings."""
     ref_page: dict[str, int] = {}
@@ -157,7 +199,18 @@ def assign_pages(index: list[dict], how: list[dict]) -> tuple[dict[str, int], li
             ref_page[ref] = OVERRIDES_PAGE_BY_REF[ref]
             continue
 
-        floor = u["floor"]
+        floor = u.get("floor")
+        if floor is None:
+            floor = infer_floor_from_slug(u)
+        elif isinstance(floor, str) and floor.strip().isdigit():
+            floor = int(floor.strip())
+        if floor is None:
+            warnings.append((ref, "no floor on listing or slug"))
+            continue
+        if not isinstance(floor, int):
+            warnings.append((ref, f"non-numeric floor: {floor!r}"))
+            continue
+
         beds = u["beds"]
         desc0 = (u.get("description") or [""])[0]
         st = parse_stack(desc0)
@@ -204,14 +257,25 @@ def main() -> None:
         "--pdf",
         type=Path,
         default=DEFAULT_BOOKLET_PDF,
-        help="Path to Hou seOfWellness_FloorPlans_Branded.pdf",
+        help="Path to Hou seOfWellness_FloorPlans_Branded.pdf (optional if --split-dir used)",
+    )
+    ap.add_argument(
+        "--split-dir",
+        type=Path,
+        default=DEFAULT_SPLIT_DIR,
+        help=f"Single-page PDFs (default: {DEFAULT_SPLIT_DIR})",
     )
     args = ap.parse_args()
 
-    if not args.pdf.is_file():
-        sys.exit(f"Booklet PDF not found: {args.pdf}")
-
-    index = index_booklet(args.pdf)
+    if args.pdf.is_file():
+        index = index_booklet(args.pdf)
+    elif args.split_dir.is_dir() and list(args.split_dir.glob("how-floorplan-page-*-of-*.pdf")):
+        index = index_booklet_from_split_dir(args.split_dir)
+    else:
+        sys.exit(
+            f"No booklet at {args.pdf} and no split PDFs under {args.split_dir}. "
+            "Provide --pdf or export pages to --split-dir."
+        )
     data = json.loads(LISTINGS_PATH.read_text(encoding="utf-8"))
     how = [x for x in data["listings"] if x.get("parent_slug") == "house-of-wellness"]
 

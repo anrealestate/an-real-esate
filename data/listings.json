@@ -100,6 +100,16 @@
           "Private outdoor space"
         ]
       },
+      "floorPlans": [
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404776/an-realestate/gracia-garden/planell.jpg",
+          "label": "Floor plan"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404776/an-realestate/gracia-garden/Imagen-02-logo-1.jpg",
+          "label": "Garden level"
+        }
+      ],
       "nearby": [
         {
           "name": "Jardinets de Gràcia",
