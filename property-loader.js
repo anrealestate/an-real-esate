@@ -9,9 +9,14 @@
   }
 
   function formatPrice(raw) {
-    const n = typeof raw === 'number' ? raw : parseFloat(String(raw ?? '').replace(/[^0-9.]/g, ''))
-    if (isNaN(n)) return raw
-    return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n)
+    if (!raw) return raw
+    const s = String(raw)
+    // Already has thousands separators (e.g. "$419,900", "€830,000") → return as-is
+    if (/\d[,.]\d{3}/.test(s)) return s
+    const n = parseFloat(s.replace(/[^0-9.]/g, ''))
+    if (isNaN(n)) return s
+    // Insert thousands separators, keeping the original currency symbol and any prefix text (e.g. "From")
+    return s.replace(/\d[\d.]*/, n.toLocaleString('en-US', { maximumFractionDigits: 0 }))
   }
 
   /* Allowlist of domains permitted as virtualTourUrl src (Matterport, Kuula, etc.).
