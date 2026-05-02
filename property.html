@@ -232,23 +232,7 @@
         <!-- MAIN CONTENT -->
         <main class="prop-main">
 
-          <!-- Description -->
-          <section class="prop-section">
-            <h2 class="prop-section-h" data-i18n="section.description">Description</h2>
-            <div class="prop-desc" id="prop-description">
-              <p>Ground-floor residence currently undergoing a high-spec renovation in the heart of Gràcia, adjacent to Avenida Diagonal and the Jardinets de Gràcia. A rare opportunity to acquire a property of exceptional character in one of Barcelona's most sought-after neighbourhoods.</p>
-              <p>The residence features soaring ceilings, beautifully restored Volta Catalana brickwork, and a luminous 23 m² open-plan living, dining and kitchen area. The principal suite includes a generous dressing room and a 7.30 m² bathroom. A second bedroom and a fully independent multipurpose pavilion of 18.50 m² — pre-installed for a potential third bathroom — complete the layout.</p>
-              <p>The 45 m² Mediterranean garden provides a private outdoor sanctuary in the city, ideal for entertaining or simply enjoying the Barcelona climate year-round.</p>
-            </div>
-          </section>
-
-          <!-- Video (populated by property-loader.js when listing.youtubeUrl is set) -->
-          <section class="prop-section" id="prop-video-section" hidden>
-            <h2 class="prop-section-h" data-i18n="section.video">Video tour</h2>
-            <div class="prop-video-wrap">
-              <iframe id="prop-video-iframe" title="Property video tour" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
-            </div>
-          </section>
+          <!-- Orden: 1 Details → 2 Floor plans → 3 Description → 4 Features → 5 Video → 6 Location -->
 
           <!-- Property details table -->
           <section class="prop-section">
@@ -297,6 +281,22 @@
             </div>
           </section>
 
+          <!-- Floor Plans (hero + strip — property-loader.js) -->
+          <section class="prop-section" id="ph-floorplans-section" hidden>
+            <h2 class="prop-section-h" data-i18n="section.floorplans">Floor Plans</h2>
+            <div class="fp-hero-layout" id="ph-floorplans-root"></div>
+          </section>
+
+          <!-- Description -->
+          <section class="prop-section">
+            <h2 class="prop-section-h" data-i18n="section.description">Description</h2>
+            <div class="prop-desc" id="prop-description">
+              <p>Ground-floor residence currently undergoing a high-spec renovation in the heart of Gràcia, adjacent to Avenida Diagonal and the Jardinets de Gràcia. A rare opportunity to acquire a property of exceptional character in one of Barcelona's most sought-after neighbourhoods.</p>
+              <p>The residence features soaring ceilings, beautifully restored Volta Catalana brickwork, and a luminous 23 m² open-plan living, dining and kitchen area. The principal suite includes a generous dressing room and a 7.30 m² bathroom. A second bedroom and a fully independent multipurpose pavilion of 18.50 m² — pre-installed for a potential third bathroom — complete the layout.</p>
+              <p>The 45 m² Mediterranean garden provides a private outdoor sanctuary in the city, ideal for entertaining or simply enjoying the Barcelona climate year-round.</p>
+            </div>
+          </section>
+
           <!-- Features as tags -->
           <section class="prop-section" id="prop-features-section">
             <h2 class="prop-section-h" data-i18n="section.features">Features &amp; Amenities</h2>
@@ -325,10 +325,12 @@
             </div>
           </section>
 
-          <!-- Floor Plans (ejemplo: hero + strip — ver property-loader.js) -->
-          <section class="prop-section" id="ph-floorplans-section" hidden>
-            <h2 class="prop-section-h" data-i18n="section.floorplans">Floor Plans</h2>
-            <div class="fp-hero-layout" id="ph-floorplans-root"></div>
+          <!-- Video (populated by property-loader.js when listing.youtubeUrl is set) -->
+          <section class="prop-section" id="prop-video-section" hidden>
+            <h2 class="prop-section-h" data-i18n="section.video">Video tour</h2>
+            <div class="prop-video-wrap">
+              <iframe id="prop-video-iframe" title="Property video tour" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+            </div>
           </section>
 
           <!-- Location -->
