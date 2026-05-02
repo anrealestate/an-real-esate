@@ -1822,7 +1822,82 @@
       "stage": "active",
       "order": 3,
       "badge": "new_dev",
-      "youtubeUrl": "https://youtu.be/vc1u9porSjQ"
+      "youtubeUrl": "https://youtu.be/vc1u9porSjQ",
+      "totalFloors": 34,
+      "totalUnits": 58,
+      "amenitiesArea": "22,000 sq ft",
+      "deliveryDate": "Q4 2029",
+      "constructionStatus": "Pre-construction",
+      "developer": "North Development",
+      "architect": "Mc+G Architecture",
+      "interiorDesign": "Urban Robot Associates",
+      "managementCompany": "North Management",
+      "salesAgency": "Fortune Development Sales",
+      "details": [
+        {
+          "key": "Reference",
+          "val": "AN202603"
+        },
+        {
+          "key": "Address",
+          "val": "152 SW 9th Street, Brickell, Miami, FL 33130"
+        },
+        {
+          "key": "Type",
+          "val": "New Development"
+        },
+        {
+          "key": "Floors",
+          "val": "34"
+        },
+        {
+          "key": "Residences",
+          "val": "58"
+        },
+        {
+          "key": "Status",
+          "val": "Pre-construction"
+        },
+        {
+          "key": "Delivery",
+          "val": "Q4 2029"
+        },
+        {
+          "key": "Price from",
+          "val": "$419,000"
+        },
+        {
+          "key": "Amenity area",
+          "val": "22,000 sq ft"
+        }
+      ],
+      "features": {
+        "Fitness & Wellness": [
+          "State-of-the-art fitness centre with private personal training suite",
+          "Functional training zones",
+          "Cold plunge",
+          "Full-service spa — Steam Room, Sauna & Hammam",
+          "Rooftop pool with panoramic skyline views",
+          "IV therapy, physical therapy & nutritionist consultations",
+          "Massage therapy",
+          "Weekly yoga & meditation sessions"
+        ],
+        "Community Spaces": [
+          "Clubhouse with event kitchen",
+          "Co-working areas",
+          "Juice bar",
+          "Podcast room",
+          "Pet-friendly facilities"
+        ],
+        "Residences": [
+          "Loft-style ceiling heights of 9'4\"",
+          "Premium appliances",
+          "Two-tone cabinetry with terrazzo countertops",
+          "Porcelain tile bathrooms",
+          "Polished concrete balconies (select units)",
+          "Views over Brickell and Biscayne Bay (select units)"
+        ]
+      }
     },
     {
       "slug": "house-of-wellness-u-1009",
