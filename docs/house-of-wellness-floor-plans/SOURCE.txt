@@ -1,0 +1,17 @@
+Split from: Hou seOfWellness_FloorPlans_Branded.pdf
+Pages: 64
+Brand: House of Wellness Brickell — floor plan booklet
+Files: how-floorplan-page-XX-of-64.pdf (one layout variant per page; not one file per unit).
+
+Regenerate: python3 scripts/split_how_floorplans.py "/path/to/Hou seOfWellness_FloorPlans_Branded.pdf"
+
+Unit → sheet (see scripts/how_assign_floorplans.py): inventory “Line” = booklet LINE number;
+match bedroom type and floor ∈ LEVELS. Overrides for booklet gaps / ambiguous sheets.
+
+After editing listings or re-running how_assign_floorplans.py --write:
+  python3 scripts/sync_listings_bundles.py
+
+Production URLs (Cloudinary raw): upload once, then patch listings:
+  python3 scripts/upload_how_floorplans_cloudinary.py
+  python3 scripts/sync_listings_bundles.py
+Manifest: data/how-floorplan-cloudinary-urls.json
