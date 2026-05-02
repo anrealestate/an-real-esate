@@ -332,10 +332,36 @@
             unitFilters.querySelectorAll('.dv-uftab').forEach(t => t.classList.remove('active'))
             tab.classList.add('active')
             const f = tab.dataset.ufilter
+            /* When filtering, reveal all cards so the full filtered set is visible */
+            unitGrid.querySelectorAll('.dv-more-hidden').forEach(c => c.classList.remove('dv-more-hidden'))
+            if (loadMoreBtn) loadMoreBtn.hidden = true
             unitGrid.querySelectorAll('[data-beds]').forEach(card => {
               card.classList.toggle('hidden', f !== 'all' && card.dataset.beds !== f)
             })
           })
+        })
+      }
+
+      const PAGE_SIZE = 12
+      const countEl    = document.getElementById('dv-units-count')
+      const loadMoreBtn = document.getElementById('dv-units-loadmore')
+
+      function applyPagination(total) {
+        if (!unitGrid || !loadMoreBtn) return
+        const cards = [...unitGrid.querySelectorAll('.dv-unit-card')]
+        cards.slice(PAGE_SIZE).forEach(c => c.classList.add('dv-more-hidden'))
+        if (total > PAGE_SIZE) {
+          const remaining = total - PAGE_SIZE
+          const moreLabel = lang === 'es' ? `Ver más (${remaining})` : `Show more (${remaining})`
+          loadMoreBtn.textContent = moreLabel
+          loadMoreBtn.hidden = false
+        }
+      }
+
+      if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', () => {
+          unitGrid.querySelectorAll('.dv-more-hidden').forEach(c => c.classList.remove('dv-more-hidden'))
+          loadMoreBtn.hidden = true
         })
       }
 
@@ -346,6 +372,10 @@
         const bedsSet = new Set(listing.units.map(u => u.beds ?? 0))
         wireFilters(bedsSet)
 
+        if (countEl) {
+          countEl.textContent = `${listing.units.length} ${lang === 'es' ? 'unidades' : 'units'}`
+          countEl.hidden = false
+        }
         unitGrid.innerHTML = listing.units.map(u => {
           const sizeRange  = u.sizeMin && u.sizeMax ? `${u.sizeMin}–${u.sizeMax} sq ft` : (u.sizeMin ? `${u.sizeMin} sq ft` : '')
           const avail      = u.availability || 'available'
@@ -366,12 +396,24 @@
               ${!isSold ? `<a href="#enquire" class="dv-unit-cta" onclick="document.querySelector('#prop-form [name=message]').value='Interested in unit type ${esc(u.id)} (${esc(u.layout||'')})'">Enquire</a>` : ''}
             </div>`
         }).join('')
+        applyPagination(listing.units.length)
         unitsSection.removeAttribute('hidden')
 
       } else if (children.length) {
         /* ── Unidades hijas con ficha propia (property.html) ── */
         const bedsSet = new Set(children.map(c => c.beds ?? 0))
         wireFilters(bedsSet)
+
+        if (countEl) {
+          const availCount = children.filter(c => c.stage === 'active').length
+          const countStr = lang === 'es'
+            ? `${availCount} residencias disponibles · ${children.length} en total`
+            : `${availCount} residences available · ${children.length} total`
+          countEl.textContent = countStr
+          countEl.hidden = false
+        }
+
+        const ctaLabel = lang === 'es' ? 'Ver ficha →' : 'View listing →'
         unitGrid.innerHTML = children.map(c => {
           const stage  = c.stage || 'active'
           const sLabel = STAGE_LABEL[stage] || stage
@@ -396,10 +438,11 @@
               </div>
               <p class="dv-unit-price">${esc(c.price || '—')}</p>
               ${!isSold
-                ? `<a href="property.html?slug=${esc(c.slug)}" class="dv-unit-cta dv-child-cta">Ver ficha →</a>`
+                ? `<a href="property.html?slug=${esc(c.slug)}" class="dv-unit-cta dv-child-cta">${ctaLabel}</a>`
                 : ''}
             </div>`
         }).join('')
+        applyPagination(children.length)
         unitsSection.removeAttribute('hidden')
 
       } else {

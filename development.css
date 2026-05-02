@@ -401,6 +401,34 @@
 
 .dv-unit-cta:hover { background: var(--gold); color: var(--bg); }
 
+.dv-units-count {
+  font-family: var(--sans);
+  font-size: var(--fs-2xs);
+  color: var(--gold);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin: -.25rem 0 1rem;
+}
+
+.dv-loadmore {
+  display: block;
+  margin: 1.5rem auto 0;
+  padding: .6rem 2rem;
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color .2s, color .2s;
+}
+.dv-loadmore:hover { border-color: var(--gold); color: var(--gold); }
+
+.dv-unit-card.dv-more-hidden { display: none !important; }
+
 .dv-units-note {
   font-family: var(--sans);
   font-size: var(--fs-2xs);

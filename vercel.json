@@ -1,6 +1,20 @@
 {
   "outputDirectory": ".",
   "cleanUrls": false,
+  "redirects": [
+    {
+      "source": "/development.html",
+      "has": [{ "type": "query", "key": "slug", "value": "house-of-wellnes" }],
+      "destination": "/development.html?slug=house-of-wellness",
+      "permanent": true
+    },
+    {
+      "source": "/property.html",
+      "has": [{ "type": "query", "key": "slug", "value": "house-of-wellnes-u-:unit" }],
+      "destination": "/property.html?slug=house-of-wellness-u-:unit",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
