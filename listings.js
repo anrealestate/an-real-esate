@@ -57,6 +57,13 @@ function renderGrid() {
   }
 }
 
+function formatBuiltArea(listing) {
+  const s = listing.size
+  if (s === undefined || s === null || String(s).trim() === '') return ''
+  if (listing.sizeUnit === 'sqft') return escHtml(String(s)) + ' sq ft'
+  return escHtml(String(s)) + ' m²'
+}
+
 function renderCard(listing) {
   const lang     = (typeof getLang === 'function') ? getLang() : (localStorage.getItem('an_lang') || 'en')
   const L        = (window.I18N && window.I18N[lang]) || (window.I18N && window.I18N.en) || {}
@@ -97,7 +104,7 @@ function renderCard(listing) {
 
   const specsHTML = isDev
     ? `<p class="prop-specs prop-specs--dev">${listing.totalFloors ? listing.totalFloors + ' floors' : ''} ${listing.totalFloors && listing.totalUnits ? '&nbsp;·&nbsp;' : ''} ${listing.totalUnits ? listing.totalUnits + ' residences' : ''} &nbsp;·&nbsp; ${listing.constructionStatus || 'Pre-construction'}</p>`
-    : `<p class="prop-specs">${propType ? escHtml(propType) + ' &nbsp;·&nbsp; ' : ''}${escHtml(String(listing.beds))} ${L['card.bed']||'bed'} &nbsp;·&nbsp; ${escHtml(String(listing.baths))} ${L['card.bath']||'bath'} &nbsp;·&nbsp; ${escHtml(String(listing.size))} m²</p>`
+    : `<p class="prop-specs">${propType ? escHtml(propType) + ' &nbsp;·&nbsp; ' : ''}${escHtml(String(listing.beds))} ${L['card.bed']||'bed'} &nbsp;·&nbsp; ${escHtml(String(listing.baths))} ${L['card.bath']||'bath'} &nbsp;·&nbsp; ${formatBuiltArea(listing)}</p>`
 
   const imgHTML = listing.image
     ? `<img src="${escHtml(listing.image)}" alt="${escHtml(listing.title)}" class="prop-img" loading="lazy" />`

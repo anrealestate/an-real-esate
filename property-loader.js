@@ -204,9 +204,15 @@
 
     /* ── specs ── */
     const set = (id, val) => { const e = document.getElementById(id); if (e) e.textContent = val }
+    function formatBuiltArea(l) {
+      const s = l.size
+      if (s === undefined || s === null || String(s).trim() === '') return '—'
+      if (l.sizeUnit === 'sqft') return `${s} sq ft`
+      return `${s} m²`
+    }
     set('spec-beds',  listing.beds)
     set('spec-baths', listing.baths)
-    set('spec-size',  `${listing.size} m²`)
+    set('spec-size',  formatBuiltArea(listing))
     set('spec-floor', listing.floor || '—')
 
     /* hide extra Gràcia-specific specs if not needed */

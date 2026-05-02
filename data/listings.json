@@ -209,7 +209,8 @@
           "Weekly yoga & meditation sessions",
           "On-site Lifestyle Director"
         ]
-      }
+      },
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-1009",
@@ -332,7 +333,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3018
+      "order": 3018,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-1101",
@@ -455,7 +457,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3042
+      "order": 3042,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-1104",
@@ -578,7 +581,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3031
+      "order": 3031,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-1120",
@@ -701,7 +705,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3049
+      "order": 3049,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-1205",
@@ -824,7 +829,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3024
+      "order": 3024,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-1406",
@@ -947,7 +953,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3027
+      "order": 3027,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-1508",
@@ -1070,7 +1077,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3025
+      "order": 3025,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-1514",
@@ -1193,7 +1201,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3045
+      "order": 3045,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-1523",
@@ -1316,7 +1325,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3033
+      "order": 3033,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-1611",
@@ -1439,7 +1449,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3017
+      "order": 3017,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-1621",
@@ -1562,7 +1573,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3006
+      "order": 3006,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-1817",
@@ -1685,7 +1697,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3038
+      "order": 3038,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-1818",
@@ -1808,7 +1821,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3036
+      "order": 3036,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-1819",
@@ -1931,7 +1945,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3008
+      "order": 3008,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-1822",
@@ -2054,7 +2069,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3034
+      "order": 3034,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-1915",
@@ -2177,7 +2193,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3001
+      "order": 3001,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-1920",
@@ -2300,7 +2317,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3054
+      "order": 3054,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-2006",
@@ -2423,7 +2441,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3037
+      "order": 3037,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-2012",
@@ -2546,7 +2565,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3000
+      "order": 3000,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-2014",
@@ -2669,7 +2689,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3048
+      "order": 3048,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-2105",
@@ -2792,7 +2813,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3035
+      "order": 3035,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-2113",
@@ -2915,7 +2937,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3046
+      "order": 3046,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-2126",
@@ -3038,7 +3061,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3047
+      "order": 3047,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-2207",
@@ -3161,7 +3185,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3009
+      "order": 3009,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-2209",
@@ -3284,7 +3309,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3039
+      "order": 3039,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-2216",
@@ -3407,7 +3433,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3020
+      "order": 3020,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-2221",
@@ -3530,7 +3557,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3010
+      "order": 3010,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-2303",
@@ -3653,7 +3681,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3019
+      "order": 3019,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-2311",
@@ -3776,7 +3805,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3022
+      "order": 3022,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-2420",
@@ -3899,7 +3929,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3055
+      "order": 3055,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-2514",
@@ -4022,7 +4053,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3050
+      "order": 3050,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-2519",
@@ -4145,7 +4177,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3011
+      "order": 3011,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-2702",
@@ -4268,7 +4301,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3002
+      "order": 3002,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-2713",
@@ -4391,7 +4425,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3052
+      "order": 3052,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-2820",
@@ -4514,7 +4549,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3040
+      "order": 3040,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-2901",
@@ -4637,7 +4673,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3051
+      "order": 3051,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-2907",
@@ -4760,7 +4797,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3012
+      "order": 3012,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-2926",
@@ -4883,7 +4921,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3053
+      "order": 3053,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-3003",
@@ -5006,7 +5045,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3029
+      "order": 3029,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-3014",
@@ -5129,7 +5169,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3057
+      "order": 3057,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-3015",
@@ -5252,7 +5293,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3007
+      "order": 3007,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-3021",
@@ -5375,7 +5417,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3013
+      "order": 3013,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-3024",
@@ -5498,7 +5541,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3030
+      "order": 3030,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-3219",
@@ -5621,7 +5665,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3014
+      "order": 3014,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-3225",
@@ -5744,7 +5789,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3004
+      "order": 3004,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-3326",
@@ -5867,7 +5913,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3056
+      "order": 3056,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-801",
@@ -5990,7 +6037,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3041
+      "order": 3041,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-808",
@@ -6113,7 +6161,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3023
+      "order": 3023,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-810",
@@ -6236,7 +6285,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3032
+      "order": 3032,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-818",
@@ -6359,7 +6409,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3021
+      "order": 3021,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-911",
@@ -6482,7 +6533,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3015
+      "order": 3015,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-913",
@@ -6605,7 +6657,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3043
+      "order": 3043,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-916",
@@ -6728,7 +6781,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3016
+      "order": 3016,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-917",
@@ -6851,7 +6905,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3028
+      "order": 3028,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-919",
@@ -6974,7 +7029,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3005
+      "order": 3005,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-921",
@@ -7097,7 +7153,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3003
+      "order": 3003,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-922",
@@ -7220,7 +7277,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3026
+      "order": 3026,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellnes-u-926",
@@ -7343,7 +7401,8 @@
           "val": "House of Wellness — Brickell"
         }
       ],
-      "order": 3044
+      "order": 3044,
+      "sizeUnit": "sqft"
     },
     {
       "slug": "gracia-garden",

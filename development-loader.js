@@ -377,7 +377,9 @@
           const sLabel = STAGE_LABEL[stage] || stage
           const sClass = STAGE_CLASS[stage] || 'dv-unit-avail--available'
           const isSold = stage === 'sold'
-          const size   = c.size ? `${c.size} m²` : ''
+          const size   = c.size
+            ? `${c.size}${c.sizeUnit === 'sqft' ? ' sq ft' : ' m²'}`
+            : ''
           const floor  = c.floor ? `Floor ${esc(c.floor)}` : ''
           return `
             <div class="dv-unit-card dv-child-card" data-beds="${c.beds ?? 0}">

@@ -215,7 +215,7 @@ document.getElementById('prop-form')?.addEventListener('submit', async e => {
             <span class="prop-price">${l.price}</span>
           </div>
           <h3 class="prop-title">${l.title}</h3>
-          <p class="prop-specs">${l.beds} bed &nbsp;·&nbsp; ${l.baths} bath &nbsp;·&nbsp; ${l.size} m²</p>
+          <p class="prop-specs">${l.beds} bed &nbsp;·&nbsp; ${l.baths} bath &nbsp;·&nbsp; ${l.size != null && l.size !== '' ? l.size + (l.sizeUnit === 'sqft' ? ' sq ft' : ' m²') : '—'}</p>
         </div>
       </a>`
   }).join('')
