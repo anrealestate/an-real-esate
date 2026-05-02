@@ -85,6 +85,11 @@ function initGallery() {
   cellEls.forEach((cell, i) => {
     cell.addEventListener('click', () => lbOpen(i + 1))
   })
+
+  document.querySelectorAll('.pg-thumb').forEach(btn => {
+    const idx = parseInt(btn.dataset.index, 10)
+    btn.addEventListener('click', () => lbOpen(idx))
+  })
 }
 
 /* Fire immediately if loader already ran, otherwise wait for the event */

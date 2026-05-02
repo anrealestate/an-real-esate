@@ -696,7 +696,7 @@
       }
     })
 
-    // Inject hidden cells for photos beyond the 5 visible — property.js picks them up for the lightbox
+    // Keep hidden cells for imgs[5+] so lightbox indices stay correct (property.js reads all .pg-cell)
     const pgSide = document.querySelector('.pg-grid-side')
     if (pgSide && imgs.length > 5) {
       imgs.slice(5).forEach(img => {
@@ -710,6 +710,29 @@
         btn.appendChild(el)
         pgSide.appendChild(btn)
       })
+    }
+
+    // Render visible overflow strip below the mosaic (Option A) — each thumb opens lightbox at correct index
+    if (imgs.length > 5) {
+      const pgSection = document.querySelector('.pg-section')
+      if (pgSection) {
+        const strip = document.createElement('div')
+        strip.className = 'pg-all-photos'
+        imgs.slice(5).forEach((img, i) => {
+          const btn = document.createElement('button')
+          btn.type = 'button'
+          btn.className = 'pg-thumb'
+          btn.dataset.index = String(i + 5)  // lightbox index: hero=0, cells[0-3]=1-4, overflow starts at 5
+          btn.setAttribute('aria-label', img.alt || `Photo ${i + 6}`)
+          const el = document.createElement('img')
+          el.src = img.src
+          el.alt = img.alt || baseListing.title
+          el.loading = 'lazy'
+          btn.appendChild(el)
+          strip.appendChild(btn)
+        })
+        pgSection.appendChild(strip)
+      }
     }
 
     const moreText = document.querySelector('.pg-more-overlay')
