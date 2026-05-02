@@ -53,22 +53,18 @@
     revealPropertyShell()
     return
   }
-  /* Merge admin cache with deployed data so published fields (e.g. youtubeUrl) are not
-     wiped by an older an_listings_cache on the same browser. */
+  /* Merge admin cache: datos del sitio (JSON) tienen prioridad sobre localStorage del admin */
   try {
     const cached = JSON.parse(localStorage.getItem('an_listings_cache') || '{}').listings || []
     if (cached.length && listings.length) {
       const serverBySlug = Object.fromEntries(listings.map(l => [l.slug, l]))
-      const merged = []
-      const seen = new Set()
+      listings = listings.map(srv => {
+        const c = cached.find(x => x.slug === srv.slug)
+        return c ? { ...c, ...srv } : srv
+      })
       cached.forEach(c => {
-        merged.push({ ...c, ...(serverBySlug[c.slug] || {}) })
-        seen.add(c.slug)
+        if (!serverBySlug[c.slug]) listings.push(c)
       })
-      listings.forEach(l => {
-        if (!seen.has(l.slug)) merged.push(l)
-      })
-      listings = merged
     } else if (cached.length) {
       listings = cached
     }

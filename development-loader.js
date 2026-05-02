@@ -15,16 +15,18 @@
   let listings = []
   try { listings = JSON.parse(el.textContent).listings || [] } catch { return }
 
-  /* Merge admin localStorage cache (same pattern as property-loader.js) */
+  /* Merge admin cache: servidor publicado gana siempre (evita ficha vacía con caché antigua del admin) */
   try {
     const cached = JSON.parse(localStorage.getItem('an_listings_cache') || '{}').listings || []
     if (cached.length && listings.length) {
       const serverBySlug = Object.fromEntries(listings.map(l => [l.slug, l]))
-      const merged = []
-      const seen = new Set()
-      cached.forEach(c => { merged.push({ ...c, ...(serverBySlug[c.slug] || {}) }); seen.add(c.slug) })
-      listings.forEach(l => { if (!seen.has(l.slug)) merged.push(l) })
-      listings = merged
+      listings = listings.map(srv => {
+        const c = cached.find(x => x.slug === srv.slug)
+        return c ? { ...c, ...srv } : srv
+      })
+      cached.forEach(c => {
+        if (!serverBySlug[c.slug]) listings.push(c)
+      })
     } else if (cached.length) {
       listings = cached
     }
