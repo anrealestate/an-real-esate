@@ -243,13 +243,27 @@
         </div>
         <div class="info-content">
           <div class="info-block">
-            <div class="filter-tabs" role="tablist">
-              <button class="ftab active" data-filter="all" data-i18n="filter.all">All</button>
-              <button class="ftab" data-filter="sale" data-i18n="prop.for_sale">For Sale</button>
-              <button class="ftab" data-filter="rent" data-i18n="prop.for_rent">For Rent</button>
-              <button class="ftab" data-filter="development" data-i18n="filter.new_dev">New Dev</button>
+            <div class="controls-row">
+              <div class="filter-tabs" role="tablist">
+                <button class="ftab active" data-filter="all" data-i18n="filter.all">All</button>
+                <button class="ftab" data-filter="sale" data-i18n="prop.for_sale">For Sale</button>
+                <button class="ftab" data-filter="rent" data-i18n="prop.for_rent">For Rent</button>
+                <button class="ftab" data-filter="development" data-i18n="filter.new_dev">New Dev</button>
+              </div>
+              <div class="sort-wrap">
+                <label for="props-sort" class="sort-label" data-i18n="sort.by">Sort</label>
+                <select id="props-sort" class="sort-select">
+                  <option value="default"    data-i18n="sort.default">Featured</option>
+                  <option value="price_desc" data-i18n="sort.price_desc">Price: High → Low</option>
+                  <option value="price_asc"  data-i18n="sort.price_asc">Price: Low → High</option>
+                </select>
+              </div>
             </div>
-            <div class="props-grid" id="props-grid">
+            <p class="result-count" id="props-count" aria-live="polite"></p>
+            <div class="props-grid" id="props-grid"></div>
+            <p class="rent-sort-note" id="rent-sort-note" aria-live="polite"></p>
+            <div class="view-more-wrap">
+              <button class="btn-view-more" id="btn-view-more" hidden></button>
             </div>
           </div>
 
