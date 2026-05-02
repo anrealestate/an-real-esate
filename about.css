@@ -254,6 +254,21 @@
   margin-bottom: 3.5rem;
 }
 
+@media (max-width: 767px) {
+  .ab-cta-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: .75rem;
+    margin-top: 1.5rem;
+  }
+  .ab-cta-actions .button {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+}
+
 .ab-wa {
   display: inline-flex;
   align-items: center;

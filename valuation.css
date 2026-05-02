@@ -648,3 +648,32 @@
   /* Hero headline — clamp() handles scaling automatically */
   .val-h1 { font-size: clamp(32px, 9vw, 56px); }
 }
+
+/* Lead summary shown after chat completion */
+.chat-summary {
+  margin-top: .75rem;
+  border: 1px solid rgba(240,235,224,.12);
+  border-radius: 4px;
+  padding: .75rem 1rem;
+  background: rgba(240,235,224,.03);
+}
+.chat-summary-row {
+  display: flex;
+  gap: .75rem;
+  padding: .35rem 0;
+  border-bottom: 1px solid rgba(240,235,224,.07);
+  font-size: var(--fs-xs);
+  line-height: 1.4;
+}
+.chat-summary-row:last-child { border-bottom: none; }
+.chat-summary-k {
+  min-width: 90px;
+  color: var(--muted);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  font-size: var(--fs-2xs);
+  flex-shrink: 0;
+}
+.chat-summary-v {
+  color: var(--cream);
+}

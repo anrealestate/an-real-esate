@@ -723,6 +723,7 @@
     'vallvidrera-villa':           { lat: 41.4208, lng: 2.0865 },
     'eixample-villarroel':         { lat: 41.3875, lng: 2.1528 },
     'villa-cascades':              { lat: 41.4328796, lng: 2.0927754 },
+    'house-of-wellness':           { lat: 41.3851, lng: 2.1734 },
   }
   const MAP_STYLE = [
     { elementType: 'geometry',            stylers: [{ color: '#18180f' }] },
@@ -796,8 +797,8 @@
       renderMap({ lat: parseFloat(baseListing.lat), lng: parseFloat(baseListing.lng) })
       return
     }
-    // 2. Hardcoded fallback coords
-    const coord = COORDS[lookupSlug]
+    // 2. Hardcoded fallback coords — strip unit suffix for child unit pages
+    const coord = COORDS[lookupSlug] || COORDS[lookupSlug.replace(/-u-[^/]*$/, '')]
     if (coord) {
       renderMap(coord)
       return
@@ -817,7 +818,7 @@
   function tryInitMap() {
     if (window.google && window.google.maps) { initPropertyMap(); return }
     if (++_mapAttempts < 25) setTimeout(tryInitMap, 400)
-    else { const coord = COORDS[lookupSlug]; if (coord) renderOsmMap(coord) }
+    else { const coord = COORDS[lookupSlug] || COORDS[lookupSlug.replace(/-u-[^/]*$/, '')]; if (coord) renderOsmMap(coord) }
   }
   tryInitMap()
 

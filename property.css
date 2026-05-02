@@ -517,6 +517,7 @@
   font-size: var(--fs-xs);
   font-weight: 500;
   letter-spacing: .06em;
+  text-transform: uppercase;
   transition: opacity var(--fast);
 }
 .pc-whatsapp:hover { opacity: .88; }
@@ -533,7 +534,8 @@
   border: 1px solid var(--border);
   font-size: var(--fs-xs);
   color: var(--cream-dim);
-  letter-spacing: .08em;
+  letter-spacing: .06em;
+  text-transform: uppercase;
   transition: border-color var(--fast), color var(--fast);
 }
 .pc-tel:hover { border-color: rgba(240,235,224,.3); color: var(--cream); }
@@ -1059,7 +1061,12 @@
 
   /* Spec dividers look broken when flex items wrap to new rows */
   .ph-specs-divider { display: none; }
-  .ph-specs { gap: .75rem 1.5rem; }
+  .ph-specs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .75rem 1rem;
+  }
+  .ph-price-block { grid-column: 1 / -1; margin-right: 0; }
 
   /* Lightbox: side padding was 5rem leaving only 215px for the photo */
   .lb-stage       { padding: 4.5rem 1rem 3.5rem; }
