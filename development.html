@@ -22,7 +22,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="property.css" />
-  <link rel="stylesheet" href="development.css?v=listings610" />
+  <link rel="stylesheet" href="development.css?v=au1" />
   <script src="i18n.js"></script>
 </head>
 <body>
@@ -190,8 +190,14 @@
           <section class="dv-section" id="dv-units-section" hidden>
             <h2 class="dv-section-h">Available Units</h2>
             <p class="dv-units-count" id="dv-units-count" hidden></p>
-            <div class="dv-unit-filters" id="dv-unit-filters" role="tablist">
-              <button class="dv-uftab active" data-ufilter="all">All</button>
+            <div class="dv-unit-controls">
+              <div class="dv-unit-filters" id="dv-unit-filters" role="tablist">
+                <button class="dv-uftab active" data-ufilter="all">All</button>
+              </div>
+              <div class="dv-sort-wrap">
+                <label for="dv-units-sort" class="dv-sort-label" data-i18n="sort.by">Sort</label>
+                <select id="dv-units-sort" class="dv-sort-sel" aria-label="Sort units"></select>
+              </div>
             </div>
             <div class="dv-unit-grid" id="dv-unit-grid"></div>
             <button class="dv-loadmore" id="dv-units-loadmore" hidden></button>
@@ -346,8 +352,9 @@
   </div>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg7_3UefA_rzfXRAwCMS42A4Z7lx4BUTc" async defer></script>
+  <script src="area-format.js?v=au1"></script>
   <script src="data-listings.js?v=listings610"></script>
-  <script src="development-loader.js?v=listings610"></script>
+  <script src="development-loader.js?v=au1"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="main.js"></script>

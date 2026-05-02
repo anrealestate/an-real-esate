@@ -58,6 +58,7 @@ function renderGrid() {
 }
 
 function formatBuiltArea(listing) {
+  if (window.AN_FMT && window.AN_FMT.formatArea) return window.AN_FMT.formatArea(listing)
   const s = listing.size
   if (s === undefined || s === null || String(s).trim() === '') return ''
   if (listing.sizeUnit === 'sqft') return escHtml(String(s)) + ' sq ft'

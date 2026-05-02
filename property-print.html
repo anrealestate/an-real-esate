@@ -6,6 +6,7 @@
   <title>Property PDF</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="area-format.js?v=au1"></script>
   <script src="data-listings.js?v=listings610"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -470,7 +471,7 @@
           <div class="cover-specs">
             ${spec(l.beds,  'Dormitorios')}
             ${spec(l.baths, 'Baños')}
-            ${spec(l.size ? (l.sizeUnit === 'sqft' ? l.size + ' sq ft' : l.size + ' m²') : '', 'Superficie')}
+            ${spec(window.AN_FMT ? window.AN_FMT.formatArea(l) : (l.size ? (l.sizeUnit === 'sqft' ? l.size + ' sq ft' : l.size + ' m²') : ''), 'Superficie')}
             ${spec(l.garage? l.garage + ' plz.': '', 'Garaje')}
           </div>
         </div>

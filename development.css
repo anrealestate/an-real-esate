@@ -274,11 +274,63 @@
 /* ================================
    Units Table
    ================================ */
+.dv-unit-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-bottom: 1.25rem;
+}
+
 .dv-unit-filters {
   display: flex;
   flex-wrap: wrap;
   gap: .4rem;
-  margin-bottom: 1.25rem;
+}
+
+.dv-sort-wrap {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex-shrink: 0;
+}
+
+.dv-sort-label {
+  font-family: var(--sans);
+  font-size: var(--fs-2xs);
+  color: var(--muted);
+  letter-spacing: .06em;
+  white-space: nowrap;
+}
+
+.dv-sort-sel {
+  font-family: var(--sans);
+  font-size: var(--fs-2xs);
+  color: var(--cream);
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: .35em .5em .35em .65em;
+  border-radius: 4px;
+  cursor: pointer;
+  letter-spacing: .04em;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none' stroke='%23928878' stroke-width='1.5'%3E%3Cpath d='M1 1l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right .5em center;
+  padding-right: 1.75em;
+  transition: border-color .2s;
+}
+.dv-sort-sel:focus, .dv-sort-sel:hover { border-color: rgba(240,235,224,.35); outline: none; }
+.dv-sort-sel option { background: #1a1a12; color: var(--cream); }
+
+.dv-unit-ext-meta {
+  font-size: var(--fs-3xs, .65rem);
+  color: var(--muted);
+  letter-spacing: .04em;
+  display: block;
+  margin-top: .15em;
 }
 
 .dv-uftab {

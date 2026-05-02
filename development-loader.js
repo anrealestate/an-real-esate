@@ -335,26 +335,82 @@
             /* When filtering, reveal all cards so the full filtered set is visible */
             unitGrid.querySelectorAll('.dv-more-hidden').forEach(c => c.classList.remove('dv-more-hidden'))
             if (loadMoreBtn) loadMoreBtn.hidden = true
-            unitGrid.querySelectorAll('[data-beds]').forEach(card => {
-              card.classList.toggle('hidden', f !== 'all' && card.dataset.beds !== f)
-            })
+            applyFilter(f)
           })
         })
       }
 
-      const PAGE_SIZE = 12
-      const countEl    = document.getElementById('dv-units-count')
-      const loadMoreBtn = document.getElementById('dv-units-loadmore')
+      const PAGE_SIZE    = 12
+      const countEl      = document.getElementById('dv-units-count')
+      const loadMoreBtn  = document.getElementById('dv-units-loadmore')
+      const sortSel      = document.getElementById('dv-units-sort')
+      const FMT          = window.AN_FMT || {}
+      const L            = (window.I18N && window.I18N[lang]) || {}
+      const t            = k => L[k] || k
 
-      function applyPagination(total) {
-        if (!unitGrid || !loadMoreBtn) return
-        const cards = [...unitGrid.querySelectorAll('.dv-unit-card')]
-        cards.slice(PAGE_SIZE).forEach(c => c.classList.add('dv-more-hidden'))
-        if (total > PAGE_SIZE) {
-          const remaining = total - PAGE_SIZE
-          const moreLabel = lang === 'es' ? `Ver más (${remaining})` : `Show more (${remaining})`
-          loadMoreBtn.textContent = moreLabel
+      /* ── Sort helpers ── */
+      function parsePrice(str) {
+        return FMT.parsePrice ? FMT.parsePrice(str) : Infinity
+      }
+      function sizeVal(c) {
+        return FMT.sortableSize ? FMT.sortableSize(c) : parseFloat(String(c.size ?? 0)) || 0
+      }
+
+      /* Sort a copy of arr; doesn't mutate original */
+      function sortArr(arr, criterion) {
+        const a2 = [...arr]
+        switch (criterion) {
+          case 'price-asc':  a2.sort((a,b) => parsePrice(a.price) - parsePrice(b.price)); break
+          case 'price-desc': a2.sort((a,b) => parsePrice(b.price) - parsePrice(a.price)); break
+          case 'size-asc':   a2.sort((a,b) => sizeVal(a) - sizeVal(b)); break
+          case 'size-desc':  a2.sort((a,b) => sizeVal(b) - sizeVal(a)); break
+          case 'floor-asc':  a2.sort((a,b) => (a.floor ?? 999) - (b.floor ?? 999)); break
+          case 'floor-desc': a2.sort((a,b) => (b.floor ?? -1) - (a.floor ?? -1)); break
+          default: /* keep original order (by ref) */
+        }
+        return a2
+      }
+
+      /* Build sort <option> list */
+      function buildSortOptions() {
+        if (!sortSel) return
+        const opts = [
+          { v: 'default',    k: 'sort.default' },
+          { v: 'price-asc',  k: 'sort.price_asc' },
+          { v: 'price-desc', k: 'sort.price_desc' },
+          { v: 'size-asc',   k: 'sort.size_asc' },
+          { v: 'size-desc',  k: 'sort.size_desc' },
+          { v: 'floor-asc',  k: 'sort.floor_asc' },
+          { v: 'floor-desc', k: 'sort.floor_desc' },
+        ]
+        const cur = sortSel.value || 'default'
+        sortSel.innerHTML = opts.map(o =>
+          `<option value="${o.v}"${o.v === cur ? ' selected' : ''}>${esc(t(o.k))}</option>`
+        ).join('')
+      }
+
+      /* Track active filter for re-application after sort */
+      let _activeFilter = 'all'
+
+      function applyFilter(f) {
+        _activeFilter = f
+        unitGrid.querySelectorAll('[data-beds]').forEach(card => {
+          const hidden = f !== 'all' && card.dataset.beds !== f
+          card.classList.toggle('hidden', hidden)
+        })
+      }
+
+      function applyPagination(visibleCount) {
+        if (!loadMoreBtn) return
+        const allCards = [...unitGrid.querySelectorAll('.dv-unit-card')]
+        allCards.forEach((c, i) => c.classList.toggle('dv-more-hidden', i >= PAGE_SIZE))
+        if (visibleCount > PAGE_SIZE) {
+          const rem = visibleCount - PAGE_SIZE
+          const lbl = t('dv.loadmore').replace('{n}', rem)
+          loadMoreBtn.textContent = lbl || `${lang === 'es' ? 'Ver más' : 'Show more'} (${rem})`
           loadMoreBtn.hidden = false
+        } else {
+          loadMoreBtn.hidden = true
         }
       }
 
@@ -377,10 +433,12 @@
           countEl.hidden = false
         }
         unitGrid.innerHTML = listing.units.map(u => {
-          const sizeRange  = u.sizeMin && u.sizeMax ? `${u.sizeMin}–${u.sizeMax} sq ft` : (u.sizeMin ? `${u.sizeMin} sq ft` : '')
-          const avail      = u.availability || 'available'
-          const aClass     = availClass[avail] || 'dv-unit-avail--available'
-          const isSold     = avail === 'sold'
+          const sizeRange = u.sizeMin && u.sizeMax
+            ? `${u.sizeMin}–${u.sizeMax} sq ft`
+            : (u.sizeMin ? `${u.sizeMin} sq ft` : '')
+          const avail  = u.availability || 'available'
+          const aClass = availClass[avail] || 'dv-unit-avail--available'
+          const isSold = avail === 'sold'
           return `
             <div class="dv-unit-card" data-beds="${u.beds ?? 0}">
               <div class="dv-unit-head">
@@ -403,46 +461,76 @@
         /* ── Unidades hijas con ficha propia (property.html) ── */
         const bedsSet = new Set(children.map(c => c.beds ?? 0))
         wireFilters(bedsSet)
+        buildSortOptions()
 
-        if (countEl) {
-          const availCount = children.filter(c => c.stage === 'active').length
-          const countStr = lang === 'es'
-            ? `${availCount} residencias disponibles · ${children.length} en total`
-            : `${availCount} residences available · ${children.length} total`
-          countEl.textContent = countStr
-          countEl.hidden = false
-        }
+        const ctaLabel = t('unit.view_listing') || (lang === 'es' ? 'Ver ficha →' : 'View listing →')
+        const areaIntLabel = t('area.interior') || 'Interior'
+        const areaExtLabel = t('area.exterior') || 'Exterior'
 
-        const ctaLabel = lang === 'es' ? 'Ver ficha →' : 'View listing →'
-        unitGrid.innerHTML = children.map(c => {
-          const stage  = c.stage || 'active'
-          const sLabel = STAGE_LABEL[stage] || stage
-          const sClass = STAGE_CLASS[stage] || 'dv-unit-avail--available'
-          const isSold = stage === 'sold'
-          const size   = c.size
-            ? `${c.size}${c.sizeUnit === 'sqft' ? ' sq ft' : ' m²'}`
-            : ''
-          const floor  = c.floor ? `Floor ${esc(c.floor)}` : ''
-          return `
-            <div class="dv-unit-card dv-child-card" data-beds="${c.beds ?? 0}">
+        function renderChildren(arr) {
+          const frag = document.createDocumentFragment()
+          arr.forEach(c => {
+            const stage  = c.stage || 'active'
+            const sLabel = STAGE_LABEL[stage] || stage
+            const sClass = STAGE_CLASS[stage] || 'dv-unit-avail--available'
+            const isSold = stage === 'sold'
+            const areaParts = FMT.formatAreaParts ? FMT.formatAreaParts(c) : null
+            const interior  = areaParts ? areaParts.interior : (c.size ? c.size + (c.sizeUnit === 'sqft' ? ' sq ft' : ' m²') : null)
+            const exterior  = areaParts ? areaParts.exterior : null
+            const floor     = c.floor ? `Floor ${esc(c.floor)}` : ''
+            const beds      = c.beds != null ? (c.beds === 0 ? 'Studio' : c.beds + ' bed') : ''
+            const baths     = c.baths ? c.baths + ' bath' : ''
+
+            const div = document.createElement('div')
+            div.className = 'dv-unit-card dv-child-card'
+            div.dataset.beds = String(c.beds ?? 0)
+            div.innerHTML = `
               <div class="dv-unit-head">
                 <span class="dv-child-ref">${esc(c.ref || c.slug)}</span>
                 <span class="dv-unit-avail ${sClass}">${esc(sLabel)}</span>
               </div>
               <p class="dv-unit-layout">${esc(c.title || '')}</p>
               <div class="dv-unit-meta">
-                ${c.beds != null ? `<span>${c.beds === 0 ? 'Studio' : c.beds + ' bed'}</span>` : ''}
-                ${c.baths  ? `<span>${c.baths} bath</span>` : ''}
-                ${size     ? `<span>${esc(size)}</span>` : ''}
-                ${floor    ? `<span>${floor}</span>` : ''}
+                ${beds    ? `<span>${esc(beds)}</span>`     : ''}
+                ${baths   ? `<span>${esc(baths)}</span>`    : ''}
+                ${interior ? `<span title="${esc(areaIntLabel)}">${esc(interior)}</span>` : ''}
+                ${floor   ? `<span>${floor}</span>`          : ''}
               </div>
+              ${exterior ? `<p class="dv-unit-ext-meta" title="${esc(areaExtLabel)}">+ ${esc(exterior)} ext.</p>` : ''}
               <p class="dv-unit-price">${esc(c.price || '—')}</p>
-              ${!isSold
-                ? `<a href="property.html?slug=${esc(c.slug)}" class="dv-unit-cta dv-child-cta">${ctaLabel}</a>`
-                : ''}
-            </div>`
-        }).join('')
+              ${!isSold ? `<a href="property.html?slug=${esc(c.slug)}" class="dv-unit-cta dv-child-cta">${ctaLabel}</a>` : ''}
+            `
+            frag.appendChild(div)
+          })
+          unitGrid.innerHTML = ''
+          unitGrid.appendChild(frag)
+        }
+
+        /* Initial render (default sort: by ref, already sorted) */
+        renderChildren(children)
+
+        /* Unit count badge */
+        if (countEl) {
+          const availCount = children.filter(c => c.stage === 'active').length
+          const avStr = t('dv.units_available').replace('{n}', availCount) || `${availCount} residences available`
+          const totStr = t('dv.units_total').replace('{n}', children.length) || `${children.length} total`
+          countEl.textContent = `${avStr} · ${totStr}`
+          countEl.hidden = false
+        }
+
         applyPagination(children.length)
+
+        /* Sort handler */
+        if (sortSel) {
+          sortSel.addEventListener('change', () => {
+            const criterion = sortSel.value
+            const sorted = sortArr(children, criterion)
+            renderChildren(sorted)
+            applyFilter(_activeFilter)
+            applyPagination(children.length)
+          })
+        }
+
         unitsSection.removeAttribute('hidden')
 
       } else {

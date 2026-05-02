@@ -203,16 +203,42 @@
     if (pcLoc) pcLoc.textContent = listing.neighbourhood || listing.city || ''
 
     /* ── specs ── */
+    const FMT = window.AN_FMT || {}
     const set = (id, val) => { const e = document.getElementById(id); if (e) e.textContent = val }
-    function formatBuiltArea(l) {
-      const s = l.size
-      if (s === undefined || s === null || String(s).trim() === '') return '—'
-      if (l.sizeUnit === 'sqft') return `${s} sq ft`
-      return `${s} m²`
+    const areaParts = FMT.formatAreaParts ? FMT.formatAreaParts(listing) : null
+    const interiorStr = areaParts?.interior || (listing.size ? (listing.sizeUnit === 'sqft' ? listing.size + ' sq ft' : listing.size + ' m²') : '—')
+    const exteriorStr = areaParts?.exterior || null
+
+    /* Label: show 'Interior' when exterior also exists, else keep existing i18n 'Built area' */
+    const specSizeEl = document.getElementById('spec-size')
+    const specSizeKey = document.querySelector('#spec-size ~ .ph-spec-key, [data-i18n="spec.built_area"]')
+    if (specSizeEl) specSizeEl.textContent = interiorStr
+    if (specSizeKey && exteriorStr) specSizeKey.setAttribute('data-i18n', 'area.interior')
+
+    /* Exterior spec — inject dynamically when data present */
+    const specExteriorEl = document.getElementById('spec-exterior')
+    if (exteriorStr) {
+      if (specExteriorEl) {
+        specExteriorEl.style.display = ''
+        const valEl = specExteriorEl.querySelector('.ph-spec-val')
+        if (valEl) valEl.textContent = exteriorStr
+      } else {
+        /* Build and insert after spec-size's parent .ph-spec */
+        const sizeSpec = specSizeEl?.closest('.ph-spec')
+        if (sizeSpec) {
+          const ext = document.createElement('div')
+          ext.id = 'spec-exterior'
+          ext.className = 'ph-spec'
+          ext.innerHTML = `<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><div class="ph-spec-text"><span class="ph-spec-val" id="spec-ext-val">${esc(exteriorStr)}</span><span class="ph-spec-key" data-i18n="area.exterior">Exterior</span></div>`
+          sizeSpec.after(ext)
+        }
+      }
+    } else if (specExteriorEl) {
+      specExteriorEl.style.display = 'none'
     }
+
     set('spec-beds',  listing.beds)
     set('spec-baths', listing.baths)
-    set('spec-size',  formatBuiltArea(listing))
     set('spec-floor', listing.floor || '—')
 
     /* hide extra Gràcia-specific specs if not needed */
