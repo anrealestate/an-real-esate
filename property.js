@@ -4,13 +4,16 @@
 function showFieldError(input, msg) {
   clearFieldError(input)
   input.style.borderColor = 'var(--gold)'
+  input.setAttribute('aria-invalid', 'true')
   const err = document.createElement('p')
   err.className = 'field-error'
+  err.setAttribute('role', 'alert')
   err.textContent = msg
   input.parentNode.appendChild(err)
 }
 function clearFieldError(input) {
   input.style.borderColor = ''
+  input.removeAttribute('aria-invalid')
   const prev = input.parentNode.querySelector('.field-error')
   if (prev) prev.remove()
 }
@@ -113,18 +116,67 @@ document.addEventListener('keydown', e => {
 })
 
 /* ================================
-   Touch swipe
+   Swipe prev/next — touch / pen / desktop táctil (Pointer Events).
+   No usar pointerType mouse: evita cambiar foto al arrastrar con ratón.
    ================================ */
-let touchStartX = 0
-lbOverlay?.addEventListener('touchstart', e => {
-  touchStartX = e.changedTouches[0].clientX
-}, { passive: true })
+const lbStage = document.querySelector('.lb-stage')
+const SWIPE_MIN_PX = 80
 
-lbOverlay?.addEventListener('touchend', e => {
-  const dx = e.changedTouches[0].clientX - touchStartX
-  if (Math.abs(dx) < 80) return
+function lbSwipeIgnoreTarget(t) {
+  return !!(t && typeof t.closest === 'function' && t.closest('.lb-close, .lb-arrow'))
+}
+
+function lbApplySwipe(dx) {
+  if (Math.abs(dx) < SWIPE_MIN_PX) return
   dx < 0 ? lbShow(current + 1) : lbShow(current - 1)
+}
+
+let lbSwipeStartX = null
+
+function lbOnPointerDown(e) {
+  if (!lbOverlay?.classList.contains('is-open')) return
+  if (e.pointerType === 'mouse') return
+  if (lbSwipeIgnoreTarget(e.target)) return
+  lbSwipeStartX = e.clientX
+  try {
+    lbStage?.setPointerCapture(e.pointerId)
+  } catch (_) {}
+}
+
+function lbOnPointerUp(e) {
+  if (e.pointerType === 'mouse') return
+  if (lbSwipeStartX == null) return
+  const dx = e.clientX - lbSwipeStartX
+  lbSwipeStartX = null
+  try {
+    lbStage?.releasePointerCapture(e.pointerId)
+  } catch (_) {}
+  if (lbSwipeIgnoreTarget(e.target)) return
+  lbApplySwipe(dx)
+}
+
+lbStage?.addEventListener('pointerdown', lbOnPointerDown)
+lbStage?.addEventListener('pointerup', lbOnPointerUp)
+lbStage?.addEventListener('pointercancel', e => {
+  lbSwipeStartX = null
+  try {
+    lbStage?.releasePointerCapture(e.pointerId)
+  } catch (_) {}
 })
+
+/* Fallback Safari sin Pointer Events completo: touch solo en stage */
+if (typeof window.PointerEvent === 'undefined') {
+  let touchStartX = 0
+  lbStage?.addEventListener('touchstart', e => {
+    if (lbSwipeIgnoreTarget(e.target)) return
+    touchStartX = e.changedTouches[0].clientX
+  }, { passive: true })
+  lbStage?.addEventListener('touchend', e => {
+    if (lbSwipeIgnoreTarget(e.target)) return
+    const dx = e.changedTouches[0].clientX - touchStartX
+    lbApplySwipe(dx)
+  }, { passive: true })
+}
 
 /* ================================
    Enquiry form

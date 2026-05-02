@@ -5,6 +5,15 @@ function escHtml(str) {
   return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')
 }
 
+/** Slug en URL pública (vercel) vs typo legacy en listings.json — misma regla que *-loader.js */
+function publicSlugFromJson(jsonSlug) {
+  var s = String(jsonSlug || '').trim()
+  if (s === 'house-of-wellnes') return 'house-of-wellness'
+  var m = /^house-of-wellnes-u-(.+)$/.exec(s)
+  if (m) return 'house-of-wellness-u-' + m[1]
+  return s
+}
+
 var cachedListings = []
 
 var _activeFilter = 'all'
@@ -190,7 +199,7 @@ function renderCard(listing) {
   const propType  = listing.badge_type || listing.propertyType || ''
   const listType  = listing.type === 'rent' || listing.status === 'rent' ? 'rent' : 'sale'
   const dataType  = `${listType} ${propType}`
-  const href      = `property.html?slug=${listing.slug || ''}`
+  const href      = `property.html?slug=${publicSlugFromJson(listing.slug || '')}`
 
   const BADGE_LABELS = {
     new:      { en: 'New',             es: 'Nueva',         ca: 'Nova',           fr: 'Nouveau',      de: 'Neu',         it: 'Nuovo',          ru: 'Новый' },
@@ -204,7 +213,7 @@ function renderCard(listing) {
   const badgeHTML = badgeText ? `<span class="prop-badge prop-badge--${escHtml(listing.badge)}">${badgeText}</span>` : ''
 
   const isDev    = listing.propertyType === 'development'
-  const devHref  = `development.html?slug=${listing.slug || ''}`
+  const devHref  = `development.html?slug=${publicSlugFromJson(listing.slug || '')}`
   const cardHref = isDev ? devHref : href
   const cardType = isDev ? `development ${listType}` : dataType
 

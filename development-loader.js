@@ -36,7 +36,28 @@
     return null
   }
 
-  const slug = (new URLSearchParams(location.search).get('slug') || '').trim()
+  /**
+   * Canonical en listings.json: house-of-wellness / house-of-wellness-u-*.
+   * Compat: URLs o caché antigua con typo house-of-wellnes → mismo slug corregido.
+   */
+  function listingsSlugFromUrl(urlSlug) {
+    const s = String(urlSlug || '').trim()
+    if (!s) return ''
+    if (s === 'house-of-wellnes') return 'house-of-wellness'
+    const m = /^house-of-wellnes-u-(.+)$/.exec(s)
+    if (m) return 'house-of-wellness-u-' + m[1]
+    return s
+  }
+
+  function publicSlugFromJson(jsonSlug) {
+    const s = String(jsonSlug || '').trim()
+    if (s === 'house-of-wellnes') return 'house-of-wellness'
+    const m = /^house-of-wellnes-u-(.+)$/.exec(s)
+    if (m) return 'house-of-wellness-u-' + m[1]
+    return s
+  }
+
+  const slug = listingsSlugFromUrl(new URLSearchParams(location.search).get('slug') || '')
 
   async function loadListings() {
     /* Servidor (JSON) primero: evita bundle data-listings.js antiguo en caché CDN */
@@ -170,7 +191,7 @@
     /* Meta + OG */
     const firstImg = (listing.images || []).find(i => !(typeof i === 'object' ? i.hidden : false))
     const ogImg = typeof firstImg === 'string' ? firstImg : (firstImg?.src || listing.image || '')
-    const pageUrl = `https://anrealestate.es/development.html?slug=${esc(listing.slug)}`
+    const pageUrl = `https://anrealestate.es/development.html?slug=${esc(publicSlugFromJson(listing.slug))}`
     document.title = `${listing.title} — ${listing.price} — AN Real Estate`
     document.querySelector('meta[name="description"]')?.setAttribute('content', (listing.description || [])[0] || '')
     document.querySelector('meta[property="og:title"]')?.setAttribute('content', `${listing.title} — AN Real Estate`)
@@ -502,7 +523,7 @@
               </div>
               ${exterior ? `<p class="dv-unit-ext-meta" title="${esc(areaExtLabel)}">+ ${esc(exterior)} ext.</p>` : ''}
               <p class="dv-unit-price">${esc(c.price || '—')}</p>
-              ${!isSold ? `<a href="property.html?slug=${esc(c.slug)}" class="dv-unit-cta dv-child-cta">${ctaLabel}</a>` : ''}
+              ${!isSold ? `<a href="property.html?slug=${esc(publicSlugFromJson(c.slug))}" class="dv-unit-cta dv-child-cta">${ctaLabel}</a>` : ''}
             `
             frag.appendChild(div)
           })

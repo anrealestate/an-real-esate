@@ -1721,8 +1721,8 @@
       "order": 1
     },
     {
-      "slug": "house-of-wellnes",
-      "title": "House of Wellnes",
+      "slug": "house-of-wellness",
+      "title": "House of Wellness",
       "price": "$From 419000",
       "ref": "AN202603",
       "province": "Florida",
@@ -1825,8 +1825,8 @@
       "youtubeUrl": "https://youtu.be/vc1u9porSjQ"
     },
     {
-      "slug": "house-of-wellnes-u-1009",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-1009",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 1009 · 1 bed",
       "ref": "AN202605-1009",
       "price": "$581,900",
@@ -1948,8 +1948,8 @@
       "order": 3018
     },
     {
-      "slug": "house-of-wellnes-u-1101",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-1101",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 1101 · 2 bed",
       "ref": "AN202605-1101",
       "price": "$795,900",
@@ -2071,8 +2071,8 @@
       "order": 3042
     },
     {
-      "slug": "house-of-wellnes-u-1104",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-1104",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 1104 · 1 bed",
       "ref": "AN202605-1104",
       "price": "$610,900",
@@ -2194,8 +2194,8 @@
       "order": 3031
     },
     {
-      "slug": "house-of-wellnes-u-1120",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-1120",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 1120 · 2 bed",
       "ref": "AN202605-1120",
       "price": "$884,900",
@@ -2317,8 +2317,8 @@
       "order": 3049
     },
     {
-      "slug": "house-of-wellnes-u-1205",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-1205",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 1205 · 1 bed",
       "ref": "AN202605-1205",
       "price": "$590,900",
@@ -2440,8 +2440,8 @@
       "order": 3024
     },
     {
-      "slug": "house-of-wellnes-u-1406",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-1406",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 1406 · 1 bed",
       "ref": "AN202605-1406",
       "price": "$596,900",
@@ -2563,8 +2563,8 @@
       "order": 3027
     },
     {
-      "slug": "house-of-wellnes-u-1508",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-1508",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 1508 · 1 bed",
       "ref": "AN202605-1508",
       "price": "$590,900",
@@ -2686,8 +2686,8 @@
       "order": 3025
     },
     {
-      "slug": "house-of-wellnes-u-1514",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-1514",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 1514 · 2 bed",
       "ref": "AN202605-1514",
       "price": "$845,900",
@@ -2809,8 +2809,8 @@
       "order": 3045
     },
     {
-      "slug": "house-of-wellnes-u-1523",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-1523",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 1523 · 1 bed",
       "ref": "AN202605-1523",
       "price": "$627,900",
@@ -2932,8 +2932,8 @@
       "order": 3033
     },
     {
-      "slug": "house-of-wellnes-u-1611",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-1611",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 1611 · 1 bed",
       "ref": "AN202605-1611",
       "price": "$560,900",
@@ -3055,8 +3055,8 @@
       "order": 3017
     },
     {
-      "slug": "house-of-wellnes-u-1621",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-1621",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 1621 · Studio",
       "ref": "AN202605-1621",
       "price": "$474,900",
@@ -3178,8 +3178,8 @@
       "order": 3006
     },
     {
-      "slug": "house-of-wellnes-u-1817",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-1817",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 1817 · 1 bed",
       "ref": "AN202605-1817",
       "price": "$633,900",
@@ -3301,8 +3301,8 @@
       "order": 3038
     },
     {
-      "slug": "house-of-wellnes-u-1818",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-1818",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 1818 · 1 bed",
       "ref": "AN202605-1818",
       "price": "$629,900",
@@ -3424,8 +3424,8 @@
       "order": 3036
     },
     {
-      "slug": "house-of-wellnes-u-1819",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-1819",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 1819 · Studio",
       "ref": "AN202605-1819",
       "price": "$490,900",
@@ -3547,8 +3547,8 @@
       "order": 3008
     },
     {
-      "slug": "house-of-wellnes-u-1822",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-1822",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 1822 · 1 bed",
       "ref": "AN202605-1822",
       "price": "$627,900",
@@ -3670,8 +3670,8 @@
       "order": 3034
     },
     {
-      "slug": "house-of-wellnes-u-1915",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-1915",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 1915 · Studio",
       "ref": "AN202605-1915",
       "price": "$425,900",
@@ -3793,8 +3793,8 @@
       "order": 3001
     },
     {
-      "slug": "house-of-wellnes-u-1920",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-1920",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 1920 · 2 bed",
       "ref": "AN202605-1920",
       "price": "$953,900",
@@ -3916,8 +3916,8 @@
       "order": 3054
     },
     {
-      "slug": "house-of-wellnes-u-2006",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-2006",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 2006 · 1 bed",
       "ref": "AN202605-2006",
       "price": "$629,900",
@@ -4039,8 +4039,8 @@
       "order": 3037
     },
     {
-      "slug": "house-of-wellnes-u-2012",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-2012",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 2012 · Studio",
       "ref": "AN202605-2012",
       "price": "$419,900",
@@ -4162,8 +4162,8 @@
       "order": 3000
     },
     {
-      "slug": "house-of-wellnes-u-2014",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-2014",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 2014 · 2 bed",
       "ref": "AN202605-2014",
       "price": "$880,900",
@@ -4285,8 +4285,8 @@
       "order": 3048
     },
     {
-      "slug": "house-of-wellnes-u-2105",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-2105",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 2105 · 1 bed",
       "ref": "AN202605-2105",
       "price": "$627,900",
@@ -4408,8 +4408,8 @@
       "order": 3035
     },
     {
-      "slug": "house-of-wellnes-u-2113",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-2113",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 2113 · 2 bed",
       "ref": "AN202605-2113",
       "price": "$854,900",
@@ -4531,8 +4531,8 @@
       "order": 3046
     },
     {
-      "slug": "house-of-wellnes-u-2126",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-2126",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 2126 · 2 bed",
       "ref": "AN202605-2126",
       "price": "$865,900",
@@ -4654,8 +4654,8 @@
       "order": 3047
     },
     {
-      "slug": "house-of-wellnes-u-2207",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-2207",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 2207 · Studio",
       "ref": "AN202605-2207",
       "price": "$499,900",
@@ -4777,8 +4777,8 @@
       "order": 3009
     },
     {
-      "slug": "house-of-wellnes-u-2209",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-2209",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 2209 · 1 bed",
       "ref": "AN202605-2209",
       "price": "$634,900",
@@ -4900,8 +4900,8 @@
       "order": 3039
     },
     {
-      "slug": "house-of-wellnes-u-2216",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-2216",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 2216 · 1 bed",
       "ref": "AN202605-2216",
       "price": "$585,900",
@@ -5023,8 +5023,8 @@
       "order": 3020
     },
     {
-      "slug": "house-of-wellnes-u-2221",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-2221",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 2221 · Studio",
       "ref": "AN202605-2221",
       "price": "$503,900",
@@ -5146,8 +5146,8 @@
       "order": 3010
     },
     {
-      "slug": "house-of-wellnes-u-2303",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-2303",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 2303 · 1 bed",
       "ref": "AN202605-2303",
       "price": "$584,900",
@@ -5269,8 +5269,8 @@
       "order": 3019
     },
     {
-      "slug": "house-of-wellnes-u-2311",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-2311",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 2311 · 1 bed",
       "ref": "AN202605-2311",
       "price": "$587,900",
@@ -5392,8 +5392,8 @@
       "order": 3022
     },
     {
-      "slug": "house-of-wellnes-u-2420",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-2420",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 2420 · 2 bed",
       "ref": "AN202605-2420",
       "price": "$970,900",
@@ -5515,8 +5515,8 @@
       "order": 3055
     },
     {
-      "slug": "house-of-wellnes-u-2514",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-2514",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 2514 · 2 bed",
       "ref": "AN202605-2514",
       "price": "$904,900",
@@ -5638,8 +5638,8 @@
       "order": 3050
     },
     {
-      "slug": "house-of-wellnes-u-2519",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-2519",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 2519 · Studio",
       "ref": "AN202605-2519",
       "price": "$513,900",
@@ -5761,8 +5761,8 @@
       "order": 3011
     },
     {
-      "slug": "house-of-wellnes-u-2702",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-2702",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 2702 · Studio",
       "ref": "AN202605-2702",
       "price": "$438,900",
@@ -5884,8 +5884,8 @@
       "order": 3002
     },
     {
-      "slug": "house-of-wellnes-u-2713",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-2713",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 2713 · 2 bed",
       "ref": "AN202605-2713",
       "price": "$933,900",
@@ -6007,8 +6007,8 @@
       "order": 3052
     },
     {
-      "slug": "house-of-wellnes-u-2820",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-2820",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 2820 · 2 bed",
       "ref": "AN202605-2820",
       "price": "$1,014,900",
@@ -6130,8 +6130,8 @@
       "order": 3040
     },
     {
-      "slug": "house-of-wellnes-u-2901",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-2901",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 2901 · 2 bed",
       "ref": "AN202605-2901",
       "price": "$905,900",
@@ -6253,8 +6253,8 @@
       "order": 3051
     },
     {
-      "slug": "house-of-wellnes-u-2907",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-2907",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 2907 · Studio",
       "ref": "AN202605-2907",
       "price": "$546,900",
@@ -6376,8 +6376,8 @@
       "order": 3012
     },
     {
-      "slug": "house-of-wellnes-u-2926",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-2926",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 2926 · 2 bed",
       "ref": "AN202605-2926",
       "price": "$952,900",
@@ -6499,8 +6499,8 @@
       "order": 3053
     },
     {
-      "slug": "house-of-wellnes-u-3003",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-3003",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 3003 · 1 bed",
       "ref": "AN202605-3003",
       "price": "$603,900",
@@ -6622,8 +6622,8 @@
       "order": 3029
     },
     {
-      "slug": "house-of-wellnes-u-3014",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-3014",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 3014 · 2 bed",
       "ref": "AN202605-3014",
       "price": "$988,900",
@@ -6745,8 +6745,8 @@
       "order": 3057
     },
     {
-      "slug": "house-of-wellnes-u-3015",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-3015",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 3015 · Studio",
       "ref": "AN202605-3015",
       "price": "$476,900",
@@ -6868,8 +6868,8 @@
       "order": 3007
     },
     {
-      "slug": "house-of-wellnes-u-3021",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-3021",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 3021 · Studio",
       "ref": "AN202605-3021",
       "price": "$553,900",
@@ -6991,8 +6991,8 @@
       "order": 3013
     },
     {
-      "slug": "house-of-wellnes-u-3024",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-3024",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 3024 · 1 bed",
       "ref": "AN202605-3024",
       "price": "$604,900",
@@ -7114,8 +7114,8 @@
       "order": 3030
     },
     {
-      "slug": "house-of-wellnes-u-3219",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-3219",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 3219 · Studio",
       "ref": "AN202605-3219",
       "price": "$564,900",
@@ -7237,8 +7237,8 @@
       "order": 3014
     },
     {
-      "slug": "house-of-wellnes-u-3225",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-3225",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 3225 · Studio",
       "ref": "AN202605-3225",
       "price": "$460,900",
@@ -7360,8 +7360,8 @@
       "order": 3004
     },
     {
-      "slug": "house-of-wellnes-u-3326",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-3326",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 3326 · 2 bed",
       "ref": "AN202605-3326",
       "price": "$977,900",
@@ -7483,8 +7483,8 @@
       "order": 3056
     },
     {
-      "slug": "house-of-wellnes-u-801",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-801",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 801 · 2 bed",
       "ref": "AN202605-801",
       "price": "$789,900",
@@ -7606,8 +7606,8 @@
       "order": 3041
     },
     {
-      "slug": "house-of-wellnes-u-808",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-808",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 808 · 1 bed",
       "ref": "AN202605-808",
       "price": "$588,900",
@@ -7729,8 +7729,8 @@
       "order": 3023
     },
     {
-      "slug": "house-of-wellnes-u-810",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-810",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 810 · 1 bed",
       "ref": "AN202605-810",
       "price": "$616,900",
@@ -7852,8 +7852,8 @@
       "order": 3032
     },
     {
-      "slug": "house-of-wellnes-u-818",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-818",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 818 · 1 bed",
       "ref": "AN202605-818",
       "price": "$587,900",
@@ -7975,8 +7975,8 @@
       "order": 3021
     },
     {
-      "slug": "house-of-wellnes-u-911",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-911",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 911 · 1 bed",
       "ref": "AN202605-911",
       "price": "$547,900",
@@ -8098,8 +8098,8 @@
       "order": 3015
     },
     {
-      "slug": "house-of-wellnes-u-913",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-913",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 913 · 2 bed",
       "ref": "AN202605-913",
       "price": "$799,900",
@@ -8221,8 +8221,8 @@
       "order": 3043
     },
     {
-      "slug": "house-of-wellnes-u-916",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-916",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 916 · 1 bed",
       "ref": "AN202605-916",
       "price": "$548,900",
@@ -8344,8 +8344,8 @@
       "order": 3016
     },
     {
-      "slug": "house-of-wellnes-u-917",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-917",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 917 · 1 bed",
       "ref": "AN202605-917",
       "price": "$600,900",
@@ -8467,8 +8467,8 @@
       "order": 3028
     },
     {
-      "slug": "house-of-wellnes-u-919",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-919",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 919 · Studio",
       "ref": "AN202605-919",
       "price": "$465,900",
@@ -8590,8 +8590,8 @@
       "order": 3005
     },
     {
-      "slug": "house-of-wellnes-u-921",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-921",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 921 · Studio",
       "ref": "AN202605-921",
       "price": "$455,900",
@@ -8713,8 +8713,8 @@
       "order": 3003
     },
     {
-      "slug": "house-of-wellnes-u-922",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-922",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 922 · 1 bed",
       "ref": "AN202605-922",
       "price": "$593,900",
@@ -8836,8 +8836,8 @@
       "order": 3026
     },
     {
-      "slug": "house-of-wellnes-u-926",
-      "parent_slug": "house-of-wellnes",
+      "slug": "house-of-wellness-u-926",
+      "parent_slug": "house-of-wellness",
       "title": "Unit 926 · 2 bed",
       "ref": "AN202605-926",
       "price": "$819,900",

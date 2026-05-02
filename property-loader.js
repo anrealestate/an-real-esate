@@ -35,7 +35,29 @@
     } catch (_) {}
     return null
   }
-  const slug = new URLSearchParams(location.search).get('slug')
+
+  /** Canonical house-of-wellness en JSON; compat typo antigua house-of-wellnes en URL/caché */
+  function listingsSlugFromUrl(urlSlug) {
+    const s = String(urlSlug || '').trim()
+    if (!s) return ''
+    if (s === 'house-of-wellnes') return 'house-of-wellness'
+    const m = /^house-of-wellnes-u-(.+)$/.exec(s)
+    if (m) return 'house-of-wellness-u-' + m[1]
+    return s
+  }
+
+  function publicSlugFromJson(jsonSlug) {
+    const s = String(jsonSlug || '').trim()
+    if (s === 'house-of-wellnes') return 'house-of-wellness'
+    const m = /^house-of-wellnes-u-(.+)$/.exec(s)
+    if (m) return 'house-of-wellness-u-' + m[1]
+    return s
+  }
+
+  const urlSlug = new URLSearchParams(location.search).get('slug')
+  const lookupSlug = urlSlug != null && String(urlSlug).trim() !== ''
+    ? listingsSlugFromUrl(urlSlug)
+    : 'gracia-garden'
 
   function revealPropertyShell() {
     document.documentElement.classList.remove('property-shell-pending')
@@ -84,16 +106,16 @@
     }
   } catch {}
 
-  const baseListing = listings.find(l => l.slug === (slug || 'gracia-garden'))
+  const baseListing = listings.find(l => l.slug === lookupSlug)
   if (!baseListing) {
     revealPropertyShell()
     return
   }
 
-  /* Promociones (obra nueva) usan development.html — misma URL antigua sigue funcionando */
+  /* Promociones (obra nueva) usan development.html — slug público alineado con vercel */
   if (baseListing.propertyType === 'development') {
     const params = new URLSearchParams(location.search)
-    if (!params.get('slug')) params.set('slug', baseListing.slug)
+    params.set('slug', publicSlugFromJson(baseListing.slug))
     location.replace(`development.html?${params.toString()}`)
     return
   }
@@ -127,7 +149,7 @@
     /* ── OG / Twitter image + canonical ── */
     const rawFirst = (baseListing.images || []).find(i => !(typeof i === 'object' ? i.hidden : false))
     const ogImg = typeof rawFirst === 'string' ? rawFirst : (rawFirst?.src || listing.image || '')
-    const pageUrl = `https://anrealestate.es/property.html?slug=${listing.slug}`
+    const pageUrl = `https://anrealestate.es/property.html?slug=${publicSlugFromJson(listing.slug)}`
     document.querySelector('meta[property="og:image"]')?.setAttribute('content', ogImg)
     document.querySelector('meta[name="twitter:image"]')?.setAttribute('content', ogImg)
     document.querySelector('meta[property="og:title"]')?.setAttribute('content', `${listing.title} — ${priceLabel} — AN Real Estate`)
@@ -175,7 +197,7 @@
             .find(s => !s.hasAttribute('aria-current') && s.textContent.trim() !== '›')
           if (regionSpan) {
             const link = document.createElement('a')
-            link.href = `development.html?slug=${esc(parent.slug)}`
+            link.href = `development.html?slug=${esc(publicSlugFromJson(parent.slug))}`
             link.textContent = parent.title
             regionSpan.replaceWith(link)
           }
@@ -503,7 +525,7 @@
       return
     }
     // 2. Hardcoded fallback coords
-    const coord = COORDS[slug || 'gracia-garden']
+    const coord = COORDS[lookupSlug]
     if (coord) {
       renderMap(coord)
       return
@@ -523,7 +545,7 @@
   function tryInitMap() {
     if (window.google && window.google.maps) { initPropertyMap(); return }
     if (++_mapAttempts < 25) setTimeout(tryInitMap, 400)
-    else { const coord = COORDS[slug || 'gracia-garden']; if (coord) renderOsmMap(coord) }
+    else { const coord = COORDS[lookupSlug]; if (coord) renderOsmMap(coord) }
   }
   tryInitMap()
 

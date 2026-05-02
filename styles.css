@@ -53,6 +53,17 @@ a   { color: inherit; text-decoration: none; }
 ul  { list-style: none; }
 button { cursor: pointer; border: none; background: none; font-family: inherit; }
 
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .loader-dots span { animation: none; opacity: 0.55; }
+}
+
+/* Keyboard — foco visible (las clases más abajo pueden anular offset/radio/tamaño) */
+:where(a, button, input, select, textarea, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
 /* ================================
    Layout
    ================================ */
@@ -715,8 +726,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .info-intro {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2.5rem;
-  margin-bottom: 2.5rem;
+  gap: clamp(2.25rem, 5vw, 3rem);
+  margin-bottom: clamp(2.25rem, 5vw, 3rem);
 }
 
 .info-text {
@@ -815,7 +826,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .props-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem 1.5rem;
+  gap: clamp(1.85rem, 4vw, 2.5rem) clamp(1.35rem, 3vw, 1.85rem);
   transition: opacity .14s ease;
 }
 .props-grid.is-fading { opacity: 0; }
@@ -1255,7 +1266,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   border-bottom: 1px solid var(--border);
   padding: .65rem 0;
   font-family: var(--sans);
-  font-size: var(--fs-md);
+  /* min 1rem (16px): evita zoom iOS al enfocar; conserva escala en pantallas grandes */
+  font-size: max(1rem, var(--fs-md));
   color: var(--cream);
   appearance: none;
   transition: border-color var(--fast);
@@ -1864,8 +1876,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .testi-big-quote { font-size: clamp(24px, 5.5vw, 28px); line-height: 1.55; }
   .testi-list      { min-height: 160px; }
 
-  /* Form inputs: iOS auto-zooms on focus if font-size < 16px */
-  .finput { font-size: 16px; }
+  /* .finput ya usa max(1rem, …); mantener botón legible en narrow */
   .button { font-size: 15px; }
 }
 
@@ -1873,11 +1884,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
    Form field error messages
    ================================ */
 .field-error {
-  font-size: var(--fs-2xs);
+  font-size: var(--fs-xs);
+  font-weight: 500;
   color: var(--gold);
-  letter-spacing: .04em;
-  margin-top: .3rem;
-  line-height: 1.4;
+  letter-spacing: .03em;
+  margin-top: .45rem;
+  line-height: 1.45;
 }
 
 /* ================================
@@ -1903,9 +1915,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .skip-link:focus { top: .75rem; }
 
 /* ================================
-   Focus states — keyboard navigation
+   Focus states — keyboard navigation (base :where arriba)
    ================================ */
-:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
 /* suppress for mouse users on elements that already have hover states */
 .hn-link:focus-visible,
@@ -1922,11 +1933,11 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .link-flash:focus-visible     { outline: 2px solid var(--gold); outline-offset: 4px; }
 
 .form-error-alt {
-  margin-top: .75rem;
-  font-size: var(--fs-2xs);
-  letter-spacing: .04em;
+  margin-top: .85rem;
+  font-size: var(--fs-xs);
+  letter-spacing: .03em;
   color: var(--muted);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 .form-error-alt a { color: var(--gold); text-decoration: none; }
 .form-error-alt a:hover { text-decoration: underline; }

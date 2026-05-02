@@ -4,13 +4,16 @@
 function showFieldError(input, msg) {
   clearFieldError(input)
   input.style.borderColor = 'var(--gold)'
+  input.setAttribute('aria-invalid', 'true')
   const err = document.createElement('p')
   err.className = 'field-error'
+  err.setAttribute('role', 'alert')
   err.textContent = msg
   input.parentNode.appendChild(err)
 }
 function clearFieldError(input) {
   input.style.borderColor = ''
+  input.removeAttribute('aria-invalid')
   const prev = input.parentNode.querySelector('.field-error')
   if (prev) prev.remove()
 }
