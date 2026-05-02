@@ -8,6 +8,12 @@
     return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')
   }
 
+  function cloudinarySrcset(url) {
+    if (!url || !url.includes('res.cloudinary.com')) return ''
+    return [640, 1024, 1440, 1920].map(w => `${url.replace(/\bw_\d+/, `w_${w}`)} ${w}w`).join(', ')
+  }
+
+
   const TOUR_ALLOWED_HOSTS = [
     'my.matterport.com', 'matterport.com',
     'kuula.co', 'roundme.com',
@@ -342,6 +348,8 @@
       heroEl.dataset.src = imgs[0].src
       heroImg.src = imgs[0].src
       heroImg.alt = imgs[0].alt || listing.title
+      const hSrcset = cloudinarySrcset(imgs[0].src)
+      if (hSrcset) { heroImg.srcset = hSrcset; heroImg.sizes = '100vw' }
       heroEl.removeAttribute('hidden')
     }
 
