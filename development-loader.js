@@ -57,40 +57,110 @@
     return s
   }
 
+  /** Absolute URL for floor plan assets (JSON may use /docs/… relative to site root). */
+  function resolveFloorplanAssetUrl(src) {
+    if (!src) return ''
+    try { return new URL(src, window.location.href).href } catch (_) { return String(src) }
+  }
+
+  let _pdfJsPromise = null
+  function loadPdfJs() {
+    if (typeof window.pdfjsLib !== 'undefined' && window.pdfjsLib) return Promise.resolve(window.pdfjsLib)
+    if (_pdfJsPromise) return _pdfJsPromise
+    _pdfJsPromise = new Promise((resolve, reject) => {
+      const ver = '3.11.174'
+      const base = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${ver}/legacy/build/`
+      const s = document.createElement('script')
+      s.src = base + 'pdf.min.js'
+      s.async = true
+      s.onload = () => {
+        const lib = window.pdfjsLib
+        if (!lib) { reject(new Error('pdfjsLib')); return }
+        lib.GlobalWorkerOptions.workerSrc = base + 'pdf.worker.min.js'
+        resolve(lib)
+      }
+      s.onerror = () => reject(new Error('pdf.js'))
+      document.head.appendChild(s)
+    })
+    return _pdfJsPromise
+  }
+
+  async function renderPdfFirstPage(canvas, pdfUrl, maxW, maxH) {
+    const lib = await loadPdfJs()
+    const pdf = await lib.getDocument({ url: pdfUrl, withCredentials: false }).promise
+    const page = await pdf.getPage(1)
+    const baseVp = page.getViewport({ scale: 1 })
+    const scale = Math.min(maxW / baseVp.width, maxH / baseVp.height)
+    const viewport = page.getViewport({ scale: Math.max(scale, 0.08) })
+    const dpr = Math.min(window.devicePixelRatio || 1, 2)
+    canvas.width = Math.max(1, Math.floor(viewport.width * dpr))
+    canvas.height = Math.max(1, Math.floor(viewport.height * dpr))
+    canvas.style.width = Math.floor(viewport.width) + 'px'
+    canvas.style.height = Math.floor(viewport.height) + 'px'
+    const ctx = canvas.getContext('2d')
+    ctx.setTransform(1, 0, 0, 1, 0, 0)
+    ctx.scale(dpr, dpr)
+    await page.render({ canvasContext: ctx, viewport }).promise
+  }
+
   const slug = listingsSlugFromUrl(new URLSearchParams(location.search).get('slug') || '')
 
+  function readInlineListings() {
+    const el = document.getElementById('listings-data')
+    if (!el) return []
+    try {
+      const parsed = JSON.parse(el.textContent)
+      return Array.isArray(parsed.listings) ? parsed.listings : []
+    } catch (_) {
+      return []
+    }
+  }
+
+  function mergeFetchWithInline(fromFetch, fromInline) {
+    if (!fromFetch.length) return fromInline
+    if (!fromInline.length) return fromFetch
+    const inlineBySlug = Object.fromEntries(fromInline.map(l => [l.slug, l]))
+    const merged = fromFetch.map(srv => {
+      const inl = inlineBySlug[srv.slug]
+      if (!inl) return srv
+      if (!srv.floorPlans?.length && inl.floorPlans?.length)
+        return { ...srv, floorPlans: inl.floorPlans }
+      return srv
+    })
+    const fetchSlugs = new Set(fromFetch.map(l => l.slug))
+    const extras = fromInline.filter(l => !fetchSlugs.has(l.slug))
+    return extras.length ? merged.concat(extras) : merged
+  }
+
   async function loadListings() {
-    /* Servidor (JSON) primero: evita bundle data-listings.js antiguo en caché CDN */
+    let fromFetch = []
     try {
       const listingsUrl = new URL('data/listings.json', window.location.href).href
       const r = await fetch(listingsUrl, { cache: 'no-store', credentials: 'same-origin' })
       if (r.ok) {
         const j = await r.json()
-        if (Array.isArray(j.listings) && j.listings.length) return j.listings
+        if (Array.isArray(j.listings) && j.listings.length) fromFetch = j.listings
       }
     } catch (_) {}
-    const el = document.getElementById('listings-data')
-    if (el) {
-      try {
-        const parsed = JSON.parse(el.textContent)
-        const fromInline = Array.isArray(parsed.listings) ? parsed.listings : []
-        if (fromInline.length) return fromInline
-      } catch (_) {}
-    }
-    return []
+    const fromInline = readInlineListings()
+    if (fromFetch.length) return mergeFetchWithInline(fromFetch, fromInline)
+    return fromInline
   }
 
   let listings = await loadListings()
   if (!listings.length) return
 
-  /* Merge admin cache: servidor publicado gana siempre (evita ficha vacía con caché antigua del admin) */
+  /* Merge admin cache: servidor publicado gana; floorPlans del servidor si existen */
   try {
     const cached = JSON.parse(localStorage.getItem('an_listings_cache') || '{}').listings || []
     if (cached.length && listings.length) {
       const serverBySlug = Object.fromEntries(listings.map(l => [l.slug, l]))
       listings = listings.map(srv => {
         const c = cached.find(x => x.slug === srv.slug)
-        return c ? { ...c, ...srv } : srv
+        if (!c) return srv
+        const merged = { ...c, ...srv }
+        if (Array.isArray(srv.floorPlans) && srv.floorPlans.length) merged.floorPlans = srv.floorPlans
+        return merged
       })
       cached.forEach(c => {
         if (!serverBySlug[c.slug]) listings.push(c)
@@ -183,6 +253,17 @@
     if (++_mapAttempts < 25) setTimeout(tryInitMap, 400)
     else if (listing.lat && listing.lng) renderOsmMap({ lat: parseFloat(listing.lat), lng: parseFloat(listing.lng) })
   }
+
+  /* ── Floor plans section — module-scope state ── */
+  let _fpInited      = false  // section scaffold built only once
+  let _fpRenderGen   = 0      // bumped on each grid re-render to cancel stale PDF renders
+  let _fpObserver    = null   // single IntersectionObserver for lazy PDF previews
+  let _fpAllGroups   = []     // layout groups cached on first init
+  let _fpPage        = 1      // load-more page cursor (1 = first FP_PAGE cards visible)
+  let _fpFilter      = 'all'  // active beds filter chip value
+  let _fpSort        = 'default'
+  let _fpLastCard    = null   // card element that triggered modal (for focus restore)
+  let _fpTrapHandler = null   // keydown handler for modal focus trap
 
   /* ── Main render ── */
   function renderContent() {
@@ -564,26 +645,313 @@
       }
     }
 
-    /* Floor Plans */
+    /* ══════════════════════════════════════════════════════════════════
+       Floor Plans — group child units by layout; interactive grid + modal
+       ══════════════════════════════════════════════════════════════════ */
     const fpSec  = document.getElementById('dv-floorplans-section')
     const fpGrid = document.getElementById('dv-floorplans-grid')
-    if (fpSec && fpGrid && listing.floorPlans?.length) {
-      fpGrid.innerHTML = listing.floorPlans.map(fp => {
-        const isPdf = /\.pdf(\?|$)/i.test(fp.src || '')
-        return `<div class="fp-item">
-          <div class="fp-img-wrap" onclick="window.open('${esc(fp.src)}','_blank')">
-            ${isPdf
-              ? `<svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>`
-              : `<img src="${esc(fp.src)}" alt="${esc(fp.label || '')}" loading="lazy" />`}
+
+    /*
+     * Layout group key = normalised URL pathname of floorPlans[0].src (query stripped).
+     * Units sharing the same PDF/image file collapse into one layout card.
+     * Fallback: floorPlans[0].label (lowercase-trimmed) when src is absent.
+     * A unit is assigned to the group of its FIRST floorPlan only; multiple plans
+     * on the same unit are accessible via the PDF link on the card.
+     * Units without floorPlans are excluded from this section.
+     */
+    function fpLayoutKey(fp) {
+      if (!fp) return null
+      const raw = (fp.src || '').trim()
+      if (raw) {
+        try { return new URL(raw, window.location.href).pathname }
+        catch (_) { return raw.replace(/\?.*$/, '') }
+      }
+      const lbl = (fp.label || '').toLowerCase().trim()
+      return lbl || null
+    }
+
+    if (!_fpInited) {
+      /* Build layout groups once (children data doesn't change with lang switch) */
+      const groupMap = new Map()
+      for (const child of children) {
+        if (!child.floorPlans?.length) continue
+        const fp = child.floorPlans[0]
+        const key = fpLayoutKey(fp)
+        if (!key) continue
+        if (!groupMap.has(key)) groupMap.set(key, { fp: { ...fp }, units: [] })
+        groupMap.get(key).units.push(child)
+      }
+      _fpAllGroups = [...groupMap.values()]
+
+      if (!fpSec || !fpGrid || !_fpAllGroups.length) {
+        if (fpSec) { fpSec.setAttribute('hidden', ''); fpSec.hidden = true }
+      } else {
+        const FP_PAGE = 12
+        const STAGE_LABEL = { active: 'Available', reserved: 'Reserved', sold: 'Sold' }
+        const STAGE_CLASS  = { active: 'dv-unit-avail--available', reserved: 'dv-unit-avail--reserved', sold: 'dv-unit-avail--sold' }
+        const BEDS_LABEL   = { 0: 'Studio', 1: '1 Bed', 2: '2 Bed', 3: '3 Bed', 4: '4 Bed', 5: '5 Bed' }
+
+        function fpIsPdf(fp) { return /\.pdf(\?|$)/i.test(fp?.src || '') }
+        function fpThumbUrl(fp) {
+          const raw = fp?.thumb || fp?.preview
+          if (raw && String(raw).trim()) return String(raw).trim()
+          if (!fpIsPdf(fp) && fp?.src) return String(fp.src).trim()
+          return ''
+        }
+
+        /* Most-common beds value among a group's units (for filter assignment) */
+        function groupBedsKey(group) {
+          const beds = group.units.map(u => u.beds).filter(b => b != null)
+          if (!beds.length) return -1
+          const freq = {}
+          beds.forEach(b => { freq[b] = (freq[b] || 0) + 1 })
+          return Number(Object.keys(freq).sort((a, b) => freq[b] - freq[a])[0])
+        }
+
+        /* Human-readable aggregate: "2 bed · 4 residences" */
+        function groupMeta(group) {
+          const units = group.units
+          const bedsVals = units.map(u => u.beds).filter(b => b != null)
+          const bMin = bedsVals.length ? Math.min(...bedsVals) : null
+          const bMax = bedsVals.length ? Math.max(...bedsVals) : null
+          const bedsStr = bMin === null ? '' :
+            bMin === bMax ? (bMin === 0 ? 'Studio' : `${bMin} bed`) : `${bMin}–${bMax} bed`
+          const unitStr = units.length === 1 ? '1 residence' : `${units.length} residences`
+          return [bedsStr, unitStr].filter(Boolean).join(' · ')
+        }
+
+        function sortGroups(arr, criterion) {
+          const a2 = [...arr]
+          switch (criterion) {
+            case 'label-asc':   a2.sort((a, b) => (a.fp.label || '').localeCompare(b.fp.label || '')); break
+            case 'label-desc':  a2.sort((a, b) => (b.fp.label || '').localeCompare(a.fp.label || '')); break
+            case 'count-desc':  a2.sort((a, b) => b.units.length - a.units.length); break
+            case 'count-asc':   a2.sort((a, b) => a.units.length - b.units.length); break
+          }
+          return a2
+        }
+
+        function getFilteredSorted() {
+          let g = sortGroups(_fpAllGroups, _fpSort)
+          if (_fpFilter !== 'all') g = g.filter(gr => String(groupBedsKey(gr)) === _fpFilter)
+          return g
+        }
+
+        /* ── IntersectionObserver for lazy PDF renders ── */
+        function makeObserver(gen) {
+          return new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+              if (!entry.isIntersecting) return
+              _fpObserver && _fpObserver.unobserve(entry.target)
+              if (gen !== _fpRenderGen) return
+              const card   = entry.target
+              const canvas = card.querySelector('.fp-lcard-canvas')
+              const loadEl = card.querySelector('.fp-lcard-loading')
+              const pdfUrl = card.dataset.pdfUrl
+              if (!canvas || !pdfUrl) return
+              const prev = canvas.closest('.fp-lcard-preview')
+              const maxW = Math.max(60, (prev ? prev.offsetWidth : 0) || 200)
+              const maxH = Math.max(60, (prev ? prev.offsetHeight : 0) || 150)
+              renderPdfFirstPage(canvas, pdfUrl, maxW, maxH)
+                .then(() => { if (gen === _fpRenderGen && loadEl) loadEl.remove() })
+                .catch(() => { if (loadEl) loadEl.remove() })
+            })
+          }, { rootMargin: '200px' })
+        }
+
+        /* ── Build a layout card element ── */
+        function buildFpCard(group) {
+          const fp      = group.fp
+          const isPdf   = fpIsPdf(fp)
+          const thumb   = fpThumbUrl(fp)
+          const pdfAbs  = isPdf && !thumb ? resolveFloorplanAssetUrl(fp.src) : ''
+          const label   = fp.label || 'Floor Plan'
+          const meta    = groupMeta(group)
+
+          let previewInner = ''
+          if (thumb) {
+            previewInner = `<img src="${esc(thumb)}" alt="${esc(label)}" loading="lazy" />`
+          } else if (pdfAbs) {
+            previewInner = `<canvas class="fp-lcard-canvas" aria-label="${esc(label)} preview"></canvas><div class="fp-lcard-loading" aria-hidden="true">Loading…</div>`
+          } else {
+            previewInner = `<div class="fp-lcard-preview-placeholder" aria-hidden="true"><svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span>Floor Plan</span></div>`
+          }
+
+          const card = document.createElement('button')
+          card.type = 'button'
+          card.className = 'fp-lcard'
+          card.setAttribute('aria-label', `${label}${meta ? ' — ' + meta : ''}`)
+          if (pdfAbs) card.dataset.pdfUrl = pdfAbs
+
+          const hasPdfLink = isPdf && fp.src
+          card.innerHTML = `
+            <div class="fp-lcard-preview">${previewInner}</div>
+            <div class="fp-lcard-body">
+              <div class="fp-lcard-label">${esc(label)}</div>
+              ${meta ? `<div class="fp-lcard-meta">${esc(meta)}</div>` : ''}
+            </div>
+            <div class="fp-lcard-actions">
+              <span class="fp-lcard-cta">View residences</span>
+              ${hasPdfLink ? `<a class="fp-lcard-pdf" href="${esc(resolveFloorplanAssetUrl(fp.src))}" target="_blank" rel="noopener" aria-label="Open PDF for ${esc(label)}" onclick="event.stopPropagation()"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> PDF</a>` : ''}
+            </div>`
+          card.addEventListener('click', () => { _fpLastCard = card; openFpModal(group) })
+          return card
+        }
+
+        /* ── Render (or append) cards to the grid ── */
+        const loadMoreBtn = document.createElement('button')
+        loadMoreBtn.className = 'dv-fp-loadmore'
+        loadMoreBtn.hidden = true
+        fpGrid.after(loadMoreBtn)
+
+        function renderFpGrid(mode) {
+          if (mode !== 'append') {
+            if (_fpObserver) { _fpObserver.disconnect(); _fpObserver = null }
+            _fpRenderGen++
+            fpGrid.innerHTML = ''
+            _fpPage = 1
+          } else {
+            _fpPage++
+          }
+
+          const groups    = getFilteredSorted()
+          const startIdx  = mode === 'append' ? (_fpPage - 1) * FP_PAGE : 0
+          const endIdx    = _fpPage * FP_PAGE
+          const slice     = groups.slice(startIdx, endIdx)
+
+          const gen = _fpRenderGen
+          if (!_fpObserver) _fpObserver = makeObserver(gen)
+
+          slice.forEach(group => {
+            const card = buildFpCard(group)
+            fpGrid.appendChild(card)
+            if (card.dataset.pdfUrl) _fpObserver.observe(card)
+          })
+
+          const remaining = Math.max(0, groups.length - Math.min(endIdx, groups.length))
+          loadMoreBtn.textContent = remaining > 0 ? `Show more (${remaining})` : ''
+          loadMoreBtn.hidden = remaining <= 0
+        }
+
+        loadMoreBtn.addEventListener('click', () => renderFpGrid('append'))
+
+        /* ── Modal ── */
+        const fpModalOverlay = document.getElementById('fp-modal-overlay')
+        const fpModalTitle   = document.getElementById('fp-modal-title')
+        const fpModalBody    = document.getElementById('fp-modal-body')
+        const fpModalClose   = document.getElementById('fp-modal-close')
+
+        function openFpModal(group) {
+          if (!fpModalOverlay || !fpModalTitle || !fpModalBody) return
+          fpModalTitle.textContent = group.fp.label || 'Floor Plan'
+          fpModalBody.innerHTML = group.units.map(u => {
+            const stage  = u.stage || 'active'
+            const sLabel = STAGE_LABEL[stage] || stage
+            const sClass = STAGE_CLASS[stage] || 'dv-unit-avail--available'
+            const isSold = stage === 'sold'
+            const beds   = u.beds != null ? (u.beds === 0 ? 'Studio' : `${u.beds} bed`) : ''
+            const floor  = u.floor ? `Fl. ${u.floor}` : ''
+            const meta   = [beds, floor].filter(Boolean).join(' · ')
+            return `<div class="fp-modal-unit">
+              <span class="fp-modal-unit-ref">${esc(u.ref || u.slug)}</span>
+              <div class="fp-modal-unit-info">
+                <div class="fp-modal-unit-title">${esc(u.title || '')}</div>
+                ${meta ? `<div class="fp-modal-unit-meta">${esc(meta)}</div>` : ''}
+              </div>
+              <span class="fp-modal-unit-price">${esc(u.price || '—')}</span>
+              <span class="dv-unit-avail ${sClass}">${esc(sLabel)}</span>
+              ${!isSold ? `<a href="property.html?slug=${esc(publicSlugFromJson(u.slug))}" class="fp-modal-unit-link">View →</a>` : ''}
+            </div>`
+          }).join('')
+          fpModalOverlay.classList.add('is-open')
+          fpModalOverlay.setAttribute('aria-hidden', 'false')
+          document.body.style.overflow = 'hidden'
+          if (fpModalClose) fpModalClose.focus()
+          _fpTrapHandler = function(e) {
+            if (e.key === 'Escape') { closeFpModal(); return }
+            if (e.key !== 'Tab') return
+            const sel = 'button:not([disabled]),[href],[tabindex]:not([tabindex="-1"])'
+            const els = [...fpModalOverlay.querySelectorAll(sel)]
+            if (!els.length) return
+            const first = els[0], last = els[els.length - 1]
+            if (e.shiftKey) { if (document.activeElement === first) { e.preventDefault(); last.focus() } }
+            else            { if (document.activeElement === last)  { e.preventDefault(); first.focus() } }
+          }
+          document.addEventListener('keydown', _fpTrapHandler)
+        }
+
+        function closeFpModal() {
+          if (!fpModalOverlay) return
+          fpModalOverlay.classList.remove('is-open')
+          fpModalOverlay.setAttribute('aria-hidden', 'true')
+          document.body.style.overflow = ''
+          if (_fpTrapHandler) { document.removeEventListener('keydown', _fpTrapHandler); _fpTrapHandler = null }
+          if (_fpLastCard) { _fpLastCard.focus(); _fpLastCard = null }
+        }
+
+        if (fpModalClose) fpModalClose.addEventListener('click', closeFpModal)
+        if (fpModalOverlay) fpModalOverlay.addEventListener('click', e => { if (e.target === fpModalOverlay) closeFpModal() })
+
+        /* ── Toolbar ── */
+        const fpH2 = fpSec.querySelector('h2')
+        const subtitleEl = document.createElement('p')
+        subtitleEl.className = 'dv-fp-subtitle'
+        subtitleEl.textContent = 'Each plan groups residences sharing the same layout'
+        if (fpH2) fpH2.after(subtitleEl)
+
+        const allBeds = [...new Set(_fpAllGroups.map(g => groupBedsKey(g)).filter(b => b >= 0))].sort((a, b) => a - b)
+        const allCounts  = _fpAllGroups.map(g => g.units.length)
+        const allLabels  = _fpAllGroups.map(g => g.fp.label || '')
+        const countsSame = new Set(allCounts).size <= 1
+        const labelsSame = new Set(allLabels).size <= 1
+
+        const FP_SORT_OPTS = [
+          { v: 'default',    label: 'Label A–Z',   disabled: labelsSame },
+          { v: 'label-desc', label: 'Label Z–A',   disabled: labelsSame },
+          { v: 'count-desc', label: 'Residences ↓', disabled: countsSame },
+          { v: 'count-asc',  label: 'Residences ↑', disabled: countsSame },
+        ]
+
+        const toolbarEl = document.createElement('div')
+        toolbarEl.className = 'dv-fp-toolbar'
+        toolbarEl.innerHTML = `
+          <div class="dv-fp-filters" role="group" aria-label="Filter by bedrooms">
+            <button class="dv-uftab active" data-fpf="all" type="button">All</button>
+            ${allBeds.map(b => `<button class="dv-uftab" data-fpf="${b}" type="button">${esc(BEDS_LABEL[b] || b + ' Bed')}</button>`).join('')}
           </div>
-          ${fp.label ? `<p class="fp-label">${esc(fp.label)}</p>` : ''}
-          <a href="${esc(fp.src)}" class="fp-download" target="_blank" rel="noopener">
-            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            ${isPdf ? 'PDF' : 'Ver'}
-          </a>
-        </div>`
-      }).join('')
-      fpSec.removeAttribute('hidden')
+          <div class="dv-sort-wrap">
+            <label class="dv-sort-label" for="dv-fp-sort">Sort</label>
+            <select class="dv-sort-sel" id="dv-fp-sort">
+              ${FP_SORT_OPTS.map(o => `<option value="${o.v}"${o.disabled ? ' disabled' : ''}>${esc(o.label)}${o.disabled ? ' (n/a)' : ''}</option>`).join('')}
+            </select>
+          </div>`
+        fpGrid.before(toolbarEl)
+
+        toolbarEl.querySelectorAll('[data-fpf]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            toolbarEl.querySelectorAll('[data-fpf]').forEach(b => b.classList.remove('active'))
+            btn.classList.add('active')
+            _fpFilter = btn.dataset.fpf
+            renderFpGrid('reset')
+          })
+        })
+
+        const fpSortSel = toolbarEl.querySelector('#dv-fp-sort')
+        if (fpSortSel) {
+          fpSortSel.addEventListener('change', () => {
+            _fpSort = fpSortSel.value
+            renderFpGrid('reset')
+          })
+        }
+
+        renderFpGrid('reset')
+        fpSec.removeAttribute('hidden')
+        fpSec.hidden = false
+        _fpInited = true
+      }
+    } else if (fpSec && !fpSec.hidden && !_fpAllGroups.length) {
+      fpSec.setAttribute('hidden', '')
+      fpSec.hidden = true
     }
 
     /* Details */

@@ -28,7 +28,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css?v=g5" />
   <link rel="stylesheet" href="property.css?v=ux3" />
-  <link rel="stylesheet" href="development.css?v=au3" />
+  <link rel="stylesheet" href="development.css?v=au4" />
   <script>
   (function () {
     try {
@@ -226,7 +226,7 @@
           <!-- Floor Plans -->
           <section class="dv-section" id="dv-floorplans-section" hidden>
             <h2 class="dv-section-h" data-i18n="section.floorplans">Floor Plans</h2>
-            <div class="fp-grid" id="dv-floorplans-grid"></div>
+            <div class="fp-layout-grid" id="dv-floorplans-grid"></div>
           </section>
 
           <!-- Project Details -->
@@ -336,6 +336,19 @@
     </div>
   </footer>
 
+  <!-- Floor Plans Modal -->
+  <div class="fp-modal-overlay" id="fp-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="fp-modal-title" aria-hidden="true">
+    <div class="fp-modal">
+      <div class="fp-modal-head">
+        <h2 class="fp-modal-title" id="fp-modal-title">Floor Plan</h2>
+        <button class="fp-modal-close" id="fp-modal-close" aria-label="Close">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="fp-modal-body" id="fp-modal-body"></div>
+    </div>
+  </div>
+
   <!-- LIGHTBOX -->
   <div class="lb-overlay" id="lb-overlay" role="dialog" aria-modal="true" aria-label="Photo gallery">
     <button class="lb-close" id="lb-close" aria-label="Close gallery">
@@ -375,7 +388,7 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg7_3UefA_rzfXRAwCMS42A4Z7lx4BUTc" async defer></script>
   <script src="area-format.js?v=au1"></script>
   <script src="data-listings.js?v=listings617"></script>
-  <script src="development-loader.js?v=au4"></script>
+  <script src="development-loader.js?v=au5"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="main.js?v=ux2"></script>
