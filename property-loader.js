@@ -37,10 +37,22 @@
   }
   const slug = new URLSearchParams(location.search).get('slug')
 
+  function revealPropertyShell() {
+    document.documentElement.classList.remove('property-shell-pending')
+  }
+
   const el = document.getElementById('listings-data')
-  if (!el) return
+  if (!el) {
+    revealPropertyShell()
+    return
+  }
   let listings = []
-  try { listings = JSON.parse(el.textContent).listings || [] } catch { return }
+  try {
+    listings = JSON.parse(el.textContent).listings || []
+  } catch {
+    revealPropertyShell()
+    return
+  }
   /* Merge admin cache with deployed data so published fields (e.g. youtubeUrl) are not
      wiped by an older an_listings_cache on the same browser. */
   try {
@@ -63,7 +75,18 @@
   } catch {}
 
   const baseListing = listings.find(l => l.slug === (slug || 'gracia-garden'))
-  if (!baseListing) return
+  if (!baseListing) {
+    revealPropertyShell()
+    return
+  }
+
+  /* Promociones (obra nueva) usan development.html — misma URL antigua sigue funcionando */
+  if (baseListing.propertyType === 'development') {
+    const params = new URLSearchParams(location.search)
+    if (!params.get('slug')) params.set('slug', baseListing.slug)
+    location.replace(`development.html?${params.toString()}`)
+    return
+  }
 
   function getTranslatedListing(lang) {
     if (lang && baseListing.translations?.[lang]) {
@@ -459,7 +482,11 @@
 
   /* ── initial render ── */
   const initLang = localStorage.getItem('an_lang') || 'en'
-  renderContent(getTranslatedListing(initLang))
+  try {
+    renderContent(getTranslatedListing(initLang))
+  } finally {
+    revealPropertyShell()
+  }
 
   /* ── re-render on language change (no reload needed) ── */
   window.addEventListener('an:langchange', e => {
