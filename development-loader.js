@@ -36,17 +36,10 @@
     return null
   }
 
-  const slug = new URLSearchParams(location.search).get('slug')
+  const slug = (new URLSearchParams(location.search).get('slug') || '').trim()
 
   async function loadListings() {
-    const el = document.getElementById('listings-data')
-    if (el) {
-      try {
-        const parsed = JSON.parse(el.textContent)
-        const fromInline = Array.isArray(parsed.listings) ? parsed.listings : []
-        if (fromInline.length) return fromInline
-      } catch (_) {}
-    }
+    /* Servidor (JSON) primero: evita bundle data-listings.js antiguo en caché CDN */
     try {
       const listingsUrl = new URL('data/listings.json', window.location.href).href
       const r = await fetch(listingsUrl, { cache: 'no-store', credentials: 'same-origin' })
@@ -55,6 +48,14 @@
         if (Array.isArray(j.listings) && j.listings.length) return j.listings
       }
     } catch (_) {}
+    const el = document.getElementById('listings-data')
+    if (el) {
+      try {
+        const parsed = JSON.parse(el.textContent)
+        const fromInline = Array.isArray(parsed.listings) ? parsed.listings : []
+        if (fromInline.length) return fromInline
+      } catch (_) {}
+    }
     return []
   }
 
@@ -73,8 +74,6 @@
       cached.forEach(c => {
         if (!serverBySlug[c.slug]) listings.push(c)
       })
-    } else if (cached.length) {
-      listings = cached
     }
   } catch {}
 

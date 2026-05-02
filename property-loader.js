@@ -65,8 +65,6 @@
       cached.forEach(c => {
         if (!serverBySlug[c.slug]) listings.push(c)
       })
-    } else if (cached.length) {
-      listings = cached
     }
   } catch {}
 
