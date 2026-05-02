@@ -1355,3 +1355,18 @@
     height: 4rem;
   }
 }
+
+/* ── Seller cross-link nudge ── */
+.pc-sell-nudge {
+  display: block;
+  margin-top: .9rem;
+  text-align: center;
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  letter-spacing: .06em;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .2s;
+}
+.pc-sell-nudge:hover { color: var(--gold); }
+.pc-sell-nudge:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
