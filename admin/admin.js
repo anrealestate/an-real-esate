@@ -2058,7 +2058,25 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('f-slug')?.addEventListener('input', () => { _titleChanged = true })
 })
 
+function validateBeforePublish() {
+  const invalid = _listings.filter(l => {
+    if (l.stage === 'draft') return false  // drafts are excluded from public JSON anyway
+    const hasSlug  = l.slug  && l.slug.trim()  && l.slug  !== 'sadf'
+    const hasTitle = l.title && l.title.trim() && l.title !== 'sadf'
+    const hasImage = (l.images && l.images.length > 0) || l.image
+    return !(hasSlug && hasTitle && hasImage)
+  })
+  return invalid
+}
+
 async function publishToWeb() {
+  const bad = validateBeforePublish()
+  if (bad.length) {
+    const names = bad.map(l => `"${l.title || l.slug}"`).join(', ')
+    toast(`No se puede publicar: ${bad.length} ficha(s) sin título o imágenes: ${names}`, 'error')
+    return
+  }
+
   const btn = document.getElementById('publish-btn')
   const orig = btn.innerHTML
   btn.disabled = true
