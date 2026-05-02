@@ -2245,3 +2245,111 @@ select:disabled { opacity: .45; cursor: default; }
   white-space: nowrap;
 }
 .btn-cancel-wm:hover { border-color: #e07070; }
+
+/* ── PRICE CURRENCY SELECTOR ─────────────────── */
+.price-curr {
+  width: auto;
+  min-width: 80px;
+  padding: .6rem .55rem .6rem .65rem;
+  border-radius: var(--r) 0 0 var(--r);
+  border-right: none;
+  flex-shrink: 0;
+}
+.price-wrap { display: flex; align-items: center; }
+.price-wrap .price-input { border-radius: 0; flex: 1; }
+.price-wrap .price-postfix { border-radius: 0 var(--r) var(--r) 0; border-left: none; width: auto; min-width: 110px; }
+.field-hint {
+  margin-top: .35rem;
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  letter-spacing: .03em;
+}
+.field-hint code {
+  font-family: monospace;
+  background: rgba(255,255,255,.07);
+  padding: .1rem .35rem;
+  border-radius: 3px;
+}
+
+/* ── DEV / PROMO BLOCKS ──────────────────────── */
+.dev-block {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  margin-top: 1.5rem;
+  overflow: hidden;
+}
+.dev-block-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .75rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.dev-block-title {
+  font-size: var(--fs-xs);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.dev-block .form-grid { padding: 1rem; }
+.dev-children-empty {
+  padding: 1rem;
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+
+/* ── CHILDREN TABLE ──────────────────────────── */
+.child-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+}
+.child-table th {
+  text-align: left;
+  padding: .45rem .75rem;
+  font-size: var(--fs-xs);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+}
+.child-table td {
+  padding: .5rem .75rem;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  vertical-align: middle;
+}
+.child-table tr:last-child td { border-bottom: none; }
+.child-ref {
+  font-size: .72rem;
+  letter-spacing: .05em;
+  color: var(--gold);
+  font-weight: 500;
+}
+.child-actions { display: flex; gap: .35rem; }
+
+/* ── FLOOR PLANS ADMIN ───────────────────────── */
+.fp-admin-row {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  padding: .4rem .75rem;
+}
+.fp-admin-row .fp-src { flex: 2; }
+.fp-admin-row .fp-label-input { flex: 1; }
+.fp-del {
+  flex-shrink: 0;
+  background: none;
+  border: 1px solid rgba(192,57,43,.4);
+  border-radius: 4px;
+  color: #c0392b;
+  font-size: 1rem;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--trans);
+}
+.fp-del:hover { background: rgba(192,57,43,.12); }

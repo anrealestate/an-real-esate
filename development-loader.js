@@ -237,70 +237,138 @@
       featSection.removeAttribute('hidden')
     }
 
-    /* Units */
+    /* Units — real child listings first; fallback to mother's units[] */
     const unitsSection = document.getElementById('dv-units-section')
     const unitGrid     = document.getElementById('dv-unit-grid')
     const unitFilters  = document.getElementById('dv-unit-filters')
-    if (unitsSection && unitGrid && listing.units?.length) {
-      const AVAIL_LABEL = { available: 'Available', reserved: 'Reserved', sold: 'Sold' }
-      const availClass  = { available: 'dv-unit-avail--available', reserved: 'dv-unit-avail--reserved', sold: 'dv-unit-avail--sold' }
 
-      /* Derive filter categories */
-      const bedsSet = new Set(listing.units.map(u => u.beds))
-      const filterMap = {
-        0: 'Studio',
-        1: '1 Bed',
-        2: '2 Bed',
-        3: '3 Bed',
-        4: '4+ Bed',
-      }
-      const filterLabels = [...bedsSet].sort((a, b) => a - b)
-        .map(b => ({ beds: b, label: filterMap[b] || `${b} Bed` }))
+    /* Child listings are PUBLIC_STAGES only (active/reserved/sold); draft hidden from web */
+    const PUBLIC_STAGES = ['active', 'reserved', 'sold']
+    const children = listings
+      .filter(l => l.parent_slug === listing.slug && PUBLIC_STAGES.includes(l.stage))
+      .sort((a, b) => (a.ref || '').localeCompare(b.ref || ''))
 
-      if (unitFilters && filterLabels.length > 1) {
-        filterLabels.forEach(({ beds, label }) => {
+    if (unitsSection && unitGrid) {
+      const FILTER_LABEL = { 0: 'Studio', 1: '1 Bed', 2: '2 Bed', 3: '3 Bed' }
+      const STAGE_LABEL  = { active: 'Available', reserved: 'Reserved', sold: 'Sold' }
+      const STAGE_CLASS  = { active: 'dv-unit-avail--available', reserved: 'dv-unit-avail--reserved', sold: 'dv-unit-avail--sold' }
+
+      function wireFilters(bedsValues) {
+        if (!unitFilters || bedsValues.size < 2) return
+        const sorted = [...bedsValues].sort((a, b) => a - b)
+        sorted.forEach(b => {
           const btn = document.createElement('button')
           btn.className = 'dv-uftab'
-          btn.dataset.ufilter = String(beds)
-          btn.textContent = label
+          btn.dataset.ufilter = String(b)
+          btn.textContent = FILTER_LABEL[b] || `${b} Bed`
           unitFilters.appendChild(btn)
         })
-
         unitFilters.querySelectorAll('.dv-uftab').forEach(tab => {
           tab.addEventListener('click', () => {
             unitFilters.querySelectorAll('.dv-uftab').forEach(t => t.classList.remove('active'))
             tab.classList.add('active')
             const f = tab.dataset.ufilter
-            unitGrid.querySelectorAll('.dv-unit-card').forEach(card => {
+            unitGrid.querySelectorAll('[data-beds]').forEach(card => {
               card.classList.toggle('hidden', f !== 'all' && card.dataset.beds !== f)
             })
           })
         })
       }
 
-      unitGrid.innerHTML = listing.units.map(u => {
-        const sizeRange  = u.sizeMin && u.sizeMax ? `${u.sizeMin}–${u.sizeMax} sq ft` : (u.sizeMin ? `${u.sizeMin} sq ft` : '')
-        const avail      = u.availability || 'available'
-        const availLabel = AVAIL_LABEL[avail] || avail
-        const aClass     = availClass[avail] || 'dv-unit-avail--available'
-        const isSold     = avail === 'sold'
-        return `
-          <div class="dv-unit-card" data-beds="${u.beds ?? 0}">
-            <div class="dv-unit-head">
-              <span class="dv-unit-id">${esc(u.id)}</span>
-              <span class="dv-unit-avail ${aClass}">${esc(availLabel)}</span>
-            </div>
-            <p class="dv-unit-layout">${esc(u.layout || '')}</p>
-            <div class="dv-unit-meta">
-              ${sizeRange ? `<span>${esc(sizeRange)}</span>` : ''}
-              ${u.floorsAvailable ? `<span>Floors ${esc(u.floorsAvailable)}</span>` : ''}
-            </div>
-            <p class="dv-unit-price">${esc(u.priceFrom || '—')}</p>
-            ${!isSold ? `<a href="#enquire" class="dv-unit-cta" onclick="document.querySelector('#prop-form [name=message]').value='I am interested in unit type ${esc(u.id)} (${esc(u.layout||'')}).'">Enquire</a>` : ''}
-          </div>`
-      }).join('')
+      if (children.length) {
+        /* ── Real child listings ── */
+        const bedsSet = new Set(children.map(c => c.beds ?? 0))
+        wireFilters(bedsSet)
+        unitGrid.innerHTML = children.map(c => {
+          const stage  = c.stage || 'active'
+          const sLabel = STAGE_LABEL[stage] || stage
+          const sClass = STAGE_CLASS[stage] || 'dv-unit-avail--available'
+          const isSold = stage === 'sold'
+          const size   = c.size ? `${c.size} m²` : ''
+          const floor  = c.floor ? `Floor ${esc(c.floor)}` : ''
+          return `
+            <div class="dv-unit-card dv-child-card" data-beds="${c.beds ?? 0}">
+              <div class="dv-unit-head">
+                <span class="dv-child-ref">${esc(c.ref || c.slug)}</span>
+                <span class="dv-unit-avail ${sClass}">${esc(sLabel)}</span>
+              </div>
+              <p class="dv-unit-layout">${esc(c.title || '')}</p>
+              <div class="dv-unit-meta">
+                ${c.beds != null ? `<span>${c.beds === 0 ? 'Studio' : c.beds + ' bed'}</span>` : ''}
+                ${c.baths  ? `<span>${c.baths} bath</span>` : ''}
+                ${size     ? `<span>${esc(size)}</span>` : ''}
+                ${floor    ? `<span>${floor}</span>` : ''}
+              </div>
+              <p class="dv-unit-price">${esc(c.price || '—')}</p>
+              ${!isSold
+                ? `<a href="../property.html?slug=${esc(c.slug)}" class="dv-unit-cta dv-child-cta">Ver ficha →</a>`
+                : ''}
+            </div>`
+        }).join('')
+        unitsSection.removeAttribute('hidden')
 
-      unitsSection.removeAttribute('hidden')
+      } else if (listing.units?.length) {
+        /* ── Fallback: units[] embedded in mother listing ── */
+        const AVAIL_LABEL = { available: 'Available', reserved: 'Reserved', sold: 'Sold' }
+        const availClass  = { available: 'dv-unit-avail--available', reserved: 'dv-unit-avail--reserved', sold: 'dv-unit-avail--sold' }
+        const bedsSet = new Set(listing.units.map(u => u.beds ?? 0))
+        wireFilters(bedsSet)
+
+        const note = document.querySelector('.dv-units-note')
+        if (note) {
+          const banner = document.createElement('p')
+          banner.className = 'dv-units-fallback-note'
+          banner.textContent = '⚠ Showing indicative unit types. Individual unit listings coming soon.'
+          note.parentNode.insertBefore(banner, note)
+        }
+
+        unitGrid.innerHTML = listing.units.map(u => {
+          const sizeRange  = u.sizeMin && u.sizeMax ? `${u.sizeMin}–${u.sizeMax} sq ft` : (u.sizeMin ? `${u.sizeMin} sq ft` : '')
+          const avail      = u.availability || 'available'
+          const aClass     = availClass[avail] || 'dv-unit-avail--available'
+          const isSold     = avail === 'sold'
+          return `
+            <div class="dv-unit-card" data-beds="${u.beds ?? 0}">
+              <div class="dv-unit-head">
+                <span class="dv-unit-id">${esc(u.id)}</span>
+                <span class="dv-unit-avail ${aClass}">${esc(AVAIL_LABEL[avail] || avail)}</span>
+              </div>
+              <p class="dv-unit-layout">${esc(u.layout || '')}</p>
+              <div class="dv-unit-meta">
+                ${sizeRange ? `<span>${esc(sizeRange)}</span>` : ''}
+                ${u.floorsAvailable ? `<span>Floors ${esc(u.floorsAvailable)}</span>` : ''}
+              </div>
+              <p class="dv-unit-price">${esc(u.priceFrom || '—')}</p>
+              ${!isSold ? `<a href="#enquire" class="dv-unit-cta" onclick="document.querySelector('#prop-form [name=message]').value='Interested in unit type ${esc(u.id)} (${esc(u.layout||'')})'">Enquire</a>` : ''}
+            </div>`
+        }).join('')
+        unitsSection.removeAttribute('hidden')
+
+      } else {
+        if (unitsSection) unitsSection.setAttribute('hidden', '')
+      }
+    }
+
+    /* Floor Plans */
+    const fpSec  = document.getElementById('dv-floorplans-section')
+    const fpGrid = document.getElementById('dv-floorplans-grid')
+    if (fpSec && fpGrid && listing.floorPlans?.length) {
+      fpGrid.innerHTML = listing.floorPlans.map(fp => {
+        const isPdf = /\.pdf(\?|$)/i.test(fp.src || '')
+        return `<div class="fp-item">
+          <div class="fp-img-wrap" onclick="window.open('${esc(fp.src)}','_blank')">
+            ${isPdf
+              ? `<svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>`
+              : `<img src="${esc(fp.src)}" alt="${esc(fp.label || '')}" loading="lazy" />`}
+          </div>
+          ${fp.label ? `<p class="fp-label">${esc(fp.label)}</p>` : ''}
+          <a href="${esc(fp.src)}" class="fp-download" target="_blank" rel="noopener">
+            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            ${isPdf ? 'PDF' : 'Ver'}
+          </a>
+        </div>`
+      }).join('')
+      fpSec.removeAttribute('hidden')
     }
 
     /* Details */

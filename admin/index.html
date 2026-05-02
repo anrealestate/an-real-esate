@@ -208,7 +208,7 @@
             </div>
             <div class="fg">
               <label data-i18n="label.type">Tipo de propiedad</label>
-              <select id="f-property-type">
+              <select id="f-property-type" onchange="onPropertyTypeChange(this.value)">
                 <option value="apartment" data-i18n="opt.type.apartment">Apartamento</option>
                 <option value="penthouse" data-i18n="opt.type.penthouse">Ático</option>
                 <option value="villa" data-i18n="opt.type.villa">Villa</option>
@@ -217,13 +217,18 @@
                 <option value="studio" data-i18n="opt.type.studio">Estudio</option>
                 <option value="office" data-i18n="opt.type.office">Oficina / Comercial</option>
                 <option value="land" data-i18n="opt.type.land">Solar / Terreno</option>
+                <option value="development">Promoción / Obra nueva</option>
               </select>
             </div>
 
             <div class="fg">
               <label data-i18n="label.price">Precio</label>
               <div class="price-wrap">
-                <span class="price-sym">€</span>
+                <select id="f-price-curr" class="price-curr" title="Moneda / formato" onchange="onPriceCurrChange(this.value)">
+                  <option value="eur">€</option>
+                  <option value="usd">$</option>
+                  <option value="text">Texto libre</option>
+                </select>
                 <input type="text" id="f-price-num" class="price-input" placeholder="830,000" />
                 <select id="f-price-postfix" class="price-postfix">
                   <option value="" data-i18n="opt.sale">— venta —</option>
@@ -232,6 +237,7 @@
                   <option value="/noche" data-i18n="opt.night">/noche</option>
                 </select>
               </div>
+              <p class="field-hint" id="price-text-hint" style="display:none">Escribe el precio completo, ej: «Desde $420,000»</p>
             </div>
             <div class="fg">
               <label>Provincia</label>
@@ -369,6 +375,88 @@
           </div>
 
           <input type="hidden" id="f-badge-type" />
+
+          <!-- Ficha madre: tabla de hijos -->
+          <div id="dev-children-block" class="dev-block" style="display:none">
+            <div class="dev-block-hd">
+              <span class="dev-block-title">Unidades hijas de esta promoción</span>
+              <button type="button" class="btn-add" onclick="addChildProperty()">+ Nueva unidad hija</button>
+            </div>
+            <div id="dev-children-list"></div>
+          </div>
+
+          <!-- Bloque datos de promoción (solo visible cuando propertyType = development) -->
+          <div id="dev-promo-block" class="dev-block" style="display:none">
+            <div class="dev-block-hd">
+              <span class="dev-block-title">Datos de la promoción</span>
+            </div>
+            <div class="form-grid">
+              <div class="fg">
+                <label>Estado de construcción</label>
+                <select id="f-construction-status">
+                  <option value="">— Selecciona —</option>
+                  <option value="Pre-construction">Pre-construcción</option>
+                  <option value="Under Construction">En construcción</option>
+                  <option value="Ready">Entregado / Listo</option>
+                </select>
+              </div>
+              <div class="fg">
+                <label>Fecha de entrega</label>
+                <input type="text" id="f-delivery-date" placeholder="ej: Q4 2027" />
+              </div>
+              <div class="fg">
+                <label>Nº total de plantas</label>
+                <input type="number" id="f-total-floors" min="1" placeholder="ej: 34" />
+              </div>
+              <div class="fg">
+                <label>Nº total de unidades</label>
+                <input type="number" id="f-total-units" min="1" placeholder="ej: 656" />
+              </div>
+              <div class="fg">
+                <label>Superficie amenities</label>
+                <input type="text" id="f-amenities-area" placeholder="ej: 22,000 sq ft" />
+              </div>
+              <div class="fg">
+                <label>Promotor / Developer</label>
+                <input type="text" id="f-developer" placeholder="ej: North Development" />
+              </div>
+              <div class="fg">
+                <label>Arquitectura</label>
+                <input type="text" id="f-architect" placeholder="ej: Mc+G Architecture" />
+              </div>
+              <div class="fg">
+                <label>Diseño interior</label>
+                <input type="text" id="f-interior-design" placeholder="ej: Urban Robot Associates" />
+              </div>
+              <div class="fg">
+                <label>Gestión de la propiedad</label>
+                <input type="text" id="f-management-company" placeholder="ej: North Management" />
+              </div>
+              <div class="fg">
+                <label>Agencia de ventas</label>
+                <input type="text" id="f-sales-agency" placeholder="ej: Fortune Development Sales" />
+              </div>
+              <div class="fg fg-2">
+                <label>URL del dossier / brochure</label>
+                <input type="url" id="f-brochure-url" placeholder="https://…" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Campo parent_slug (solo visible para hijos) -->
+          <div id="dev-parent-block" class="dev-block" style="display:none">
+            <div class="dev-block-hd">
+              <span class="dev-block-title">Unidad hija de una promoción</span>
+            </div>
+            <div class="form-grid">
+              <div class="fg fg-2">
+                <label>Promoción madre (parent_slug)</label>
+                <input type="text" id="f-parent-slug" readonly placeholder="Se asigna al crear desde la madre" />
+                <p class="field-hint">La referencia debe comenzar con el prefijo de la madre: <code id="parent-ref-hint"></code></p>
+              </div>
+            </div>
+          </div>
+
         </div>
 
         <!-- TAB: imágenes -->
@@ -433,6 +521,16 @@
             <div class="list-hd"><span class="list-title">Vídeo (YouTube)</span></div>
             <p class="gal-hint">Pega la URL del vídeo (recomendado: No listado). En la ficha se usa reproductor discreto (youtube-nocookie, 16:9).</p>
             <input type="url" id="f-youtube-url" placeholder="https://www.youtube.com/watch?v=…" autocomplete="off" aria-label="URL de YouTube" style="width:100%;max-width:42rem;padding:.65rem .85rem;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.25);color:inherit;font-size:.88rem" />
+          </div>
+
+          <!-- Planos -->
+          <div class="list-block">
+            <div class="list-hd">
+              <span class="list-title">Planos</span>
+              <button type="button" class="btn-add" onclick="addFloorPlanItem()">+ Añadir plano</button>
+            </div>
+            <p class="gal-hint">URL de imagen o PDF. Aparece en la sección "Floor Plans" de la ficha.</p>
+            <div id="fp-list" class="dyn-list"></div>
           </div>
         </div>
 

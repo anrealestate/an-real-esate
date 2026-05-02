@@ -760,10 +760,18 @@ function _showForm(slug) {
   document.getElementById('f-slug').value          = l.slug || ''
   document.getElementById('f-ref').value           = isNew ? generateRef() : (l.ref || '')
 
-  // Price: parse "€830,000" or "€7,700/mes" back into num + postfix
+  // Price: detect currency prefix and parse back into selector + num + postfix
   const _priceStr = l.price || ''
   const _pricePostfixMatch = _priceStr.match(/(\/\S+)$/)
-  document.getElementById('f-price-num').value     = _priceStr.replace(/^€/, '').replace(/(\/\S+)$/, '').trim()
+  const _priceCurrEl = document.getElementById('f-price-curr')
+  if (_priceCurrEl) {
+    if (_priceStr.startsWith('€')) { _priceCurrEl.value = 'eur' }
+    else if (_priceStr.startsWith('$')) { _priceCurrEl.value = 'usd' }
+    else if (_priceStr) { _priceCurrEl.value = 'text' }
+    else { _priceCurrEl.value = 'eur' }
+    onPriceCurrChange(_priceCurrEl.value)
+  }
+  document.getElementById('f-price-num').value     = _priceStr.replace(/^[€$]/, '').replace(/(\/\S+)$/, '').trim()
   document.getElementById('f-price-postfix').value = _pricePostfixMatch ? _pricePostfixMatch[1] : ''
 
   // Location cascade — populate province/city/zone from stored fields or migrate from old neighbourhood string
@@ -799,6 +807,7 @@ function _showForm(slug) {
   document.getElementById('f-door-num').value      = l.doorNum || ''
   document.getElementById('f-zip').value           = l.zip || ''
   document.getElementById('f-property-type').value = l.propertyType || 'apartment'
+  onPropertyTypeChange(l.propertyType || 'apartment', l)
 
   const _typeRadio = document.querySelector(`input[name="f-type"][value="${l.type || 'sale'}"]`)
   if (_typeRadio) _typeRadio.checked = true
@@ -858,6 +867,13 @@ function _showForm(slug) {
   const nearbyEl = document.getElementById('nearby-list')
   nearbyEl.innerHTML = ''
   ;(l.nearby || []).forEach(n => addNearbyRow(n))
+
+  // Floor plans
+  const fpList = document.getElementById('fp-list')
+  if (fpList) {
+    fpList.innerHTML = ''
+    ;(l.floorPlans || []).forEach(fp => addFloorPlanItem(fp))
+  }
 
   // Existing translations
   document.getElementById('f-translations').value = l.translations ? JSON.stringify(l.translations) : ''
@@ -1026,25 +1042,80 @@ async function saveProperty() {
     dist: r.querySelector('.nb-dist').value.trim()
   })).filter(n => n.name)
 
-  // Price
-  const _priceNum = document.getElementById('f-price-num').value.trim()
-  const _pricePost = document.getElementById('f-price-postfix').value
-  const price = _priceNum ? `€${_priceNum}${_pricePost}` : ''
+  // Price — supports €, $ or free text
+  const _priceNum   = document.getElementById('f-price-num').value.trim()
+  const _pricePost  = document.getElementById('f-price-postfix').value
+  const _priceCurr  = document.getElementById('f-price-curr')?.value || 'eur'
+  let price = ''
+  if (_priceNum) {
+    if (_priceCurr === 'text') price = _priceNum
+    else if (_priceCurr === 'usd') price = `$${_priceNum}${_pricePost}`
+    else price = `€${_priceNum}${_pricePost}`
+  }
 
   // Type from radio (sale/rent)
   const _typeChecked = document.querySelector('input[name="f-type"]:checked')
   const type = _typeChecked ? _typeChecked.value : 'sale'
 
   // Badge type auto from propertyType
-  const BADGE_MAP = { apartment:'Apartment', penthouse:'Penthouse', villa:'Villa', house:'House', townhouse:'Townhouse', studio:'Studio', office:'Office', land:'Land' }
+  const BADGE_MAP = { apartment:'Apartment', penthouse:'Penthouse', villa:'Villa', house:'House', townhouse:'Townhouse', studio:'Studio', office:'Office', land:'Land', development:'New Development' }
   const propertyType = document.getElementById('f-property-type').value
   const badge_type = BADGE_MAP[propertyType] || propertyType.charAt(0).toUpperCase() + propertyType.slice(1)
+  const badge = propertyType === 'development' ? 'new_dev' : undefined
+
+  // Ref
+  const ref = document.getElementById('f-ref').value.trim()
+
+  // Ref uniqueness check (global)
+  const refConflict = _listings.find(l => l.ref === ref && l.slug !== (original || slug))
+  if (refConflict) {
+    toast(`La referencia "${ref}" ya existe en "${refConflict.title}" (${refConflict.slug}). Usa una referencia única.`, 'error')
+    return
+  }
+
+  // Child ref prefix check — warning only (soft validation)
+  const parentSlug = document.getElementById('f-parent-slug')?.value?.trim() || ''
+  if (parentSlug) {
+    const parentListing = _listings.find(l => l.slug === parentSlug)
+    if (parentListing?.ref && ref && !ref.startsWith(parentListing.ref + '-')) {
+      toast(`Aviso: la ref del hijo debería comenzar con "${parentListing.ref}-". Ajústala o continúa si es intencional.`, 'warning', 6000)
+    }
+  }
+
+  // Promotion fields (only when development)
+  const isDevelopment = propertyType === 'development'
+  const promoFields = isDevelopment ? {
+    constructionStatus: document.getElementById('f-construction-status')?.value || undefined,
+    deliveryDate:       document.getElementById('f-delivery-date')?.value.trim() || undefined,
+    totalFloors:        document.getElementById('f-total-floors')?.value ? parseInt(document.getElementById('f-total-floors').value) : undefined,
+    totalUnits:         document.getElementById('f-total-units')?.value ? parseInt(document.getElementById('f-total-units').value) : undefined,
+    amenitiesArea:      document.getElementById('f-amenities-area')?.value.trim() || undefined,
+    developer:          document.getElementById('f-developer')?.value.trim() || undefined,
+    architect:          document.getElementById('f-architect')?.value.trim() || undefined,
+    interiorDesign:     document.getElementById('f-interior-design')?.value.trim() || undefined,
+    managementCompany:  document.getElementById('f-management-company')?.value.trim() || undefined,
+    salesAgency:        document.getElementById('f-sales-agency')?.value.trim() || undefined,
+    brochureUrl:        document.getElementById('f-brochure-url')?.value.trim() || undefined,
+  } : {}
+
+  // Floor plans
+  const fpRows = document.querySelectorAll('#fp-list .fp-admin-row')
+  const floorPlans = [...fpRows].map(row => ({
+    src:   row.querySelector('.fp-src')?.value.trim() || '',
+    label: row.querySelector('.fp-label-input')?.value.trim() || undefined,
+  })).filter(fp => fp.src).map(fp => { if (!fp.label) delete fp.label; return fp })
+
+  // Previous listing for merge (preserves keys not touched in this save)
+  const prevListing = original ? (_listings.find(l => l.slug === original) || {}) : {}
 
   const listing = {
+    // Start with previous to preserve unedited fields (units[], parent_slug, etc.)
+    ...prevListing,
+    // Overwrite with all form-sourced fields
     slug,
     title:         document.getElementById('f-title').value.trim(),
     price,
-    ref:           document.getElementById('f-ref').value.trim(),
+    ref,
     province:      document.getElementById('f-province').value.trim() || undefined,
     city:          document.getElementById('f-city').value.trim() || undefined,
     zone:          document.getElementById('f-zone').value.trim() || undefined,
@@ -1063,6 +1134,7 @@ async function saveProperty() {
     type,
     propertyType,
     badge_type,
+    ...(badge !== undefined ? { badge } : {}),
     beds:          parseInt(document.getElementById('f-beds').value) || 0,
     baths:         parseInt(document.getElementById('f-baths').value) || 0,
     size:          document.getElementById('f-size').value.trim(),
@@ -1081,6 +1153,7 @@ async function saveProperty() {
     details:      details.length ? details : undefined,
     features:     Object.keys(features).length ? features : undefined,
     nearby:       nearby.length ? nearby : undefined,
+    floorPlans:   floorPlans.length ? floorPlans : undefined,
     stage:        getCurrentStage(),
     translations: (() => { try { const v = document.getElementById('f-translations').value; return v ? JSON.parse(v) : undefined } catch { return undefined } })(),
     order:        (() => {
@@ -1091,7 +1164,20 @@ async function saveProperty() {
       const maxOrder = _listings.reduce((m, l) => Math.max(m, l.order ?? 0), 0)
       return maxOrder + 1
     })(),
+    // Promotion fields (only when development; cleared if type changed away)
+    ...promoFields,
   }
+
+  // If no longer a development, strip exclusive promotion keys from merge residue
+  if (!isDevelopment) {
+    const DEV_ONLY = ['constructionStatus','deliveryDate','totalFloors','totalUnits','amenitiesArea','developer','architect','interiorDesign','managementCompany','salesAgency','brochureUrl']
+    DEV_ONLY.forEach(k => delete listing[k])
+  }
+
+  // Preserve parent_slug from form (read-only field or previous)
+  const parentSlugFinal = document.getElementById('f-parent-slug')?.value?.trim() || prevListing.parent_slug || ''
+  if (parentSlugFinal) listing.parent_slug = parentSlugFinal
+  else delete listing.parent_slug
 
   // Remove undefined keys
   Object.keys(listing).forEach(k => listing[k] === undefined && delete listing[k])
@@ -1128,6 +1214,18 @@ function confirmDelete(slug) {
   const deleteSlug = typeof slug === 'string' ? slug : _editSlug
   const l = _listings.find(x => x.slug === deleteSlug)
   if (!l) return
+
+  // Block deletion of development listing that still has children
+  if (l.propertyType === 'development') {
+    const children = _listings.filter(x => x.parent_slug === deleteSlug)
+    if (children.length) {
+      const names = children.slice(0, 3).map(c => `• ${c.title || c.slug} (${c.ref || c.slug})`).join('\n')
+      const more  = children.length > 3 ? `\n…y ${children.length - 3} más` : ''
+      alert(`No se puede eliminar "${l.title}" porque tiene ${children.length} unidad${children.length > 1 ? 'es hijas' : ' hija'}:\n\n${names}${more}\n\nElimina o reasigna las unidades antes de borrar la promoción.`)
+      return
+    }
+  }
+
   const backup = JSON.parse(JSON.stringify(l))
   _listings = _listings.filter(x => x.slug !== deleteSlug)
   cacheListings()
@@ -1160,6 +1258,115 @@ function cloneProperty(slug) {
   renderTable()
   updateSummary()
   toast('Propiedad duplicada como borrador', 'success')
+}
+
+// ── PROPERTY TYPE / PROMO TOGGLE ──────────────
+function onPropertyTypeChange(type, listing) {
+  const isDev    = type === 'development'
+  const isChild  = !!(listing?.parent_slug || document.getElementById('f-parent-slug')?.value?.trim())
+  const promoEl  = document.getElementById('dev-promo-block')
+  const childEl  = document.getElementById('dev-children-block')
+  const parentEl = document.getElementById('dev-parent-block')
+
+  if (promoEl)  promoEl.style.display  = isDev   ? '' : 'none'
+  if (parentEl) parentEl.style.display = isChild  ? '' : 'none'
+
+  // Children table only for saved development listings
+  if (childEl) {
+    const isDevWithSlug = isDev && !!_editSlug
+    childEl.style.display = isDevWithSlug ? '' : 'none'
+    if (isDevWithSlug) renderDevChildren(_editSlug)
+  }
+
+  // Beds/baths/size/floor are less relevant for development mother listings
+  const devHideFields = ['f-beds','f-baths','f-size','f-floor','f-condition','f-energy']
+  devHideFields.forEach(id => {
+    const fg = document.getElementById(id)?.closest('.fg')
+    if (fg) fg.style.opacity = isDev ? '.35' : ''
+  })
+}
+
+function onPriceCurrChange(curr) {
+  const postfixEl = document.getElementById('f-price-postfix')
+  const hintEl    = document.getElementById('price-text-hint')
+  const numEl     = document.getElementById('f-price-num')
+  if (curr === 'text') {
+    if (postfixEl) postfixEl.style.display = 'none'
+    if (hintEl) hintEl.style.display = ''
+    if (numEl) numEl.placeholder = 'Ej: Desde $420,000'
+  } else {
+    if (postfixEl) postfixEl.style.display = ''
+    if (hintEl) hintEl.style.display = 'none'
+    if (numEl) numEl.placeholder = '830,000'
+  }
+}
+
+function renderDevChildren(parentSlug) {
+  const el = document.getElementById('dev-children-list')
+  if (!el) return
+  const kids = _listings.filter(l => l.parent_slug === parentSlug)
+    .sort((a, b) => (a.ref || '').localeCompare(b.ref || ''))
+  if (!kids.length) {
+    el.innerHTML = '<p class="dev-children-empty">Sin unidades hijas aún. Crea la primera con el botón.</p>'
+    return
+  }
+  el.innerHTML = `<table class="child-table">
+    <thead><tr><th>Ref</th><th>Título</th><th>Precio</th><th>Stage</th><th></th></tr></thead>
+    <tbody>${kids.map(k => `
+      <tr>
+        <td class="child-ref">${escHtml(k.ref || '—')}</td>
+        <td>${escHtml(k.title || k.slug)}</td>
+        <td>${escHtml(k.price || '—')}</td>
+        <td><span class="state-badge ${STAGE_CLASS[k.stage] || ''}">${STAGE_LABEL[k.stage] || k.stage}</span></td>
+        <td class="child-actions">
+          <button class="act-btn act-edit" title="Editar" onclick="showForm('${k.slug}')">
+            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </button>
+          <a class="act-btn" href="../property.html?slug=${k.slug}" target="_blank" title="Ver ficha" style="display:inline-flex;align-items:center;justify-content:center">
+            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </td>
+      </tr>`).join('')}
+    </tbody>
+  </table>`
+}
+
+function addChildProperty() {
+  if (!_editSlug) return
+  const parent = _listings.find(l => l.slug === _editSlug)
+  if (!parent) return
+  // Open a blank form pre-filled with parent_slug
+  _editSlug = null
+  _formDirty = false
+  _showForm(null)
+  // After form renders, inject parent context
+  requestAnimationFrame(() => {
+    const parentSlugEl = document.getElementById('f-parent-slug')
+    if (parentSlugEl) parentSlugEl.value = parent.slug
+    const parentBlockEl = document.getElementById('dev-parent-block')
+    if (parentBlockEl) parentBlockEl.style.display = ''
+    const refHintEl = document.getElementById('parent-ref-hint')
+    if (refHintEl) refHintEl.textContent = parent.ref ? parent.ref + '-…' : parent.slug + '-…'
+    // Suggest ref prefix
+    const refEl = document.getElementById('f-ref')
+    if (refEl && parent.ref) refEl.value = parent.ref + '-'
+    document.getElementById('form-title').textContent = `Nueva unidad hija de "${parent.title}"`
+  })
+}
+
+// ── FLOOR PLANS ───────────────────────────────
+function addFloorPlanItem(fp = {}) {
+  const list = document.getElementById('fp-list')
+  if (!list) return
+  const row = document.createElement('div')
+  row.className = 'fp-admin-row'
+  row.innerHTML = `
+    <input class="fp-src" type="url" placeholder="URL imagen o PDF…" value="${escHtml(fp.src || '')}" />
+    <input class="fp-label-input" type="text" placeholder="Etiqueta (ej: Planta tipo A)" value="${escHtml(fp.label || '')}" />
+    <button type="button" class="fp-del" title="Eliminar">×</button>`
+  row.querySelector('.fp-del').addEventListener('click', () => row.remove())
+  list.appendChild(row)
+  row.querySelector('.fp-src').focus()
 }
 
 // ── GALLERY CARDS ─────────────────────────────

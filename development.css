@@ -623,3 +623,39 @@
   .dv-stat { flex: 1 1 100px; padding: .65rem .75rem; }
   .dv-aside { position: static; }
 }
+
+/* ── Child listing cards ── */
+.dv-child-card { border: 1px solid rgba(201,169,110,.18); }
+.dv-child-ref {
+  font-size: .7rem;
+  letter-spacing: .06em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.dv-child-cta {
+  display: inline-block;
+  margin-top: .5rem;
+  padding: .45rem 1rem;
+  background: var(--gold);
+  color: var(--bg);
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: opacity .15s;
+}
+.dv-child-cta:hover { opacity: .85; }
+
+.dv-units-fallback-note {
+  font-size: .72rem;
+  color: var(--gold);
+  letter-spacing: .04em;
+  padding: .5rem .75rem;
+  background: rgba(201,169,110,.07);
+  border-left: 2px solid var(--gold);
+  margin-bottom: 1rem;
+}
+
+#dv-floorplans-grid.fp-grid { margin-top: .25rem; }

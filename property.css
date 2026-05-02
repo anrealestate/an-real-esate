@@ -909,3 +909,51 @@
   .lb-arrow--prev { left: .25rem; }
   .lb-arrow--next { right: .25rem; }
 }
+
+/* ================================
+   Floor Plans
+   ================================ */
+.fp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.25rem;
+}
+.fp-item {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+.fp-img-wrap {
+  background: var(--surface);
+  border-radius: 4px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity .15s;
+}
+.fp-img-wrap:hover { opacity: .85; }
+.fp-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.fp-img-wrap svg { color: var(--muted); }
+.fp-label {
+  font-size: var(--fs-2xs);
+  color: var(--muted);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.fp-download {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: var(--fs-2xs);
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: .04em;
+}
+.fp-download:hover { text-decoration: underline; }
