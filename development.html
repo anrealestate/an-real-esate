@@ -22,7 +22,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="property.css" />
-  <link rel="stylesheet" href="development.css" />
+  <link rel="stylesheet" href="development.css?v=listings608" />
   <script src="i18n.js"></script>
 </head>
 <body>
@@ -171,6 +171,13 @@
           <section class="dv-section">
             <h2 class="dv-section-h" data-i18n="section.description">Description</h2>
             <div class="dv-desc" id="dv-description"></div>
+          </section>
+
+          <section class="dv-section" id="dv-video-section" hidden>
+            <h2 class="dv-section-h" data-i18n="section.video">Video tour</h2>
+            <div class="dv-video-wrap">
+              <iframe id="dv-video-iframe" title="Development video tour" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+            </div>
           </section>
 
           <!-- Features -->
@@ -337,8 +344,8 @@
   </div>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg7_3UefA_rzfXRAwCMS42A4Z7lx4BUTc" async defer></script>
-  <script src="data-listings.js?v=listings58"></script>
-  <script src="development-loader.js?v=listings58"></script>
+  <script src="data-listings.js?v=listings608"></script>
+  <script src="development-loader.js?v=listings608"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="main.js"></script>

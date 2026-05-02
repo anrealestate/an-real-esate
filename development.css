@@ -192,6 +192,22 @@
 
 .dv-desc p:last-child { margin-bottom: 0; }
 
+.dv-video-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-width: 960px;
+  background: #0a0a0a;
+  border: 1px solid var(--border);
+}
+.dv-video-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 /* ================================
    Features Grid
    ================================ */

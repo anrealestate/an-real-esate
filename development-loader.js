@@ -8,23 +8,54 @@
     return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')
   }
 
+  function extractYoutubeVideoId(input) {
+    if (!input || typeof input !== 'string') return null
+    const s = input.trim()
+    if (!s) return null
+    if (/^[a-zA-Z0-9_-]{11}$/.test(s)) return s
+    try {
+      const u = new URL(/^https?:\/\//i.test(s) ? s : 'https://' + s)
+      const host = u.hostname.replace(/^www\./, '')
+      if (host === 'youtu.be') {
+        const id = u.pathname.replace(/^\//, '').split('/')[0]
+        return /^[a-zA-Z0-9_-]{11}$/.test(id) ? id : null
+      }
+      if (host === 'youtube.com' || host === 'm.youtube.com' || host === 'youtube-nocookie.com') {
+        if (u.pathname.startsWith('/embed/')) {
+          const id = u.pathname.slice('/embed/'.length).split('/')[0].split('?')[0]
+          return /^[a-zA-Z0-9_-]{11}$/.test(id) ? id : null
+        }
+        if (u.pathname.startsWith('/shorts/')) {
+          const id = u.pathname.slice('/shorts/'.length).split('/')[0].split('?')[0]
+          return /^[a-zA-Z0-9_-]{11}$/.test(id) ? id : null
+        }
+        const v = u.searchParams.get('v')
+        return v && /^[a-zA-Z0-9_-]{11}$/.test(v) ? v : null
+      }
+    } catch (_) {}
+    return null
+  }
+
   const slug = new URLSearchParams(location.search).get('slug')
 
   async function loadListings() {
+    const el = document.getElementById('listings-data')
+    if (el) {
+      try {
+        const parsed = JSON.parse(el.textContent)
+        const fromInline = Array.isArray(parsed.listings) ? parsed.listings : []
+        if (fromInline.length) return fromInline
+      } catch (_) {}
+    }
     try {
-      const r = await fetch('/data/listings.json', { cache: 'no-store', credentials: 'same-origin' })
+      const listingsUrl = new URL('data/listings.json', window.location.href).href
+      const r = await fetch(listingsUrl, { cache: 'no-store', credentials: 'same-origin' })
       if (r.ok) {
         const j = await r.json()
         if (Array.isArray(j.listings) && j.listings.length) return j.listings
       }
     } catch (_) {}
-    const el = document.getElementById('listings-data')
-    if (!el) return []
-    try {
-      return JSON.parse(el.textContent).listings || []
-    } catch {
-      return []
-    }
+    return []
   }
 
   let listings = await loadListings()
@@ -242,6 +273,23 @@
       descEl.innerHTML = listing.description.map(p => `<p>${esc(p)}</p>`).join('')
     }
 
+    const vidSec = document.getElementById('dv-video-section')
+    const vidFrame = document.getElementById('dv-video-iframe')
+    if (vidSec && vidFrame) {
+      const yid = extractYoutubeVideoId(listing.youtubeUrl || listing.videoYoutubeUrl || '')
+      if (yid) {
+        vidSec.removeAttribute('hidden')
+        vidFrame.src =
+          'https://www.youtube-nocookie.com/embed/' +
+          encodeURIComponent(yid) +
+          '?rel=0&modestbranding=1&playsinline=1'
+      } else {
+        vidSec.setAttribute('hidden', '')
+        vidFrame.src = ''
+        vidFrame.removeAttribute('src')
+      }
+    }
+
     /* Features */
     const featSection = document.getElementById('dv-features-section')
     const featEl = document.getElementById('dv-features')
@@ -347,7 +395,7 @@
               </div>
               <p class="dv-unit-price">${esc(c.price || '—')}</p>
               ${!isSold
-                ? `<a href="../property.html?slug=${esc(c.slug)}" class="dv-unit-cta dv-child-cta">Ver ficha →</a>`
+                ? `<a href="property.html?slug=${esc(c.slug)}" class="dv-unit-cta dv-child-cta">Ver ficha →</a>`
                 : ''}
             </div>`
         }).join('')
