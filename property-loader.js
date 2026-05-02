@@ -54,6 +54,60 @@
     return s
   }
 
+  /** URL absoluta para planos (JSON puede usar /docs/... relativo al site). */
+  function resolveFloorplanAssetUrl(src) {
+    if (!src) return ''
+    try {
+      return new URL(src, window.location.href).href
+    } catch (_) {
+      return String(src)
+    }
+  }
+
+  let _pdfJsPromise = null
+  function loadPdfJs() {
+    if (typeof window.pdfjsLib !== 'undefined' && window.pdfjsLib) return Promise.resolve(window.pdfjsLib)
+    if (_pdfJsPromise) return _pdfJsPromise
+    _pdfJsPromise = new Promise((resolve, reject) => {
+      const ver = '3.11.174'
+      const base = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${ver}/legacy/build/`
+      const s = document.createElement('script')
+      s.src = base + 'pdf.min.js'
+      s.async = true
+      s.onload = () => {
+        const lib = window.pdfjsLib
+        if (!lib) {
+          reject(new Error('pdfjsLib'))
+          return
+        }
+        lib.GlobalWorkerOptions.workerSrc = base + 'pdf.worker.min.js'
+        resolve(lib)
+      }
+      s.onerror = () => reject(new Error('pdf.js'))
+      document.head.appendChild(s)
+    })
+    return _pdfJsPromise
+  }
+
+  async function renderPdfFirstPage(canvas, pdfUrl, maxW, maxH) {
+    const pdfjsLib = await loadPdfJs()
+    const task = pdfjsLib.getDocument({ url: pdfUrl, withCredentials: false })
+    const pdf = await task.promise
+    const page = await pdf.getPage(1)
+    const baseVp = page.getViewport({ scale: 1 })
+    const scale = Math.min(maxW / baseVp.width, maxH / baseVp.height)
+    const viewport = page.getViewport({ scale: Math.max(scale, 0.08) })
+    const dpr = Math.min(window.devicePixelRatio || 1, 2)
+    canvas.width = Math.max(1, Math.floor(viewport.width * dpr))
+    canvas.height = Math.max(1, Math.floor(viewport.height * dpr))
+    canvas.style.width = Math.floor(viewport.width) + 'px'
+    canvas.style.height = Math.floor(viewport.height) + 'px'
+    const ctx = canvas.getContext('2d')
+    ctx.setTransform(1, 0, 0, 1, 0, 0)
+    ctx.scale(dpr, dpr)
+    await page.render({ canvasContext: ctx, viewport }).promise
+  }
+
   const urlSlug = new URLSearchParams(location.search).get('slug')
   const lookupSlug = urlSlug != null && String(urlSlug).trim() !== ''
     ? listingsSlugFromUrl(urlSlug)
@@ -63,15 +117,7 @@
     document.documentElement.classList.remove('property-shell-pending')
   }
 
-  async function loadListings() {
-    try {
-      const listingsUrl = new URL('data/listings.json', window.location.href).href
-      const r = await fetch(listingsUrl, { cache: 'no-store', credentials: 'same-origin' })
-      if (r.ok) {
-        const j = await r.json()
-        if (Array.isArray(j.listings) && j.listings.length) return j.listings
-      }
-    } catch (_) {}
+  function readInlineListings() {
     const el = document.getElementById('listings-data')
     if (!el) return []
     try {
@@ -80,6 +126,42 @@
     } catch {
       return []
     }
+  }
+
+  /**
+   * fetch(listings.json) puede estar cacheado / desactualizado en CDN-FTP mientras
+   * data-listings.js ya inyectó #listings-data con floorPlans. Si solo usamos fetch,
+   * las fichas pierden planos aunque el bundle sea correcto.
+   */
+  function mergeFetchWithInline(fromFetch, fromInline) {
+    if (!fromFetch.length) return fromInline
+    if (!fromInline.length) return fromFetch
+    const inlineBySlug = Object.fromEntries(fromInline.map(l => [l.slug, l]))
+    const merged = fromFetch.map(srv => {
+      const inl = inlineBySlug[srv.slug]
+      if (!inl) return srv
+      if (!srv.floorPlans?.length && inl.floorPlans?.length)
+        return { ...srv, floorPlans: inl.floorPlans }
+      return srv
+    })
+    const fetchSlugs = new Set(fromFetch.map(l => l.slug))
+    const extras = fromInline.filter(l => !fetchSlugs.has(l.slug))
+    return extras.length ? merged.concat(extras) : merged
+  }
+
+  async function loadListings() {
+    let fromFetch = []
+    try {
+      const listingsUrl = new URL('data/listings.json', window.location.href).href
+      const r = await fetch(listingsUrl, { cache: 'no-store', credentials: 'same-origin' })
+      if (r.ok) {
+        const j = await r.json()
+        if (Array.isArray(j.listings) && j.listings.length) fromFetch = j.listings
+      }
+    } catch (_) {}
+    const fromInline = readInlineListings()
+    if (fromFetch.length) return mergeFetchWithInline(fromFetch, fromInline)
+    return fromInline
   }
 
   let listings = await loadListings()
@@ -333,29 +415,169 @@
       }
     }
 
-    /* ── floor plans ── */
+    /* ── floor plans (ejemplo opción B: hero + strip, armonizado con galería / secciones) ── */
     const fpSec  = document.getElementById('ph-floorplans-section')
-    const fpGrid = document.getElementById('ph-floorplans-grid')
-    if (fpSec && fpGrid && listing.floorPlans?.length) {
-      fpGrid.innerHTML = listing.floorPlans.map(fp => {
-        const isPdf = /\.pdf(\?|$)/i.test(fp.src || '')
-        return `<div class="fp-item">
-          <div class="fp-img-wrap" onclick="window.open('${esc(fp.src)}','_blank')">
-            ${isPdf
-              ? `<svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>`
-              : `<img src="${esc(fp.src)}" alt="${esc(fp.label || '')}" loading="lazy" />`}
-          </div>
-          ${fp.label ? `<p class="fp-label">${esc(fp.label)}</p>` : ''}
-          <a href="${esc(fp.src)}" class="fp-download" target="_blank" rel="noopener">
-            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            ${isPdf ? 'PDF' : 'Ver'}
+    const fpRoot = document.getElementById('ph-floorplans-root')
+    const FP_PDF_ICON = '<svg class="fp-pdf-icon" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>'
+    const fpDlSvg = '<svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>'
+
+    function fpIsPdf(fp) {
+      return /\.pdf(\?|$)/i.test(fp.src || '')
+    }
+    function fpThumbUrl(fp) {
+      const raw = fp.thumb || fp.preview
+      if (raw && String(raw).trim()) return String(raw).trim()
+      if (!fpIsPdf(fp) && fp.src) return String(fp.src).trim()
+      return ''
+    }
+
+    if (fpSec && fpRoot && listing.floorPlans?.length) {
+      const plans = listing.floorPlans
+
+      fpRoot.innerHTML = `
+        <figure class="fp-hero-stage">
+          <a class="fp-hero-hit" id="ph-fp-hero-link" href="#" target="_blank" rel="noopener">
+            <div class="fp-hero-visual" id="ph-fp-hero-visual"></div>
           </a>
+          <figcaption class="fp-hero-caption">
+            <span class="fp-hero-label" id="ph-fp-hero-label"></span>
+            <span class="fp-hero-badge" id="ph-fp-hero-badge" hidden>PDF</span>
+          </figcaption>
+        </figure>
+        <div class="fp-strip-wrap" id="ph-fp-strip-wrap">
+          <div class="fp-strip" id="ph-fp-strip" role="tablist" aria-label="Floor plans"></div>
+        </div>
+        <div class="fp-hero-actions">
+          <a href="#" class="fp-download" id="ph-fp-open-tab" target="_blank" rel="noopener">${fpDlSvg}<span id="ph-fp-open-label"></span></a>
         </div>`
+
+      const heroVisual = document.getElementById('ph-fp-hero-visual')
+      const heroLink = document.getElementById('ph-fp-hero-link')
+      const heroLabel = document.getElementById('ph-fp-hero-label')
+      const heroBadge = document.getElementById('ph-fp-hero-badge')
+      const stripWrap = document.getElementById('ph-fp-strip-wrap')
+      const stripEl = document.getElementById('ph-fp-strip')
+      const openTab = document.getElementById('ph-fp-open-tab')
+      const openLbl = document.getElementById('ph-fp-open-label')
+
+      let fpPdfGen = 0
+
+      function setHeroVisual(fp) {
+        const myGen = ++fpPdfGen
+        const thumb = fpThumbUrl(fp)
+        const isPdf = fpIsPdf(fp)
+        const pdfAbs = isPdf ? resolveFloorplanAssetUrl(fp.src) : ''
+
+        if (thumb) {
+          heroVisual.innerHTML = `<div class="fp-hero-visual-inner"><img src="${esc(thumb)}" alt="${esc(fp.label || 'Floor plan')}" loading="lazy" /></div>`
+          return
+        }
+
+        if (isPdf && pdfAbs) {
+          heroVisual.innerHTML = `<div class="fp-hero-visual-inner"><div class="fp-pdf-render"><p class="fp-pdf-loading">Loading preview…</p><canvas class="fp-pdf-canvas" aria-label="${esc(fp.label || 'Floor plan preview')}"></canvas></div></div>`
+          const paintPdf = () => {
+            if (myGen !== fpPdfGen) return
+            const inner = heroVisual.querySelector('.fp-hero-visual-inner')
+            const canvas = heroVisual.querySelector('.fp-pdf-canvas')
+            const loading = heroVisual.querySelector('.fp-pdf-loading')
+            if (!inner || !canvas) return
+            const r = inner.getBoundingClientRect()
+            const maxW = Math.max(80, r.width)
+            const maxH = Math.max(80, r.height)
+            renderPdfFirstPage(canvas, pdfAbs, maxW, maxH)
+              .then(() => {
+                if (myGen !== fpPdfGen || !loading) return
+                loading.remove()
+              })
+              .catch(() => {
+                if (myGen !== fpPdfGen) return
+                heroVisual.innerHTML = `<div class="fp-hero-visual-inner"><div class="fp-hero-placeholder">${FP_PDF_ICON}<p class="fp-hero-placeholder-note">Preview unavailable — open the PDF</p></div></div>`
+              })
+          }
+          requestAnimationFrame(() => requestAnimationFrame(paintPdf))
+          return
+        }
+
+        heroVisual.innerHTML = `<div class="fp-hero-visual-inner"><div class="fp-hero-placeholder">${FP_PDF_ICON}</div></div>`
+      }
+
+      function setActive(i) {
+        const fp = plans[i]
+        if (!fp) return
+        const isPdf = fpIsPdf(fp)
+        const absOpen = resolveFloorplanAssetUrl(fp.src)
+        const hrefOpen = fp.src ? absOpen : '#'
+        setHeroVisual(fp)
+        heroLabel.textContent = fp.label || (isPdf ? 'Floor plan' : 'Plan')
+        heroBadge.hidden = !isPdf
+        heroLink.href = hrefOpen
+        openTab.href = hrefOpen
+        openLbl.textContent = isPdf ? 'PDF' : 'Ver'
+        stripEl.querySelectorAll('.fp-strip-item').forEach((btn, j) => {
+          const on = j === i
+          btn.classList.toggle('is-active', on)
+          btn.setAttribute('aria-selected', on ? 'true' : 'false')
+          btn.tabIndex = on ? 0 : -1
+        })
+      }
+
+      stripEl.innerHTML = plans.map((fp, i) => {
+        const thumb = fpThumbUrl(fp)
+        let inner
+        if (thumb) {
+          inner = `<span class="fp-strip-thumb"><span class="fp-strip-inner"><img src="${esc(thumb)}" alt="" loading="lazy" /></span></span>`
+        } else if (fpIsPdf(fp) && fp.src) {
+          inner = `<span class="fp-strip-thumb"><span class="fp-strip-inner fp-strip-inner--pdf"><span class="fp-pdf-loading fp-pdf-loading--strip" aria-hidden="true">…</span><canvas class="fp-strip-canvas" aria-hidden="true"></canvas></span></span>`
+        } else {
+          inner = `<span class="fp-strip-thumb fp-strip-fallback">${FP_PDF_ICON}</span>`
+        }
+        const tabLabel = fp.label || `Plan ${i + 1}`
+        return `<button type="button" class="fp-strip-item" role="tab" aria-selected="${i === 0 ? 'true' : 'false'}" data-fp-i="${i}" aria-label="${esc(tabLabel)}">${inner}</button>`
       }).join('')
+
+      stripWrap.hidden = plans.length <= 1
+
+      stripEl.addEventListener('click', e => {
+        const btn = e.target.closest('.fp-strip-item')
+        if (!btn || btn.disabled) return
+        setActive(parseInt(btn.dataset.fpI, 10))
+      })
+
+      stripEl.addEventListener('keydown', e => {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return
+        const items = [...stripEl.querySelectorAll('.fp-strip-item')]
+        const cur = items.findIndex(b => b.classList.contains('is-active'))
+        if (cur < 0) return
+        e.preventDefault()
+        const dir = e.key === 'ArrowRight' ? 1 : -1
+        const next = Math.max(0, Math.min(items.length - 1, cur + dir))
+        items[next].focus()
+        setActive(next)
+      })
+
+      setActive(0)
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          plans.forEach((fp, i) => {
+            if (fpThumbUrl(fp) || !fpIsPdf(fp) || !fp.src) return
+            const btn = stripEl.querySelector(`button[data-fp-i="${i}"]`)
+            const canvas = btn && btn.querySelector('.fp-strip-canvas')
+            const loading = btn && btn.querySelector('.fp-pdf-loading--strip')
+            if (!canvas) return
+            const url = resolveFloorplanAssetUrl(fp.src)
+            renderPdfFirstPage(canvas, url, 76, 58)
+              .then(() => { if (loading) loading.remove() })
+              .catch(() => { if (loading) loading.remove() })
+          })
+        })
+      })
+
       fpSec.removeAttribute('hidden')
       fpSec.hidden = false
     } else if (fpSec) {
       fpSec.hidden = true
+      if (fpRoot) fpRoot.innerHTML = ''
     }
 
     /* ── nearby ── */
