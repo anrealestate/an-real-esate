@@ -8,6 +8,26 @@
     return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')
   }
 
+  /* Allowlist of domains permitted as virtualTourUrl src (Matterport, Kuula, etc.).
+     'javascript:' and other unsafe schemes are rejected by the https-only check. */
+  const TOUR_ALLOWED_HOSTS = [
+    'my.matterport.com', 'matterport.com',
+    'kuula.co', 'roundme.com',
+    'cloudpano.com', 'app.cloudpano.com',
+    '3dvista.com', 'spinview.tv',
+    'res.cloudinary.com',
+  ]
+  function sanitizeVirtualTourUrl(raw) {
+    if (!raw || typeof raw !== 'string') return ''
+    try {
+      const u = new URL(raw.trim())
+      if (u.protocol !== 'https:') return ''
+      const host = u.hostname.toLowerCase()
+      if (TOUR_ALLOWED_HOSTS.some(a => host === a || host.endsWith('.' + a))) return u.href
+    } catch (_) {}
+    return ''
+  }
+
   function extractYoutubeVideoId(input) {
     if (!input || typeof input !== 'string') return null
     const s = input.trim()
@@ -219,10 +239,11 @@
     const detSec   = document.getElementById('prop-details')?.closest('section')
     const featSec  = document.getElementById('prop-features-section')
     const vidSec   = document.getElementById('prop-video-section')
+    const tourSec  = document.getElementById('prop-tour-section')
     const nearSec  = document.getElementById('prop-nearby-section')
 
-    /* Obra nueva: Details → Floor plans → Description → Features → Video → Location */
-    for (const sec of [detSec, fpSec, descSec, featSec, vidSec, nearSec]) {
+    /* Obra nueva: Details → Floor plans → Description → Features → Video → Tour 360° → Location */
+    for (const sec of [detSec, fpSec, descSec, featSec, vidSec, tourSec, nearSec]) {
       if (sec && sec.parentElement === mainEl) mainEl.appendChild(sec)
     }
     mainEl.dataset.orderApplied = 'new-dev'
@@ -414,6 +435,20 @@
         vidSec.hidden = true
         vidFrame.src = ''
         vidFrame.removeAttribute('src')
+      }
+    }
+
+    /* ── Virtual Tour 360° (allowlisted embed URL) ── */
+    const tourSec = document.getElementById('prop-tour-section')
+    const tourFrame = document.getElementById('prop-tour-iframe')
+    if (tourSec && tourFrame) {
+      const tourUrl = sanitizeVirtualTourUrl(listing.virtualTourUrl || '')
+      if (tourUrl) {
+        tourSec.hidden = false
+        tourFrame.src = tourUrl
+      } else {
+        tourSec.hidden = true
+        tourFrame.removeAttribute('src')
       }
     }
 

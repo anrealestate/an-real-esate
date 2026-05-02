@@ -17,6 +17,7 @@ const SESSION_KEY       = 'an_admin_auth'
 const CLD_CLOUD         = 'dbume3eak'
 const CLD_PRESET        = 'f3eiclx5'
 const CLD_UPLOAD_URL    = `https://api.cloudinary.com/v1_1/${CLD_CLOUD}/image/upload`
+const CLD_RAW_UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLD_CLOUD}/raw/upload`
 const MEDIA_KEY         = 'an_media_library'
 const VISITS_KEY        = 'an_visits'
 /** Vista previa watermark: v2 ignora muestras viejas que suelen traer la marca AN ya “quemada”. */
@@ -38,6 +39,26 @@ migrateWmSampleStorageOnce()
 
 function escHtml(s) {
   return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')
+}
+
+/* Allowlist of domains accepted as virtualTourUrl (Matterport, Kuula, RoundMe, CloudPano, 3DVista, Spinview, own Cloudinary).
+   Rejects javascript: and non-https schemes. Returns sanitised href or null. */
+const TOUR_ALLOWED_HOSTS = [
+  'my.matterport.com', 'matterport.com',
+  'kuula.co', 'roundme.com',
+  'cloudpano.com', 'app.cloudpano.com',
+  '3dvista.com', 'spinview.tv',
+  'res.cloudinary.com',
+]
+function validateVirtualTourUrl(raw) {
+  if (!raw || typeof raw !== 'string') return null
+  try {
+    const u = new URL(raw.trim())
+    if (u.protocol !== 'https:') return null
+    const host = u.hostname.toLowerCase()
+    if (TOUR_ALLOWED_HOSTS.some(a => host === a || host.endsWith('.' + a))) return u.href
+  } catch (_) {}
+  return null
 }
 
 /** Accept watch URL, youtu.be, shorts, embed, or bare 11-char id → video id or null */
@@ -310,6 +331,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Watermark tool
   initWatermarkTool()
+
+  // Virtual tour field
+  initTourField()
 
   // (upload-main-file removed — use gallery upload instead)
 
@@ -839,6 +863,7 @@ function _showForm(slug) {
   // PDF hero
   setPdfHero(l.pdf_hero || '')
   document.getElementById('f-youtube-url').value = l.youtubeUrl || ''
+  setTourUrl(l.virtualTourUrl || '')
 
   // Description
   const descEl = document.getElementById('desc-list')
@@ -944,6 +969,118 @@ function switchView(name) {
 }
 
 // ── SAVE ──────────────────────────────────────
+/* ── Virtual Tour 360° helpers ── */
+function setTourUrl(url) {
+  const input   = document.getElementById('f-tour-url')
+  const status  = document.getElementById('tour-url-status')
+  const preview = document.getElementById('tour-preview-wrap')
+  const iframe  = document.getElementById('tour-preview-iframe')
+  if (!input) return
+  input.value = url || ''
+  if (url && validateVirtualTourUrl(url)) {
+    status.textContent = '✓ URL válida'
+    status.style.color = 'var(--gold)'
+    preview.style.display = ''
+    iframe.src = url
+  } else {
+    status.textContent = ''
+    preview.style.display = 'none'
+    if (iframe) iframe.removeAttribute('src')
+  }
+}
+
+function initTourField() {
+  const input     = document.getElementById('f-tour-url')
+  const dropZone  = document.getElementById('tour-drop-zone')
+  const fileInput = document.getElementById('tour-file-input')
+  const status    = document.getElementById('tour-url-status')
+  if (!input || !dropZone) return
+
+  /* Live URL validation feedback */
+  input.addEventListener('input', () => {
+    const v = input.value.trim()
+    if (!v) { status.textContent = ''; return }
+    if (validateVirtualTourUrl(v)) {
+      status.textContent = '✓ URL válida'
+      status.style.color = 'var(--gold)'
+    } else {
+      status.textContent = '✗ Dominio no permitido (Matterport, Kuula, RoundMe, CloudPano, 3DVista, Spinview)'
+      status.style.color = '#e07070'
+    }
+  })
+
+  /* Drag-drop: accept link text (dragged from browser address bar / link) */
+  dropZone.addEventListener('dragover', e => {
+    e.preventDefault()
+    dropZone.dataset.over = '1'
+  })
+  dropZone.addEventListener('dragleave', () => { delete dropZone.dataset.over })
+  dropZone.addEventListener('drop', async e => {
+    e.preventDefault()
+    delete dropZone.dataset.over
+
+    /* Priority: URI list (link drag) > plain text > file */
+    const uriList = e.dataTransfer.getData('text/uri-list')
+    const plainText = e.dataTransfer.getData('text/plain')
+    const url = (uriList || plainText || '').split('\n').map(s => s.trim()).find(s => s.startsWith('http'))
+
+    if (url) {
+      input.value = url
+      input.dispatchEvent(new Event('input'))
+      return
+    }
+
+    /* File drop — upload raw to Cloudinary */
+    const file = e.dataTransfer.files?.[0]
+    if (file) await uploadTourFile(file)
+  })
+
+  /* File picker */
+  fileInput?.addEventListener('change', async e => {
+    const file = e.target.files?.[0]
+    if (file) await uploadTourFile(file)
+    fileInput.value = ''
+  })
+}
+
+async function uploadTourFile(file) {
+  const status = document.getElementById('tour-url-status')
+  status.textContent = 'Subiendo archivo…'
+  status.style.color = 'var(--gold)'
+
+  return new Promise(resolve => {
+    const xhr  = new XMLHttpRequest()
+    const form = new FormData()
+    form.append('file', file)
+    form.append('upload_preset', CLD_PRESET)
+    form.append('folder', 'an-realestate/tours')
+
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        const res = JSON.parse(xhr.responseText)
+        setTourUrl(res.secure_url)
+        status.textContent = '✓ Archivo subido'
+        status.style.color = 'var(--gold)'
+        resolve(res.secure_url)
+      } else {
+        let msg = xhr.status
+        try { msg = JSON.parse(xhr.responseText)?.error?.message || msg } catch {}
+        status.textContent = 'Error al subir: ' + msg
+        status.style.color = '#e07070'
+        resolve(null)
+      }
+    }
+    xhr.onerror = () => {
+      status.textContent = 'Error de red al subir'
+      status.style.color = '#e07070'
+      resolve(null)
+    }
+
+    xhr.open('POST', CLD_RAW_UPLOAD_URL)
+    xhr.send(form)
+  })
+}
+
 function setPdfHero(url) {
   const preview = document.getElementById('pdf-hero-preview')
   const img     = document.getElementById('pdf-hero-img')
@@ -1029,6 +1166,11 @@ async function saveProperty() {
   const ytRaw = document.getElementById('f-youtube-url').value.trim()
   if (ytRaw && !extractYoutubeVideoId(ytRaw)) {
     toast('URL de YouTube no válida (youtube.com, youtu.be o shorts).', 'error')
+    return
+  }
+  const tourRaw = document.getElementById('f-tour-url').value.trim()
+  if (tourRaw && !validateVirtualTourUrl(tourRaw)) {
+    toast('URL del tour virtual no válida. Dominios permitidos: Matterport, Kuula, RoundMe, CloudPano, 3DVista, Spinview.', 'error')
     return
   }
 
@@ -1151,6 +1293,7 @@ async function saveProperty() {
     images:       images.length ? images : undefined,
     pdf_hero:     pdfHero || undefined,
     youtubeUrl:   ytRaw || undefined,
+    virtualTourUrl: tourRaw ? validateVirtualTourUrl(tourRaw) || undefined : undefined,
     description:  description.length ? description : undefined,
     details:      details.length ? details : undefined,
     features:     Object.keys(features).length ? features : undefined,

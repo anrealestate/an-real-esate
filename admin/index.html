@@ -531,6 +531,25 @@
             <input type="url" id="f-youtube-url" placeholder="https://www.youtube.com/watch?v=…" autocomplete="off" aria-label="URL de YouTube" style="width:100%;max-width:42rem;padding:.65rem .85rem;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.25);color:inherit;font-size:.88rem" />
           </div>
 
+          <!-- Tour Virtual 360° -->
+          <div class="list-block">
+            <div class="list-hd"><span class="list-title">Tour Virtual 360°</span></div>
+            <p class="gal-hint">Dominios permitidos: Matterport (<code style="font-size:.8em">my.matterport.com/show/?m=…</code>), Kuula, RoundMe, CloudPano, 3DVista, Spinview. Pega la URL de embed, arrastra un enlace desde el navegador, o sube un archivo HTML autocontenido.</p>
+            <input type="url" id="f-tour-url" placeholder="https://my.matterport.com/show/?m=…" autocomplete="off" aria-label="URL Tour Virtual" style="width:100%;max-width:42rem;padding:.65rem .85rem;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.25);color:inherit;font-size:.88rem" />
+            <div id="tour-url-status" style="font-size:.82rem;margin-top:.35rem;min-height:1.1em"></div>
+            <div id="tour-drop-zone" data-over="" style="position:relative;margin-top:.65rem;max-width:42rem;border:1.5px dashed rgba(255,255,255,.18);border-radius:8px;padding:.9rem 1rem;font-size:.82rem;color:rgba(240,235,224,.45);text-align:center;cursor:pointer;transition:border-color .15s,color .15s" onmouseover="this.style.borderColor='rgba(185,155,100,.55)'" onmouseout="if(!this.dataset.over)this.style.borderColor='rgba(255,255,255,.18)'">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:.4em"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Arrastra un enlace o archivo de tour aquí
+              <input type="file" id="tour-file-input" accept=".html,.htm,.zip" style="position:absolute;inset:0;opacity:0;cursor:pointer" tabindex="-1" />
+            </div>
+            <div id="tour-preview-wrap" style="display:none;margin-top:.75rem;max-width:42rem">
+              <p style="font-size:.78rem;color:rgba(240,235,224,.4);margin:0 0 .35rem">Vista previa (puede mostrar restricción X-Frame-Options según proveedor):</p>
+              <div style="position:relative;aspect-ratio:16/9;background:#0a0a0a;border:1px solid rgba(255,255,255,.12)">
+                <iframe id="tour-preview-iframe" loading="lazy" allowfullscreen allow="xr-spatial-tracking; fullscreen; vr" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
+              </div>
+            </div>
+          </div>
+
           <!-- Planos -->
           <div class="list-block">
             <div class="list-hd">

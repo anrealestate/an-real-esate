@@ -8,6 +8,24 @@
     return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')
   }
 
+  const TOUR_ALLOWED_HOSTS = [
+    'my.matterport.com', 'matterport.com',
+    'kuula.co', 'roundme.com',
+    'cloudpano.com', 'app.cloudpano.com',
+    '3dvista.com', 'spinview.tv',
+    'res.cloudinary.com',
+  ]
+  function sanitizeVirtualTourUrl(raw) {
+    if (!raw || typeof raw !== 'string') return ''
+    try {
+      const u = new URL(raw.trim())
+      if (u.protocol !== 'https:') return ''
+      const host = u.hostname.toLowerCase()
+      if (TOUR_ALLOWED_HOSTS.some(a => host === a || host.endsWith('.' + a))) return u.href
+    } catch (_) {}
+    return ''
+  }
+
   function extractYoutubeVideoId(input) {
     if (!input || typeof input !== 'string') return null
     const s = input.trim()
@@ -392,6 +410,20 @@
         vidSec.setAttribute('hidden', '')
         vidFrame.src = ''
         vidFrame.removeAttribute('src')
+      }
+    }
+
+    /* ── Virtual Tour 360° ── */
+    const tourSec = document.getElementById('dv-tour-section')
+    const tourFrame = document.getElementById('dv-tour-iframe')
+    if (tourSec && tourFrame) {
+      const tourUrl = sanitizeVirtualTourUrl(listing.virtualTourUrl || '')
+      if (tourUrl) {
+        tourSec.removeAttribute('hidden')
+        tourFrame.src = tourUrl
+      } else {
+        tourSec.setAttribute('hidden', '')
+        tourFrame.removeAttribute('src')
       }
     }
 

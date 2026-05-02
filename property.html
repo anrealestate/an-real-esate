@@ -252,6 +252,14 @@
             </div>
           </section>
 
+          <!-- Virtual Tour 360° (populated by property-loader.js when listing.virtualTourUrl is set) -->
+          <section class="prop-section" id="prop-tour-section" hidden>
+            <h2 class="prop-section-h" data-i18n="section.virtualtour">Virtual Tour 360°</h2>
+            <div class="prop-video-wrap">
+              <iframe id="prop-tour-iframe" title="Property virtual tour 360°" loading="lazy" allowfullscreen allow="xr-spatial-tracking; fullscreen; vr" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            </div>
+          </section>
+
           <!-- Property details table -->
           <section class="prop-section">
             <h2 class="prop-section-h" data-i18n="section.details">Property Details</h2>
@@ -596,7 +604,7 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg7_3UefA_rzfXRAwCMS42A4Z7lx4BUTc" async defer></script>
   <script src="area-format.js?v=au1"></script>
   <script src="data-listings.js?v=listings618"></script>
-  <script src="property-loader.js?v=au12"></script>
+  <script src="property-loader.js?v=au13"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="main.js?v=ux2"></script>
