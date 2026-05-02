@@ -291,9 +291,14 @@
     const firstImg = (listing.images || []).find(i => !(typeof i === 'object' ? i.hidden : false))
     const ogImg = typeof firstImg === 'string' ? firstImg : (firstImg?.src || listing.image || '')
     const pageUrl = `https://anrealestate.es/development.html?slug=${esc(publicSlugFromJson(listing.slug))}`
+    const dvDesc = (listing.description || [])[0] || ''
+    const dvTitle = `${listing.title} — AN Real Estate`
     document.title = `${listing.title} — ${listing.price} — AN Real Estate`
-    document.querySelector('meta[name="description"]')?.setAttribute('content', (listing.description || [])[0] || '')
-    document.querySelector('meta[property="og:title"]')?.setAttribute('content', `${listing.title} — AN Real Estate`)
+    document.querySelector('meta[name="description"]')?.setAttribute('content', dvDesc)
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content', dvTitle)
+    document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', dvTitle)
+    document.querySelector('meta[property="og:description"]')?.setAttribute('content', dvDesc)
+    document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', dvDesc)
     document.querySelector('meta[property="og:url"]')?.setAttribute('content', pageUrl)
     if (ogImg) {
       document.querySelector('meta[property="og:image"]')?.setAttribute('content', ogImg)
@@ -306,14 +311,17 @@
     /* JSON-LD */
     const jsonLdEl = document.getElementById('property-jsonld')
     if (jsonLdEl) {
+      const dvPriceCurrency = /^\$/.test(String(listing.price || '')) ? 'USD' : 'EUR'
+      const dvPriceNum = String(listing.price || '').replace(/[^0-9]/g, '')
       jsonLdEl.textContent = JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'RealEstateListing',
         'name': listing.title,
-        'description': (listing.description || [])[0] || '',
+        'description': dvDesc,
         'url': pageUrl,
         'image': ogImg,
-        'address': { '@type': 'PostalAddress', 'streetAddress': listing.address || '', 'addressLocality': listing.city || '' }
+        ...(dvPriceNum ? { 'offers': { '@type': 'Offer', 'price': dvPriceNum, 'priceCurrency': dvPriceCurrency } } : {}),
+        'address': { '@type': 'PostalAddress', 'streetAddress': listing.address || '', 'addressLocality': listing.city || 'Barcelona', 'addressCountry': 'ES' }
       })
     }
 

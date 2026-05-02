@@ -290,9 +290,14 @@
     const rawFirst = (baseListing.images || []).find(i => !(typeof i === 'object' ? i.hidden : false))
     const ogImg = typeof rawFirst === 'string' ? rawFirst : (rawFirst?.src || listing.image || '')
     const pageUrl = `https://anrealestate.es/property.html?slug=${publicSlugFromJson(listing.slug)}`
+    const ogTitle = `${listing.title} — ${priceLabel} — AN Real Estate`
+    const ogDesc  = (listing.description || [])[0] || ''
     document.querySelector('meta[property="og:image"]')?.setAttribute('content', ogImg)
     document.querySelector('meta[name="twitter:image"]')?.setAttribute('content', ogImg)
-    document.querySelector('meta[property="og:title"]')?.setAttribute('content', `${listing.title} — ${priceLabel} — AN Real Estate`)
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content', ogTitle)
+    document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', ogTitle)
+    document.querySelector('meta[property="og:description"]')?.setAttribute('content', ogDesc)
+    document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', ogDesc)
     document.querySelector('meta[property="og:url"]')?.setAttribute('content', pageUrl)
     let canonEl = document.querySelector('link[rel="canonical"]')
     if (!canonEl) { canonEl = document.createElement('link'); canonEl.rel = 'canonical'; document.head.appendChild(canonEl) }
@@ -301,24 +306,26 @@
     /* ── JSON-LD structured data ── */
     const jsonLdEl = document.getElementById('property-jsonld')
     if (jsonLdEl) {
+      const priceCurrency = /^\$/.test(String(listing.price || '')) ? 'USD' : 'EUR'
+      const priceNum = String(listing.price || '').replace(/[^0-9]/g, '')
       jsonLdEl.textContent = JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'RealEstateListing',
         'name': listing.title,
-        'description': (listing.description || [])[0] || '',
+        'description': ogDesc,
         'url': pageUrl,
         'image': ogImg,
         'offers': {
           '@type': 'Offer',
-          'price': listing.price.replace(/[^0-9]/g, ''),
-          'priceCurrency': 'EUR',
+          'price': priceNum,
+          'priceCurrency': priceCurrency,
           'availability': 'https://schema.org/InStock'
         },
         'numberOfRooms': listing.beds,
         'floorSize': { '@type': 'QuantitativeValue', 'value': listing.size, 'unitCode': 'MTK' },
         'address': {
           '@type': 'PostalAddress',
-          'addressLocality': 'Barcelona',
+          'addressLocality': listing.city || 'Barcelona',
           'addressRegion': 'Catalunya',
           'addressCountry': 'ES'
         }
