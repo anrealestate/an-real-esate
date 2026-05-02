@@ -10,7 +10,7 @@
     },
     {
       "source": "/property.html",
-      "has": [{ "type": "query", "key": "slug", "value": "house-of-wellnes-u-:unit" }],
+      "has": [{ "type": "query", "key": "slug", "value": "house-of-wellnes-u-(?<unit>.*)" }],
       "destination": "/property.html?slug=house-of-wellness-u-:unit",
       "permanent": true
     }
