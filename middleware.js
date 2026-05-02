@@ -15,6 +15,14 @@ export const config = {
 }
 
 export default function middleware(request) {
+  const { pathname } = new URL(request.url)
+
+  // Redirect /admin (no trailing slash) → /admin/ so relative CSS/JS paths resolve correctly.
+  // The redirect itself carries no protected content; /admin/ still requires auth below.
+  if (pathname === '/admin') {
+    return Response.redirect(new URL('/admin/', request.url), 302)
+  }
+
   const expectedUser = process.env.ADMIN_USER ?? 'alvaro'
   const expectedPass = process.env.ADMIN_PASS
 
