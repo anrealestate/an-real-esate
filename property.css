@@ -477,7 +477,8 @@
   width: 100%;
   min-width: 0;
 }
-.pc-form-actions .button {
+.pc-form-actions .button,
+.pc-form-actions .pc-dossier {
   width: 100%;
   justify-content: center;
   box-sizing: border-box;
@@ -510,7 +511,7 @@
   justify-content: center;
   gap: .5rem;
   width: 100%;
-  margin-top: .65rem;
+  margin-top: 0;
   padding: .8rem;
   background: #25d366;
   color: #fff;
@@ -529,7 +530,7 @@
   justify-content: center;
   gap: .45rem;
   width: 100%;
-  margin-top: .65rem;
+  margin-top: .5rem;
   padding: .7rem;
   border: 1px solid var(--border);
   font-size: var(--fs-xs);
@@ -779,8 +780,8 @@
   box-sizing: border-box;
   min-height: 44px;
   padding: .72rem 1rem;
-  font-size: var(--fs-2xs);
-  letter-spacing: .1em;
+  font-size: var(--fs-xs);
+  letter-spacing: .08em;
   line-height: 1.2;
   word-break: break-word;
   text-align: center;
@@ -957,27 +958,36 @@
   .lb-stage { padding: 5rem 7rem; }
 }
 
-/* ── Dossier download button ── */
+/* ── Dossier download button — sits inside .pc-form-actions, same size as sibling buttons ── */
 .pc-dossier {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: .5rem;
-  width: 100%;
-  margin-top: .65rem;
-  padding: .82rem;
   background: transparent;
-  border: 1px solid var(--gold, #c8a96e);
+  border: 1px solid rgba(201,169,110,.45);
   color: var(--gold, #c8a96e);
   font-family: inherit;
-  font-size: var(--fs-xs, .72rem);
-  font-weight: 500;
-  letter-spacing: .1em;
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  letter-spacing: .06em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background .18s, color .18s;
+  transition: background .18s, border-color .18s, color .18s;
 }
-.pc-dossier:hover { background: var(--gold, #c8a96e); color: #091f38; }
+.pc-dossier:hover {
+  background: rgba(201,169,110,.08);
+  border-color: var(--gold, #c8a96e);
+  color: var(--gold, #c8a96e);
+}
+.pc-dossier:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+/* Thin separator between conversion CTAs and direct-channel links */
+.pc-channels-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 1rem 0 .5rem;
+}
 
 /* ── Dossier lead modal ── */
 .dossier-overlay {
