@@ -3,17 +3,32 @@
    Reads ?slug= from URL and populates
    development.html dynamically
    ================================ */
-;(function () {
+;(async function () {
   function esc(str) {
     return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')
   }
 
   const slug = new URLSearchParams(location.search).get('slug')
 
-  const el = document.getElementById('listings-data')
-  if (!el) return
-  let listings = []
-  try { listings = JSON.parse(el.textContent).listings || [] } catch { return }
+  async function loadListings() {
+    try {
+      const r = await fetch('/data/listings.json', { cache: 'no-store', credentials: 'same-origin' })
+      if (r.ok) {
+        const j = await r.json()
+        if (Array.isArray(j.listings) && j.listings.length) return j.listings
+      }
+    } catch (_) {}
+    const el = document.getElementById('listings-data')
+    if (!el) return []
+    try {
+      return JSON.parse(el.textContent).listings || []
+    } catch {
+      return []
+    }
+  }
+
+  let listings = await loadListings()
+  if (!listings.length) return
 
   /* Merge admin cache: servidor publicado gana siempre (evita ficha vacía con caché antigua del admin) */
   try {
@@ -239,7 +254,7 @@
       featSection.removeAttribute('hidden')
     }
 
-    /* Units — real child listings first; fallback to mother's units[] */
+    /* Units — inventario units[] de la promoción primero; si no hay, unidades hijas (fichas) */
     const unitsSection = document.getElementById('dv-units-section')
     const unitGrid     = document.getElementById('dv-unit-grid')
     const unitFilters  = document.getElementById('dv-unit-filters')
@@ -277,8 +292,37 @@
         })
       }
 
-      if (children.length) {
-        /* ── Real child listings ── */
+      if (listing.units?.length) {
+        /* ── Inventario en la promoción (p. ej. listado PDF importado en admin) ── */
+        const AVAIL_LABEL = { available: 'Available', reserved: 'Reserved', sold: 'Sold' }
+        const availClass  = { available: 'dv-unit-avail--available', reserved: 'dv-unit-avail--reserved', sold: 'dv-unit-avail--sold' }
+        const bedsSet = new Set(listing.units.map(u => u.beds ?? 0))
+        wireFilters(bedsSet)
+
+        unitGrid.innerHTML = listing.units.map(u => {
+          const sizeRange  = u.sizeMin && u.sizeMax ? `${u.sizeMin}–${u.sizeMax} sq ft` : (u.sizeMin ? `${u.sizeMin} sq ft` : '')
+          const avail      = u.availability || 'available'
+          const aClass     = availClass[avail] || 'dv-unit-avail--available'
+          const isSold     = avail === 'sold'
+          return `
+            <div class="dv-unit-card" data-beds="${u.beds ?? 0}">
+              <div class="dv-unit-head">
+                <span class="dv-unit-id">${esc(u.id)}</span>
+                <span class="dv-unit-avail ${aClass}">${esc(AVAIL_LABEL[avail] || avail)}</span>
+              </div>
+              <p class="dv-unit-layout">${esc(u.layout || '')}</p>
+              <div class="dv-unit-meta">
+                ${sizeRange ? `<span>${esc(sizeRange)}</span>` : ''}
+                ${u.floorsAvailable ? `<span>Floors ${esc(u.floorsAvailable)}</span>` : ''}
+              </div>
+              <p class="dv-unit-price">${esc(u.priceFrom || '—')}</p>
+              ${!isSold ? `<a href="#enquire" class="dv-unit-cta" onclick="document.querySelector('#prop-form [name=message]').value='Interested in unit type ${esc(u.id)} (${esc(u.layout||'')})'">Enquire</a>` : ''}
+            </div>`
+        }).join('')
+        unitsSection.removeAttribute('hidden')
+
+      } else if (children.length) {
+        /* ── Unidades hijas con ficha propia (property.html) ── */
         const bedsSet = new Set(children.map(c => c.beds ?? 0))
         wireFilters(bedsSet)
         unitGrid.innerHTML = children.map(c => {
@@ -305,43 +349,6 @@
               ${!isSold
                 ? `<a href="../property.html?slug=${esc(c.slug)}" class="dv-unit-cta dv-child-cta">Ver ficha →</a>`
                 : ''}
-            </div>`
-        }).join('')
-        unitsSection.removeAttribute('hidden')
-
-      } else if (listing.units?.length) {
-        /* ── Fallback: units[] embedded in mother listing ── */
-        const AVAIL_LABEL = { available: 'Available', reserved: 'Reserved', sold: 'Sold' }
-        const availClass  = { available: 'dv-unit-avail--available', reserved: 'dv-unit-avail--reserved', sold: 'dv-unit-avail--sold' }
-        const bedsSet = new Set(listing.units.map(u => u.beds ?? 0))
-        wireFilters(bedsSet)
-
-        const note = document.querySelector('.dv-units-note')
-        if (note) {
-          const banner = document.createElement('p')
-          banner.className = 'dv-units-fallback-note'
-          banner.textContent = '⚠ Showing indicative unit types. Individual unit listings coming soon.'
-          note.parentNode.insertBefore(banner, note)
-        }
-
-        unitGrid.innerHTML = listing.units.map(u => {
-          const sizeRange  = u.sizeMin && u.sizeMax ? `${u.sizeMin}–${u.sizeMax} sq ft` : (u.sizeMin ? `${u.sizeMin} sq ft` : '')
-          const avail      = u.availability || 'available'
-          const aClass     = availClass[avail] || 'dv-unit-avail--available'
-          const isSold     = avail === 'sold'
-          return `
-            <div class="dv-unit-card" data-beds="${u.beds ?? 0}">
-              <div class="dv-unit-head">
-                <span class="dv-unit-id">${esc(u.id)}</span>
-                <span class="dv-unit-avail ${aClass}">${esc(AVAIL_LABEL[avail] || avail)}</span>
-              </div>
-              <p class="dv-unit-layout">${esc(u.layout || '')}</p>
-              <div class="dv-unit-meta">
-                ${sizeRange ? `<span>${esc(sizeRange)}</span>` : ''}
-                ${u.floorsAvailable ? `<span>Floors ${esc(u.floorsAvailable)}</span>` : ''}
-              </div>
-              <p class="dv-unit-price">${esc(u.priceFrom || '—')}</p>
-              ${!isSold ? `<a href="#enquire" class="dv-unit-cta" onclick="document.querySelector('#prop-form [name=message]').value='Interested in unit type ${esc(u.id)} (${esc(u.layout||'')})'">Enquire</a>` : ''}
             </div>`
         }).join('')
         unitsSection.removeAttribute('hidden')
