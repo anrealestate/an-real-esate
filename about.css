@@ -25,16 +25,17 @@
 }
 
 .ab-top-inner {
-  max-width: 1140px;
+  max-width: 40rem;
   margin: 0 auto;
+  padding-inline: 0;
 }
 
 .ab-h1 {
   font-family: var(--serif);
   font-size: max(40px, 9vw);
   font-weight: 300;
-  line-height: .97;
-  letter-spacing: -.3vw;
+  line-height: 1.02;
+  letter-spacing: clamp(-0.06em, -0.2vw, -0.02em);
   color: var(--cream);
   margin-top: 1rem;
   margin-bottom: 1.5rem;
@@ -54,11 +55,12 @@
 .ab-top-sub {
   font-size: var(--fs-xs);
   font-weight: 300;
-  letter-spacing: .16em;
+  letter-spacing: .14em;
   text-transform: uppercase;
-  color: var(--cream-dim);
-  opacity: .8;
-  line-height: 1.8;
+  color: rgba(240, 235, 224, 0.72);
+  line-height: 1.75;
+  max-width: 36rem;
+  margin-inline: auto;
 }
 
 /* ================================
@@ -106,8 +108,26 @@
    (augments styles from styles.css)
    ================================ */
 .ab-team-wrap {
-  margin-top: clamp(0.5rem, 2vw, 1.5rem);
-  margin-bottom: clamp(5rem, 14vw, 14rem);
+  margin-top: clamp(0.25rem, 1.5vw, 1rem);
+  margin-bottom: clamp(4.5rem, 12vw, 12rem);
+}
+
+/* Team block: calmer hierarchy (no duplicate key / role row) */
+.ab-team-wrap .at-heading {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+}
+.ab-team-wrap .at-sub {
+  margin-bottom: 1.75rem;
+  color: rgba(201, 169, 110, 0.92);
+}
+.ab-team-wrap .at-img {
+  border: 1px solid var(--border);
+}
+.ab-team-wrap .at-caption {
+  text-align: center;
+  margin-top: 1rem;
+  letter-spacing: 0.22em;
 }
 
 /* Slightly higher contrast on long-form about copy (readability on dark bg) */
@@ -128,15 +148,15 @@
    CREDENTIALS / HISTORY
    ================================ */
 .ab-history {
-  padding-bottom: clamp(5rem, 12vw, 12rem);
+  padding-bottom: clamp(4.5rem, 10vw, 10rem);
   border-top: 1px solid var(--border);
 }
 
 .ab-history-inner {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
-  padding-top: clamp(3rem, 6vw, 5rem);
+  gap: 2.5rem;
+  padding-top: clamp(2.75rem, 5vw, 4rem);
 }
 
 /* Left sticky column */
@@ -155,7 +175,7 @@
   line-height: 1.05;
   letter-spacing: -.12vw;
   color: var(--cream);
-  margin-top: 1rem;
+  margin-top: 0;
   margin-bottom: 1rem;
 }
 .ab-history-h2 .text-wrap {
@@ -167,11 +187,10 @@
 
 .ab-history-sub {
   font-size: var(--fs-xs);
-  color: var(--muted);
-  letter-spacing: .06em;
-  line-height: 1.6;
-  opacity: .8;
-  max-width: 28ch;
+  color: rgba(240, 235, 224, 0.45);
+  letter-spacing: 0.04em;
+  line-height: 1.65;
+  max-width: 38ch;
 }
 
 /* Right scrolling column */
@@ -180,10 +199,17 @@
 }
 
 .ab-history-item {
-  max-width: 520px;
-  margin-bottom: clamp(3.5rem, 8vw, 6rem);
+  max-width: 34rem;
+  margin-bottom: 0;
+  padding-bottom: clamp(2rem, 4vw, 2.75rem);
+  margin-bottom: clamp(2rem, 4vw, 2.75rem);
+  border-bottom: 1px solid rgba(240, 235, 224, 0.06);
 }
-.ab-history-item:last-child { margin-bottom: 0; }
+.ab-history-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
 
 .ab-history-year {
   display: block;
@@ -210,26 +236,30 @@
 
 .ab-history-text {
   font-size: var(--fs-sm);
-  color: var(--cream-dim);
-  opacity: .8;
-  line-height: 1.75;
+  line-height: 1.78;
 }
 
 /* ================================
    CTA
    ================================ */
 .ab-cta {
-  padding-block: clamp(4rem, 9vw, 7rem);
+  padding-block: clamp(3.5rem, 8vw, 6.5rem);
+}
+
+.ab-cta-inner {
+  max-width: 46rem;
+  margin-inline: auto;
+  padding-inline: 0;
 }
 
 .ab-cta-h2 {
   font-family: var(--serif);
-  font-size: max(44px, 7vw);
+  font-size: max(40px, 6.25vw);
   font-weight: 300;
   line-height: 1;
-  letter-spacing: -.2vw;
+  letter-spacing: clamp(-0.05em, -0.15vw, -0.02em);
   color: var(--cream);
-  margin-top: .75rem;
+  margin-top: 0.25rem;
   margin-bottom: 1.25rem;
 }
 .ab-cta-h2 em {
@@ -245,11 +275,9 @@
 
 .ab-cta-sub {
   font-size: var(--fs-sm);
-  color: var(--cream-dim);
-  opacity: .8;
-  line-height: 1.7;
-  max-width: 44ch;
-  margin-bottom: 2.5rem;
+  line-height: 1.72;
+  max-width: 42ch;
+  margin-bottom: 2rem;
 }
 
 .ab-cta-actions {
@@ -257,7 +285,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 3.5rem;
+  margin-bottom: 2.75rem;
 }
 
 @media (max-width: 767px) {
@@ -293,10 +321,11 @@
 .ab-contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2rem 2.5rem;
-  border-top: 1px solid var(--border);
-  padding-top: 2.5rem;
-  max-width: 640px;
+  gap: 1.75rem 2.25rem;
+  border-top: 1px solid rgba(240, 235, 224, 0.1);
+  padding-top: 2.25rem;
+  max-width: 40rem;
+  margin-inline: auto;
 }
 
 .ab-contact-item {
@@ -315,7 +344,7 @@
 
 .ab-contact-val {
   font-size: var(--fs-sm);
-  color: var(--cream-dim);
+  color: rgba(240, 235, 224, 0.88);
   line-height: 1.5;
 }
 
@@ -353,21 +382,21 @@
     width: calc(50% - 40px);
     margin-left: auto;
     padding-left: 60px;
-    padding-top: clamp(3rem, 6vw, 5rem);
+    padding-top: clamp(2.5rem, 5vw, 4rem);
   }
 
   .ab-history-item {
-    margin-bottom: clamp(5rem, 12vw, 10rem);
+    padding-bottom: clamp(2.25rem, 5vw, 3rem);
+    margin-bottom: clamp(2.25rem, 5vw, 3rem);
   }
 
   .ab-contact-grid {
-    max-width: none;
+    max-width: 44rem;
   }
 }
 
 @media (min-width: 1280px) {
-  .ab-h1 { font-size: max(56px, 8.5vw); }
-  .ab-history-item { margin-bottom: clamp(6rem, 14vw, 12rem); }
+  .ab-h1 { font-size: max(52px, 6vw); }
 }
 
 /* ── Mobile ───────────────────── */
@@ -378,9 +407,11 @@
   /* CTA heading: allow wrapping on very small screens */
   .ab-cta-h2 { font-size: clamp(34px, 9vw, 44px); }
 
-  /* Contact grid: collapse to single column below 480px */
-  .ab-contact-grid { grid-template-columns: 1fr; gap: 1.5rem; max-width: 320px; }
+  /* Contact grid: single column, full width of holder */
+  .ab-contact-grid { grid-template-columns: 1fr; gap: 1.5rem; max-width: none; margin-inline: 0; }
 
-  /* Reduce excess bottom margin in history items on mobile */
-  .ab-history-item { margin-bottom: clamp(2.5rem, 6vw, 4rem); }
+  .ab-history-item {
+    padding-bottom: clamp(1.5rem, 4vw, 2rem);
+    margin-bottom: clamp(1.5rem, 4vw, 2rem);
+  }
 }
