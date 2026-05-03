@@ -126,176 +126,28 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Gràcia",
-      "order": 1
+      "order": 5
     },
     {
       "slug": "eixample-golden-square-rent",
       "title": "Refined Luxury in Barcelona's Golden Square",
       "price": "€7,700",
       "ref": "AN-46749",
+      "province": "Barcelona",
+      "city": "Barcelona",
+      "zone": "Eixample",
       "neighbourhood": "Eixample, Barcelona",
       "type": "rent",
+      "propertyType": "apartment",
       "badge_type": "Apartment",
       "beds": 3,
       "baths": 3,
       "size": "145",
       "floor": "Principal",
-      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404776/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_08-3.jpg",
+      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404785/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_64-2.jpg",
       "images": [
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404776/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_08-3.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404776/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_09-3.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404776/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_10-3.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404778/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_11-3.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404778/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_12-3.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404778/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_13-3.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404778/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_14-3.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404778/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_15-3.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404778/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_16-3.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404778/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_17-3.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404778/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_18-3.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404779/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_19-3.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404779/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_20-3.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404779/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_21-3.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404779/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_22-3.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404779/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_23-3.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404779/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_24-3.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404779/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_28-2.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404780/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_29-2.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404780/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_30-2.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404781/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_31-2.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404781/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_32-2.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404781/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_33-2.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404781/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_36-2.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404781/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_37-2.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404781/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_38-2.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404781/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_45-2.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404782/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_46-2.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404782/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_47-2.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404782/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_48-2.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404782/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_49-2.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404782/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_50-2.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404783/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_51-2.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404783/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_54-2.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404783/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_55-2.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404783/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_56-2.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404783/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_57-2.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404784/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_58-2.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404784/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_59-2.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404785/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_64-2.jpg",
           "alt": "Refined Luxury in Barcelona's Golden Square"
         },
         {
@@ -303,19 +155,23 @@
           "alt": "Refined Luxury in Barcelona's Golden Square"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404784/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_61-2.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404784/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_62-2.jpg",
-          "alt": "Refined Luxury in Barcelona's Golden Square"
-        },
-        {
           "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404784/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_63-2.jpg",
           "alt": "Refined Luxury in Barcelona's Golden Square"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404785/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_64-2.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404784/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_61-2.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404784/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_59-2.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404784/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_58-2.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404784/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_62-2.jpg",
           "alt": "Refined Luxury in Barcelona's Golden Square"
         },
         {
@@ -327,11 +183,151 @@
           "alt": "Refined Luxury in Barcelona's Golden Square"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404785/an-realestate/eixample-golden-square-rent/IMG_9580-2-1.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404783/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_57-2.jpg",
           "alt": "Refined Luxury in Barcelona's Golden Square"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404785/an-realestate/eixample-golden-square-rent/PHOTO-2025-01-20-15-19-23-1.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404783/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_56-2.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404783/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_55-2.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404783/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_54-2.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404783/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_51-2.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404782/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_50-2.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404782/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_49-2.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404782/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_48-2.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404782/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_47-2.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404782/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_46-2.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404781/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_45-2.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404781/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_38-2.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404781/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_37-2.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404781/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_36-2.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404781/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_33-2.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404781/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_32-2.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404781/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_31-2.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404780/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_30-2.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404780/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_29-2.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404779/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_28-2.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404779/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_24-3.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404779/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_23-3.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404779/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_22-3.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404779/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_21-3.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404779/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_20-3.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404779/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_19-3.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404778/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_18-3.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404778/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_17-3.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404778/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_16-3.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404778/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_15-3.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404778/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_14-3.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404778/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_13-3.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404778/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_12-3.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404778/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_11-3.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404776/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_10-3.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404776/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_09-3.jpg",
+          "alt": "Refined Luxury in Barcelona's Golden Square"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404776/an-realestate/eixample-golden-square-rent/2026-02-24_Rambla_de_Catalunya_45_Ppal_2_Barcelona_08-3.jpg",
           "alt": "Refined Luxury in Barcelona's Golden Square"
         }
       ],
@@ -375,7 +371,7 @@
         }
       ],
       "features": {
-        "Interior": [
+        "Additional": [
           "Spacious living & dining room",
           "Eixample balconies",
           "Fully equipped kitchen",
@@ -383,9 +379,7 @@
           "Bespoke built-in wardrobes",
           "Solid wooden floors",
           "High ceilings",
-          "Double glazing"
-        ],
-        "Climate": [
+          "Double glazing",
           "Ducted air conditioning",
           "Central heating"
         ]
@@ -409,44 +403,36 @@
         }
       ],
       "stage": "active",
-      "propertyType": "apartment",
-      "province": "Barcelona",
-      "city": "Barcelona",
-      "zone": "Eixample",
-      "order": 2
+      "order": 4
     },
     {
       "slug": "sant-gervasi-galvany",
       "title": "Renovated Residence with Historic Charm in Sant Gervasi",
       "price": "€520,000",
       "ref": "AN-1012",
+      "province": "Barcelona",
+      "city": "Barcelona",
+      "zone": "Sant Gervasi",
       "neighbourhood": "Sant Gervasi, Barcelona",
       "type": "sale",
+      "propertyType": "apartment",
       "badge_type": "Apartment",
       "beds": 2,
       "baths": 1,
       "size": "86",
       "floor": "Upper",
-      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404786/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-2.jpg",
+      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404787/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-43-2.jpg",
       "images": [
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404786/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-2.jpg",
-          "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404785/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-3.jpg",
-          "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404786/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-4.jpg",
-          "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404786/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-8.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404787/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-43-2.jpg",
           "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
         },
         {
           "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404786/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-9.jpg",
+          "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404787/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-43.jpg",
           "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
         },
         {
@@ -459,14 +445,6 @@
         },
         {
           "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404787/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-12.jpg",
-          "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404787/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-43.jpg",
-          "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404787/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-43-2.jpg",
           "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
         },
         {
@@ -498,7 +476,11 @@
           "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404789/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-44.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404786/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-2.jpg",
+          "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404785/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-3.jpg",
           "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
         },
         {
@@ -506,11 +488,15 @@
           "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404789/an-realestate/sant-gervasi-galvany/IMG_9580-2-1.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404786/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-4.jpg",
           "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404789/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-20-15-19-23-1.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404786/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-42-8.jpg",
+          "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404789/an-realestate/sant-gervasi-galvany/PHOTO-2025-01-24-13-29-44.jpg",
           "alt": "Renovated Residence with Historic Charm in Sant Gervasi"
         }
       ],
@@ -554,18 +540,18 @@
         }
       ],
       "features": {
-        "Interior": [
+        "Climate": [
+          "Air conditioning",
+          "Heating"
+        ],
+        "Additional": [
           "35 m² living-dining area",
           "Open-plan kitchen",
           "2 double bedrooms",
           "Exposed Catalan vaulting",
           "High ceilings",
           "Wooden flooring",
-          "Private balcony"
-        ],
-        "Equipment": [
-          "Air conditioning",
-          "Heating",
+          "Private balcony",
           "Security door",
           "One apartment per floor"
         ]
@@ -589,11 +575,7 @@
         }
       ],
       "stage": "sold",
-      "propertyType": "apartment",
-      "province": "Barcelona",
-      "city": "Barcelona",
-      "zone": "Sant Gervasi",
-      "order": 3
+      "order": 9
     },
     {
       "slug": "el-born-corner",
@@ -699,48 +681,52 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "El Born",
-      "order": 5
+      "order": 3
     },
     {
       "slug": "rambla-catalunya-corner",
       "title": "Stunning Refurbished Corner Apartment on Rambla de Catalunya",
       "price": "€1,395,000",
       "ref": "AN-10007",
+      "province": "Barcelona",
+      "city": "Barcelona",
+      "zone": "Eixample",
       "neighbourhood": "Eixample, Barcelona",
       "type": "sale",
+      "propertyType": "apartment",
       "badge_type": "Apartment",
       "beds": 3,
       "baths": 3,
       "size": "150",
       "floor": "Upper",
-      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404790/an-realestate/rambla-catalunya-corner/RAMBLA_CATALUNYA-2_Pagina_01_Imagen_0001-scaled.jpg",
+      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658485/an-realestate/r4lebuljkf8vrqfgtwc4.jpg",
       "images": [
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404790/an-realestate/rambla-catalunya-corner/RAMBLA_CATALUNYA-2_Pagina_01_Imagen_0001-scaled.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658485/an-realestate/r4lebuljkf8vrqfgtwc4.jpg",
           "alt": "Stunning Refurbished Corner Apartment on Rambla de Catalunya"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404790/an-realestate/rambla-catalunya-corner/RAMBLA_CATALUNYA-2_Pagina_24_Imagen_0001-scaled.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658486/an-realestate/wdxbcppisdafcqbzhegv.jpg",
           "alt": "Stunning Refurbished Corner Apartment on Rambla de Catalunya"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404790/an-realestate/rambla-catalunya-corner/RAMBLA_CATALUNYA-2_Pagina_18_Imagen_0001-scaled.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658488/an-realestate/s0wdnd7rbhbybxwivnfy.jpg",
           "alt": "Stunning Refurbished Corner Apartment on Rambla de Catalunya"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404791/an-realestate/rambla-catalunya-corner/RAMBLA_CATALUNYA-2_Pagina_17_Imagen_0001-scaled.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658489/an-realestate/cwttlbhhqj6yxzbxaofg.jpg",
           "alt": "Stunning Refurbished Corner Apartment on Rambla de Catalunya"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404791/an-realestate/rambla-catalunya-corner/RAMBLA_CATALUNYA-2_Pagina_07_Imagen_0001-scaled.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658490/an-realestate/h1uqyf3h9iymer1cpars.jpg",
           "alt": "Stunning Refurbished Corner Apartment on Rambla de Catalunya"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404791/an-realestate/rambla-catalunya-corner/RAMBLA_CATALUNYA-2_Pagina_05_Imagen_0001-1.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658491/an-realestate/wznbihan1lqttsvw5lfx.jpg",
           "alt": "Stunning Refurbished Corner Apartment on Rambla de Catalunya"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404791/an-realestate/rambla-catalunya-corner/Captura-de-pantalla-2024-10-13-a-las-14.00.30.png",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658492/an-realestate/bpbnfdif4mtiqwg8tk9s.jpg",
           "alt": "Stunning Refurbished Corner Apartment on Rambla de Catalunya"
         }
       ],
@@ -780,18 +766,20 @@
         }
       ],
       "features": {
-        "Interior": [
+        "Climate": [
+          "Air conditioning"
+        ],
+        "Building": [
+          "Elevator",
+          "Modernist building"
+        ],
+        "Additional": [
           "High ceilings with original mouldings",
           "Marble flooring",
           "Wooden flooring",
           "Private balcony",
           "Alarm system",
-          "Air conditioning"
-        ],
-        "Building": [
-          "Elevator",
-          "Concierge service",
-          "Modernist building"
+          "Concierge service"
         ]
       },
       "nearby": [
@@ -813,11 +801,7 @@
         }
       ],
       "stage": "sold",
-      "propertyType": "apartment",
-      "province": "Barcelona",
-      "city": "Barcelona",
-      "zone": "Eixample",
-      "order": 6
+      "order": 8
     },
     {
       "slug": "eixample-golden-mile",
@@ -961,169 +945,173 @@
       "title": "Exquisite Modern Villa with 360° Views Over Barcelona",
       "price": "€5,500,000",
       "ref": "AN-AN1005",
+      "province": "Barcelona",
+      "city": "Barcelona",
+      "zone": "Vallvidrera",
       "neighbourhood": "Vallvidrera, Barcelona",
       "type": "sale",
-      "badge": "exclusive",
+      "propertyType": "villa",
       "badge_type": "Villa",
       "beds": 6,
       "baths": 6,
       "size": "634",
       "floor": "3 levels",
-      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404793/an-realestate/vallvidrera-villa/Mont-dorsa-68_17.jpg",
+      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658394/an-realestate/fuxsci735wn1vzfqma3d.jpg",
       "images": [
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404793/an-realestate/vallvidrera-villa/Mont-dorsa-68_17.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658394/an-realestate/fuxsci735wn1vzfqma3d.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404793/an-realestate/vallvidrera-villa/Mont-dorsa-68_18.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658395/an-realestate/e0y92n0ydk6yzibnshkz.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_19.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658396/an-realestate/l0guquxibfqeic4omb9z.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_22.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658397/an-realestate/tvdjgxyhttuwk3oj1qfa.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_23.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658398/an-realestate/usvg48mntlmiwpazbmsk.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_25.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658398/an-realestate/llgnq33guwdy824jxwd6.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_26.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658399/an-realestate/j37zblpzjfqyi11c7kix.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404795/an-realestate/vallvidrera-villa/Mont-dorsa-68_27.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658399/an-realestate/gvi1jz6otc21glnkmlgy.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404795/an-realestate/vallvidrera-villa/Mont-dorsa-68_28.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658400/an-realestate/suagwno4gcchclsqftm0.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404795/an-realestate/vallvidrera-villa/Mont-dorsa-68_29.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658401/an-realestate/voryjocftgaf2c43pcai.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404795/an-realestate/vallvidrera-villa/Mont-dorsa-68_30.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658402/an-realestate/q8b7xmvihdz2zfwbec9t.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_31.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658402/an-realestate/eheyjifnk0de2wql3cnd.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_32.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658403/an-realestate/gfm1gnp979x5vqx0mvfi.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_33.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658404/an-realestate/vpslvgeoyhtkyw5pmj97.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_34.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658405/an-realestate/gksrod2d8dvypjzrcoqg.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_35.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658405/an-realestate/lkmttkk3svjwjtlzfbpv.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_36.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658406/an-realestate/biwie8ampvrjddq95t69.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_38-1.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658407/an-realestate/qexxsddwojkkvrdpzyb1.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_42.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658407/an-realestate/k00sy1rqolaid2gl71ib.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_48.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658408/an-realestate/spjrcodkgfek13sm6sr8.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_49.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658409/an-realestate/ycvguy1wudckidnhvqzj.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_50.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658409/an-realestate/uvdkudsssc01itqnch1p.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404798/an-realestate/vallvidrera-villa/Mont-dorsa-68_51.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658411/an-realestate/m6gtvmaxjcgf0t1vl6sn.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404798/an-realestate/vallvidrera-villa/Mont-dorsa-68_52.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658412/an-realestate/gdkvxotbshm4cvsvioql.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404798/an-realestate/vallvidrera-villa/Mont-dorsa-68_53-1.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658413/an-realestate/bv7tgzae2aj1aghqs5io.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404798/an-realestate/vallvidrera-villa/Mont-dorsa-68_54.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658414/an-realestate/uhbacs0sflvpuvttr8my.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404799/an-realestate/vallvidrera-villa/Mont-dorsa-68_55.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658414/an-realestate/rwzgyodf61m4papzlofz.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404799/an-realestate/vallvidrera-villa/Mont-dorsa-68_56.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658415/an-realestate/oz8uvfr869ihe2rtxdwj.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404799/an-realestate/vallvidrera-villa/Mont-dorsa-68_57.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658416/an-realestate/noptnzrqolunowjob3vw.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404799/an-realestate/vallvidrera-villa/Mont-dorsa-68_58.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658417/an-realestate/zy8g78pabramvd4dpxui.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404800/an-realestate/vallvidrera-villa/Mont-dorsa-68_59-1.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658417/an-realestate/m5sfhjych4vfgxmcfhm3.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404802/an-realestate/vallvidrera-villa/Mont-dorsa-68_60.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658418/an-realestate/vx3fyfecnfxfrdn3cv2t.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/vallvidrera-villa/Mont-dorsa-68_61.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658419/an-realestate/nmotgesnmb09u93aj7bp.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404800/an-realestate/vallvidrera-villa/Mont-dorsa-68_62.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658419/an-realestate/ka2wplkuvttxr2uyj4ww.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/vallvidrera-villa/Mont-dorsa-68_63.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658420/an-realestate/fucsnfxlspnehmor6vjk.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/vallvidrera-villa/Mont-dorsa-68_64.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658421/an-realestate/oysia41ccjytzvrupezp.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404800/an-realestate/vallvidrera-villa/Mont-dorsa-68_65-1.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658422/an-realestate/j20ql3dxyopi5jvxqhkk.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/vallvidrera-villa/Mont-dorsa-68_66-1.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658423/an-realestate/diiulnwgpk0acrwnrnqd.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         }
       ],
+      "pdf_hero": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658441/an-realestate/mcrnqnrmwk2sdkdh6l8k.jpg",
       "description": [
         "A once-in-a-generation opportunity to acquire one of Barcelona's most extraordinary private residences. Completed in 2022, this three-level contemporary villa sits on a prime corner plot in Vallvidrera with unobstructed 360° panoramic views over the city and the Mediterranean.",
         "The villa spans 634 m² across three levels: ground level with seven-car garage, wine cellar, and service areas; lower floor with open-plan living, dining, and premium kitchen opening to the garden; first floor with four luxury en-suite bedrooms including a 70 m² master suite; top level with multi-purpose rooms and a 117 m² terrace.",
@@ -1176,23 +1164,19 @@
         }
       ],
       "features": {
-        "Interior": [
+        "Additional": [
           "70 m² master suite",
           "6 en-suite bedrooms",
           "Open-plan living & dining",
           "Premium kitchen",
           "Wine cellar",
-          "Smart home automation"
-        ],
-        "Outdoor": [
+          "Smart home automation",
           "Climate-controlled pool",
           "117 m² roof terrace",
           "Private garden",
           "Finnish sauna",
           "7-car garage",
-          "360° panoramic views"
-        ],
-        "Sustainability": [
+          "360° panoramic views",
           "Energy class A",
           "Solar panels",
           "Aerothermal underfloor heating",
@@ -1218,48 +1202,48 @@
         }
       ],
       "stage": "active",
-      "propertyType": "villa",
-      "province": "Barcelona",
-      "city": "Barcelona",
-      "zone": "Vallvidrera",
-      "order": 8
+      "order": 2
     },
     {
       "slug": "eixample-villarroel",
       "title": "Newly Renovated 3-Bedroom Apartment with Timeless Elegance in Eixample",
       "price": "€820,000",
       "ref": "AN-AN1004",
+      "province": "Barcelona",
+      "city": "Barcelona",
+      "zone": "Eixample",
       "neighbourhood": "Eixample, Barcelona",
       "type": "sale",
+      "propertyType": "apartment",
       "badge_type": "Apartment",
       "beds": 3,
       "baths": 2,
       "size": "104",
       "floor": "Upper",
-      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/eixample-villarroel/villarroel.jpg",
+      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658469/an-realestate/aqraljzsldpfbkctt0qk.jpg",
       "images": [
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/eixample-villarroel/villarroel.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658469/an-realestate/aqraljzsldpfbkctt0qk.jpg",
           "alt": "Newly Renovated 3-Bedroom Apartment with Timeless Elegance in Eixample"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404802/an-realestate/eixample-villarroel/final_cropped_image_6.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658470/an-realestate/rj4xvkoyfaryk89mruzq.jpg",
           "alt": "Newly Renovated 3-Bedroom Apartment with Timeless Elegance in Eixample"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404802/an-realestate/eixample-villarroel/final_cropped_image_7.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658471/an-realestate/ff8mpywmraxcgqngy0f8.jpg",
           "alt": "Newly Renovated 3-Bedroom Apartment with Timeless Elegance in Eixample"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404802/an-realestate/eixample-villarroel/final_cropped_image_8.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658472/an-realestate/zz71qpemmssox3obyqkf.jpg",
           "alt": "Newly Renovated 3-Bedroom Apartment with Timeless Elegance in Eixample"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404802/an-realestate/eixample-villarroel/final_cropped_image_4.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658472/an-realestate/fcj1ol54tzfuesfvv5bs.jpg",
           "alt": "Newly Renovated 3-Bedroom Apartment with Timeless Elegance in Eixample"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404802/an-realestate/eixample-villarroel/framed_plan_image_high_res.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777658473/an-realestate/i3sufeakdokso1kntryp.jpg",
           "alt": "Newly Renovated 3-Bedroom Apartment with Timeless Elegance in Eixample"
         }
       ],
@@ -1303,16 +1287,16 @@
         }
       ],
       "features": {
-        "Interior": [
+        "Building": [
+          "Elevator",
+          "Modernist building"
+        ],
+        "Additional": [
           "Expansive open-plan living",
           "Master suite with walk-in closet",
           "State-of-the-art kitchen",
           "Parquet flooring",
-          "South-facing terrace"
-        ],
-        "Building": [
-          "Modernist building",
-          "Elevator",
+          "South-facing terrace",
           "Fully restored period building"
         ]
       },
@@ -1335,11 +1319,7 @@
         }
       ],
       "stage": "sold",
-      "propertyType": "apartment",
-      "province": "Barcelona",
-      "city": "Barcelona",
-      "zone": "Eixample",
-      "order": 9
+      "order": 6
     },
     {
       "slug": "villa-cascades",
@@ -1351,6 +1331,8 @@
       "zone": "Les Planes",
       "neighbourhood": "Les Planes, Sant Cugat del Vallès",
       "address": "Calle Magarola, 19, Sant Cugat del Vallès, Spain",
+      "lat": 41.4328796,
+      "lng": 2.0927754,
       "zip": "08196",
       "type": "sale",
       "propertyType": "villa",
@@ -1698,14 +1680,12 @@
         ]
       },
       "stage": "active",
-      "lat": 41.4328796,
-      "lng": 2.0927754,
-      "order": 3
+      "order": 1
     },
     {
       "slug": "house-of-wellness",
       "title": "House of Wellness",
-      "price": "$From 419,000",
+      "price": "$From 419000",
       "ref": "AN202603",
       "province": "Florida",
       "city": "Miami",
@@ -1721,19 +1701,15 @@
       "size": "",
       "year": 2029,
       "condition": "New construction",
-      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677974/an-realestate/ixyag09mggaj4hx1qtuc.jpg",
+      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677966/an-realestate/ttmkxxup42umfwkt45j5.jpg",
       "images": [
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677974/an-realestate/ixyag09mggaj4hx1qtuc.jpg",
-          "alt": "HoW_Exterior_Rooftop_BayView_Daytime"
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677966/an-realestate/ttmkxxup42umfwkt45j5.jpg",
+          "alt": "How_Interior_Unit_Balcony_B5"
         },
         {
           "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677969/an-realestate/z1rutiwnrpgukmugj69x.jpg",
           "alt": "How_Interior_Unit_B1"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677966/an-realestate/ttmkxxup42umfwkt45j5.jpg",
-          "alt": "How_Interior_Unit_Balcony_B5"
         },
         {
           "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677970/an-realestate/ev4z8mxdatrxuv2jabve.jpg",
@@ -1750,6 +1726,10 @@
         {
           "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677973/an-realestate/cdfohxhxxldw4tj3zozy.jpg",
           "alt": "How_Building_Hero_Closeup"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677974/an-realestate/ixyag09mggaj4hx1qtuc.jpg",
+          "alt": "HoW_Exterior_Rooftop_BayView_Daytime"
         },
         {
           "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677976/an-realestate/yc9lee3xuf1dostyprk1.jpg",
@@ -1802,7 +1782,7 @@
         "Residences feature loft-style ceiling heights of 9'4\", premium appliances, two-tone cabinetry with terrazzo countertops, and porcelain tile bathrooms. Select  \n  units offer exceptional views over Brickell and Biscayne Bay and polished concrete balconies. Developed by North Development — the alliance between Oak Capital\n   and Edifica — with architecture by Mc+G Architecture and interiors by Urban Robot Associates"
       ],
       "stage": "active",
-      "order": 4,
+      "order": 3,
       "badge": "new_dev",
       "youtubeUrl": "https://youtu.be/vc1u9porSjQ",
       "details": [
@@ -1844,6 +1824,40 @@
         }
       ],
       "features": {
+        "Interior": [
+          "Open Floorplan",
+          "Natural Light"
+        ],
+        "Kitchen": [
+          "Equipped Kitchen",
+          "Open kitchen",
+          "Oven",
+          "Refrigerator",
+          "Dishwasher",
+          "Microwave",
+          "Freezer"
+        ],
+        "Climate": [
+          "Air conditioning",
+          "Heating"
+        ],
+        "Outdoor": [
+          "Balcony",
+          "Terrace",
+          "Communal terrace",
+          "Swimming Pool",
+          "Chill out area",
+          "Parking"
+        ],
+        "Building": [
+          "Elevator",
+          "Concierge Service",
+          "Double Glazing"
+        ],
+        "Views": [
+          "City Views",
+          "Sea Views"
+        ],
         "Additional": [
           "State-of-the-art fitness centre with private personal training suite",
           "Functional training zones",
@@ -1866,8 +1880,7 @@
           "Views over Brickell and Biscayne Bay (select units)"
         ]
       },
-      "pdf_hero": "https://anrealestate.es/admin/",
-      "sizeUnit": "sqft"
+      "pdf_hero": "https://anrealestate.es/admin/"
     },
     {
       "slug": "house-of-wellness-u-1009",
@@ -1996,8 +2009,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-21-of-64.pdf",
           "label": "Floor plan · LINE 09 B1"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-1101",
@@ -2126,8 +2138,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-01-of-64.pdf",
           "label": "Floor plan · LINE 01 C4"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-1104",
@@ -2256,8 +2267,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-04-of-64.pdf",
           "label": "Floor plan · LINE 04 B5"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-1120",
@@ -2386,8 +2396,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-43-of-64.pdf",
           "label": "Floor plan · LINE 20 C1"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-1205",
@@ -2516,8 +2525,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-07-of-64.pdf",
           "label": "Floor plan · LINE 05 B1"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-1406",
@@ -2646,8 +2654,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-11-of-64.pdf",
           "label": "Floor plan · LINE 06 B1"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-1508",
@@ -2776,8 +2783,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-18-of-64.pdf",
           "label": "Floor plan · LINE 08 B1"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-1514",
@@ -2906,8 +2912,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-32-of-64.pdf",
           "label": "Floor plan · LINE 14 C2"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-1523",
@@ -3036,8 +3041,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-51-of-64.pdf",
           "label": "Floor plan · LINE 23 B2"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-1611",
@@ -3166,8 +3170,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-28-of-64.pdf",
           "label": "Floor plan · LINE 11 B4"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-1621",
@@ -3296,8 +3299,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-45-of-64.pdf",
           "label": "Floor plan · LINE 21 N"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-1817",
@@ -3426,8 +3428,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-36-of-64.pdf",
           "label": "Floor plan · LINE 17 B2"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-1818",
@@ -3556,8 +3557,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-38-of-64.pdf",
           "label": "Floor plan · LINE 18 B1"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-1819",
@@ -3686,8 +3686,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-41-of-64.pdf",
           "label": "Floor plan · LINE 19 N"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-1822",
@@ -3816,8 +3815,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-49-of-64.pdf",
           "label": "Floor plan · LINE 22 B1"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-1915",
@@ -3946,8 +3944,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-33-of-64.pdf",
           "label": "Floor plan · LINE 15 A2"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-1920",
@@ -4076,8 +4073,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-42-of-64.pdf",
           "label": "Floor plan · LINE 20 C1"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-2006",
@@ -4206,8 +4202,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-11-of-64.pdf",
           "label": "Floor plan · LINE 06 B1"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-2012",
@@ -4336,8 +4331,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-30-of-64.pdf",
           "label": "Floor plan · LINE 12 A3"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-2014",
@@ -4466,8 +4460,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-32-of-64.pdf",
           "label": "Floor plan · LINE 14 C2"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-2105",
@@ -4596,8 +4589,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-09-of-64.pdf",
           "label": "Floor plan · LINE 05 B1"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-2113",
@@ -4726,8 +4718,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-31-of-64.pdf",
           "label": "Floor plan · LINE 13 C4"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-2126",
@@ -4856,8 +4847,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-58-of-64.pdf",
           "label": "Floor plan · LINE 26 C3"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-2207",
@@ -4986,8 +4976,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-15-of-64.pdf",
           "label": "Floor plan · LINE 07 N"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-2209",
@@ -5116,8 +5105,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-22-of-64.pdf",
           "label": "Floor plan · LINE 09 B1"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-2216",
@@ -5246,8 +5234,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-34-of-64.pdf",
           "label": "Floor plan · LINE 16 B3"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-2221",
@@ -5376,8 +5363,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-45-of-64.pdf",
           "label": "Floor plan · LINE 21 N"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-2303",
@@ -5506,8 +5492,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-03-of-64.pdf",
           "label": "Floor plan · LINE 03 B4"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-2311",
@@ -5636,8 +5621,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-28-of-64.pdf",
           "label": "Floor plan · LINE 11 B4"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-2420",
@@ -5766,8 +5750,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-43-of-64.pdf",
           "label": "Floor plan · LINE 20 C1"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-2514",
@@ -5896,8 +5879,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-32-of-64.pdf",
           "label": "Floor plan · LINE 14 C2"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-2519",
@@ -6026,8 +6008,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-41-of-64.pdf",
           "label": "Floor plan · LINE 19 N"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-2702",
@@ -6156,8 +6137,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-02-of-64.pdf",
           "label": "Floor plan · LINE 02 A3"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-2713",
@@ -6286,8 +6266,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-31-of-64.pdf",
           "label": "Floor plan · LINE 13 C4"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-2820",
@@ -6416,8 +6395,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-43-of-64.pdf",
           "label": "Floor plan · LINE 20 C1"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-2901",
@@ -6546,8 +6524,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-01-of-64.pdf",
           "label": "Floor plan · LINE 01 C4"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-2907",
@@ -6676,8 +6653,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-16-of-64.pdf",
           "label": "Floor plan · LINE 07 N"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-2926",
@@ -6806,8 +6782,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-58-of-64.pdf",
           "label": "Floor plan · LINE 26 C3"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-3003",
@@ -6936,8 +6911,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-03-of-64.pdf",
           "label": "Floor plan · LINE 03 B4"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-3014",
@@ -7066,8 +7040,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-32-of-64.pdf",
           "label": "Floor plan · LINE 14 C2"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-3015",
@@ -7196,8 +7169,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-33-of-64.pdf",
           "label": "Floor plan · LINE 15 A2"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-3021",
@@ -7326,8 +7298,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-45-of-64.pdf",
           "label": "Floor plan · LINE 21 N"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-3024",
@@ -7456,8 +7427,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-54-of-64.pdf",
           "label": "Floor plan · LINE 24 B3"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-3219",
@@ -7586,8 +7556,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-41-of-64.pdf",
           "label": "Floor plan · LINE 19 N"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-3225",
@@ -7716,8 +7685,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-56-of-64.pdf",
           "label": "Floor plan · LINE 25 A2"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-3326",
@@ -7846,8 +7814,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-58-of-64.pdf",
           "label": "Floor plan · LINE 26 C3"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-801",
@@ -7976,8 +7943,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-01-of-64.pdf",
           "label": "Floor plan · LINE 01 C4"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-808",
@@ -8106,8 +8072,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-19-of-64.pdf",
           "label": "Floor plan · LINE 08 B1"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-810",
@@ -8236,8 +8201,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-24-of-64.pdf",
           "label": "Floor plan · LINE 10 B5"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-818",
@@ -8366,8 +8330,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-39-of-64.pdf",
           "label": "Floor plan · LINE 18 B1"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-911",
@@ -8496,8 +8459,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-28-of-64.pdf",
           "label": "Floor plan · LINE 11 B4"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-913",
@@ -8626,8 +8588,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-31-of-64.pdf",
           "label": "Floor plan · LINE 13 C4"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-916",
@@ -8756,8 +8717,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-34-of-64.pdf",
           "label": "Floor plan · LINE 16 B3"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-917",
@@ -8886,8 +8846,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-36-of-64.pdf",
           "label": "Floor plan · LINE 17 B2"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-919",
@@ -9016,8 +8975,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-40-of-64.pdf",
           "label": "Floor plan · LINE 19 N"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-921",
@@ -9146,8 +9104,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-45-of-64.pdf",
           "label": "Floor plan · LINE 21 N"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-922",
@@ -9276,8 +9233,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-49-of-64.pdf",
           "label": "Floor plan · LINE 22 B1"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "house-of-wellness-u-926",
@@ -9406,8 +9362,7 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-58-of-64.pdf",
           "label": "Floor plan · LINE 26 C3"
         }
-      ],
-      "sizeUnit": "sqft"
+      ]
     },
     {
       "slug": "sadf",
