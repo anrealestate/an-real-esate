@@ -8,6 +8,20 @@
     return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')
   }
 
+  /** Skip a Reference row in details when it only repeats listing.ref (hero already shows Ref.). */
+  function detailsMinusDupReference(listing) {
+    const rows = listing.details
+    if (!rows?.length) return []
+    const ref = String(listing.ref || '').trim()
+    if (!ref) return rows
+    return rows.filter(d => {
+      const key = String(d.key || '').trim().toLowerCase()
+      const val = String(d.val ?? '').trim()
+      const refLikeKey = key === 'reference' || key === 'referencia' || key === 'ref'
+      return !(refLikeKey && val === ref)
+    })
+  }
+
   function cloudinarySrcset(url) {
     if (!url || !url.includes('res.cloudinary.com')) return ''
     return [828, 1024, 1440, 1920].map(w => `${url.replace(/\bw_\d+/, `w_${w}`)} ${w}w`).join(', ')
@@ -478,10 +492,18 @@
 
     /* ── property details table ── */
     const detailsEl = document.getElementById('prop-details')
+    const detailsSection = detailsEl?.closest('.prop-section')
     if (detailsEl && listing.details) {
-      detailsEl.innerHTML = listing.details.map(d =>
-        `<div class="pd-row"><span class="pd-key">${esc(d.key)}</span><span class="pd-val">${esc(d.val)}</span></div>`
-      ).join('')
+      const rows = detailsMinusDupReference(listing)
+      if (rows.length) {
+        detailsEl.innerHTML = rows.map(d =>
+          `<div class="pd-row"><span class="pd-key">${esc(d.key)}</span><span class="pd-val">${esc(d.val)}</span></div>`
+        ).join('')
+        if (detailsSection) detailsSection.hidden = false
+      } else {
+        detailsEl.innerHTML = ''
+        if (detailsSection) detailsSection.hidden = true
+      }
     }
 
     /* ── features ── */

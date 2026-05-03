@@ -238,6 +238,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // FAB publish button
   document.getElementById('fab-publish')?.addEventListener('click', publishToWeb)
 
+  // Reload from server — discards local cache and fetches the published JSON
+  document.getElementById('btn-reload-server')?.addEventListener('click', () => {
+    if (!confirm('Se descartarán todos los cambios locales no publicados y se recargarán los datos del servidor. ¿Continuar?')) return
+    localStorage.removeItem('an_listings_cache')
+    loadData()
+  })
+
   initGallerySortable()
 
   // Dynamic list add buttons
@@ -511,18 +518,75 @@ function handleVisitParam() {
 }
 
 // ── DATA ──────────────────────────────────────
+/** Slugs from #listings-data (published snapshot in admin HTML) — used to resolve duplicate refs in corrupt cache. */
+function getCanonicalSlugsFromEmbed() {
+  const set = new Set()
+  try {
+    const el = document.getElementById('listings-data')
+    if (!el) return set
+    const inline = JSON.parse(el.textContent).listings || []
+    inline.forEach(il => {
+      const s = String(il.slug || '').trim()
+      if (s) set.add(s)
+    })
+  } catch (_) {}
+  return set
+}
+
+/** Same ref on different slugs (bad clone / typo slug). Keep best row; prefer embed-canonical slug, then longer slug, no -copy/-copia.
+ *  Returns { listings, dropped, remap } where remap maps discarded slug → kept slug (for parent_slug healing). */
+function dedupeListingsByRef(listings, canonicalSlugs) {
+  const byRef = new Map()
+  for (const l of listings) {
+    const r = String(l.ref || '').trim()
+    if (!r) continue
+    if (!byRef.has(r)) byRef.set(r, [])
+    byRef.get(r).push(l)
+  }
+  const dropSlugs = new Set()
+  const remap = new Map() // discarded slug → canonical slug kept
+  for (const group of byRef.values()) {
+    if (group.length < 2) continue
+    const score = l => {
+      const slug = String(l.slug || '').trim()
+      let s = 0
+      if (canonicalSlugs.has(slug)) s += 1e6
+      if (!/-(copy|copia)(\d+)?$/i.test(slug)) s += 1e4
+      s += Math.min(slug.length, 500)
+      const o = Number(l.order)
+      if (!Number.isNaN(o)) s -= o / 1e9
+      return s
+    }
+    group.sort((a, b) => score(b) - score(a))
+    const canonSlug = String(group[0].slug || '').trim()
+    for (let i = 1; i < group.length; i++) {
+      const badSlug = String(group[i].slug || '').trim()
+      dropSlugs.add(badSlug)
+      if (canonSlug) remap.set(badSlug, canonSlug)
+    }
+  }
+  const trimmed = listings.filter(l => !dropSlugs.has(String(l.slug || '').trim()))
+  return { listings: trimmed, dropped: listings.length - trimmed.length, remap }
+}
+
 async function loadData() {
   // Priority: localStorage cache → /data/listings.json (canonical) → inline HTML (last resort)
 
+  const canonicalSlugs = getCanonicalSlugsFromEmbed()
+
   // 1. localStorage cache — updated on every save, reorder, stage-change
   let cachedListings = []
+  let cachedSavedAt  = 0
   try {
-    cachedListings = JSON.parse(localStorage.getItem('an_listings_cache') || '{}').listings || []
+    const raw = JSON.parse(localStorage.getItem('an_listings_cache') || '{}')
+    cachedListings = raw.listings || []
+    cachedSavedAt  = raw.savedAt  || 0
   } catch {}
 
   if (cachedListings.length) {
     // Cache is the source of truth — reflects every unpublished change the user has made
     _listings = cachedListings
+    if (cachedSavedAt) _updateCacheBadge(cachedSavedAt)
     // Append any inline-only slugs missing from cache (new device, partial cache loss)
     const el = document.getElementById('listings-data')
     if (el) {
@@ -578,6 +642,42 @@ async function loadData() {
       if (!l.province && maybeCity) { l.city = maybeCity; l.zone = maybeZone }
     }
   })
+
+  // Same slug twice (incl. trailing spaces): corrupt cache / double-merge.
+  const seenSlugs = new Set()
+  const nSlugBefore = _listings.length
+  _listings = _listings.filter(l => {
+    const s = String(l.slug || '').trim()
+    if (!s || seenSlugs.has(s)) return false
+    seenSlugs.add(s)
+    l.slug = s
+    return true
+  })
+  const slugDropped = nSlugBefore - _listings.length
+
+  // Same ref, different slug (ej. "house-of-wellnes" copiada con AN202603): keep canonical / mejor candidato.
+  const refDedup = dedupeListingsByRef(_listings, canonicalSlugs)
+  _listings = refDedup.listings
+  const refDropped = refDedup.dropped
+  // Re-point any child whose parent_slug was a discarded typo slug → canonical slug.
+  if (refDedup.remap.size) {
+    _listings.forEach(l => {
+      if (l.parent_slug && refDedup.remap.has(l.parent_slug))
+        l.parent_slug = refDedup.remap.get(l.parent_slug)
+    })
+  }
+
+  if (slugDropped || refDropped) {
+    const parts = []
+    if (slugDropped) parts.push(`${slugDropped} misma slug`)
+    if (refDropped) parts.push(`${refDropped} misma referencia`)
+    console.warn(`[admin] Limpieza de caché: ${parts.join(', ')}`)
+    toast(
+      `Se quitaron filas duplicadas del navegador (${parts.join(', ')}). Se priorizó la ficha del JSON publicado cuando había misma ref.`,
+      'warning',
+      9000
+    )
+  }
 
   if (_listings.length) cacheListings()
   renderTable()
@@ -2072,8 +2172,8 @@ document.addEventListener('DOMContentLoaded', () => {
 function validateBeforePublish() {
   const invalid = _listings.filter(l => {
     if (l.stage === 'draft') return false  // drafts are excluded from public JSON anyway
-    const hasSlug  = l.slug  && l.slug.trim()  && l.slug  !== 'sadf'
-    const hasTitle = l.title && l.title.trim() && l.title !== 'sadf'
+    const hasSlug  = l.slug  && l.slug.trim()
+    const hasTitle = l.title && l.title.trim()
     const hasImage = (l.images && l.images.length > 0) || l.image
     return !(hasSlug && hasTitle && hasImage)
   })
@@ -2141,7 +2241,22 @@ function dlFile(content, filename, type) {
 }
 
 function cacheListings() {
-  localStorage.setItem('an_listings_cache', JSON.stringify({ listings: _listings }))
+  const savedAt = Date.now()
+  localStorage.setItem('an_listings_cache', JSON.stringify({ listings: _listings, savedAt }))
+  _updateCacheBadge(savedAt)
+}
+
+function _updateCacheBadge(savedAt) {
+  const el = document.getElementById('cache-saved-at')
+  if (!el || !savedAt) return
+  const diff = Date.now() - savedAt
+  let label
+  if (diff < 60000)        label = 'hace un momento'
+  else if (diff < 3600000) label = `hace ${Math.floor(diff / 60000)} min`
+  else if (diff < 86400000) label = `hace ${Math.floor(diff / 3600000)} h`
+  else                     label = new Date(savedAt).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })
+  el.textContent = `Últ. edición local: ${label}`
+  el.hidden = false
 }
 
 // ── MAP PICKER (Leaflet / OpenStreetMap — no API key needed) ──────────

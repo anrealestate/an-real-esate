@@ -65,9 +65,11 @@ export default async function handler(req, res) {
     const indexFile    = await getFile('index.html')
     const indexContent = Buffer.from(indexFile.content, 'base64').toString('utf-8')
     const inlineJson   = JSON.stringify({ listings })
+    // Use a replacer function so special patterns like $1 inside inlineJson
+    // (e.g. USD prices "$1,014,900") are never treated as regex backreferences.
     const updated = indexContent.replace(
       /(<script[^>]+id="listings-data"[^>]*>)([\s\S]*?)(<\/script>)/,
-      `$1${inlineJson}$3`
+      (_, open, _old, close) => open + inlineJson + close
     )
     if (updated !== indexContent) {
       await putFile('index.html', updated, indexFile.sha, `Sync inline listings data (${listings.length} properties)`)

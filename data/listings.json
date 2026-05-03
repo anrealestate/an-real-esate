@@ -9345,27 +9345,6 @@
           "label": "Floor plan · LINE 26 C3"
         }
       ]
-    },
-    {
-      "slug": "sadf",
-      "title": "sadf",
-      "price": "€600000",
-      "ref": "AN202606",
-      "province": "Florida",
-      "city": "Miami",
-      "zone": "Brickell",
-      "neighbourhood": "Brickell, Miami",
-      "address": "gtgsd",
-      "type": "sale",
-      "propertyType": "development",
-      "badge_type": "New Development",
-      "badge": "new_dev",
-      "beds": 2,
-      "baths": 1,
-      "size": "",
-      "stage": "draft",
-      "order": 3058,
-      "constructionStatus": "Under Construction"
     }
   ]
 }

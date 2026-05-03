@@ -2186,6 +2186,13 @@ details[open] .vl-import-toggle::before { transform: rotate(90deg); }
 select:disabled { opacity: .45; cursor: default; }
 
 /* ── DEPLOY HINT ─────────────────────────────── */
+.sb-cache-badge {
+  font-size: 10px;
+  color: var(--gold);
+  opacity: .7;
+  margin: .2rem 0 0;
+  padding: 0 .25rem;
+}
 .sb-deploy-hint {
   font-size: 10px;
   color: var(--muted);
