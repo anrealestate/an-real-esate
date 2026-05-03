@@ -2504,3 +2504,38 @@ select:disabled { opacity: .45; cursor: default; }
   z-index: 2;
 }
 .gal-drag-handle svg { pointer-events: none; }
+
+/* Reorder buttons — visible only on touch screens, hidden on pointer:hover desktops */
+.gal-card-reorder {
+  display: none;
+}
+@media (hover: none) {
+  .gal-card-reorder {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    border-top: 1px solid var(--border);
+    background: var(--bg2);
+  }
+}
+.gal-ro-up,
+.gal-ro-dn {
+  flex: 1;
+  height: 30px;
+  font-size: 15px;
+  line-height: 1;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .1s, opacity .1s;
+  touch-action: manipulation;
+}
+.gal-ro-up:not(:disabled):active,
+.gal-ro-dn:not(:disabled):active { background: var(--bg); }
+.gal-ro-up:disabled,
+.gal-ro-dn:disabled { opacity: .28; cursor: default; }
