@@ -763,7 +763,8 @@
           loadMoreBtn.hidden = false
           if (showAllUnitsBtn) {
             showAllUnitsBtn.hidden = false
-            showAllUnitsBtn.textContent = t('dv.show_all')
+            showAllUnitsBtn.textContent = t('dev.show_all')
+            showAllUnitsBtn.title = t('dev.show_all_hint')
           }
           if (unitActionsEl) unitActionsEl.hidden = false
         } else {
@@ -1096,8 +1097,9 @@
         const showAllFpBtn = document.createElement('button')
         showAllFpBtn.type = 'button'
         showAllFpBtn.className = 'dv-fp-loadall'
-        showAllFpBtn.setAttribute('data-i18n', 'dv.show_all')
-        showAllFpBtn.textContent = tDev('dv.show_all')
+        showAllFpBtn.setAttribute('data-i18n', 'dev.show_all')
+        showAllFpBtn.textContent = tDev('dev.show_all')
+        showAllFpBtn.title = tDev('dev.show_all_hint')
         fpActions.appendChild(loadMoreBtn)
         fpActions.appendChild(showAllFpBtn)
 
@@ -1116,7 +1118,8 @@
           loadMoreBtn.hidden = false
           loadMoreBtn.textContent = tDev('dv.loadmore').replace('{n}', String(rem))
           showAllFpBtn.hidden = false
-          showAllFpBtn.textContent = tDev('dv.show_all')
+          showAllFpBtn.textContent = tDev('dev.show_all')
+          showAllFpBtn.title = tDev('dev.show_all_hint')
         }
 
         function renderFpGrid() {
