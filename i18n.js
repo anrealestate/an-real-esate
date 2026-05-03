@@ -169,7 +169,7 @@ var I18N = {
   es: {
     'a11y.skip': 'Saltar al contenido',
     'notfound.title': 'Página no encontrada.', 'notfound.sub': 'La página que buscas no existe o puede que haya cambiado.', 'notfound.home': 'Volver al inicio',
-    'nav.properties': 'Propiedades', 'nav.services': 'Servicios', 'nav.about': 'Sobre nosotros', 'nav.contact': 'Contacto',
+    'nav.properties': 'Propiedades', 'nav.services': 'Servicios', 'nav.about': 'Conoce a Álvaro', 'nav.contact': 'Contacto',
     'prop.for_sale': 'En Venta', 'prop.for_rent': 'En Alquiler', 'prop.sold': 'Vendido', 'prop.reserved': 'Reservado',
     'spec.bedrooms': 'Dormitorios', 'spec.bathrooms': 'Baños', 'spec.built_area': 'Superficie', 'spec.floor': 'Planta',
     'section.description': 'Descripción', 'section.details': 'Detalles del inmueble', 'section.video': 'Tour en vídeo', 'section.virtualtour': 'Tour Virtual 360°',
@@ -195,7 +195,7 @@ var I18N = {
     'about.h1': 'Sobre',
     'about.since': 'AN Real Estate · Desde 2012',
     'about.text': 'Con más de una década de experiencia en el mercado inmobiliario de lujo de Barcelona, me especializo en propiedades exclusivas de alto nivel — ya sea meticulosamente renovadas o listas para ser transformadas. Desde joyas modernistas hasta obras maestras contemporáneas, comprometido a ofrecer orientación personalizada en cada paso.',
-    'about.link': 'Conocer a Álvaro',
+    'about.link': 'Conoce a Álvaro',
     'props.h1': 'Propiedades',
     'props.h2': 'Destacadas',
     'filter.all': 'Todos', 'card.bed': 'hab', 'card.bath': 'baño',

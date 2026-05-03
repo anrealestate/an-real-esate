@@ -682,7 +682,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top center;
+  /* Bust portrait: anchor slightly above geometric center so face reads centered in 3/4 and fixed-height crops */
+  object-position: 50% 42%;
   display: block;
 }
 
@@ -1479,22 +1480,43 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .header-phone  { display: block; }
   .mobile-drawer { display: none !important; }
 
-  .about-team {
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 0;
+  /*
+   * index.html: 3 columns, no .at-line — old flex + width 50% each = 150% base;
+   * .at-heading { white-space: nowrap } blocked shrink → overflow + portrait painted over text.
+   * about.html: 2 columns + decorative .at-line (absolute).
+   */
+  .about-team:not(:has(> .at-line)) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(1.25rem, 2.5vw, 2.5rem);
+    align-items: center;
+  }
+
+  .about-team:has(> .at-line) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 4vw, 4rem);
+    align-items: center;
+  }
+
+  .about-team:not(:has(> .at-line)) .about-team-col,
+  .about-team:not(:has(> .at-line)) .at-img-col,
+  .about-team:has(> .at-line) .about-team-col,
+  .about-team:has(> .at-line) .at-img-col {
+    width: auto;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  /* Long headings must wrap inside their grid track (ES/DE/… translations). */
+  .about-team:not(:has(> .at-line)) .at-heading {
+    white-space: normal;
   }
 
   .at-line { display: block; }
 
   .about-team-col {
-    width: calc(50% - 2rem);
     margin-bottom: 0;
-  }
-
-  .at-img-col {
-    width: calc(50% - 2rem);
   }
 
   .at-img {

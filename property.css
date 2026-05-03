@@ -417,6 +417,7 @@
   width: 56px; height: 56px;
   border-radius: 50%;
   object-fit: cover;
+  object-position: 50% 42%;
   flex-shrink: 0;
   border: 1px solid var(--border);
 }
