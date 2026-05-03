@@ -1785,6 +1785,11 @@
       "order": 3,
       "badge": "new_dev",
       "youtubeUrl": "https://youtu.be/vc1u9porSjQ",
+      "totalFloors": 34,
+      "totalUnits": 58,
+      "constructionStatus": "Pre-construction",
+      "deliveryDate": "Q4 2029",
+      "amenitiesArea": "22,000 sq ft",
       "details": [
         {
           "key": "Reference",

@@ -95,6 +95,30 @@
     return s
   }
 
+  /** Stats bar + badges: prefer top-level dev fields; fall back to `details` (older JSON / admin cache). */
+  function devPromotionStats(l) {
+    const dm = {}
+    if (Array.isArray(l.details)) {
+      for (const row of l.details) {
+        const k = String(row.key || '').trim().toLowerCase()
+        const v = row.val != null ? String(row.val).trim() : ''
+        if (k && v) dm[k] = v
+      }
+    }
+    const pick = (top, detailKey) => {
+      const t = top != null && String(top).trim() !== '' ? String(top).trim() : ''
+      if (t) return t
+      return dm[detailKey] || ''
+    }
+    return {
+      floors: pick(l.totalFloors, 'floors'),
+      units: pick(l.totalUnits, 'residences'),
+      amenities: pick(l.amenitiesArea, 'amenity area'),
+      delivery: pick(l.deliveryDate, 'delivery'),
+      status: pick(l.constructionStatus, 'status'),
+    }
+  }
+
   /** Absolute URL for floor plan assets (JSON may use /docs/… relative to site root). */
   function resolveFloorplanAssetUrl(src) {
     if (!src) return ''
@@ -303,9 +327,106 @@
   let _fpLastCard    = null   // card element that triggered modal (for focus restore)
   let _fpTrapHandler = null   // keydown handler for modal focus trap
 
+  let _layoutTabsWired = false
+  let _devHasUnits     = false
+
+  function tDev(k) {
+    const lg = (typeof getLang === 'function') ? getLang() : (localStorage.getItem('an_lang') || 'en')
+    const L = (window.I18N && window.I18N[lg]) || {}
+    return L[k] || (window.I18N && window.I18N.en && window.I18N.en[k]) || k
+  }
+
+  function selectDevTab(which) {
+    const tabFp = document.getElementById('dv-tab-fp')
+    const tabUnits = document.getElementById('dv-tab-units')
+    const fp = document.getElementById('dv-floorplans-section')
+    const u = document.getElementById('dv-units-section')
+    if (!tabFp || !tabUnits || !fp || !u) return
+    if (which === 'fp') {
+      tabFp.setAttribute('aria-selected', 'true')
+      tabUnits.setAttribute('aria-selected', 'false')
+      tabFp.tabIndex = 0
+      tabUnits.tabIndex = -1
+      fp.removeAttribute('hidden')
+      fp.hidden = false
+      u.setAttribute('hidden', '')
+      u.hidden = true
+    } else {
+      tabUnits.setAttribute('aria-selected', 'true')
+      tabFp.setAttribute('aria-selected', 'false')
+      tabUnits.tabIndex = 0
+      tabFp.tabIndex = -1
+      u.removeAttribute('hidden')
+      u.hidden = false
+      fp.setAttribute('hidden', '')
+      fp.hidden = true
+    }
+  }
+
+  function wireLayoutTabsOnce() {
+    if (_layoutTabsWired) return
+    const tabStrip = document.getElementById('dv-dev-tabstrip')
+    const tabFp = document.getElementById('dv-tab-fp')
+    const tabUnits = document.getElementById('dv-tab-units')
+    if (!tabStrip || !tabFp || !tabUnits) return
+    _layoutTabsWired = true
+    tabStrip.setAttribute('aria-label', tDev('a11y.dev_layout_tabs'))
+    tabFp.addEventListener('click', () => selectDevTab('fp'))
+    tabUnits.addEventListener('click', () => selectDevTab('units'))
+    tabStrip.addEventListener('keydown', e => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return
+      if (e.target !== tabFp && e.target !== tabUnits) return
+      e.preventDefault()
+      selectDevTab(e.key === 'ArrowRight' ? 'units' : 'fp')
+    })
+  }
+
+  function syncDevLayoutsChrome() {
+    const layoutWrap = document.getElementById('dv-layouts-section')
+    const tabStrip = document.getElementById('dv-dev-tabstrip')
+    const fp = document.getElementById('dv-floorplans-section')
+    const u = document.getElementById('dv-units-section')
+    if (!layoutWrap || !fp || !u || !tabStrip) return
+
+    const hasFp = _fpAllGroups.length > 0 && !fp.hidden
+    const invUnits = _devHasUnits
+
+    if (!invUnits && !hasFp) {
+      layoutWrap.setAttribute('hidden', '')
+      layoutWrap.hidden = true
+      return
+    }
+
+    layoutWrap.removeAttribute('hidden')
+    layoutWrap.hidden = false
+    tabStrip.setAttribute('aria-label', tDev('a11y.dev_layout_tabs'))
+
+    if (invUnits && hasFp) {
+      tabStrip.hidden = false
+      tabStrip.removeAttribute('hidden')
+      wireLayoutTabsOnce()
+      selectDevTab('fp')
+    } else {
+      tabStrip.hidden = true
+      tabStrip.setAttribute('hidden', '')
+      if (hasFp) {
+        fp.removeAttribute('hidden')
+        fp.hidden = false
+        u.setAttribute('hidden', '')
+        u.hidden = true
+      } else {
+        u.removeAttribute('hidden')
+        u.hidden = false
+        fp.setAttribute('hidden', '')
+        fp.hidden = true
+      }
+    }
+  }
+
   /* ── Main render ── */
   function renderContent() {
     const lang = (typeof getLang === 'function') ? getLang() : (localStorage.getItem('an_lang') || 'en')
+    _devHasUnits = false
 
     /* Meta + OG */
     const firstImg = (listing.images || []).find(i => !(typeof i === 'object' ? i.hidden : false))
@@ -401,6 +522,8 @@
     const refEl = document.getElementById('dv-ref')
     if (refEl && listing.ref) refEl.textContent = `Ref. ${listing.ref}`
 
+    const ps = devPromotionStats(listing)
+
     /* Badges */
     const badgesEl = document.getElementById('dv-badges')
     if (badgesEl) {
@@ -408,24 +531,39 @@
         'pre-construction': 'dv-badge--status-pre',
         'under construction': 'dv-badge--status-construction',
         'ready': 'dv-badge--status-ready',
-      }[(listing.constructionStatus || '').toLowerCase()] || 'dv-badge--status-pre'
+      }[(ps.status || '').toLowerCase()] || 'dv-badge--status-pre'
       badgesEl.innerHTML =
         `<span class="dv-badge dv-badge--type">New Development</span>` +
-        (listing.constructionStatus ? `<span class="dv-badge ${statusClass}">${esc(listing.constructionStatus)}</span>` : '')
+        (ps.status ? `<span class="dv-badge ${statusClass}">${esc(ps.status)}</span>` : '')
     }
 
     /* Stats row */
     const set = (id, val) => { const e = document.getElementById(id); if (e && val) e.textContent = val }
-    set('dv-floors',       listing.totalFloors ? String(listing.totalFloors) : null)
-    set('dv-res-count',    listing.totalUnits  ? String(listing.totalUnits)  : null)
-    set('dv-amenities-area', listing.amenitiesArea || null)
-    set('dv-delivery',     listing.deliveryDate || null)
-    set('dv-status-stat',  listing.constructionStatus || null)
+    set('dv-floors',         ps.floors || null)
+    set('dv-res-count',      ps.units || null)
+    set('dv-amenities-area', ps.amenities || null)
+    set('dv-delivery',       ps.delivery || null)
+    set('dv-status-stat',    ps.status || null)
 
-    /* Description */
+    /* Description (+ optional lead when multiple paragraphs) */
     const descEl = document.getElementById('dv-description')
-    if (descEl && listing.description?.length) {
-      descEl.innerHTML = listing.description.map(p => `<p>${esc(p)}</p>`).join('')
+    const introSec = document.getElementById('dv-intro-section')
+    const introLead = document.getElementById('dv-intro-lead')
+    const paras = listing.description || []
+    if (introSec && introLead) {
+      if (paras.length > 1) {
+        introLead.textContent = paras[0]
+        introSec.removeAttribute('hidden')
+        introSec.hidden = false
+      } else {
+        introLead.textContent = ''
+        introSec.setAttribute('hidden', '')
+        introSec.hidden = true
+      }
+    }
+    if (descEl) {
+      const bodyParas = paras.length > 1 ? paras.slice(1) : paras
+      descEl.innerHTML = bodyParas.length ? bodyParas.map(p => `<p>${esc(p)}</p>`).join('') : ''
     }
 
     const vidSec = document.getElementById('dv-video-section')
@@ -483,6 +621,9 @@
       .sort((a, b) => (a.ref || '').localeCompare(b.ref || ''))
 
     if (unitsSection && unitGrid) {
+      if (unitFilters) {
+        unitFilters.innerHTML = '<button type="button" class="dv-uftab active" data-ufilter="all">All</button>'
+      }
       const FILTER_LABEL = { 0: 'Studio', 1: '1 Bed', 2: '2 Bed', 3: '3 Bed' }
       const STAGE_LABEL  = { active: 'Available', reserved: 'Reserved', sold: 'Sold' }
       const STAGE_CLASS  = { active: 'dv-unit-avail--available', reserved: 'dv-unit-avail--reserved', sold: 'dv-unit-avail--sold' }
@@ -492,6 +633,7 @@
         const sorted = [...bedsValues].sort((a, b) => a - b)
         sorted.forEach(b => {
           const btn = document.createElement('button')
+          btn.type = 'button'
           btn.className = 'dv-uftab'
           btn.dataset.ufilter = String(b)
           btn.textContent = FILTER_LABEL[b] || `${b} Bed`
@@ -625,7 +767,7 @@
             </div>`
         }).join('')
         applyPagination(listing.units.length)
-        unitsSection.removeAttribute('hidden')
+        _devHasUnits = true
 
       } else if (children.length) {
         /* ── Unidades hijas con ficha propia (property.html) ── */
@@ -702,10 +844,13 @@
           })
         }
 
-        unitsSection.removeAttribute('hidden')
+        _devHasUnits = true
 
       } else {
-        if (unitsSection) unitsSection.setAttribute('hidden', '')
+        if (unitsSection) {
+          unitsSection.setAttribute('hidden', '')
+          unitsSection.hidden = true
+        }
       }
     }
 
@@ -957,11 +1102,10 @@
         if (fpModalOverlay) fpModalOverlay.addEventListener('click', e => { if (e.target === fpModalOverlay) closeFpModal() })
 
         /* ── Toolbar ── */
-        const fpH2 = fpSec.querySelector('h2')
         const subtitleEl = document.createElement('p')
         subtitleEl.className = 'dv-fp-subtitle'
-        subtitleEl.textContent = 'Each plan groups residences sharing the same layout'
-        if (fpH2) fpH2.after(subtitleEl)
+        subtitleEl.textContent = tDev('dev.fp.subtitle')
+        fpGrid.before(subtitleEl)
 
         const allBeds = [...new Set(_fpAllGroups.map(g => groupBedsKey(g)).filter(b => b >= 0))].sort((a, b) => a - b)
         const allCounts  = _fpAllGroups.map(g => g.units.length)
@@ -1018,6 +1162,11 @@
       fpSec.hidden = true
     }
 
+    if (fpSec) {
+      const fpSubEl = fpSec.querySelector('.dv-fp-subtitle')
+      if (fpSubEl) fpSubEl.textContent = tDev('dev.fp.subtitle')
+    }
+
     /* Details */
     const detailsSection = document.getElementById('dv-details-section')
     const detailsEl = document.getElementById('dv-details')
@@ -1072,10 +1221,11 @@
     const asideMeta = document.getElementById('dv-aside-meta')
     if (asideMeta) {
       const rows = [
-        listing.totalFloors     && { k: 'Floors',    v: String(listing.totalFloors) },
-        listing.totalUnits      && { k: 'Residences', v: String(listing.totalUnits) },
-        listing.deliveryDate    && { k: 'Delivery',   v: listing.deliveryDate },
-        listing.constructionStatus && { k: 'Status',  v: listing.constructionStatus },
+        ps.floors     && { k: 'Floors',       v: ps.floors },
+        ps.units      && { k: 'Residences',   v: ps.units },
+        ps.amenities  && { k: 'Amenities',    v: ps.amenities },
+        ps.delivery   && { k: 'Delivery',     v: ps.delivery },
+        ps.status     && { k: 'Status',       v: ps.status },
       ].filter(Boolean)
       asideMeta.innerHTML = rows.map(r => `
         <div class="dv-aside-meta-row">
@@ -1097,6 +1247,8 @@
 
     /* Map */
     tryInitMap()
+
+    syncDevLayoutsChrome()
 
     /* Reveal shell (mirrors property-loader.js anti-FOUC) */
     document.documentElement.classList.remove('property-shell-pending')

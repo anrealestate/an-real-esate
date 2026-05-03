@@ -758,6 +758,50 @@
 
 #dv-floorplans-grid.fp-layout-grid { margin-top: .25rem; }
 
+.dv-intro-lead {
+  max-width: 42rem;
+  margin: 0;
+  font-size: clamp(0.9rem, 1.5vw, 0.98rem);
+  line-height: 1.65;
+  color: var(--cream);
+  opacity: 0.93;
+}
+
+.dv-dev-tabstrip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+  margin-bottom: 1.15rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid rgba(201, 169, 110, 0.22);
+}
+
+.dv-dev-tab {
+  font-family: Jost, system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.42rem 0.85rem;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 1px solid rgba(201, 169, 110, 0.35);
+  background: transparent;
+  color: var(--muted, #9a8f7a);
+}
+
+.dv-dev-tab[aria-selected="true"] {
+  border-color: rgba(201, 169, 110, 0.55);
+  color: var(--gold, #c8a96e);
+  background: rgba(201, 169, 110, 0.12);
+}
+
+.dv-dev-tab:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
 /* ================================
    Floor Plans — Layout Grid & Modal
    ================================ */
@@ -766,7 +810,7 @@
   font-family: var(--sans);
   font-size: var(--fs-xs);
   color: var(--muted);
-  margin: -.5rem 0 1.35rem;
+  margin: 0 0 1.1rem;
   letter-spacing: .03em;
 }
 
