@@ -12,15 +12,16 @@
    ================================ */
 .ab-main {
   padding-top: 74px; /* fixed header height */
+  /* One vertical rhythm for every major block (match hero top/bottom air) */
+  --ab-section-gap: clamp(3.5rem, 8vw, 7rem);
 }
 
 /* ================================
    TOP TITLE SECTION
    ================================ */
 .ab-top {
-  padding-top: clamp(3rem, 8vw, 7rem);
-  /* Extra bottom air: hero strip image removed (was duplicate portrait) */
-  padding-bottom: clamp(3.5rem, 8vw, 7rem);
+  padding-top: var(--ab-section-gap);
+  padding-bottom: var(--ab-section-gap);
   text-align: center;
 }
 
@@ -108,11 +109,19 @@
    (augments styles from styles.css)
    ================================ */
 .ab-team-wrap {
-  margin-top: clamp(0.25rem, 1.5vw, 1rem);
-  margin-bottom: clamp(4.5rem, 12vw, 12rem);
+  margin-top: 0;
+  margin-bottom: var(--ab-section-gap);
 }
 
 /* Team block: calmer hierarchy (no duplicate key / role row) */
+.ab-team-wrap .about-team:has(> .at-line) .at-heading {
+  white-space: normal;
+  line-height: 1.12;
+}
+.ab-team-wrap .about-team:has(> .at-line) .at-heading .text-wrap,
+.ab-team-wrap .about-team:has(> .at-line) .at-heading .text-inner {
+  overflow: visible;
+}
 .ab-team-wrap .at-heading {
   margin-top: 0;
   margin-bottom: 1.25rem;
@@ -148,7 +157,7 @@
    CREDENTIALS / HISTORY
    ================================ */
 .ab-history {
-  padding-bottom: clamp(4.5rem, 10vw, 10rem);
+  padding-bottom: var(--ab-section-gap);
   border-top: 1px solid var(--border);
 }
 
@@ -156,7 +165,7 @@
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
-  padding-top: clamp(2.75rem, 5vw, 4rem);
+  padding-top: var(--ab-section-gap);
 }
 
 /* Left sticky column */
@@ -243,7 +252,7 @@
    CTA
    ================================ */
 .ab-cta {
-  padding-block: clamp(3.5rem, 8vw, 6.5rem);
+  padding-block: var(--ab-section-gap);
 }
 
 .ab-cta-inner {
@@ -382,7 +391,7 @@
     width: calc(50% - 40px);
     margin-left: auto;
     padding-left: 60px;
-    padding-top: clamp(2.5rem, 5vw, 4rem);
+    padding-top: 0;
   }
 
   .ab-history-item {
