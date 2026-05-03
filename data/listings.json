@@ -699,7 +699,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "El Born",
-      "order": 4
+      "order": 5
     },
     {
       "slug": "rambla-catalunya-corner",
@@ -817,7 +817,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Eixample",
-      "order": 5
+      "order": 6
     },
     {
       "slug": "eixample-golden-mile",
@@ -954,7 +954,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Dreta de l'Eixample",
-      "order": 6
+      "order": 7
     },
     {
       "slug": "vallvidrera-villa",
@@ -969,150 +969,10 @@
       "baths": 6,
       "size": "634",
       "floor": "3 levels",
-      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/vallvidrera-villa/Mont-dorsa-68_66-1.jpg",
+      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404793/an-realestate/vallvidrera-villa/Mont-dorsa-68_17.jpg",
       "images": [
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/vallvidrera-villa/Mont-dorsa-68_66-1.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404800/an-realestate/vallvidrera-villa/Mont-dorsa-68_65-1.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/vallvidrera-villa/Mont-dorsa-68_64.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/vallvidrera-villa/Mont-dorsa-68_63.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404800/an-realestate/vallvidrera-villa/Mont-dorsa-68_62.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/vallvidrera-villa/Mont-dorsa-68_61.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404802/an-realestate/vallvidrera-villa/Mont-dorsa-68_60.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404800/an-realestate/vallvidrera-villa/Mont-dorsa-68_59-1.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404799/an-realestate/vallvidrera-villa/Mont-dorsa-68_58.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404799/an-realestate/vallvidrera-villa/Mont-dorsa-68_57.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404799/an-realestate/vallvidrera-villa/Mont-dorsa-68_56.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404799/an-realestate/vallvidrera-villa/Mont-dorsa-68_55.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404798/an-realestate/vallvidrera-villa/Mont-dorsa-68_54.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404798/an-realestate/vallvidrera-villa/Mont-dorsa-68_53-1.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404798/an-realestate/vallvidrera-villa/Mont-dorsa-68_52.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404798/an-realestate/vallvidrera-villa/Mont-dorsa-68_51.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_50.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_49.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_48.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_42.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_38-1.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_36.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_35.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_34.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_33.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_32.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_31.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404795/an-realestate/vallvidrera-villa/Mont-dorsa-68_30.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404795/an-realestate/vallvidrera-villa/Mont-dorsa-68_29.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404795/an-realestate/vallvidrera-villa/Mont-dorsa-68_28.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404795/an-realestate/vallvidrera-villa/Mont-dorsa-68_27.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_26.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_25.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_23.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_22.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_19.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404793/an-realestate/vallvidrera-villa/Mont-dorsa-68_17.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
@@ -1120,7 +980,147 @@
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404793/an-realestate/vallvidrera-villa/Mont-dorsa-68_17.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_19.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_22.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_23.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_25.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_26.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404795/an-realestate/vallvidrera-villa/Mont-dorsa-68_27.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404795/an-realestate/vallvidrera-villa/Mont-dorsa-68_28.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404795/an-realestate/vallvidrera-villa/Mont-dorsa-68_29.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404795/an-realestate/vallvidrera-villa/Mont-dorsa-68_30.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_31.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_32.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_33.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_34.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_35.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_36.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_38-1.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_42.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_48.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_49.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_50.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404798/an-realestate/vallvidrera-villa/Mont-dorsa-68_51.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404798/an-realestate/vallvidrera-villa/Mont-dorsa-68_52.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404798/an-realestate/vallvidrera-villa/Mont-dorsa-68_53-1.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404798/an-realestate/vallvidrera-villa/Mont-dorsa-68_54.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404799/an-realestate/vallvidrera-villa/Mont-dorsa-68_55.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404799/an-realestate/vallvidrera-villa/Mont-dorsa-68_56.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404799/an-realestate/vallvidrera-villa/Mont-dorsa-68_57.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404799/an-realestate/vallvidrera-villa/Mont-dorsa-68_58.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404800/an-realestate/vallvidrera-villa/Mont-dorsa-68_59-1.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404802/an-realestate/vallvidrera-villa/Mont-dorsa-68_60.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/vallvidrera-villa/Mont-dorsa-68_61.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404800/an-realestate/vallvidrera-villa/Mont-dorsa-68_62.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/vallvidrera-villa/Mont-dorsa-68_63.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/vallvidrera-villa/Mont-dorsa-68_64.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404800/an-realestate/vallvidrera-villa/Mont-dorsa-68_65-1.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/vallvidrera-villa/Mont-dorsa-68_66-1.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         }
       ],
@@ -1176,19 +1176,23 @@
         }
       ],
       "features": {
-        "Additional": [
+        "Interior": [
           "70 m² master suite",
           "6 en-suite bedrooms",
           "Open-plan living & dining",
           "Premium kitchen",
           "Wine cellar",
-          "Smart home automation",
+          "Smart home automation"
+        ],
+        "Outdoor": [
           "Climate-controlled pool",
           "117 m² roof terrace",
           "Private garden",
           "Finnish sauna",
           "7-car garage",
-          "360° panoramic views",
+          "360° panoramic views"
+        ],
+        "Sustainability": [
           "Energy class A",
           "Solar panels",
           "Aerothermal underfloor heating",
@@ -1218,7 +1222,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Vallvidrera",
-      "order": 7
+      "order": 8
     },
     {
       "slug": "eixample-villarroel",
@@ -1335,7 +1339,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Eixample",
-      "order": 8
+      "order": 9
     },
     {
       "slug": "villa-cascades",
@@ -1696,12 +1700,12 @@
       "stage": "active",
       "lat": 41.4328796,
       "lng": 2.0927754,
-      "order": 9
+      "order": 3
     },
     {
       "slug": "house-of-wellness",
       "title": "House of Wellness",
-      "price": "$From 419000",
+      "price": "$From 419,000",
       "ref": "AN202603",
       "province": "Florida",
       "city": "Miami",
@@ -1798,7 +1802,7 @@
         "Residences feature loft-style ceiling heights of 9'4\", premium appliances, two-tone cabinetry with terrazzo countertops, and porcelain tile bathrooms. Select  \n  units offer exceptional views over Brickell and Biscayne Bay and polished concrete balconies. Developed by North Development — the alliance between Oak Capital\n   and Edifica — with architecture by Mc+G Architecture and interiors by Urban Robot Associates"
       ],
       "stage": "active",
-      "order": 3,
+      "order": 4,
       "badge": "new_dev",
       "youtubeUrl": "https://youtu.be/vc1u9porSjQ",
       "details": [
@@ -1862,7 +1866,8 @@
           "Views over Brickell and Biscayne Bay (select units)"
         ]
       },
-      "pdf_hero": "https://anrealestate.es/admin/"
+      "pdf_hero": "https://anrealestate.es/admin/",
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-1009",
@@ -1991,7 +1996,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-21-of-64.pdf",
           "label": "Floor plan · LINE 09 B1"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-1101",
@@ -2120,7 +2126,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-01-of-64.pdf",
           "label": "Floor plan · LINE 01 C4"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-1104",
@@ -2249,7 +2256,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-04-of-64.pdf",
           "label": "Floor plan · LINE 04 B5"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-1120",
@@ -2378,7 +2386,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-43-of-64.pdf",
           "label": "Floor plan · LINE 20 C1"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-1205",
@@ -2507,7 +2516,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-07-of-64.pdf",
           "label": "Floor plan · LINE 05 B1"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-1406",
@@ -2636,7 +2646,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-11-of-64.pdf",
           "label": "Floor plan · LINE 06 B1"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-1508",
@@ -2765,7 +2776,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-18-of-64.pdf",
           "label": "Floor plan · LINE 08 B1"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-1514",
@@ -2894,7 +2906,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-32-of-64.pdf",
           "label": "Floor plan · LINE 14 C2"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-1523",
@@ -3023,7 +3036,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-51-of-64.pdf",
           "label": "Floor plan · LINE 23 B2"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-1611",
@@ -3152,7 +3166,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-28-of-64.pdf",
           "label": "Floor plan · LINE 11 B4"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-1621",
@@ -3281,7 +3296,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-45-of-64.pdf",
           "label": "Floor plan · LINE 21 N"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-1817",
@@ -3410,7 +3426,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-36-of-64.pdf",
           "label": "Floor plan · LINE 17 B2"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-1818",
@@ -3539,7 +3556,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-38-of-64.pdf",
           "label": "Floor plan · LINE 18 B1"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-1819",
@@ -3668,7 +3686,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-41-of-64.pdf",
           "label": "Floor plan · LINE 19 N"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-1822",
@@ -3797,7 +3816,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-49-of-64.pdf",
           "label": "Floor plan · LINE 22 B1"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-1915",
@@ -3926,7 +3946,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-33-of-64.pdf",
           "label": "Floor plan · LINE 15 A2"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-1920",
@@ -4055,7 +4076,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-42-of-64.pdf",
           "label": "Floor plan · LINE 20 C1"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-2006",
@@ -4184,7 +4206,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-11-of-64.pdf",
           "label": "Floor plan · LINE 06 B1"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-2012",
@@ -4313,7 +4336,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-30-of-64.pdf",
           "label": "Floor plan · LINE 12 A3"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-2014",
@@ -4442,7 +4466,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-32-of-64.pdf",
           "label": "Floor plan · LINE 14 C2"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-2105",
@@ -4571,7 +4596,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-09-of-64.pdf",
           "label": "Floor plan · LINE 05 B1"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-2113",
@@ -4700,7 +4726,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-31-of-64.pdf",
           "label": "Floor plan · LINE 13 C4"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-2126",
@@ -4829,7 +4856,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-58-of-64.pdf",
           "label": "Floor plan · LINE 26 C3"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-2207",
@@ -4958,7 +4986,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-15-of-64.pdf",
           "label": "Floor plan · LINE 07 N"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-2209",
@@ -5087,7 +5116,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-22-of-64.pdf",
           "label": "Floor plan · LINE 09 B1"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-2216",
@@ -5216,7 +5246,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-34-of-64.pdf",
           "label": "Floor plan · LINE 16 B3"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-2221",
@@ -5345,7 +5376,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-45-of-64.pdf",
           "label": "Floor plan · LINE 21 N"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-2303",
@@ -5474,7 +5506,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-03-of-64.pdf",
           "label": "Floor plan · LINE 03 B4"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-2311",
@@ -5603,7 +5636,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-28-of-64.pdf",
           "label": "Floor plan · LINE 11 B4"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-2420",
@@ -5732,7 +5766,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-43-of-64.pdf",
           "label": "Floor plan · LINE 20 C1"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-2514",
@@ -5861,7 +5896,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-32-of-64.pdf",
           "label": "Floor plan · LINE 14 C2"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-2519",
@@ -5990,7 +6026,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-41-of-64.pdf",
           "label": "Floor plan · LINE 19 N"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-2702",
@@ -6119,7 +6156,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-02-of-64.pdf",
           "label": "Floor plan · LINE 02 A3"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-2713",
@@ -6248,7 +6286,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-31-of-64.pdf",
           "label": "Floor plan · LINE 13 C4"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-2820",
@@ -6377,7 +6416,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-43-of-64.pdf",
           "label": "Floor plan · LINE 20 C1"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-2901",
@@ -6506,7 +6546,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-01-of-64.pdf",
           "label": "Floor plan · LINE 01 C4"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-2907",
@@ -6635,7 +6676,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-16-of-64.pdf",
           "label": "Floor plan · LINE 07 N"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-2926",
@@ -6764,7 +6806,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-58-of-64.pdf",
           "label": "Floor plan · LINE 26 C3"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-3003",
@@ -6893,7 +6936,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-03-of-64.pdf",
           "label": "Floor plan · LINE 03 B4"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-3014",
@@ -7022,7 +7066,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-32-of-64.pdf",
           "label": "Floor plan · LINE 14 C2"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-3015",
@@ -7151,7 +7196,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-33-of-64.pdf",
           "label": "Floor plan · LINE 15 A2"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-3021",
@@ -7280,7 +7326,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-45-of-64.pdf",
           "label": "Floor plan · LINE 21 N"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-3024",
@@ -7409,7 +7456,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-54-of-64.pdf",
           "label": "Floor plan · LINE 24 B3"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-3219",
@@ -7538,7 +7586,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-41-of-64.pdf",
           "label": "Floor plan · LINE 19 N"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-3225",
@@ -7667,7 +7716,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-56-of-64.pdf",
           "label": "Floor plan · LINE 25 A2"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-3326",
@@ -7796,7 +7846,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-58-of-64.pdf",
           "label": "Floor plan · LINE 26 C3"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-801",
@@ -7925,7 +7976,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-01-of-64.pdf",
           "label": "Floor plan · LINE 01 C4"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-808",
@@ -8054,7 +8106,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-19-of-64.pdf",
           "label": "Floor plan · LINE 08 B1"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-810",
@@ -8183,7 +8236,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-24-of-64.pdf",
           "label": "Floor plan · LINE 10 B5"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-818",
@@ -8312,7 +8366,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-39-of-64.pdf",
           "label": "Floor plan · LINE 18 B1"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-911",
@@ -8441,7 +8496,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-28-of-64.pdf",
           "label": "Floor plan · LINE 11 B4"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-913",
@@ -8570,7 +8626,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-31-of-64.pdf",
           "label": "Floor plan · LINE 13 C4"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-916",
@@ -8699,7 +8756,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-34-of-64.pdf",
           "label": "Floor plan · LINE 16 B3"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-917",
@@ -8828,7 +8886,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-36-of-64.pdf",
           "label": "Floor plan · LINE 17 B2"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-919",
@@ -8957,7 +9016,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-40-of-64.pdf",
           "label": "Floor plan · LINE 19 N"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-921",
@@ -9086,7 +9146,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-45-of-64.pdf",
           "label": "Floor plan · LINE 21 N"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-922",
@@ -9215,7 +9276,8 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-49-of-64.pdf",
           "label": "Floor plan · LINE 22 B1"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
     },
     {
       "slug": "house-of-wellness-u-926",
@@ -9344,7 +9406,29 @@
           "src": "/docs/house-of-wellness-floor-plans/how-floorplan-page-58-of-64.pdf",
           "label": "Floor plan · LINE 26 C3"
         }
-      ]
+      ],
+      "sizeUnit": "sqft"
+    },
+    {
+      "slug": "sadf",
+      "title": "sadf",
+      "price": "€600000",
+      "ref": "AN202606",
+      "province": "Florida",
+      "city": "Miami",
+      "zone": "Brickell",
+      "neighbourhood": "Brickell, Miami",
+      "address": "gtgsd",
+      "type": "sale",
+      "propertyType": "development",
+      "badge_type": "New Development",
+      "badge": "new_dev",
+      "beds": 2,
+      "baths": 1,
+      "size": "",
+      "stage": "draft",
+      "order": 3058,
+      "constructionStatus": "Under Construction"
     }
   ]
 }
