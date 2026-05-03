@@ -1778,7 +1778,7 @@ function initGallerySortable() {
   gallerySortable = Sortable.create(document.getElementById('gallery-list'), {
     animation: 150,
     draggable: '.gal-card',
-    filter: '.gal-cb, .gal-card-overlay, .gal-card-reorder, .gal-card-alt, .gal-card-url-input, .gal-card-url-wrap',
+    filter: '.gal-cb, .gal-card-overlay, .gal-card-alt, .gal-card-url-input, .gal-card-url-wrap',
     preventOnFilter: true,
     ghostClass: 'is-dragging',
     chosenClass: 'drag-over',
@@ -1822,11 +1822,7 @@ function addGalleryCard(img = {}) {
       </div>
       <div class="gal-drag-handle" aria-hidden="true"><svg width="16" height="10" viewBox="0 0 16 10" fill="currentColor"><rect x="0" y="0" width="16" height="2" rx="1"/><rect x="0" y="4" width="16" height="2" rx="1"/><rect x="0" y="8" width="16" height="2" rx="1"/></svg></div>
     </div>
-    <input class="gal-card-alt" type="text" placeholder="Alt…" value="${alt}" />
-    <div class="gal-card-reorder">
-      <button type="button" class="gal-ro-up" aria-label="Subir foto" title="Subir foto">↑</button>
-      <button type="button" class="gal-ro-dn" aria-label="Bajar foto" title="Bajar foto">↓</button>
-    </div>`
+    <input class="gal-card-alt" type="text" placeholder="Alt…" value="${alt}" />`
 
   // URL input → set src and swap to img
   const urlInput = card.querySelector('.gal-card-url-input')
@@ -1848,11 +1844,6 @@ function addGalleryCard(img = {}) {
   }
 
   bindGalCardBtns(card)
-
-  const btnUp = card.querySelector('.gal-ro-up')
-  const btnDn = card.querySelector('.gal-ro-dn')
-  if (btnUp) btnUp.addEventListener('click', e => { e.stopPropagation(); moveCard(card, -1) })
-  if (btnDn) btnDn.addEventListener('click', e => { e.stopPropagation(); moveCard(card,  1) })
 
   // Alt sync
   card.querySelector('.gal-card-alt').addEventListener('input', e => { card.dataset.alt = e.target.value })
@@ -1879,29 +1870,6 @@ function refreshGalleryBadges() {
       if (badge) badge.remove()
     }
   })
-  updateReorderButtons(cards)
-}
-
-function updateReorderButtons(cards) {
-  if (!cards) cards = [...document.querySelectorAll('#gallery-list .gal-card')]
-  const last = cards.length - 1
-  cards.forEach((c, i) => {
-    const up = c.querySelector('.gal-ro-up')
-    const dn = c.querySelector('.gal-ro-dn')
-    if (up) up.disabled = (i === 0)
-    if (dn) dn.disabled = (i === last)
-  })
-}
-
-function moveCard(card, dir) {
-  const list = document.getElementById('gallery-list')
-  const all  = [...list.querySelectorAll('.gal-card')]
-  const i    = all.indexOf(card)
-  if (dir === -1 && i > 0)               list.insertBefore(card, all[i - 1])
-  else if (dir === 1 && i < all.length - 1) list.insertBefore(all[i + 1], card)
-  else return
-  _formDirty = true
-  refreshGalleryBadges()
 }
 
 function bindGalCardBtns(card) {
