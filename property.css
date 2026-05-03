@@ -1356,14 +1356,23 @@
   }
 }
 
-/* ── Seller cross-link nudge ── */
+/* ── Seller cross-link nudge (aligned like WA / tel rows; optical center for long copy) ── */
 .pc-sell-nudge {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
   margin-top: .9rem;
+  margin-inline: auto;
+  padding: 0.4rem 0.35rem 0;
+  box-sizing: border-box;
   text-align: center;
+  text-wrap: balance;
   font-family: var(--sans);
   font-size: var(--fs-xs);
-  letter-spacing: .06em;
+  letter-spacing: 0.04em;
+  line-height: 1.45;
   color: var(--muted);
   text-decoration: none;
   transition: color .2s;

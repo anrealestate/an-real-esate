@@ -149,8 +149,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .header-block {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  /* minmax(0,1fr) lets side columns shrink so long translations don’t overlap the logo */
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
+  column-gap: clamp(10px, 2vw, 28px);
   padding-block: max(20px, 1.872vw);
   position: relative;
   z-index: 1;
@@ -159,6 +161,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .header-left {
   display: flex;
   align-items: center;
+  min-width: 0;
 }
 
 .header-right {
@@ -166,12 +169,25 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   align-items: center;
   justify-content: flex-end;
   gap: max(16px, 2.08vw);
+  min-width: 0;
 }
 
 /* Desktop nav (hidden on mobile) */
 .hn-left, .hn-right {
   display: none;
   gap: max(16px, 2.08vw);
+  min-width: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  row-gap: 0.35rem;
+}
+
+.hn-left {
+  justify-content: flex-start;
+}
+
+.hn-right {
+  justify-content: flex-end;
 }
 
 .hn-link {
@@ -204,12 +220,16 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .hn-link--cta {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   align-self: center;
+  text-align: center;
   color: var(--gold);
   border: 1px solid var(--gold);
-  padding: .4em 1.1em;
-  letter-spacing: .14em;
-  line-height: 1;
+  padding: 0.45em 1.15em;
+  letter-spacing: 0.12em;
+  line-height: 1.15;
+  max-width: 100%;
+  box-sizing: border-box;
   transition: color var(--fast), background var(--fast), border-color var(--fast);
 }
 .hn-link--cta::before { display: none; }
@@ -230,11 +250,13 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .header-phone:hover { color: var(--cream); }
 
-/* Logo */
+/* Logo — above side nav in stacking edge cases */
 .header-logo, .footer-logo {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  z-index: 2;
 }
 .header-logo-img {
   height: clamp(36px, 3.2vw, 48px);
@@ -332,7 +354,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .drawer-link[aria-current="page"] { color: var(--cream); }
 
 .drawer-link--cta {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   box-sizing: border-box;
   margin: 1.5rem 0 0;
@@ -346,6 +370,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   font-family: var(--sans);
   text-transform: uppercase;
   text-align: center;
+  line-height: 1.25;
 }
 .drawer-link--cta:hover { background: rgba(201,169,110,.06); color: var(--gold); }
 
@@ -1557,6 +1582,28 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 @media (max-width: 767px) {
   .lang-switcher { margin-left: .4rem; }
   .lang-btn { font-size: .65rem; padding: .22rem .42rem; }
+}
+
+/* Desktop header: tighter rhythm when nav + CTA + lang are crowded (long i18n strings) */
+@media (min-width: 1024px) and (max-width: 1240px) {
+  .header .holder {
+    padding-inline: max(12px, 1.65vw);
+  }
+  .hn-link {
+    font-size: max(13px, 0.78vw);
+    letter-spacing: 0.09em;
+  }
+  .hn-link--cta {
+    letter-spacing: 0.1em;
+    padding: 0.42em 0.95em;
+  }
+  .hn-left,
+  .hn-right {
+    gap: max(10px, 1.35vw);
+  }
+  .lang-switcher {
+    margin-left: 0.45rem;
+  }
 }
 
 /* ================================
