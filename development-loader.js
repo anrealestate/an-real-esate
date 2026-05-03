@@ -321,7 +321,8 @@
   let _fpRenderGen   = 0      // bumped on each grid re-render to cancel stale PDF renders
   let _fpObserver    = null   // single IntersectionObserver for lazy PDF previews
   let _fpAllGroups   = []     // layout groups cached on first init
-  let _fpPage        = 1      // load-more page cursor (1 = first FP_PAGE cards visible)
+  let _fpPage        = 1      // load-more: each step adds one grid row (fpFloorplanRowSize() cards)
+  let _fpResizeWired = false
   let _fpFilter      = 'all'  // active beds filter chip value
   let _fpSort        = 'default'
   let _fpLastCard    = null   // card element that triggered modal (for focus restore)
@@ -334,6 +335,15 @@
     const lg = (typeof getLang === 'function') ? getLang() : (localStorage.getItem('an_lang') || 'en')
     const L = (window.I18N && window.I18N[lg]) || {}
     return L[k] || (window.I18N && window.I18N.en && window.I18N.en[k]) || k
+  }
+
+  /** Cards visible in one row of #dv-floorplans-grid; must match development.css breakpoints. */
+  function fpFloorplanRowSize() {
+    if (typeof window === 'undefined') return 3
+    const w = window.innerWidth || 1024
+    if (w < 600) return 1
+    if (w < 1024) return 2
+    return 3
   }
 
   function selectDevTab(which) {
@@ -895,7 +905,6 @@
       if (!fpSec || !fpGrid || !_fpAllGroups.length) {
         if (fpSec) { fpSec.setAttribute('hidden', ''); fpSec.hidden = true }
       } else {
-        const FP_PAGE = 12
         const STAGE_LABEL = { active: 'Available', reserved: 'Reserved', sold: 'Sold' }
         const STAGE_CLASS  = { active: 'dv-unit-avail--available', reserved: 'dv-unit-avail--reserved', sold: 'dv-unit-avail--sold' }
         const BEDS_LABEL   = { 0: 'Studio', 1: '1 Bed', 2: '2 Bed', 3: '3 Bed', 4: '4 Bed', 5: '5 Bed' }
@@ -1014,6 +1023,7 @@
         fpGrid.after(loadMoreBtn)
 
         function renderFpGrid(mode) {
+          const row = fpFloorplanRowSize()
           if (mode !== 'append') {
             if (_fpObserver) { _fpObserver.disconnect(); _fpObserver = null }
             _fpRenderGen++
@@ -1024,8 +1034,8 @@
           }
 
           const groups    = getFilteredSorted()
-          const startIdx  = mode === 'append' ? (_fpPage - 1) * FP_PAGE : 0
-          const endIdx    = _fpPage * FP_PAGE
+          const startIdx  = mode === 'append' ? (_fpPage - 1) * row : 0
+          const endIdx    = _fpPage * row
           const slice     = groups.slice(startIdx, endIdx)
 
           const gen = _fpRenderGen
@@ -1038,11 +1048,21 @@
           })
 
           const remaining = Math.max(0, groups.length - Math.min(endIdx, groups.length))
-          loadMoreBtn.textContent = remaining > 0 ? `Show more (${remaining})` : ''
+          const moreLbl = tDev('dv.loadmore').replace('{n}', String(remaining))
+          loadMoreBtn.textContent = remaining > 0 ? moreLbl : ''
           loadMoreBtn.hidden = remaining <= 0
         }
 
         loadMoreBtn.addEventListener('click', () => renderFpGrid('append'))
+
+        if (!_fpResizeWired) {
+          _fpResizeWired = true
+          let _fpResizeT = null
+          window.addEventListener('resize', () => {
+            clearTimeout(_fpResizeT)
+            _fpResizeT = setTimeout(() => { renderFpGrid('reset') }, 200)
+          })
+        }
 
         /* ── Modal ── */
         const fpModalOverlay = document.getElementById('fp-modal-overlay')
