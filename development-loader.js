@@ -321,8 +321,9 @@
   let _fpRenderGen   = 0      // bumped on each grid re-render to cancel stale PDF renders
   let _fpObserver    = null   // single IntersectionObserver for lazy PDF previews
   let _fpAllGroups   = []     // layout groups cached on first init
-  let _fpPage        = 1      // load-more: each step adds one grid row (fpFloorplanRowSize() cards)
   let _fpResizeWired = false
+  let _lastFpRowSize = -1     // fpFloorplanRowSize(); resize only resets grid when this changes
+  let _fpSyncActionButtons = null
   let _fpFilter      = 'all'  // active beds filter chip value
   let _fpSort        = 'default'
   let _fpLastCard    = null   // card element that triggered modal (for focus restore)
@@ -331,9 +332,11 @@
   let _layoutTabsWired = false
   let _devHasUnits     = false
 
-  let _unitRowsShown         = 1
+  let _unitVisibleRows       = 1      // grid rows revealed (initial 1 row); +DV_GRID_CHUNK_ROWS per "Load more"
+  let _unitExpandedAll       = false  // "Show all" — reveal every card for current filter
   let _unitResizeWired       = false
   let _unitPaginationRefresh = null
+  let _lastUnitRowSize       = -1     // unitGridRowSize(); resize only reapplies when columns change
 
   function tDev(k) {
     const lg = (typeof getLang === 'function') ? getLang() : (localStorage.getItem('an_lang') || 'en')
@@ -357,6 +360,12 @@
     if (w < 600) return 1
     if (w < 900) return 2
     return 3
+  }
+
+  /** Extra cards per "Load more" ≈ three grid rows (e.g. 3×3 on desktop when columns = 3). */
+  const DV_GRID_CHUNK_ROWS = 3
+  function gridChunkSize(row) {
+    return Math.max(1, row * DV_GRID_CHUNK_ROWS)
   }
 
   function selectDevTab(which) {
@@ -451,6 +460,8 @@
     const lang = (typeof getLang === 'function') ? getLang() : (localStorage.getItem('an_lang') || 'en')
     _devHasUnits = false
     _unitPaginationRefresh = null
+    _lastUnitRowSize = -1
+    _fpSyncActionButtons = null
 
     /* Meta + OG */
     const firstImg = (listing.images || []).find(i => !(typeof i === 'object' ? i.hidden : false))
@@ -645,7 +656,8 @@
       .sort((a, b) => (a.ref || '').localeCompare(b.ref || ''))
 
     if (unitsSection && unitGrid) {
-      _unitRowsShown = 1
+      _unitVisibleRows = 1
+      _unitExpandedAll = false
       if (unitFilters) {
         unitFilters.innerHTML = '<button type="button" class="dv-uftab active" data-ufilter="all">All</button>'
       }
@@ -669,16 +681,20 @@
             unitFilters.querySelectorAll('.dv-uftab').forEach(t => t.classList.remove('active'))
             tab.classList.add('active')
             const f = tab.dataset.ufilter
-            _unitRowsShown = 1
+            _unitVisibleRows = 1
+            _unitExpandedAll = false
             applyFilter(f)
             applyPagination()
+            _lastUnitRowSize = unitGridRowSize()
           })
         })
       }
 
-      const countEl      = document.getElementById('dv-units-count')
-      const loadMoreBtn  = document.getElementById('dv-units-loadmore')
-      const sortSel      = document.getElementById('dv-units-sort')
+      const countEl         = document.getElementById('dv-units-count')
+      const loadMoreBtn     = document.getElementById('dv-units-loadmore')
+      const showAllUnitsBtn = document.getElementById('dv-units-showall')
+      const unitActionsEl   = document.getElementById('dv-unit-grid-actions')
+      const sortSel         = document.getElementById('dv-units-sort')
       const FMT          = window.AN_FMT || {}
       const L            = (window.I18N && window.I18N[lang]) || {}
       const t            = k => L[k] || k
@@ -739,21 +755,34 @@
         if (!loadMoreBtn) return
         const row = unitGridRowSize()
         const cards = [...unitGrid.querySelectorAll('.dv-unit-card:not(.hidden)')]
-        const cap = _unitRowsShown * row
+        const cap = _unitExpandedAll ? cards.length : Math.min(cards.length, _unitVisibleRows * row)
         cards.forEach((c, i) => c.classList.toggle('dv-more-hidden', i >= cap))
         const rem = Math.max(0, cards.length - cap)
         if (rem > 0) {
           loadMoreBtn.textContent = t('dv.loadmore').replace('{n}', String(rem))
           loadMoreBtn.hidden = false
+          if (showAllUnitsBtn) {
+            showAllUnitsBtn.hidden = false
+            showAllUnitsBtn.textContent = t('dv.show_all')
+          }
+          if (unitActionsEl) unitActionsEl.hidden = false
         } else {
           loadMoreBtn.textContent = ''
           loadMoreBtn.hidden = true
+          if (showAllUnitsBtn) showAllUnitsBtn.hidden = true
+          if (unitActionsEl) unitActionsEl.hidden = true
         }
       }
 
       if (loadMoreBtn) {
         loadMoreBtn.onclick = () => {
-          _unitRowsShown++
+          _unitVisibleRows += DV_GRID_CHUNK_ROWS
+          applyPagination()
+        }
+      }
+      if (showAllUnitsBtn) {
+        showAllUnitsBtn.onclick = () => {
+          _unitExpandedAll = true
           applyPagination()
         }
       }
@@ -792,6 +821,7 @@
             </div>`
         }).join('')
         applyPagination()
+        _lastUnitRowSize = unitGridRowSize()
         _devHasUnits = true
 
       } else if (children.length) {
@@ -856,6 +886,7 @@
         }
 
         applyPagination()
+        _lastUnitRowSize = unitGridRowSize()
 
         /* Sort handler */
         if (sortSel) {
@@ -864,8 +895,10 @@
             const sorted = sortArr(children, criterion)
             renderChildren(sorted)
             applyFilter(_activeFilter)
-            _unitRowsShown = 1
+            _unitVisibleRows = 1
+            _unitExpandedAll = false
             applyPagination()
+            _lastUnitRowSize = unitGridRowSize()
           }
         }
 
@@ -880,7 +913,11 @@
 
       if (_devHasUnits) {
         _unitPaginationRefresh = () => {
-          _unitRowsShown = 1
+          const r = unitGridRowSize()
+          if (_lastUnitRowSize >= 0 && r === _lastUnitRowSize) return
+          _lastUnitRowSize = r
+          _unitVisibleRows = 1
+          _unitExpandedAll = false
           applyPagination()
         }
         if (!_unitResizeWired) {
@@ -1048,27 +1085,47 @@
           return card
         }
 
-        /* ── Render (or append) cards to the grid ── */
+        /* ── Grid + load actions (first row, then ~3 rows per "more", or show all) ── */
+        const fpActions = document.createElement('div')
+        fpActions.className = 'dv-grid-load-actions'
+        fpActions.hidden = true
+        fpGrid.after(fpActions)
         const loadMoreBtn = document.createElement('button')
+        loadMoreBtn.type = 'button'
         loadMoreBtn.className = 'dv-fp-loadmore'
-        loadMoreBtn.hidden = true
-        fpGrid.after(loadMoreBtn)
+        const showAllFpBtn = document.createElement('button')
+        showAllFpBtn.type = 'button'
+        showAllFpBtn.className = 'dv-fp-loadall'
+        showAllFpBtn.setAttribute('data-i18n', 'dv.show_all')
+        showAllFpBtn.textContent = tDev('dv.show_all')
+        fpActions.appendChild(loadMoreBtn)
+        fpActions.appendChild(showAllFpBtn)
 
-        function renderFpGrid(mode) {
-          const row = fpFloorplanRowSize()
-          if (mode !== 'append') {
-            if (_fpObserver) { _fpObserver.disconnect(); _fpObserver = null }
-            _fpRenderGen++
-            fpGrid.innerHTML = ''
-            _fpPage = 1
-          } else {
-            _fpPage++
+        function syncFpActionButtons() {
+          const groups = getFilteredSorted()
+          const have = fpGrid.querySelectorAll('.fp-lcard').length
+          const rem = Math.max(0, groups.length - have)
+          if (rem <= 0) {
+            loadMoreBtn.hidden = true
+            loadMoreBtn.textContent = ''
+            showAllFpBtn.hidden = true
+            fpActions.hidden = true
+            return
           }
+          fpActions.hidden = false
+          loadMoreBtn.hidden = false
+          loadMoreBtn.textContent = tDev('dv.loadmore').replace('{n}', String(rem))
+          showAllFpBtn.hidden = false
+          showAllFpBtn.textContent = tDev('dv.show_all')
+        }
 
-          const groups    = getFilteredSorted()
-          const startIdx  = mode === 'append' ? (_fpPage - 1) * row : 0
-          const endIdx    = _fpPage * row
-          const slice     = groups.slice(startIdx, endIdx)
+        function renderFpGrid() {
+          const row = fpFloorplanRowSize()
+          if (_fpObserver) { _fpObserver.disconnect(); _fpObserver = null }
+          _fpRenderGen++
+          fpGrid.innerHTML = ''
+          const groups = getFilteredSorted()
+          const slice = groups.slice(0, row)
 
           const gen = _fpRenderGen
           if (!_fpObserver) _fpObserver = makeObserver(gen)
@@ -1078,21 +1135,57 @@
             fpGrid.appendChild(card)
             if (card.dataset.pdfUrl) _fpObserver.observe(card)
           })
-
-          const remaining = Math.max(0, groups.length - Math.min(endIdx, groups.length))
-          const moreLbl = tDev('dv.loadmore').replace('{n}', String(remaining))
-          loadMoreBtn.textContent = remaining > 0 ? moreLbl : ''
-          loadMoreBtn.hidden = remaining <= 0
+          _lastFpRowSize = row
+          syncFpActionButtons()
         }
 
-        loadMoreBtn.addEventListener('click', () => renderFpGrid('append'))
+        function appendFpChunk() {
+          const groups = getFilteredSorted()
+          const row = fpFloorplanRowSize()
+          const have = fpGrid.querySelectorAll('.fp-lcard').length
+          const rem = Math.max(0, groups.length - have)
+          if (!rem) { syncFpActionButtons(); return }
+          const n = Math.min(gridChunkSize(row), rem)
+          const slice = groups.slice(have, have + n)
+          const gen = _fpRenderGen
+          if (!_fpObserver) _fpObserver = makeObserver(gen)
+          slice.forEach(group => {
+            const card = buildFpCard(group)
+            fpGrid.appendChild(card)
+            if (card.dataset.pdfUrl) _fpObserver.observe(card)
+          })
+          syncFpActionButtons()
+        }
+
+        function appendFpAll() {
+          const groups = getFilteredSorted()
+          const have = fpGrid.querySelectorAll('.fp-lcard').length
+          const rest = groups.slice(have)
+          if (!rest.length) { syncFpActionButtons(); return }
+          const gen = _fpRenderGen
+          if (!_fpObserver) _fpObserver = makeObserver(gen)
+          rest.forEach(group => {
+            const card = buildFpCard(group)
+            fpGrid.appendChild(card)
+            if (card.dataset.pdfUrl) _fpObserver.observe(card)
+          })
+          syncFpActionButtons()
+        }
+
+        loadMoreBtn.onclick = appendFpChunk
+        showAllFpBtn.onclick = appendFpAll
+        _fpSyncActionButtons = syncFpActionButtons
 
         if (!_fpResizeWired) {
           _fpResizeWired = true
           let _fpResizeT = null
           window.addEventListener('resize', () => {
             clearTimeout(_fpResizeT)
-            _fpResizeT = setTimeout(() => { renderFpGrid('reset') }, 200)
+            _fpResizeT = setTimeout(() => {
+              const r = fpFloorplanRowSize()
+              if (_lastFpRowSize >= 0 && r === _lastFpRowSize) return
+              renderFpGrid()
+            }, 200)
           })
         }
 
@@ -1192,7 +1285,7 @@
             toolbarEl.querySelectorAll('[data-fpf]').forEach(b => b.classList.remove('active'))
             btn.classList.add('active')
             _fpFilter = btn.dataset.fpf
-            renderFpGrid('reset')
+            renderFpGrid()
           })
         })
 
@@ -1200,11 +1293,11 @@
         if (fpSortSel) {
           fpSortSel.addEventListener('change', () => {
             _fpSort = fpSortSel.value
-            renderFpGrid('reset')
+            renderFpGrid()
           })
         }
 
-        renderFpGrid('reset')
+        renderFpGrid()
         fpSec.removeAttribute('hidden')
         fpSec.hidden = false
         _fpInited = true
@@ -1217,6 +1310,7 @@
     if (fpSec) {
       const fpSubEl = fpSec.querySelector('.dv-fp-subtitle')
       if (fpSubEl) fpSubEl.textContent = tDev('dev.fp.subtitle')
+      if (typeof _fpSyncActionButtons === 'function') _fpSyncActionButtons()
     }
 
     /* Details */

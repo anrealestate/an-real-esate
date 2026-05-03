@@ -163,6 +163,7 @@ var I18N = {
     'dv.units_available': '{n} residences available',
     'dv.units_total': '{n} total',
     'dv.loadmore': 'Show more ({n})',
+    'dv.show_all': 'Show all',
   },
   es: {
     'a11y.skip': 'Saltar al contenido',
@@ -325,6 +326,7 @@ var I18N = {
     'dv.units_available': '{n} residencias disponibles',
     'dv.units_total': '{n} en total',
     'dv.loadmore': 'Ver más ({n})',
+    'dv.show_all': 'Ver todas',
   },
   ca: {
     'a11y.skip': 'Saltar al contingut',
@@ -487,6 +489,7 @@ var I18N = {
     'dv.units_available': '{n} residències disponibles',
     'dv.units_total': '{n} en total',
     'dv.loadmore': 'Veure més ({n})',
+    'dv.show_all': 'Veure-ho tot',
   },
   fr: {
     'a11y.skip': 'Aller au contenu',
@@ -649,6 +652,7 @@ var I18N = {
     'dv.units_available': '{n} résidences disponibles',
     'dv.units_total': '{n} au total',
     'dv.loadmore': 'Voir plus ({n})',
+    'dv.show_all': 'Tout afficher',
   },
   de: {
     'a11y.skip': 'Zum Inhalt springen',
@@ -811,6 +815,7 @@ var I18N = {
     'dv.units_available': '{n} Wohneinheiten verfügbar',
     'dv.units_total': '{n} insgesamt',
     'dv.loadmore': 'Mehr anzeigen ({n})',
+    'dv.show_all': 'Alle anzeigen',
   },
   it: {
     'a11y.skip': 'Salta al contenuto',
@@ -973,6 +978,7 @@ var I18N = {
     'dv.units_available': '{n} residenze disponibili',
     'dv.units_total': '{n} in totale',
     'dv.loadmore': 'Mostra di più ({n})',
+    'dv.show_all': 'Mostra tutto',
   },
   ru: {
     'a11y.skip': 'Перейти к содержимому',
@@ -1135,6 +1141,7 @@ var I18N = {
     'dv.units_available': '{n} объектов в продаже',
     'dv.units_total': 'всего {n}',
     'dv.loadmore': 'Показать ещё ({n})',
+    'dv.show_all': 'Показать все',
   },
 }
 
