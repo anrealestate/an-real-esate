@@ -465,6 +465,7 @@ body { background: var(--bg); color: var(--cream); min-height: 100vh; overflow-x
 
 .pt-title { font-weight: 500; color: var(--cream); }
 .pt-loc { font-size: var(--fs-xs); color: var(--muted); margin-top: 2px; }
+.pt-ref { font-size: .68rem; color: var(--gold); opacity: .75; margin-top: 2px; letter-spacing: .02em; }
 
 .pt-price { color: var(--gold); font-weight: 500; }
 
@@ -1658,7 +1659,7 @@ input[type="range"] {
   /* Each row becomes a 2-row grid card */
   .prop-table tr {
     display: grid;
-    grid-template-columns: 48px 44px 1fr auto;
+    grid-template-columns: 56px 44px 1fr auto;
     grid-template-rows: auto auto;
     column-gap: .5rem;
     row-gap: .25rem;
@@ -1694,6 +1695,12 @@ input[type="range"] {
 
   /* Action buttons: bigger tap target */
   .act-btn { width: 34px; height: 34px; }
+
+  /* Order controls: hide the number, stretch buttons to fill the wider column */
+  .order-num { display: none; }
+  .order-ctrl { width: 100%; justify-content: center; }
+  .order-btns { gap: 4px; width: 100%; }
+  .order-btn  { width: 100%; height: 32px; font-size: .9rem; }
 
   /* ── Filter chips: scroll horizontally ────── */
   .filter-bar { flex-wrap: nowrap; overflow-x: auto; padding-bottom: .25rem; -webkit-overflow-scrolling: touch; }

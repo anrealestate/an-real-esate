@@ -606,7 +606,7 @@ function renderTable() {
   if (_filter === 'withdrawn') filtered = filtered.filter(l => l.stage === 'withdrawn')
 
   if (!filtered.length) {
-    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--muted);font-size:.82rem;">Sin resultados</td></tr>`
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--muted);font-size:.82rem;">Sin resultados</td></tr>`
     return
   }
 
@@ -629,8 +629,8 @@ function renderTable() {
         <div class="order-ctrl">
           <span class="order-num">${l.order ?? '—'}</span>
           <div class="order-btns">
-            <button class="order-btn${isFirst ? ' disabled' : ''}" title="Subir" onclick="moveListingUp('${l.slug}')" ${isFirst ? 'disabled' : ''}>▲</button>
-            <button class="order-btn${isLast  ? ' disabled' : ''}" title="Bajar" onclick="moveListingDown('${l.slug}')" ${isLast  ? 'disabled' : ''}>▼</button>
+            <button class="order-btn${isFirst ? ' disabled' : ''}" title="Subir" aria-label="Subir en el listado" onclick="moveListingUp('${l.slug}')" ${isFirst ? 'disabled' : ''}>▲</button>
+            <button class="order-btn${isLast  ? ' disabled' : ''}" title="Bajar" aria-label="Bajar en el listado" onclick="moveListingDown('${l.slug}')" ${isLast  ? 'disabled' : ''}>▼</button>
           </div>
         </div>
       </td>
@@ -638,6 +638,7 @@ function renderTable() {
       <td>
         <div class="pt-title">${escHtml(l.title)}</div>
         <div class="pt-loc">${escHtml(l.neighbourhood || '')}</div>
+        ${l.ref ? `<div class="pt-ref">${escHtml(l.ref)}</div>` : ''}
       </td>
       <td class="pt-price">${escHtml(l.price || '—')}</td>
       <td>${typeBadge}</td>
