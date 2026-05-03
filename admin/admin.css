@@ -785,9 +785,12 @@ textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
   display: flex;
   gap: 3px;
   opacity: 0;
+  pointer-events: none;  /* invisible on touch screens — don't intercept drag gestures */
   transition: opacity .15s;
 }
-.gal-card:hover .gal-card-overlay { opacity: 1; }
+@media (hover: hover) {
+  .gal-card:hover .gal-card-overlay { opacity: 1; pointer-events: auto; }
+}
 
 .gal-cb {
   width: 22px; height: 22px;

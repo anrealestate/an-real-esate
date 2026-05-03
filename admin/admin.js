@@ -183,6 +183,9 @@ document.addEventListener('DOMContentLoaded', () => {
       tab.classList.add('active')
       document.getElementById('tab-' + tab.dataset.tab).classList.add('active')
       if (tab.dataset.tab === 'nearby') openMapPickerTab()
+      // Reinit Sortable after two rAFs so the tab is fully painted and
+      // #gallery-list has real dimensions before SortableJS measures it.
+      if (tab.dataset.tab === 'images') requestAnimationFrame(() => requestAnimationFrame(initGallerySortable))
       const allTabs = [...tabs]
       const idx = allTabs.indexOf(tab)
       const prog = document.getElementById('form-tab-progress')
@@ -213,10 +216,17 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('online',  () => toast('Conexión restaurada', 'success'))
 
   // Swipe between form tabs on mobile
+  // Gestures that start inside #gallery-list are owned by SortableJS — skip swipe detection.
   let _swipeX = 0
+  let _gestureFromGallery = false
   const viewForm = document.getElementById('view-form')
-  viewForm.addEventListener('touchstart', e => { _swipeX = e.touches[0].clientX }, { passive: true })
+  viewForm.addEventListener('touchstart', e => {
+    if (e.target.closest('#gallery-list')) { _gestureFromGallery = true; return }
+    _gestureFromGallery = false
+    _swipeX = e.touches[0].clientX
+  }, { passive: true })
   viewForm.addEventListener('touchend', e => {
+    if (_gestureFromGallery) return
     const dx = e.changedTouches[0].clientX - _swipeX
     if (Math.abs(dx) < 70) return
     const tabs = [...document.querySelectorAll('.ftab')]
@@ -1767,7 +1777,7 @@ function initGallerySortable() {
   gallerySortable = Sortable.create(document.getElementById('gallery-list'), {
     animation: 150,
     draggable: '.gal-card',
-    filter: '.gal-cb, .gal-card-alt, .gal-card-url-input, .gal-card-url-wrap',
+    filter: '.gal-cb, .gal-card-overlay, .gal-card-alt, .gal-card-url-input, .gal-card-url-wrap',
     preventOnFilter: true,
     ghostClass: 'is-dragging',
     chosenClass: 'drag-over',
