@@ -331,6 +331,10 @@
   let _layoutTabsWired = false
   let _devHasUnits     = false
 
+  let _unitRowsShown         = 1
+  let _unitResizeWired       = false
+  let _unitPaginationRefresh = null
+
   function tDev(k) {
     const lg = (typeof getLang === 'function') ? getLang() : (localStorage.getItem('an_lang') || 'en')
     const L = (window.I18N && window.I18N[lg]) || {}
@@ -343,6 +347,15 @@
     const w = window.innerWidth || 1024
     if (w < 600) return 1
     if (w < 1024) return 2
+    return 3
+  }
+
+  /** Matches .dv-unit-grid columns in development.css (600px / 900px). */
+  function unitGridRowSize() {
+    if (typeof window === 'undefined') return 3
+    const w = window.innerWidth || 1024
+    if (w < 600) return 1
+    if (w < 900) return 2
     return 3
   }
 
@@ -437,6 +450,7 @@
   function renderContent() {
     const lang = (typeof getLang === 'function') ? getLang() : (localStorage.getItem('an_lang') || 'en')
     _devHasUnits = false
+    _unitPaginationRefresh = null
 
     /* Meta + OG */
     const firstImg = (listing.images || []).find(i => !(typeof i === 'object' ? i.hidden : false))
@@ -631,6 +645,7 @@
       .sort((a, b) => (a.ref || '').localeCompare(b.ref || ''))
 
     if (unitsSection && unitGrid) {
+      _unitRowsShown = 1
       if (unitFilters) {
         unitFilters.innerHTML = '<button type="button" class="dv-uftab active" data-ufilter="all">All</button>'
       }
@@ -654,15 +669,13 @@
             unitFilters.querySelectorAll('.dv-uftab').forEach(t => t.classList.remove('active'))
             tab.classList.add('active')
             const f = tab.dataset.ufilter
-            /* When filtering, reveal all cards so the full filtered set is visible */
-            unitGrid.querySelectorAll('.dv-more-hidden').forEach(c => c.classList.remove('dv-more-hidden'))
-            if (loadMoreBtn) loadMoreBtn.hidden = true
+            _unitRowsShown = 1
             applyFilter(f)
+            applyPagination()
           })
         })
       }
 
-      const PAGE_SIZE    = 12
       const countEl      = document.getElementById('dv-units-count')
       const loadMoreBtn  = document.getElementById('dv-units-loadmore')
       const sortSel      = document.getElementById('dv-units-sort')
@@ -722,25 +735,27 @@
         })
       }
 
-      function applyPagination(visibleCount) {
+      function applyPagination() {
         if (!loadMoreBtn) return
-        const allCards = [...unitGrid.querySelectorAll('.dv-unit-card')]
-        allCards.forEach((c, i) => c.classList.toggle('dv-more-hidden', i >= PAGE_SIZE))
-        if (visibleCount > PAGE_SIZE) {
-          const rem = visibleCount - PAGE_SIZE
-          const lbl = t('dv.loadmore').replace('{n}', rem)
-          loadMoreBtn.textContent = lbl || `${lang === 'es' ? 'Ver más' : 'Show more'} (${rem})`
+        const row = unitGridRowSize()
+        const cards = [...unitGrid.querySelectorAll('.dv-unit-card:not(.hidden)')]
+        const cap = _unitRowsShown * row
+        cards.forEach((c, i) => c.classList.toggle('dv-more-hidden', i >= cap))
+        const rem = Math.max(0, cards.length - cap)
+        if (rem > 0) {
+          loadMoreBtn.textContent = t('dv.loadmore').replace('{n}', String(rem))
           loadMoreBtn.hidden = false
         } else {
+          loadMoreBtn.textContent = ''
           loadMoreBtn.hidden = true
         }
       }
 
       if (loadMoreBtn) {
-        loadMoreBtn.addEventListener('click', () => {
-          unitGrid.querySelectorAll('.dv-more-hidden').forEach(c => c.classList.remove('dv-more-hidden'))
-          loadMoreBtn.hidden = true
-        })
+        loadMoreBtn.onclick = () => {
+          _unitRowsShown++
+          applyPagination()
+        }
       }
 
       if (listing.units?.length) {
@@ -776,7 +791,7 @@
               ${!isSold ? `<a href="#enquire" class="dv-unit-cta" onclick="document.querySelector('#prop-form [name=message]').value='Interested in unit type ${esc(u.id)} (${esc(u.layout||'')})'">Enquire</a>` : ''}
             </div>`
         }).join('')
-        applyPagination(listing.units.length)
+        applyPagination()
         _devHasUnits = true
 
       } else if (children.length) {
@@ -840,18 +855,18 @@
           countEl.hidden = false
         }
 
-        applyPagination(children.length)
+        applyPagination()
 
         /* Sort handler */
         if (sortSel) {
-          sortSel.addEventListener('change', () => {
+          sortSel.onchange = () => {
             const criterion = sortSel.value
             const sorted = sortArr(children, criterion)
             renderChildren(sorted)
             applyFilter(_activeFilter)
-            const visibleCount = unitGrid.querySelectorAll('.dv-unit-card:not(.hidden)').length
-            applyPagination(visibleCount)
-          })
+            _unitRowsShown = 1
+            applyPagination()
+          }
         }
 
         _devHasUnits = true
@@ -860,6 +875,23 @@
         if (unitsSection) {
           unitsSection.setAttribute('hidden', '')
           unitsSection.hidden = true
+        }
+      }
+
+      if (_devHasUnits) {
+        _unitPaginationRefresh = () => {
+          _unitRowsShown = 1
+          applyPagination()
+        }
+        if (!_unitResizeWired) {
+          _unitResizeWired = true
+          let _uRt = null
+          window.addEventListener('resize', () => {
+            clearTimeout(_uRt)
+            _uRt = setTimeout(() => {
+              if (_unitPaginationRefresh) _unitPaginationRefresh()
+            }, 200)
+          })
         }
       }
     }
