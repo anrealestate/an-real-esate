@@ -19,7 +19,8 @@
    ================================ */
 .ab-top {
   padding-top: clamp(3rem, 8vw, 7rem);
-  padding-bottom: clamp(2.5rem, 6vw, 5rem);
+  /* Extra bottom air: hero strip image removed (was duplicate portrait) */
+  padding-bottom: clamp(3.5rem, 8vw, 7rem);
   text-align: center;
 }
 
@@ -58,25 +59,6 @@
   color: var(--cream-dim);
   opacity: .8;
   line-height: 1.8;
-}
-
-/* ================================
-   TOP IMAGE — parallax
-   ================================ */
-.ab-top-img {
-  max-width: 980px;
-  height: clamp(220px, 30vw, 400px);
-  margin: 0 auto clamp(4rem, 8vw, 8rem);
-  overflow: hidden;
-  display: block;
-}
-.ab-top-img img {
-  width: 100%;
-  height: 120%;
-  object-fit: cover;
-  /* Wide strip over portrait source — keep subject near optical center for parallax + cover crop */
-  object-position: 50% 44%;
-  display: block;
 }
 
 /* ================================
@@ -124,7 +106,18 @@
    (augments styles from styles.css)
    ================================ */
 .ab-team-wrap {
+  margin-top: clamp(0.5rem, 2vw, 1.5rem);
   margin-bottom: clamp(5rem, 14vw, 14rem);
+}
+
+/* Slightly higher contrast on long-form about copy (readability on dark bg) */
+.ab-main .at-text,
+.ab-main .ab-history-text,
+.ab-main .ab-cta-sub {
+  color: rgba(240, 235, 224, 0.82);
+}
+.ab-main .at-text--second {
+  color: rgba(240, 235, 224, 0.72);
 }
 
 /* mob-hidden helper */
@@ -201,6 +194,18 @@
   color: var(--gold);
   margin-bottom: 1rem;
   letter-spacing: -.1vw;
+}
+
+/* Credentials / metrics — not calendar years; smaller, sans, avoids “fake date” scan */
+.ab-history-year--tag {
+  font-family: var(--sans);
+  font-size: clamp(1.1rem, 2.4vw, 1.35rem);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  line-height: 1.35;
+  margin-bottom: 0.85rem;
 }
 
 .ab-history-text {
@@ -323,12 +328,6 @@
 /* ================================
    Breakpoints
    ================================ */
-@media (min-width: 768px) {
-  .ab-top-img {
-    height: clamp(280px, 28vw, 400px);
-  }
-}
-
 @media (min-width: 1024px) {
   .ab-history-inner {
     flex-direction: row;
