@@ -697,7 +697,8 @@
       const sortSel         = document.getElementById('dv-units-sort')
       const FMT          = window.AN_FMT || {}
       const L            = (window.I18N && window.I18N[lang]) || {}
-      const t            = k => L[k] || k
+      const t            = k =>
+        (L[k] !== undefined && L[k] !== '') ? L[k] : ((window.I18N && window.I18N.en && window.I18N.en[k]) || k)
 
       /* ── Sort helpers ── */
       function parsePrice(str) {

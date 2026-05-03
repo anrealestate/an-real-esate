@@ -1151,6 +1151,7 @@ var I18N = {
     'dev.show_all_hint': 'Показывает все элементы в этом разделе сразу, без подгрузки по частям.',
   },
 }
+try { if (typeof window !== 'undefined') window.I18N = I18N } catch (e) {}
 
 function getLang() {
   var stored = localStorage.getItem('an_lang')
