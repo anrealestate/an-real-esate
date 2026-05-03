@@ -228,6 +228,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // FAB publish button
   document.getElementById('fab-publish')?.addEventListener('click', publishToWeb)
 
+  initGallerySortable()
+
   // Dynamic list add buttons
   document.getElementById('add-gallery-url').addEventListener('click', () => addGalleryCard())
   document.getElementById('reverse-gallery').addEventListener('click', () => {
@@ -1750,7 +1752,19 @@ function addFloorPlanItem(fp = {}) {
 }
 
 // ── GALLERY CARDS ─────────────────────────────
-let _dragSrc = null
+
+function initGallerySortable() {
+  if (typeof Sortable === 'undefined') return
+  Sortable.create(document.getElementById('gallery-list'), {
+    animation: 150,
+    draggable: '.gal-card',
+    handle: '.gal-drag-handle',
+    ghostClass: 'is-dragging',
+    forceFallback: false,      // use HTML5 DnD on desktop, touch events on mobile
+    onEnd() { refreshGalleryBadges() }
+  })
+}
+
 
 function galEyeIcon(isHidden) {
   return isHidden
@@ -1765,7 +1779,6 @@ function addGalleryCard(img = {}) {
 
   const card = document.createElement('div')
   card.className = 'gal-card' + (hidden ? ' is-hidden' : '')
-  card.draggable = true
   card.dataset.src    = src
   card.dataset.hidden = hidden ? 'true' : 'false'
 
@@ -1781,6 +1794,7 @@ function addGalleryCard(img = {}) {
         <button type="button" class="gal-cb gal-cb-hide" title="Ocultar">${galEyeIcon(hidden)}</button>
         <button type="button" class="gal-cb gal-cb-del" title="Eliminar">×</button>
       </div>
+      <div class="gal-drag-handle" aria-hidden="true"><svg width="16" height="10" viewBox="0 0 16 10" fill="currentColor"><rect x="0" y="0" width="16" height="2" rx="1"/><rect x="0" y="4" width="16" height="2" rx="1"/><rect x="0" y="8" width="16" height="2" rx="1"/></svg></div>
     </div>
     <input class="gal-card-alt" type="text" placeholder="Alt…" value="${alt}" />`
 
@@ -1796,7 +1810,8 @@ function addGalleryCard(img = {}) {
         <div class="gal-card-overlay">
           <button type="button" class="gal-cb gal-cb-hide" title="Ocultar">${galEyeIcon(false)}</button>
           <button type="button" class="gal-cb gal-cb-del" title="Eliminar">×</button>
-        </div>`
+        </div>
+        <div class="gal-drag-handle" aria-hidden="true"><svg width="16" height="10" viewBox="0 0 16 10" fill="currentColor"><rect x="0" y="0" width="16" height="2" rx="1"/><rect x="0" y="4" width="16" height="2" rx="1"/><rect x="0" y="8" width="16" height="2" rx="1"/></svg></div>`
       bindGalCardBtns(card)
     })
     urlInput.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); urlInput.blur() } })
@@ -1807,42 +1822,12 @@ function addGalleryCard(img = {}) {
   // Alt sync
   card.querySelector('.gal-card-alt').addEventListener('input', e => { card.dataset.alt = e.target.value })
 
-  // Drag
-  card.addEventListener('dragstart', e => {
-    _dragSrc = card
-    card.classList.add('is-dragging')
-    e.dataTransfer.effectAllowed = 'move'
-  })
-  card.addEventListener('dragover', e => {
-    e.preventDefault()
-    e.dataTransfer.dropEffect = 'move'
-    if (card !== _dragSrc) card.classList.add('drag-over')
-    return false
-  })
-  card.addEventListener('dragleave', () => card.classList.remove('drag-over'))
-  card.addEventListener('drop', e => {
-    e.stopPropagation()
-    e.preventDefault()
-    if (_dragSrc && _dragSrc !== card) {
-      const list = document.getElementById('gallery-list')
-      const cards = [...list.querySelectorAll('.gal-card')]
-      const si = cards.indexOf(_dragSrc)
-      const ti = cards.indexOf(card)
-      list.insertBefore(_dragSrc, si < ti ? card.nextSibling : card)
-    }
-    card.classList.remove('drag-over')
-  })
-  card.addEventListener('dragend', () => {
-    card.classList.remove('is-dragging')
-    document.querySelectorAll('.gal-card').forEach(c => c.classList.remove('drag-over'))
-    _dragSrc = null
-    refreshGalleryBadges()
-  })
-
   document.getElementById('gallery-list').appendChild(card)
   refreshGalleryBadges()
   if (urlInput) urlInput.focus()
 }
+
+
 
 function refreshGalleryBadges() {
   const cards = [...document.querySelectorAll('#gallery-list .gal-card')]

@@ -10,7 +10,7 @@
 
   function cloudinarySrcset(url) {
     if (!url || !url.includes('res.cloudinary.com')) return ''
-    return [640, 1024, 1440, 1920].map(w => `${url.replace(/\bw_\d+/, `w_${w}`)} ${w}w`).join(', ')
+    return [828, 1024, 1440, 1920].map(w => `${url.replace(/\bw_\d+/, `w_${w}`)} ${w}w`).join(', ')
   }
 
 
