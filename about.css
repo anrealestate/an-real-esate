@@ -12,8 +12,8 @@
    ================================ */
 .ab-main {
   padding-top: 74px; /* fixed header height */
-  /* One vertical rhythm for every major block (match hero top/bottom air) */
-  --ab-section-gap: clamp(3.5rem, 8vw, 7rem);
+  /* Tighter, uniform vertical rhythm between hero → team → history → CTA */
+  --ab-section-gap: clamp(2rem, 4.5vw, 3.25rem);
 }
 
 /* ================================
@@ -113,6 +113,13 @@
   margin-bottom: var(--ab-section-gap);
 }
 
+/* Global .about-team uses huge padding-block — on about page it blows gaps after the portrait */
+.ab-team-wrap .about-team {
+  padding-top: var(--ab-section-gap);
+  padding-bottom: 0;
+  gap: clamp(1.5rem, 3vw, 2.25rem);
+}
+
 /* Team block: calmer hierarchy (no duplicate key / role row) */
 .ab-team-wrap .about-team:has(> .at-line) .at-heading {
   white-space: normal;
@@ -135,7 +142,8 @@
 }
 .ab-team-wrap .at-caption {
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 0.65rem;
+  margin-bottom: 0;
   letter-spacing: 0.22em;
 }
 
@@ -164,7 +172,7 @@
 .ab-history-inner {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: clamp(1.5rem, 3vw, 2rem);
   padding-top: var(--ab-section-gap);
 }
 
@@ -181,17 +189,21 @@
   font-family: var(--serif);
   font-size: max(28px, 3.5vw);
   font-weight: 300;
-  line-height: 1.05;
+  line-height: 1.18;
   letter-spacing: -.12vw;
   color: var(--cream);
   margin-top: 0;
   margin-bottom: 1rem;
+  white-space: normal;
+}
+.ab-history-h2 .text-wrap,
+.ab-history-h2 .text-inner {
+  overflow: visible;
 }
 .ab-history-h2 .text-wrap {
   display: block;
-  overflow: hidden;
-  padding: .1em 0;
-  margin: -.1em 0;
+  padding: 0.08em 0;
+  margin: 0;
 }
 
 .ab-history-sub {
@@ -225,10 +237,11 @@
   font-family: var(--serif);
   font-size: max(40px, 6.5vw);
   font-weight: 300;
-  line-height: 1.1;
+  line-height: 1.15;
   color: var(--gold);
   margin-bottom: 1rem;
   letter-spacing: -.1vw;
+  overflow: visible;
 }
 
 /* Credentials / metrics — not calendar years; smaller, sans, avoids “fake date” scan */
@@ -277,9 +290,9 @@
 }
 .ab-cta-h2 .text-wrap {
   display: block;
-  overflow: hidden;
-  padding: .1em 0;
-  margin: -.1em 0;
+  overflow: visible;
+  padding: 0.08em 0;
+  margin: 0;
 }
 
 .ab-cta-sub {
