@@ -100,16 +100,6 @@
           "Private outdoor space"
         ]
       },
-      "floorPlans": [
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404776/an-realestate/gracia-garden/planell.jpg",
-          "label": "Floor plan"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404776/an-realestate/gracia-garden/Imagen-02-logo-1.jpg",
-          "label": "Garden level"
-        }
-      ],
       "nearby": [
         {
           "name": "Jardinets de Gràcia",
@@ -136,19 +126,15 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Gràcia",
-      "order": 4
+      "order": 1
     },
     {
       "slug": "eixample-golden-square-rent",
       "title": "Refined Luxury in Barcelona's Golden Square",
       "price": "€7,700",
       "ref": "AN-46749",
-      "province": "Barcelona",
-      "city": "Barcelona",
-      "zone": "Eixample",
       "neighbourhood": "Eixample, Barcelona",
       "type": "rent",
-      "propertyType": "apartment",
       "badge_type": "Apartment",
       "beds": 3,
       "baths": 3,
@@ -349,7 +335,6 @@
           "alt": "Refined Luxury in Barcelona's Golden Square"
         }
       ],
-      "youtubeUrl": "https://youtu.be/wfIJzfqOryw",
       "description": [
         "Newly renovated principal-floor apartment on the prestigious Rambla de Catalunya, in the heart of Barcelona's Golden Square. A curated masterpiece blending period elegance with contemporary design.",
         "Spacious living and dining room with characteristic Eixample balconies overlooking the boulevard, an independent fully equipped kitchen, three double bedrooms with bespoke built-in wardrobes, and three contemporary bathrooms.",
@@ -390,7 +375,7 @@
         }
       ],
       "features": {
-        "Additional": [
+        "Interior": [
           "Spacious living & dining room",
           "Eixample balconies",
           "Fully equipped kitchen",
@@ -398,7 +383,9 @@
           "Bespoke built-in wardrobes",
           "Solid wooden floors",
           "High ceilings",
-          "Double glazing",
+          "Double glazing"
+        ],
+        "Climate": [
           "Ducted air conditioning",
           "Central heating"
         ]
@@ -422,7 +409,11 @@
         }
       ],
       "stage": "active",
-      "order": 5
+      "propertyType": "apartment",
+      "province": "Barcelona",
+      "city": "Barcelona",
+      "zone": "Eixample",
+      "order": 2
     },
     {
       "slug": "sant-gervasi-galvany",
@@ -602,7 +593,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Sant Gervasi",
-      "order": 10
+      "order": 3
     },
     {
       "slug": "el-born-corner",
@@ -708,7 +699,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "El Born",
-      "order": 6
+      "order": 4
     },
     {
       "slug": "rambla-catalunya-corner",
@@ -826,7 +817,7 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Eixample",
-      "order": 7
+      "order": 5
     },
     {
       "slug": "eixample-golden-mile",
@@ -963,177 +954,173 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Dreta de l'Eixample",
-      "order": 8
+      "order": 6
     },
     {
       "slug": "vallvidrera-villa",
       "title": "Exquisite Modern Villa with 360° Views Over Barcelona",
       "price": "€5,500,000",
       "ref": "AN-AN1005",
-      "province": "Barcelona",
-      "city": "Barcelona",
-      "zone": "Vallvidrera",
       "neighbourhood": "Vallvidrera, Barcelona",
       "type": "sale",
-      "propertyType": "villa",
+      "badge": "exclusive",
       "badge_type": "Villa",
       "beds": 6,
       "baths": 6,
       "size": "634",
       "floor": "3 levels",
-      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777720387/an-realestate/cmmawyhbibhxifuiqwlm.jpg",
+      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404793/an-realestate/vallvidrera-villa/Mont-dorsa-68_17.jpg",
       "images": [
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777720387/an-realestate/cmmawyhbibhxifuiqwlm.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404793/an-realestate/vallvidrera-villa/Mont-dorsa-68_17.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777720389/an-realestate/tpcqtziv7vrkm81rsyhd.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404793/an-realestate/vallvidrera-villa/Mont-dorsa-68_18.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777720392/an-realestate/j1tdafkv75zewfvv4mmz.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_19.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777720394/an-realestate/j1n354calzxb79zsvzzl.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_22.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777720396/an-realestate/qelionat4lvlj4xe54lj.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_23.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777720398/an-realestate/wwf5zoltn5hsi9bhcoom.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_25.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777720399/an-realestate/ceuhbuyddxe9qsc1cjds.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404794/an-realestate/vallvidrera-villa/Mont-dorsa-68_26.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777720401/an-realestate/srylg15izjfhzqfslgcr.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404795/an-realestate/vallvidrera-villa/Mont-dorsa-68_27.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777720402/an-realestate/sygttxwzktzmgxk8aqzf.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404795/an-realestate/vallvidrera-villa/Mont-dorsa-68_28.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660646/an-realestate/i16bz2y9wvzg3j7hchtp.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404795/an-realestate/vallvidrera-villa/Mont-dorsa-68_29.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660647/an-realestate/k5ah1ui1buqua9t8lqi9.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404795/an-realestate/vallvidrera-villa/Mont-dorsa-68_30.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660648/an-realestate/ixnitdxklm7tjqch006f.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_31.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660648/an-realestate/uf9lsap8yexkzklnsrbd.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_32.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660649/an-realestate/fqldbgjtv3za3mducay4.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_33.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660651/an-realestate/gfpw1knitfkcvqdxmdnp.jpg",
-          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona",
-          "hidden": true
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660651/an-realestate/ggnbi1cwg8qbax6hxv17.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_34.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660652/an-realestate/hydg2fo83jn6cjiodrxm.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_35.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660653/an-realestate/x9xhsymr0zlk4je64qu8.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404796/an-realestate/vallvidrera-villa/Mont-dorsa-68_36.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660654/an-realestate/lv4aaaac3t5g0gpsoeyo.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_38-1.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660655/an-realestate/fkq3avgnjdswfgijklro.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_42.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660655/an-realestate/hht9talj8rbcllbur780.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_48.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660656/an-realestate/bhtcvfin28brlvbztl4b.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_49.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660657/an-realestate/bakwr3a8g52zphmmjme9.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404797/an-realestate/vallvidrera-villa/Mont-dorsa-68_50.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660658/an-realestate/uxn77ctjag7wh3wkcmhp.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404798/an-realestate/vallvidrera-villa/Mont-dorsa-68_51.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660659/an-realestate/bmem8g4ujlxrsjjapujq.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404798/an-realestate/vallvidrera-villa/Mont-dorsa-68_52.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660660/an-realestate/dyqahdpuyrbextvjkyn2.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404798/an-realestate/vallvidrera-villa/Mont-dorsa-68_53-1.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660660/an-realestate/jbu7i2tj54o0noxqbb43.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404798/an-realestate/vallvidrera-villa/Mont-dorsa-68_54.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660661/an-realestate/h6fwp5qpemp6dfvljcrf.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404799/an-realestate/vallvidrera-villa/Mont-dorsa-68_55.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660662/an-realestate/utu5phls3ob9e6nmxprd.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404799/an-realestate/vallvidrera-villa/Mont-dorsa-68_56.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660662/an-realestate/boxe7e68jlpjuezayfcw.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404799/an-realestate/vallvidrera-villa/Mont-dorsa-68_57.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660663/an-realestate/bc8j4ob77ipzjyjqltzt.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404799/an-realestate/vallvidrera-villa/Mont-dorsa-68_58.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660664/an-realestate/ydhuqfxenq9fconrcooz.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404800/an-realestate/vallvidrera-villa/Mont-dorsa-68_59-1.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660665/an-realestate/htcjuvmypmkmbdtbskad.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404802/an-realestate/vallvidrera-villa/Mont-dorsa-68_60.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660666/an-realestate/b6thfietey681jc3ts3z.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/vallvidrera-villa/Mont-dorsa-68_61.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660666/an-realestate/fzezzlmcuwi3evtpwdqa.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404800/an-realestate/vallvidrera-villa/Mont-dorsa-68_62.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660667/an-realestate/cmqscxcpg5jaqjjknkld.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/vallvidrera-villa/Mont-dorsa-68_63.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660668/an-realestate/bzrych51ybyzwatkskey.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/vallvidrera-villa/Mont-dorsa-68_64.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         },
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777660650/an-realestate/kasu7prfatwkarhkeqrx.jpg",
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404800/an-realestate/vallvidrera-villa/Mont-dorsa-68_65-1.jpg",
+          "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777404801/an-realestate/vallvidrera-villa/Mont-dorsa-68_66-1.jpg",
           "alt": "Exquisite Modern Villa with 360° Views Over Barcelona"
         }
       ],
@@ -1189,19 +1176,23 @@
         }
       ],
       "features": {
-        "Additional": [
+        "Interior": [
           "70 m² master suite",
           "6 en-suite bedrooms",
           "Open-plan living & dining",
           "Premium kitchen",
           "Wine cellar",
-          "Smart home automation",
+          "Smart home automation"
+        ],
+        "Outdoor": [
           "Climate-controlled pool",
           "117 m² roof terrace",
           "Private garden",
           "Finnish sauna",
           "7-car garage",
-          "360° panoramic views",
+          "360° panoramic views"
+        ],
+        "Sustainability": [
           "Energy class A",
           "Solar panels",
           "Aerothermal underfloor heating",
@@ -1227,7 +1218,11 @@
         }
       ],
       "stage": "active",
-      "order": 2
+      "propertyType": "villa",
+      "province": "Barcelona",
+      "city": "Barcelona",
+      "zone": "Vallvidrera",
+      "order": 7
     },
     {
       "slug": "eixample-villarroel",
@@ -1344,20 +1339,18 @@
       "province": "Barcelona",
       "city": "Barcelona",
       "zone": "Eixample",
-      "order": 9
+      "order": 8
     },
     {
       "slug": "villa-cascades",
       "title": "Villa Cascades",
-      "price": "€1,780,000",
+      "price": "€1780000",
       "ref": "AN202602",
       "province": "Barcelona",
       "city": "Sant Cugat del Vallès",
       "zone": "Les Planes",
       "neighbourhood": "Les Planes, Sant Cugat del Vallès",
       "address": "Calle Magarola, 19, Sant Cugat del Vallès, Spain",
-      "lat": 41.4328796,
-      "lng": 2.0927754,
       "zip": "08196",
       "type": "sale",
       "propertyType": "villa",
@@ -1675,65 +1668,44 @@
           "alt": "AN202602-73"
         }
       ],
-      "youtubeUrl": "https://youtu.be/U7ebrAQ1J2I",
       "description": [
         "Villa Cascades es una villa en venta en Sant Cugat del Vallès con una arquitectura sin precedentes en el mercado residencial del área de Barcelona. Situada en la exclusiva urbanización de Les Planes, a 20 minutos en coche de la Diagonal de Barcelona, la propiedad se despliega en seis niveles escalonados a media altura — una estructura en cascada inspirada en la fluidez orgánica de Wright, la escala mediterránea de Bofill y el rigor constructivo de Scarpa. 510 m², cinco dormitorios, cuatro baños, estudio con vistas panorámicas y dos cocheras privadas para siete vehículos. Una de las viviendas más singulares disponibles hoy en el Vallès Occidental. Precio: 1.780.000 €.",
-        "Cada planta se desplaza medio nivel respecto a la anterior, generando terrazas en todas las alturas — miradores privados sobre el bosque del Collserola que disuelven los límites entre interior y exterior. Las cinco habitaciones y los cuatro baños se distribuyen a lo largo de los seis niveles con naturalidad, acompañados de espacios polivalentes que el propietario puede destinar libremente — sala de cine, gimnasio, zona de juegos, despacho secundario — sin forzar ningún uso predefinido. La vivienda incluye además un estudio completamente rodeado de vistas al entorno natural, una pieza excepcional para trabajar o crear en contacto directo con el paisaje. La dotación de garaje es igualmente destacable: una cochera interior de aproximadamente 85 m² para cinco vehículos y una segunda cochera frontal para dos vehículos de gran formato. Ofrecida con muchas posibilidades, Villa Cascades permite diseñar los acabados a medida sobre una estructura arquitectónica de alto valor — una posibilidad cada vez más escasa en el mercado de lujo de Barcelona.",
+        "Cada planta se desplaza medio nivel respecto a la anterior, generando terrazas en todas las alturas — miradores privados sobre el bosque del Collserola que disuelven los límites entre interior y exterior. Las cinco habitaciones y los cuatro baños se distribuyen a lo largo de los seis niveles con naturalidad, acompañados de espacios polivalentes que el propietario puede destinar libremente — sala de cine, gimnasio, zona de juegos, despacho secundario — sin forzar ningún uso predefinido. La vivienda incluye además un estudio completamente rodeado de vistas al entorno natural, una pieza excepcional para trabajar o crear en contacto directo con el paisaje. La dotación de garaje es igualmente destacable: una cochera interior de aproximadamente 85 m² para cinco vehículos y una segunda cochera frontal para dos vehículos de gran formato. Ofrecida para reformar, Villa Cascades permite diseñar los acabados a medida sobre una estructura arquitectónica de alto valor — una posibilidad cada vez más escasa en el mercado de lujo de Barcelona.",
         "Les Planes es una de las direcciones más valoradas de Sant Cugat del Vallès — silenciosa, arbolada y en contacto directo con el Parc Natural de Collserola. Desde las plantas superiores de la villa, las vistas alcanzan el Parc del Montseny. A 20 minutos en coche de la Diagonal de Barcelona por la C-58, la urbanización cuenta además con un servicio de autobús comunitario a demanda — gratuito para residentes — que conecta la finca con el centro urbano sin depender del vehículo privado. Colegios internacionales, campos de golf y todos los servicios de Sant Cugat a menos de diez minutos. Para quienes buscan una villa de lujo cerca de Barcelona con arquitectura diferencial, espacio real y entorno natural, Villa Cascades no tiene equivalente en el mercado actual."
       ],
       "features": {
         "Interior": [
-          "Ceilings with moldings",
-          "Open Floorplan",
-          "Natural Light",
-          "Walk-In Closet(s)",
-          "Walk-in wardrobe(s)",
-          "Library",
-          "Playroom",
-          "Utility room",
-          "Storage",
-          "Split Bedroom"
+          "Ceilings with moldings"
         ],
         "Flooring": [
           "Solid Wooden Floor",
           "Wooden Flooring"
         ],
         "Kitchen": [
-          "Equipped Kitchen",
-          "Oven",
-          "Refrigerator",
-          "Dishwasher",
-          "Microwave",
-          "Freezer",
-          "Range Hood",
-          "Solid Wood Cabinets"
+          "Equipped Kitchen"
         ],
         "Climate": [
-          "Air conditioning",
-          "Heating",
-          "Gas Water Heater",
-          "Washer",
-          "Dryer"
+          "Heating"
         ],
         "Outdoor": [
-          "Terrace",
-          "Garden",
-          "Parking"
+          "Terrace"
         ],
         "Building": [
-          "Alarm"
+          "Concierge Service"
         ],
-        "Additional": [
-          "Vistas a la naturaleza"
+        "Views": [
+          "City Views"
         ]
       },
       "stage": "active",
-      "order": 1
+      "lat": 41.4328796,
+      "lng": 2.0927754,
+      "order": 9
     },
     {
       "slug": "house-of-wellness",
       "title": "House of Wellness",
-      "price": "$From 419,000",
+      "price": "$From 419000",
       "ref": "AN202603",
       "province": "Florida",
       "city": "Miami",
@@ -1749,15 +1721,19 @@
       "size": "",
       "year": 2029,
       "condition": "New construction",
-      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677966/an-realestate/ttmkxxup42umfwkt45j5.jpg",
+      "image": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677974/an-realestate/ixyag09mggaj4hx1qtuc.jpg",
       "images": [
         {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677966/an-realestate/ttmkxxup42umfwkt45j5.jpg",
-          "alt": "How_Interior_Unit_Balcony_B5"
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677974/an-realestate/ixyag09mggaj4hx1qtuc.jpg",
+          "alt": "HoW_Exterior_Rooftop_BayView_Daytime"
         },
         {
           "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677969/an-realestate/z1rutiwnrpgukmugj69x.jpg",
           "alt": "How_Interior_Unit_B1"
+        },
+        {
+          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677966/an-realestate/ttmkxxup42umfwkt45j5.jpg",
+          "alt": "How_Interior_Unit_Balcony_B5"
         },
         {
           "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677970/an-realestate/ev4z8mxdatrxuv2jabve.jpg",
@@ -1774,10 +1750,6 @@
         {
           "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677973/an-realestate/cdfohxhxxldw4tj3zozy.jpg",
           "alt": "How_Building_Hero_Closeup"
-        },
-        {
-          "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677974/an-realestate/ixyag09mggaj4hx1qtuc.jpg",
-          "alt": "HoW_Exterior_Rooftop_BayView_Daytime"
         },
         {
           "src": "https://res.cloudinary.com/dbume3eak/image/upload/v1777677976/an-realestate/yc9lee3xuf1dostyprk1.jpg",
@@ -1833,16 +1805,6 @@
       "order": 3,
       "badge": "new_dev",
       "youtubeUrl": "https://youtu.be/vc1u9porSjQ",
-      "totalFloors": 34,
-      "totalUnits": 58,
-      "amenitiesArea": "22,000 sq ft",
-      "deliveryDate": "Q4 2029",
-      "constructionStatus": "Pre-construction",
-      "developer": "North Development",
-      "architect": "Mc+G Architecture",
-      "interiorDesign": "Urban Robot Associates",
-      "managementCompany": "North Management",
-      "salesAgency": "Fortune Development Sales",
       "details": [
         {
           "key": "Reference",
@@ -1882,7 +1844,7 @@
         }
       ],
       "features": {
-        "Fitness & Wellness": [
+        "Additional": [
           "State-of-the-art fitness centre with private personal training suite",
           "Functional training zones",
           "Cold plunge",
@@ -1890,16 +1852,12 @@
           "Rooftop pool with panoramic skyline views",
           "IV therapy, physical therapy & nutritionist consultations",
           "Massage therapy",
-          "Weekly yoga & meditation sessions"
-        ],
-        "Community Spaces": [
+          "Weekly yoga & meditation sessions",
           "Clubhouse with event kitchen",
           "Co-working areas",
           "Juice bar",
           "Podcast room",
-          "Pet-friendly facilities"
-        ],
-        "Residences": [
+          "Pet-friendly facilities",
           "Loft-style ceiling heights of 9'4\"",
           "Premium appliances",
           "Two-tone cabinetry with terrazzo countertops",
@@ -1907,7 +1865,8 @@
           "Polished concrete balconies (select units)",
           "Views over Brickell and Biscayne Bay (select units)"
         ]
-      }
+      },
+      "pdf_hero": "https://anrealestate.es/admin/"
     },
     {
       "slug": "house-of-wellness-u-1009",
@@ -9390,6 +9349,27 @@
           "label": "Floor plan · LINE 26 C3"
         }
       ]
+    },
+    {
+      "slug": "sadf",
+      "title": "sadf",
+      "price": "€600000",
+      "ref": "AN202606",
+      "province": "Florida",
+      "city": "Miami",
+      "zone": "Brickell",
+      "neighbourhood": "Brickell, Miami",
+      "address": "gtgsd",
+      "type": "sale",
+      "propertyType": "development",
+      "badge_type": "New Development",
+      "badge": "new_dev",
+      "beds": 2,
+      "baths": 1,
+      "size": "",
+      "stage": "draft",
+      "order": 3058,
+      "constructionStatus": "Under Construction"
     }
   ]
 }
