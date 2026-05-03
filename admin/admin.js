@@ -863,9 +863,11 @@ function _showForm(slug) {
 
   // Gallery — ALL images including main (first card = main)
   const galleryEl = document.getElementById('gallery-list')
+  if (gallerySortable) { gallerySortable.destroy(); gallerySortable = null }
   galleryEl.innerHTML = ''
   ;(l.images || (l.image ? [{ src: l.image, alt: l.title }] : [])).forEach(img => addGalleryCard(img))
   refreshGalleryBadges()
+  initGallerySortable()
 
   // PDF hero
   setPdfHero(l.pdf_hero || '')
@@ -1753,14 +1755,27 @@ function addFloorPlanItem(fp = {}) {
 
 // ── GALLERY CARDS ─────────────────────────────
 
+let gallerySortable = null
+
 function initGallerySortable() {
   if (typeof Sortable === 'undefined') return
-  Sortable.create(document.getElementById('gallery-list'), {
+  if (gallerySortable) { gallerySortable.destroy(); gallerySortable = null }
+  // forceFallback:true — bypasses HTML5 DnD (unsupported on iOS Safari) and uses
+  // SortableJS's own pointer/touch layer, which suppresses native image callouts.
+  // delayOnTouchOnly — 150 ms hold lets the user scroll the page without triggering drag;
+  // on desktop mouse the drag starts immediately as before.
+  gallerySortable = Sortable.create(document.getElementById('gallery-list'), {
     animation: 150,
     draggable: '.gal-card',
-    handle: '.gal-drag-handle',
+    filter: '.gal-cb, .gal-card-alt, .gal-card-url-input, .gal-card-url-wrap',
+    preventOnFilter: true,
     ghostClass: 'is-dragging',
-    forceFallback: false,      // use HTML5 DnD on desktop, touch events on mobile
+    chosenClass: 'drag-over',
+    forceFallback: true,
+    fallbackOnBody: true,
+    fallbackTolerance: 5,
+    delay: 150,
+    delayOnTouchOnly: true,
     onEnd() { refreshGalleryBadges() }
   })
 }
@@ -1787,7 +1802,7 @@ function addGalleryCard(img = {}) {
   card.innerHTML = `
     <div class="gal-card-img">
       ${src
-        ? `<img src="${src}" alt="${alt}" onerror="this.src='${errSvg}'" />`
+        ? `<img src="${src}" alt="${alt}" draggable="false" onerror="this.src='${errSvg}'" />`
         : `<div class="gal-card-url-wrap"><input class="gal-card-url-input" type="text" placeholder="Pega URL…" /></div>`
       }
       <div class="gal-card-overlay">
@@ -1806,7 +1821,7 @@ function addGalleryCard(img = {}) {
       if (!v) return
       card.dataset.src = v
       card.querySelector('.gal-card-img').innerHTML = `
-        <img src="${v}" alt="" onerror="this.src='${errSvg}'" />
+        <img src="${v}" alt="" draggable="false" onerror="this.src='${errSvg}'" />
         <div class="gal-card-overlay">
           <button type="button" class="gal-cb gal-cb-hide" title="Ocultar">${galEyeIcon(false)}</button>
           <button type="button" class="gal-cb gal-cb-del" title="Eliminar">×</button>
